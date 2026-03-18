@@ -1,18 +1,18 @@
 .t-stat-num {
-  font-family: "Geologica", sans-serif;
+  font-family: "Exo 2", sans-serif;
   font-weight: 800;
   color: #f87e0f;
   line-height: 1;
 }
 .t-card-title {
-  font-family: "Geologica", sans-serif;
+  font-family: "Exo 2", sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1;
   color: #f0ece8;
 }
 .t-eyebrow-accent {
-  font-family: "Geologica", sans-serif;
+  font-family: "Exo 2", sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 2.5px;
@@ -20,7 +20,7 @@
   color: #f87e0f;
 }
 .t-eyebrow-muted {
-  font-family: "Geologica", sans-serif;
+  font-family: "Exo 2", sans-serif;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1.8px;
@@ -28,19 +28,19 @@
   color: #737373;
 }
 .t-brand-lg {
-  font-family: "Geologica", sans-serif;
+  font-family: "Exo 2", sans-serif;
   font-size: 18px;
   font-weight: 700;
   color: #f0ece8;
 }
 .t-brand-sm {
-  font-family: "Geologica", sans-serif;
+  font-family: "Exo 2", sans-serif;
   font-size: 10px;
   font-weight: 700;
   color: #111;
 }
 .t-display-lg {
-  font-family: "Geologica", sans-serif;
+  font-family: "Exo 2", sans-serif;
   font-size: clamp(40px, 7vw, 72px);
   line-height: 0.95;
   font-weight: 800;
@@ -48,7 +48,7 @@
   text-transform: uppercase;
 }
 .t-display-md {
-  font-family: "Geologica", sans-serif;
+  font-family: "Exo 2", sans-serif;
   font-size: clamp(26px, 4.5vw, 44px);
   line-height: 1;
   font-weight: 800;
@@ -56,7 +56,7 @@
   text-transform: uppercase;
 }
 .t-display-sm {
-  font-family: "Geologica", sans-serif;
+  font-family: "Exo 2", sans-serif;
   font-size: clamp(20px, 3.2vw, 30px);
   line-height: 1.08;
   font-weight: 800;

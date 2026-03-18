@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Geologica"', "sans-serif"],
-        sans: ['"Manrope"', "sans-serif"],
+        display: ['"Exo 2"', "sans-serif"],
+        sans: ['"Exo 2"', "sans-serif"],
       },
       colors: {
         orange: "var(--c-orange)",

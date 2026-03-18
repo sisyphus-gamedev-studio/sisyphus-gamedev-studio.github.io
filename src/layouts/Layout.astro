@@ -82,22 +82,11 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${canonicalBase}${SEO.ogImagePath}`} />
 
-    <link rel="icon" type="image/png" href="/favicon.png" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
-      />
-    </noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
 
     <link rel="preload" as="image" href="/images/hero/hero-main.jpg" fetchpriority="high" />
 
@@ -131,7 +120,7 @@ const jsonLd = {
     </a>
     <noscript>
       <div
-        style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#1a1a1a;border-top:1px solid rgba(248,126,15,.3);padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Manrope',sans-serif;font-size:13px;color:#999;"
+        style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#1a1a1a;border-top:1px solid rgba(248,126,15,.3);padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Exo 2',sans-serif;font-size:13px;color:#999;"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -195,7 +184,7 @@ const jsonLd = {
               }
             });
           },
-          { threshold: 0.08, rootMargin: "0px 0px 0px 0px" },
+          { threshold: 0.08, rootMargin: "0px 0px -20% 0px" },
         );
 
         function observeRevealEls() {

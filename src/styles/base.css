@@ -14,7 +14,7 @@ html {
 body {
   background: var(--s-3);
   color: var(--c-on-surface);
-  font-family: "Manrope", sans-serif;
+  font-family: "Exo 2", sans-serif;
   overflow-x: hidden;
   width: 100%;
   -webkit-font-smoothing: antialiased;
@@ -24,7 +24,7 @@ body {
   width: 2px;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--s-6);
+  background: var(--s-5);
   border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -33,7 +33,7 @@ body {
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--s-6) transparent;
+  scrollbar-color: var(--s-5) transparent;
 }
 
 ::selection {

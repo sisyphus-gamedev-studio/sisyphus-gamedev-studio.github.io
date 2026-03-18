@@ -118,7 +118,7 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
               {p.description}
             </p>
             <div className="flex-between">
-              <div className="flex-row gap-8">
+              <div className="flex-row gap-4">
                 <button onClick={prev} className="icon-btn-outlined" style={{ width: 40, height: 40 }} aria-label={t.prevGame}>
                   <ChevronLeft size={18} />
                 </button>

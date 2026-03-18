@@ -62,7 +62,12 @@ const progressPct = `${featured.progress ?? 0}%`;
                 data-text={i === titleWords.length - 1 ? word : undefined}
                 style={`display:inline-block;color:${i === titleWords.length - 1 ? "var(--c-orange)" : "var(--c-on-surface)"};margin-right:${i < titleWords.length - 1 ? "0.2em" : "0"}`}
               >
-                {word}{i === titleWords.length - 1 && <span class="glitch-scanline" aria-hidden="true" />}
+                {word}{i === titleWords.length - 1 && (
+                  <>
+                    <span class="glitch-scanline" aria-hidden="true" />
+                    <canvas class="glitch-noise" aria-hidden="true" />
+                  </>
+                )}
               </span>
             ))
           }
@@ -257,33 +262,116 @@ const progressPct = `${featured.progress ?? 0}%`;
 <script>
   function initGlitch() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const el = document.querySelector(".glitch-word");
+    const el = document.querySelector(".glitch-word") as HTMLElement | null;
     if (!el) return;
 
-    const types = ["g-a", "g-b", "g-c", "g-d"] as const;
-    const durations: Record<string, number> = { "g-a": 350, "g-b": 500, "g-c": 180, "g-d": 400 };
-    let last = "";
-    let timer: ReturnType<typeof setTimeout>;
+    const canvas = el.querySelector(".glitch-noise") as HTMLCanvasElement | null;
+    const ctx = canvas?.getContext("2d") ?? null;
+    let noiseRaf = 0;
+    let noiseStop = 0;
 
-    function fire() {
-      let type = types[Math.floor(Math.random() * types.length)];
-      while (type === last) type = types[Math.floor(Math.random() * types.length)];
-      last = type;
-
-      el!.classList.add(type);
-      setTimeout(() => el!.classList.remove(type), durations[type] + 20);
-
-      const doubleTap = Math.random() < 0.3;
-      const nextDelay = doubleTap
-        ? durations[type] + 80 + Math.random() * 200
-        : 800 + Math.random() * 2200;
-
-      timer = setTimeout(fire, nextDelay);
+    if (canvas && ctx) {
+      const resize = () => {
+        canvas.width  = el.offsetWidth  || 200;
+        canvas.height = el.offsetHeight || 60;
+      };
+      resize();
+      new ResizeObserver(resize).observe(el);
     }
 
-    timer = setTimeout(fire, 1200 + Math.random() * 800);
+    function drawNoise() {
+      if (!ctx || !canvas) return;
+      const img = ctx.createImageData(canvas.width, canvas.height);
+      for (let i = 0; i < img.data.length; i += 4) {
+        const on = Math.random() > 0.52;
+        img.data[i] = img.data[i+1] = img.data[i+2] = on ? 255 : 0;
+        img.data[i+3] = on ? Math.floor(Math.random() * 160 + 60) : 0;
+      }
+      ctx.putImageData(img, 0, 0);
+    }
 
-    document.addEventListener("astro:before-swap", () => clearTimeout(timer), { once: true });
+    function startNoise(ms: number) {
+      cancelAnimationFrame(noiseRaf);
+      clearTimeout(noiseStop);
+      function loop() { drawNoise(); noiseRaf = requestAnimationFrame(loop); }
+      loop();
+      noiseStop = setTimeout(() => {
+        cancelAnimationFrame(noiseRaf);
+        if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }, ms) as unknown as number;
+    }
+
+    const dur = {
+      "g-burst":   550,
+      "g-echo":    380,
+      "g-tick":    200,
+      "g-drift":   900,
+      "g-stutter": 140,
+    } as const;
+    type G = keyof typeof dur;
+
+    let timer: ReturnType<typeof setTimeout>;
+
+    function fire(type: G) {
+      el!.classList.add(type);
+      startNoise(dur[type]);
+      setTimeout(() => el!.classList.remove(type), dur[type] + 20);
+    }
+
+    function delay(ms: number): Promise<void> {
+      return new Promise(r => { timer = setTimeout(r, ms); });
+    }
+
+    async function seqClassic() {
+      fire("g-burst");
+      await delay(dur["g-burst"] + 280 + Math.random() * 180);
+      fire("g-echo");
+      await delay(dur["g-echo"] + 520 + Math.random() * 380);
+      fire("g-tick");
+    }
+
+    async function seqStutter() {
+      const count = 3 + Math.floor(Math.random() * 3);
+      for (let i = 0; i < count; i++) {
+        fire("g-stutter");
+        await delay(dur["g-stutter"] + 40 + Math.random() * 60);
+      }
+      await delay(120 + Math.random() * 80);
+      fire("g-echo");
+    }
+
+    async function seqDrift() {
+      fire("g-drift");
+      await delay(dur["g-drift"] + 200 + Math.random() * 200);
+      fire("g-tick");
+    }
+
+    async function seqCorrupt() {
+      fire("g-burst");
+      await delay(dur["g-burst"] + 900 + Math.random() * 600);
+      fire("g-stutter");
+      await delay(dur["g-stutter"] + 50 + Math.random() * 40);
+      fire("g-stutter");
+    }
+
+    const sequences = [seqClassic, seqStutter, seqDrift, seqCorrupt];
+    let lastSeq = -1;
+
+    async function run() {
+      let idx: number;
+      do { idx = Math.floor(Math.random() * sequences.length); } while (idx === lastSeq);
+      lastSeq = idx;
+      await sequences[idx]();
+      timer = setTimeout(run, 2200 + Math.random() * 2800);
+    }
+
+    timer = setTimeout(run, 1400 + Math.random() * 600);
+
+    document.addEventListener("astro:before-swap", () => {
+      clearTimeout(timer);
+      clearTimeout(noiseStop);
+      cancelAnimationFrame(noiseRaf);
+    }, { once: true });
   }
 
   document.addEventListener("astro:page-load", initGlitch);

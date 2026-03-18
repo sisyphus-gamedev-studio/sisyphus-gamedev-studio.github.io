@@ -161,7 +161,6 @@
   animation: modal-in 0.28s cubic-bezier(0.05, 0.7, 0.1, 1) both;
 }
 
-/* ── glitch base ── */
 .glitch-word {
   position: relative;
   display: inline-block;
@@ -184,7 +183,6 @@
 .glitch-word::before { color: #ff3e3e; mix-blend-mode: screen; }
 .glitch-word::after  { color: #00e5ff; mix-blend-mode: screen; }
 
-/* scanline */
 .glitch-scanline {
   position: absolute;
   inset: 0;
@@ -201,137 +199,199 @@
   opacity: 0;
 }
 
-/* ── type A: fast horizontal slice ── */
-.glitch-word.g-a { animation: ga-shake 0.35s steps(1) forwards; }
-.glitch-word.g-a::before { animation: ga-r 0.35s steps(1) forwards; }
-.glitch-word.g-a::after  { animation: ga-b 0.35s steps(1) forwards; }
-.glitch-word.g-a .glitch-scanline::before { animation: ga-scan 0.35s linear forwards; }
+.glitch-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+  border-radius: inherit;
+}
 
-@keyframes ga-shake {
-  0%   { transform: translate(0); }
-  14%  { transform: translate(-3px, 1px); }
-  28%  { transform: translate(4px, -1px); }
-  42%  { transform: translate(-2px, 0); }
-  57%  { transform: translate(3px, 1px); }
-  71%  { transform: translate(-1px, -1px); }
-  85%  { transform: translate(2px, 0); }
-  100% { transform: translate(0); }
+.glitch-word.g-burst { animation: gburst-shake 0.55s steps(1) forwards; }
+.glitch-word.g-burst::before { animation: gburst-r 0.55s steps(1) forwards; }
+.glitch-word.g-burst::after  { animation: gburst-b 0.55s steps(1) forwards; }
+.glitch-word.g-burst .glitch-scanline::before { animation: gburst-scan 0.55s linear forwards; }
+.glitch-word.g-burst .glitch-noise { animation: gnoise-show 0.55s steps(1) forwards; }
+
+@keyframes gburst-shake {
+  0%   { transform: translate(0) skewX(0deg); }
+  9%   { transform: translate(-7px, 2px) skewX(-4deg); }
+  18%  { transform: translate(9px, -2px) skewX(3deg); }
+  27%  { transform: translate(-5px, 1px) skewX(-2deg); }
+  36%  { transform: translate(6px, 0) skewX(1.5deg); }
+  45%  { transform: translate(-3px, -1px) skewX(-1deg); }
+  54%  { transform: translate(4px, 1px) skewX(0.5deg); }
+  63%  { transform: translate(-2px, 0); }
+  72%  { transform: translate(2px, 0); }
+  100% { transform: translate(0) skewX(0deg); }
 }
-@keyframes ga-r {
+@keyframes gburst-r {
   0%   { opacity: 0; }
-  14%  { opacity: 0.95; clip-path: polygon(0 5%,  100% 5%,  100% 30%, 0 30%);  transform: translate(7px,  0); }
-  28%  { opacity: 0.9;  clip-path: polygon(0 55%, 100% 55%, 100% 75%, 0 75%);  transform: translate(-6px, 0); }
-  42%  { opacity: 0.95; clip-path: polygon(0 20%, 100% 20%, 100% 50%, 0 50%);  transform: translate(5px,  2px); }
-  57%  { opacity: 0;    }
-  71%  { opacity: 0.85; clip-path: polygon(0 70%, 100% 70%, 100% 95%, 0 95%);  transform: translate(-8px, 0); }
-  85%  { opacity: 0; }
+  9%   { opacity: 1;    clip-path: polygon(0 0,   100% 0,   100% 38%, 0 38%);  transform: translate(14px, 0); }
+  18%  { opacity: 0.95; clip-path: polygon(0 42%, 100% 42%, 100% 78%, 0 78%);  transform: translate(-12px, 0); }
+  27%  { opacity: 1;    clip-path: polygon(0 10%, 100% 10%, 100% 55%, 0 55%);  transform: translate(10px, 3px); }
+  36%  { opacity: 0.85; clip-path: polygon(0 60%, 100% 60%, 100% 100%,0 100%); transform: translate(-9px, 0); }
+  45%  { opacity: 0.7;  clip-path: polygon(0 25%, 100% 25%, 100% 50%, 0 50%);  transform: translate(7px, -2px); }
+  54%  { opacity: 0.5;  clip-path: polygon(0 70%, 100% 70%, 100% 90%, 0 90%);  transform: translate(-5px, 0); }
+  63%  { opacity: 0.3;  clip-path: polygon(0 0,   100% 0,   100% 20%, 0 20%);  transform: translate(4px, 0); }
+  72%  { opacity: 0.15; clip-path: polygon(0 80%, 100% 80%, 100% 100%,0 100%); transform: translate(-3px, 0); }
   100% { opacity: 0; transform: translate(0); }
 }
-@keyframes ga-b {
+@keyframes gburst-b {
   0%   { opacity: 0; }
-  14%  { opacity: 0.9;  clip-path: polygon(0 60%, 100% 60%, 100% 85%, 0 85%);  transform: translate(-7px, 0); }
-  28%  { opacity: 0.85; clip-path: polygon(0 10%, 100% 10%, 100% 40%, 0 40%);  transform: translate(6px,  0); }
-  42%  { opacity: 0.9;  clip-path: polygon(0 75%, 100% 75%, 100% 100%,0 100%); transform: translate(-5px,-2px); }
-  57%  { opacity: 0; }
-  71%  { opacity: 0.8;  clip-path: polygon(0 30%, 100% 30%, 100% 60%, 0 60%);  transform: translate(8px,  0); }
-  85%  { opacity: 0; }
+  9%   { opacity: 0.95; clip-path: polygon(0 38%, 100% 38%, 100% 80%, 0 80%);  transform: translate(-14px, 0); }
+  18%  { opacity: 1;    clip-path: polygon(0 0,   100% 0,   100% 42%, 0 42%);  transform: translate(12px, 0); }
+  27%  { opacity: 0.9;  clip-path: polygon(0 55%, 100% 55%, 100% 100%,0 100%); transform: translate(-10px,-3px); }
+  36%  { opacity: 0.8;  clip-path: polygon(0 5%,  100% 5%,  100% 40%, 0 40%);  transform: translate(9px, 0); }
+  45%  { opacity: 0.65; clip-path: polygon(0 50%, 100% 50%, 100% 75%, 0 75%);  transform: translate(-7px, 2px); }
+  54%  { opacity: 0.45; clip-path: polygon(0 15%, 100% 15%, 100% 35%, 0 35%);  transform: translate(5px, 0); }
+  63%  { opacity: 0.25; clip-path: polygon(0 65%, 100% 65%, 100% 85%, 0 85%);  transform: translate(-4px, 0); }
+  72%  { opacity: 0.1;  clip-path: polygon(0 0,   100% 0,   100% 15%, 0 15%);  transform: translate(3px, 0); }
   100% { opacity: 0; transform: translate(0); }
 }
-@keyframes ga-scan {
-  0%   { opacity: 0.8; top: 0%; }
+@keyframes gburst-scan {
+  0%   { opacity: 0.9; top: 0%; height: 3px; }
+  30%  { opacity: 0.7; top: 40%; height: 2px; }
+  60%  { opacity: 0.4; top: 75%; height: 2px; }
   100% { opacity: 0;   top: 100%; }
 }
 
-/* ── type B: wide skew + big offset ── */
-.glitch-word.g-b { animation: gb-shake 0.5s steps(1) forwards; }
-.glitch-word.g-b::before { animation: gb-r 0.5s steps(1) forwards; }
-.glitch-word.g-b::after  { animation: gb-b 0.5s steps(1) forwards; }
-.glitch-word.g-b .glitch-scanline::before { animation: gb-scan 0.5s linear forwards; }
+.glitch-word.g-echo { animation: gecho-shake 0.38s steps(1) forwards; }
+.glitch-word.g-echo::before { animation: gecho-r 0.38s steps(1) forwards; }
+.glitch-word.g-echo::after  { animation: gecho-b 0.38s steps(1) forwards; }
+.glitch-word.g-echo .glitch-scanline::before { animation: gecho-scan 0.38s linear forwards; }
+.glitch-word.g-echo .glitch-noise { animation: gnoise-show 0.38s steps(1) forwards; }
 
-@keyframes gb-shake {
-  0%   { transform: translate(0) skewX(0deg); }
-  20%  { transform: translate(-4px, 0) skewX(-3deg); }
-  40%  { transform: translate(5px, 0) skewX(2deg); }
-  60%  { transform: translate(-3px, 1px) skewX(-1deg); }
-  80%  { transform: translate(2px, -1px) skewX(1deg); }
-  100% { transform: translate(0) skewX(0deg); }
-}
-@keyframes gb-r {
-  0%   { opacity: 0; }
-  20%  { opacity: 1;   clip-path: polygon(0 0,   100% 0,   100% 45%, 0 45%);  transform: translate(10px, 0); }
-  40%  { opacity: 0.9; clip-path: polygon(0 50%, 100% 50%, 100% 100%,0 100%); transform: translate(-9px, 0); }
-  60%  { opacity: 0.8; clip-path: polygon(0 15%, 100% 15%, 100% 60%, 0 60%);  transform: translate(7px,  3px); }
-  80%  { opacity: 0; }
-  100% { opacity: 0; transform: translate(0); }
-}
-@keyframes gb-b {
-  0%   { opacity: 0; }
-  20%  { opacity: 0.9; clip-path: polygon(0 45%, 100% 45%, 100% 100%,0 100%); transform: translate(-10px,0); }
-  40%  { opacity: 1;   clip-path: polygon(0 0,   100% 0,   100% 50%, 0 50%);  transform: translate(9px,  0); }
-  60%  { opacity: 0.8; clip-path: polygon(0 40%, 100% 40%, 100% 85%, 0 85%);  transform: translate(-7px,-3px); }
-  80%  { opacity: 0; }
-  100% { opacity: 0; transform: translate(0); }
-}
-@keyframes gb-scan {
-  0%   { opacity: 0.6; top: 50%; }
-  50%  { opacity: 0.9; top: 20%; }
-  100% { opacity: 0;   top: 80%; }
-}
-
-/* ── type C: micro-flicker (subtle, quick) ── */
-.glitch-word.g-c { animation: gc-shake 0.18s steps(1) forwards; }
-.glitch-word.g-c::before { animation: gc-r 0.18s steps(1) forwards; }
-.glitch-word.g-c::after  { animation: gc-b 0.18s steps(1) forwards; }
-
-@keyframes gc-shake {
+@keyframes gecho-shake {
   0%   { transform: translate(0); }
-  33%  { transform: translate(2px, -1px); }
-  66%  { transform: translate(-2px, 1px); }
+  13%  { transform: translate(-5px, 1px) skewX(-2deg); }
+  26%  { transform: translate(6px, -1px) skewX(1.5deg); }
+  39%  { transform: translate(-3px, 0) skewX(-1deg); }
+  52%  { transform: translate(4px, 1px); }
+  65%  { transform: translate(-2px, 0); }
+  78%  { transform: translate(2px, 0); }
   100% { transform: translate(0); }
 }
-@keyframes gc-r {
+@keyframes gecho-r {
   0%   { opacity: 0; }
-  33%  { opacity: 0.8; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translate(4px, 0); }
-  66%  { opacity: 0.6; clip-path: polygon(0 30%, 100% 30%, 100% 70%, 0 70%); transform: translate(-3px, 0); }
+  13%  { opacity: 0.9;  clip-path: polygon(0 5%,  100% 5%,  100% 45%, 0 45%);  transform: translate(10px, 0); }
+  26%  { opacity: 0.85; clip-path: polygon(0 50%, 100% 50%, 100% 85%, 0 85%);  transform: translate(-9px, 0); }
+  39%  { opacity: 0.7;  clip-path: polygon(0 20%, 100% 20%, 100% 60%, 0 60%);  transform: translate(7px, 2px); }
+  52%  { opacity: 0.45; clip-path: polygon(0 65%, 100% 65%, 100% 90%, 0 90%);  transform: translate(-5px, 0); }
+  65%  { opacity: 0.2;  clip-path: polygon(0 0,   100% 0,   100% 25%, 0 25%);  transform: translate(3px, 0); }
   100% { opacity: 0; transform: translate(0); }
 }
-@keyframes gc-b {
+@keyframes gecho-b {
   0%   { opacity: 0; }
-  33%  { opacity: 0.7; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translate(-4px, 0); }
-  66%  { opacity: 0.5; clip-path: polygon(0 20%, 100% 20%, 100% 80%, 0 80%); transform: translate(3px, 0); }
+  13%  { opacity: 0.85; clip-path: polygon(0 45%, 100% 45%, 100% 90%, 0 90%);  transform: translate(-10px, 0); }
+  26%  { opacity: 0.9;  clip-path: polygon(0 0,   100% 0,   100% 50%, 0 50%);  transform: translate(9px, 0); }
+  39%  { opacity: 0.65; clip-path: polygon(0 55%, 100% 55%, 100% 95%, 0 95%);  transform: translate(-7px,-2px); }
+  52%  { opacity: 0.4;  clip-path: polygon(0 10%, 100% 10%, 100% 40%, 0 40%);  transform: translate(5px, 0); }
+  65%  { opacity: 0.15; clip-path: polygon(0 70%, 100% 70%, 100% 95%, 0 95%);  transform: translate(-3px, 0); }
+  100% { opacity: 0; transform: translate(0); }
+}
+@keyframes gecho-scan {
+  0%   { opacity: 0.6; top: 20%; }
+  100% { opacity: 0;   top: 90%; }
+}
+
+.glitch-word.g-tick { animation: gtick-shake 0.2s steps(1) forwards; }
+.glitch-word.g-tick::before { animation: gtick-r 0.2s steps(1) forwards; }
+.glitch-word.g-tick::after  { animation: gtick-b 0.2s steps(1) forwards; }
+.glitch-word.g-tick .glitch-noise { animation: gnoise-show 0.2s steps(1) forwards; }
+
+@keyframes gtick-shake {
+  0%   { transform: translate(0); }
+  25%  { transform: translate(-3px, 1px); }
+  50%  { transform: translate(4px, -1px); }
+  75%  { transform: translate(-2px, 0); }
+  100% { transform: translate(0); }
+}
+@keyframes gtick-r {
+  0%   { opacity: 0; }
+  25%  { opacity: 0.7; clip-path: polygon(0 15%, 100% 15%, 100% 55%, 0 55%); transform: translate(6px, 0); }
+  50%  { opacity: 0.5; clip-path: polygon(0 50%, 100% 50%, 100% 85%, 0 85%); transform: translate(-5px, 0); }
+  75%  { opacity: 0.25; clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%); transform: translate(3px, 0); }
+  100% { opacity: 0; transform: translate(0); }
+}
+@keyframes gtick-b {
+  0%   { opacity: 0; }
+  25%  { opacity: 0.65; clip-path: polygon(0 55%, 100% 55%, 100% 90%, 0 90%); transform: translate(-6px, 0); }
+  50%  { opacity: 0.45; clip-path: polygon(0 10%, 100% 10%, 100% 45%, 0 45%); transform: translate(5px, 0); }
+  75%  { opacity: 0.2;  clip-path: polygon(0 65%, 100% 65%, 100% 95%, 0 95%); transform: translate(-3px, 0); }
   100% { opacity: 0; transform: translate(0); }
 }
 
-/* ── type D: vertical split ── */
-.glitch-word.g-d { animation: gd-shake 0.4s steps(1) forwards; }
-.glitch-word.g-d::before { animation: gd-r 0.4s steps(1) forwards; }
-.glitch-word.g-d::after  { animation: gd-b 0.4s steps(1) forwards; }
-.glitch-word.g-d .glitch-scanline::before { animation: gd-scan 0.4s linear forwards; }
+@keyframes gnoise-show {
+  0%, 100% { opacity: 0; }
+  10%, 90%  { opacity: 0.18; }
+  50%       { opacity: 0.12; }
+}
 
-@keyframes gd-shake {
-  0%   { transform: translate(0) scaleX(1); }
-  25%  { transform: translate(-5px, 0) scaleX(1.01); }
-  50%  { transform: translate(5px, 0) scaleX(0.99); }
-  75%  { transform: translate(-2px, 2px) scaleX(1); }
-  100% { transform: translate(0) scaleX(1); }
+.glitch-word.g-drift { animation: gdrift-shake 0.9s steps(1) forwards; }
+.glitch-word.g-drift::before { animation: gdrift-r 0.9s linear forwards; }
+.glitch-word.g-drift::after  { animation: gdrift-b 0.9s linear forwards; }
+.glitch-word.g-drift .glitch-scanline::before { animation: gdrift-scan 0.9s linear forwards; }
+
+@keyframes gdrift-shake {
+  0%   { transform: translate(0); }
+  11%  { transform: translate(-2px, 0); }
+  22%  { transform: translate(3px, 1px); }
+  33%  { transform: translate(-1px, 0); }
+  44%  { transform: translate(2px, -1px); }
+  55%  { transform: translate(-3px, 0); }
+  66%  { transform: translate(1px, 1px); }
+  77%  { transform: translate(-1px, 0); }
+  88%  { transform: translate(1px, 0); }
+  100% { transform: translate(0); }
 }
-@keyframes gd-r {
-  0%   { opacity: 0; }
-  25%  { opacity: 1;   clip-path: polygon(0 0,   50% 0,   50% 100%, 0 100%);  transform: translate(8px,  0); }
-  50%  { opacity: 0.9; clip-path: polygon(50% 0, 100% 0, 100% 100%,50% 100%); transform: translate(-8px, 0); }
-  75%  { opacity: 0.7; clip-path: polygon(0 0,   100% 0, 100% 100%, 0 100%);  transform: translate(4px,  0); }
+@keyframes gdrift-r {
+  0%   { opacity: 0; transform: translate(0); }
+  8%   { opacity: 0.6; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translate(6px, 0); }
+  35%  { opacity: 0.5; clip-path: polygon(0 20%, 100% 20%, 100% 80%, 0 80%); transform: translate(10px, 0); }
+  60%  { opacity: 0.35; clip-path: polygon(0 40%, 100% 40%, 100% 70%, 0 70%); transform: translate(7px, 2px); }
+  80%  { opacity: 0.15; clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%); transform: translate(4px, 0); }
   100% { opacity: 0; transform: translate(0); }
 }
-@keyframes gd-b {
-  0%   { opacity: 0; }
-  25%  { opacity: 0.9; clip-path: polygon(50% 0, 100% 0, 100% 100%,50% 100%); transform: translate(-8px, 0); }
-  50%  { opacity: 1;   clip-path: polygon(0 0,   50% 0,   50% 100%, 0 100%);  transform: translate(8px,  0); }
-  75%  { opacity: 0.7; clip-path: polygon(0 0,   100% 0, 100% 100%, 0 100%);  transform: translate(-4px, 0); }
+@keyframes gdrift-b {
+  0%   { opacity: 0; transform: translate(0); }
+  8%   { opacity: 0.55; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translate(-6px, 0); }
+  35%  { opacity: 0.45; clip-path: polygon(0 15%, 100% 15%, 100% 75%, 0 75%); transform: translate(-10px, 0); }
+  60%  { opacity: 0.3;  clip-path: polygon(0 30%, 100% 30%, 100% 65%, 0 65%); transform: translate(-7px,-2px); }
+  80%  { opacity: 0.12; clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); transform: translate(-4px, 0); }
   100% { opacity: 0; transform: translate(0); }
 }
-@keyframes gd-scan {
-  0%   { opacity: 0.7; top: 30%; }
-  100% { opacity: 0;   top: 70%; }
+@keyframes gdrift-scan {
+  0%   { opacity: 0; top: 0%; }
+  15%  { opacity: 0.5; top: 15%; height: 1px; }
+  50%  { opacity: 0.3; top: 55%; height: 1px; }
+  85%  { opacity: 0.15; top: 85%; }
+  100% { opacity: 0; top: 100%; }
+}
+
+.glitch-word.g-stutter { animation: gstutter-shake 0.14s steps(1) forwards; }
+.glitch-word.g-stutter::before { animation: gstutter-r 0.14s steps(1) forwards; }
+.glitch-word.g-stutter::after  { animation: gstutter-b 0.14s steps(1) forwards; }
+.glitch-word.g-stutter .glitch-noise { animation: gnoise-show 0.14s steps(1) forwards; }
+
+@keyframes gstutter-shake {
+  0%   { transform: translate(0); }
+  33%  { transform: translate(-4px, 1px); }
+  66%  { transform: translate(5px, -1px); }
+  100% { transform: translate(0); }
+}
+@keyframes gstutter-r {
+  0%   { opacity: 0; }
+  33%  { opacity: 0.85; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translate(8px, 0); }
+  66%  { opacity: 0.6;  clip-path: polygon(0 30%, 100% 30%, 100% 80%, 0 80%); transform: translate(-6px, 0); }
+  100% { opacity: 0; transform: translate(0); }
+}
+@keyframes gstutter-b {
+  0%   { opacity: 0; }
+  33%  { opacity: 0.8;  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: translate(-8px, 0); }
+  66%  { opacity: 0.55; clip-path: polygon(0 20%, 100% 20%, 100% 70%, 0 70%); transform: translate(6px, 0); }
+  100% { opacity: 0; transform: translate(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -380,5 +440,8 @@
   .glitch-scanline::before {
     animation: none !important;
     opacity: 0 !important;
+  }
+  .glitch-noise {
+    display: none !important;
   }
 }

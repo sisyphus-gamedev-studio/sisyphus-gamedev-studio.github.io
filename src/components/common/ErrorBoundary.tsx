@@ -39,7 +39,6 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             border: `1px solid ${COLORS.border.default}`,
             textAlign: "center",
             color: COLORS.text.tertiary,
-            fontFamily: "'Manrope', sans-serif",
             fontSize: 14,
           }}
         >

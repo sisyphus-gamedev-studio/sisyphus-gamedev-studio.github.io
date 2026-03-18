@@ -2,14 +2,14 @@ import { Gamepad2, Mail } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export const URLS = {
-  site: import.meta.env.PUBLIC_SITE_URL || "https://sisyphus.studio",
+  site: import.meta.env.PUBLIC_SITE_URL || "https://sisyphus.com",
   steam: import.meta.env.PUBLIC_STEAM_URL || "https://store.steampowered.com",
-  youtube: import.meta.env.PUBLIC_YOUTUBE_URL || "#",
+  youtube: import.meta.env.PUBLIC_YOUTUBE_URL || "https://www.youtube.com/@SisyphusStudioDev",
   donate: import.meta.env.PUBLIC_DONATE_URL || "#",
 } as const;
 
 export const CONTACT = {
-  email: "hello@sisyphus.studio",
+  email: "sisyphus.gamedev.studio@gmail.com",
   careerEmail: "sisyphus.gamedev.studio@gmail.com",
   formspreeEndpoint:
     import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || "https://formspree.io/f/YOUR_FORM_ID",
