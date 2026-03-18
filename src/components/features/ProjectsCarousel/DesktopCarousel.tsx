@@ -78,7 +78,6 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
             borderRadius: 20,
             overflow: "hidden",
             border: `1px solid ${COLORS.border.default}`,
-            boxShadow: "0 20px 60px rgba(0,0,0,.6)",
             outline: "none",
           }}
         >

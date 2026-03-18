@@ -5,7 +5,7 @@ export const COLORS = {
   error: "#f87272",
   surface: {
     s1: "#0d0d0d",
-    s2: "#111",
+    s2: "#161616",
     s3: "#151515",
     s4: "#1a1a1a",
     s5: "#202020",
