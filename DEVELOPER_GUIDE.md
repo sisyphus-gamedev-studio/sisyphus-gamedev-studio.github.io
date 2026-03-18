@@ -15,6 +15,7 @@
   - `index.tsx` — логика переключения desktop/mobile
   - `DesktopCarousel.tsx` — раскрывающиеся панели
   - `MobileCarousel.tsx` — свайп-версия
+  - `tagIcons.ts` — маппинг ключевых слов тегов на иконки Lucide (en + ru)
 
 ### `layout/` — Макет
 - **`Navbar.tsx`** — навигация с мобильным меню, переключателем языка и соцсетями
@@ -44,8 +45,9 @@
 - **`design.ts`**
   - `COLORS` — цветовая палитра (включая цвета категорий новостей)
   - `LAYOUT` — maxWidth, padding, navHeight
-  - `SPACING` — отступы компонентов
+  - `SPACING` — отступы компонентов (`sectionPadding`, `sectionPaddingMobile`, `cardPadding`)
   - `SIZES` — размеры карточек, модала, hero
+  - `TAG_STYLE` — базовые стили тегов жанров (`base`, `desktop`, `mobile`)
 
 - **`links.ts`**
   - `URLS` — внешние URL (site, steam, youtube, donate)
@@ -64,7 +66,8 @@
   - Структура: `{ isoDate, image, type, en: {...}, ru: {...} }`
   - Типы: `announcement`, `dev-diary`, `update`
 - **`projects/`** — JSON файлы проектов
-  - Структура: `{ id, image, progress, wishlistUrl, en: {...}, ru: {...} }`
+  - Структура: `{ id, image, progress?, wishlistUrl?, en: { title, description, price, tags? }, ru: {...} }`
+  - `tags` — опциональный массив строк; иконки подбираются автоматически по `tagIcons.ts`
 
 ---
 
@@ -158,11 +161,22 @@ Navbar (fixed)
   "image": "/images/projects/project-3.jpg",
   "progress": 25,
   "wishlistUrl": "https://store.steampowered.com/app/...",
-  "en": { "title": "Game Title", "description": "...", "price": "In Development" },
-  "ru": { "title": "Название игры", "description": "...", "price": "В разработке" }
+  "en": {
+    "title": "Game Title",
+    "description": "...",
+    "price": "In Development",
+    "tags": ["Co-op", "Shooter"]
+  },
+  "ru": {
+    "title": "Название игры",
+    "description": "...",
+    "price": "В разработке",
+    "tags": ["Кооп", "Шутер"]
+  }
 }
 ```
 2. Добавь изображение в `public/images/projects/`
+3. Чтобы добавить иконку для нового тега — расширь маппинг в `src/components/features/ProjectsCarousel/tagIcons.ts`
 
 ---
 

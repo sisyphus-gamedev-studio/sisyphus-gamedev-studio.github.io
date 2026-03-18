@@ -5,11 +5,13 @@
   "en": {
     "title": "Krivda",
     "description": "A cooperative survival simulator steeped in the spirit of Slavic mythology. The open world is filled with secrets and dangers. To survive, you'll need to become one with nature and the spirit world, learn new things, and become stronger and more cunning.",
-    "price": "Coming Soon"
+    "price": "Coming Soon",
+    "tags": ["Co-op", "Survival", "Open World", "Slavic Mythology"]
   },
   "ru": {
     "title": "Кривда",
     "description": "Кооперативный симулятор выживания, пронизанный духом славянской мифологии. Открытый мир наполнен тайнами и опасностями, чтобы выжить — придется стать единым целым с природой и миром духов.",
-    "price": "Скоро"
+    "price": "Скоро",
+    "tags": ["Кооп", "Выживание", "Открытый мир", "Слав. мифология"]
   }
 }

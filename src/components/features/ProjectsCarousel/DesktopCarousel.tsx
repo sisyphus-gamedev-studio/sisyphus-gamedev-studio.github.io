@@ -2,8 +2,8 @@ import { useCallback, type FC, memo } from "react";
 import { ExternalLink } from "lucide-react";
 import type { Project, TranslationStructure } from "../../../types";
 import { handleImageError } from "../../../utils/images";
-import { PROJECTS_EXPAND_MS } from "../../../config";
-import { COLORS, LAYOUT, SPACING } from "../../../config";
+import { PROJECTS_EXPAND_MS, COLORS, LAYOUT, SPACING, TAG_STYLE } from "../../../config";
+import { getTagIcon } from "./tagIcons";
 
 interface DesktopCarouselProps {
   projects: Project[];
@@ -42,34 +42,21 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
   );
 
   return (
-    <div
-      aria-labelledby="projects-heading"
-      style={{ background: COLORS.surface.s2, padding: SPACING.sectionPadding }}
-    >
+    <div aria-labelledby="projects-heading" style={{ background: COLORS.surface.s2, padding: SPACING.sectionPadding }}>
       <div
         aria-live="polite"
         aria-atomic="true"
-        style={{
-          position: "absolute",
-          width: 1,
-          height: 1,
-          overflow: "hidden",
-          clip: "rect(0,0,0,0)",
-          whiteSpace: "nowrap",
-        }}
+        style={{ position: "absolute", width: 1, height: 1, overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap" }}
       >
         {shown.title} — {shown.price}
       </div>
 
-      <div
-        style={{ maxWidth: LAYOUT.maxWidth, margin: "0 auto", padding: `0 ${LAYOUT.padding}px` }}
-      >
+      <div style={{ maxWidth: LAYOUT.maxWidth, margin: "0 auto", padding: `0 ${LAYOUT.padding}px` }}>
         <div className="reveal" suppressHydrationWarning style={{ marginBottom: 40 }}>
           <div className="section-eyebrow">
             <div className="section-eyebrow-line" />
             <span className="section-eyebrow-label">
-              {String(activeIndex + 1).padStart(2, "0")} /{" "}
-              {String(projects.length).padStart(2, "0")}
+              {String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
             </span>
           </div>
           <h2 id="projects-heading" className="t-display-md" style={{ color: COLORS.text.primary }}>
@@ -90,7 +77,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
             height: 520,
             borderRadius: 20,
             overflow: "hidden",
-            border: "1px solid rgba(255,255,255,.07)",
+            border: `1px solid ${COLORS.border.default}`,
             boxShadow: "0 20px 60px rgba(0,0,0,.6)",
             outline: "none",
           }}
@@ -98,7 +85,8 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
           {projects.map((project, i) => {
             const isActive = i === activeIndex;
             const isDisplayed = i === displayedIndex;
-            const isAnimating = i === activeIndex || i === displayedIndex;
+            const isAnimating = isActive || isDisplayed;
+            const easing = `cubic-bezier(0.4,0,0.2,1)`;
 
             return (
               <div
@@ -117,7 +105,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                   cursor: isActive ? "default" : "pointer",
                   overflow: "hidden",
                   willChange: isAnimating ? "flex-grow" : "auto",
-                  transition: `flex-grow ${PROJECTS_EXPAND_MS}ms cubic-bezier(0.4,0,0.2,1)`,
+                  transition: `flex-grow ${PROJECTS_EXPAND_MS}ms ${easing}`,
                   background: COLORS.surface.s4,
                 }}
               >
@@ -134,10 +122,8 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    filter: isActive
-                      ? "brightness(.45) saturate(.55)"
-                      : "brightness(.2) saturate(.25)",
-                    transition: `filter ${PROJECTS_EXPAND_MS}ms cubic-bezier(0.4,0,0.2,1)`,
+                    filter: isActive ? "brightness(.45) saturate(.55)" : "brightness(.2) saturate(.25)",
+                    transition: `filter ${PROJECTS_EXPAND_MS}ms ${easing}`,
                   }}
                   onError={(e) => handleImageError(e, 900, 600)}
                 />
@@ -147,7 +133,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                     inset: 0,
                     background: "linear-gradient(180deg,transparent 20%,rgba(17,17,17,.97) 100%)",
                     opacity: isActive ? 1 : 0.6,
-                    transition: `opacity ${PROJECTS_EXPAND_MS}ms cubic-bezier(0.4,0,0.2,1)`,
+                    transition: `opacity ${PROJECTS_EXPAND_MS}ms ${easing}`,
                   }}
                 />
                 <div
@@ -156,12 +142,13 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                     inset: 0,
                     background: "linear-gradient(135deg,rgba(248,126,15,.05) 0%,transparent 55%)",
                     opacity: isActive ? 1 : 0,
-                    transition: `opacity ${PROJECTS_EXPAND_MS}ms cubic-bezier(0.4,0,0.2,1)`,
+                    transition: `opacity ${PROJECTS_EXPAND_MS}ms ${easing}`,
                     pointerEvents: "none",
                   }}
                 />
 
                 <div
+                  aria-hidden="true"
                   style={{
                     position: "absolute",
                     inset: 0,
@@ -170,22 +157,12 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                     justifyContent: "center",
                     opacity: isActive ? 0 : 1,
                     transition: isActive
-                      ? "opacity 180ms cubic-bezier(0.4,0,0.2,1)"
-                      : `opacity 260ms cubic-bezier(0.4,0,0.2,1) ${PROJECTS_EXPAND_MS * 0.5}ms`,
+                      ? `opacity 180ms ${easing}`
+                      : `opacity 260ms ${easing} ${PROJECTS_EXPAND_MS * 0.5}ms`,
                     pointerEvents: "none",
                   }}
-                  aria-hidden="true"
                 >
-                  <div
-                    style={{
-                      transform: "rotate(-90deg)",
-                      whiteSpace: "nowrap",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: 8,
-                    }}
-                  >
+                  <div style={{ transform: "rotate(-90deg)", whiteSpace: "nowrap", display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
                     <span className="t-eyebrow-accent">{String(i + 1).padStart(2, "0")}</span>
                     <span className="t-eyebrow-muted">{project.title}</span>
                   </div>
@@ -200,53 +177,41 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                     padding: SPACING.cardPadding.project,
                     opacity: isActive && isDisplayed ? 1 : 0,
                     transform: isActive && isDisplayed ? "translateY(0)" : "translateY(14px)",
-                    transition:
-                      isActive && isDisplayed
-                        ? "opacity 320ms cubic-bezier(0.4,0,0.2,1), transform 320ms cubic-bezier(0.4,0,0.2,1)"
-                        : "opacity 150ms cubic-bezier(0.4,0,1,1), transform 150ms cubic-bezier(0.4,0,1,1)",
+                    transition: isActive && isDisplayed
+                      ? `opacity 320ms ${easing}, transform 320ms ${easing}`
+                      : `opacity 150ms cubic-bezier(0.4,0,1,1), transform 150ms cubic-bezier(0.4,0,1,1)`,
                     pointerEvents: isActive ? "auto" : "none",
                   }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      marginBottom: 16,
-                    }}
-                  >
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
                     <span className="t-eyebrow-accent">
                       {String(displayedIndex + 1).padStart(2, "0")} — {t.sectionLabel}
                     </span>
                     <div className="md-badge-primary md-badge">{shown.price}</div>
                   </div>
-                  <h3
-                    className="t-card-title"
-                    style={{ fontSize: "clamp(28px,3.5vw,44px)", marginBottom: 14 }}
-                  >
+
+                  <h3 className="t-card-title" style={{ fontSize: "clamp(28px,3.5vw,44px)", marginBottom: 12 }}>
                     {shown.title}
                   </h3>
-                  <div
-                    style={{ height: 1, background: "rgba(255,255,255,.1)", marginBottom: 14 }}
-                  />
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-end",
-                      justifyContent: "space-between",
-                      gap: 32,
-                    }}
-                  >
-                    <p
-                      className="t-body-md"
-                      style={{
-                        color: COLORS.text.secondary,
-                        lineHeight: 1.68,
-                        maxWidth: 620,
-                        flex: 1,
-                        minWidth: 180,
-                      }}
-                    >
+
+                  {shown.tags && shown.tags.length > 0 && (
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
+                      {shown.tags.map((tag) => {
+                        const Icon = getTagIcon(tag);
+                        return (
+                          <span key={tag} style={{ ...TAG_STYLE.base, ...TAG_STYLE.desktop, color: COLORS.text.secondary }}>
+                            <Icon size={10} color={COLORS.orange} />
+                            {tag}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  <div style={{ height: 1, background: COLORS.border.strong, marginBottom: 14 }} />
+
+                  <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
+                    <p className="t-body-md" style={{ color: COLORS.text.secondary, lineHeight: 1.68, maxWidth: 620, flex: 1, minWidth: 180 }}>
                       {shown.description}
                     </p>
                     <a
@@ -254,14 +219,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-filled"
-                      style={{
-                        flexShrink: 0,
-                        height: 40,
-                        fontSize: 13,
-                        gap: 7,
-                        paddingLeft: 22,
-                        paddingRight: 22,
-                      }}
+                      style={{ flexShrink: 0, height: 40, fontSize: 13, gap: 7, paddingLeft: 22, paddingRight: 22 }}
                     >
                       <ExternalLink size={14} />
                       {t.wishlist}
@@ -276,9 +234,9 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                     left: 0,
                     right: 0,
                     height: 2,
-                    background: "rgba(248,126,15,.28)",
+                    background: COLORS.orangeBorder,
                     opacity: isActive ? 0 : 1,
-                    transition: `opacity ${PROJECTS_EXPAND_MS}ms cubic-bezier(0.4,0,0.2,1)`,
+                    transition: `opacity ${PROJECTS_EXPAND_MS}ms ${easing}`,
                     pointerEvents: "none",
                   }}
                 />

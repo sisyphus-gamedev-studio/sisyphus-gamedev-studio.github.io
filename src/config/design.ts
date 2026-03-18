@@ -37,11 +37,28 @@ export const LAYOUT = {
 
 export const SPACING = {
   sectionPadding: "100px 0",
+  sectionPaddingMobile: "72px 0",
   cardPadding: {
     news: "clamp(14px,4vw,26px) clamp(14px,5vw,28px) clamp(16px,4vw,32px)",
     project: "32px 40px 36px",
   },
   navLinkMargin: 20,
+} as const;
+
+export const TAG_STYLE = {
+  base: {
+    display: "inline-flex" as const,
+    alignItems: "center" as const,
+    gap: 5,
+    fontWeight: 600,
+    letterSpacing: "0.05em",
+    textTransform: "uppercase" as const,
+    background: "rgba(255,255,255,.04)",
+    border: "1px solid rgba(255,255,255,.07)",
+    borderRadius: 4,
+  },
+  desktop: { fontSize: 11, padding: "4px 10px" },
+  mobile:  { fontSize: 10, padding: "3px 8px" },
 } as const;
 
 export const SIZES = {

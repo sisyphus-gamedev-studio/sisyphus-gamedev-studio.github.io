@@ -8,6 +8,7 @@ export interface Project {
   description: string;
   image: string;
   price: string;
+  tags?: string[];
   progress?: number;
   wishlistUrl?: string;
 }

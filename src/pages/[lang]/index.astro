@@ -32,6 +32,7 @@ const projects: Project[] = sortedProjects.map((e) => ({
   description: e.data[lang].description,
   image: e.data.image,
   price: e.data[lang].price,
+  tags: e.data[lang].tags,
   progress: e.data.progress,
   wishlistUrl: e.data.wishlistUrl,
 }));

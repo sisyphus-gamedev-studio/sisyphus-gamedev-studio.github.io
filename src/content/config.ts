@@ -22,6 +22,7 @@ const projectLocalizedFields = z.object({
   title: z.string().min(1),
   description: z.string().min(1),
   price: z.string().min(1),
+  tags: z.array(z.string()).optional(),
 });
 
 const projectsCollection = defineCollection({

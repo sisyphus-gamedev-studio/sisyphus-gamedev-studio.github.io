@@ -254,37 +254,37 @@ const progressPct = `${featured.progress ?? 0}%`;
   </div>
 </section>
 
-<script is:inline>
-  // Random glitch scheduler — fires different glitch types at random intervals
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+<script>
+  function initGlitch() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const el = document.querySelector(".glitch-word");
-    if (el) {
-      const types = ["g-a", "g-b", "g-c", "g-d"];
-      // durations in ms matching CSS animation lengths
-      const durations = { "g-a": 350, "g-b": 500, "g-c": 180, "g-d": 400 };
+    if (!el) return;
 
-      let last = "";
+    const types = ["g-a", "g-b", "g-c", "g-d"] as const;
+    const durations: Record<string, number> = { "g-a": 350, "g-b": 500, "g-c": 180, "g-d": 400 };
+    let last = "";
+    let timer: ReturnType<typeof setTimeout>;
 
-      function fire() {
-        // pick a type different from last
-        let type = types[Math.floor(Math.random() * types.length)];
-        while (type === last) type = types[Math.floor(Math.random() * types.length)];
-        last = type;
+    function fire() {
+      let type = types[Math.floor(Math.random() * types.length)];
+      while (type === last) type = types[Math.floor(Math.random() * types.length)];
+      last = type;
 
-        el.classList.add(type);
-        setTimeout(() => el.classList.remove(type), durations[type] + 20);
+      el!.classList.add(type);
+      setTimeout(() => el!.classList.remove(type), durations[type] + 20);
 
-        // occasionally fire a quick double-tap
-        const doubleTap = Math.random() < 0.3;
-        const nextDelay = doubleTap
-          ? durations[type] + 80 + Math.random() * 200
-          : 800 + Math.random() * 2200;
+      const doubleTap = Math.random() < 0.3;
+      const nextDelay = doubleTap
+        ? durations[type] + 80 + Math.random() * 200
+        : 800 + Math.random() * 2200;
 
-        setTimeout(fire, nextDelay);
-      }
-
-      // initial delay
-      setTimeout(fire, 1200 + Math.random() * 800);
+      timer = setTimeout(fire, nextDelay);
     }
+
+    timer = setTimeout(fire, 1200 + Math.random() * 800);
+
+    document.addEventListener("astro:before-swap", () => clearTimeout(timer), { once: true });
   }
+
+  document.addEventListener("astro:page-load", initGlitch);
 </script>
