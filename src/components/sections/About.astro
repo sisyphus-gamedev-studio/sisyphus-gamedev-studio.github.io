@@ -34,9 +34,22 @@ const workspaceImg = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgC
 <section
   id="about"
   aria-labelledby="about-heading"
-  style="background:var(--s-4);padding:100px 0;border-top:1px solid var(--b-default)"
+  style="background:var(--s-4);padding:100px 0;border-top:1px solid var(--b-default);position:relative;overflow:hidden"
 >
-  <div style="max-width:1280px;margin:0 auto;padding:0 20px">
+  <div
+    class="grid-layer"
+    style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.01) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.01) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(ellipse 85% 80% at 50% 30%,rgba(0,0,0,0.65) 0%,transparent 72%);-webkit-mask-image:radial-gradient(ellipse 85% 80% at 50% 30%,rgba(0,0,0,0.65) 0%,transparent 72%)"
+  ></div>
+  <div
+    class="grid-layer"
+    style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:128px 128px;mask-image:radial-gradient(ellipse 65% 60% at 50% 28%,rgba(0,0,0,0.5) 0%,transparent 65%);-webkit-mask-image:radial-gradient(ellipse 65% 60% at 50% 28%,rgba(0,0,0,0.5) 0%,transparent 65%)"
+  ></div>
+  <canvas
+    class="interactive-grid-canvas"
+    style="position:absolute;inset:0;pointer-events:none;z-index:1;opacity:0;transition:opacity 0.4s ease"
+    aria-hidden="true"
+  ></canvas>
+  <div style="max-width:1280px;margin:0 auto;padding:0 20px;position:relative;z-index:2">
     <div class="reveal" style="margin-bottom:56px">
       <div class="section-eyebrow">
         <div class="section-eyebrow-line"></div>
@@ -157,3 +170,16 @@ const workspaceImg = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgC
     </div>
   </div>
 </section>
+
+<script>
+  import { initInteractiveGrid } from "../../utils/interactiveGrid";
+
+  function init() {
+    const section = document.getElementById("about") as HTMLElement | null;
+    if (!section) return;
+    const cleanup = initInteractiveGrid(section);
+    document.addEventListener("astro:before-swap", () => cleanup?.(), { once: true });
+  }
+
+  document.addEventListener("astro:page-load", init);
+</script>

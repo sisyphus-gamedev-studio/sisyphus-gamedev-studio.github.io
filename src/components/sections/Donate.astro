@@ -25,9 +25,22 @@ const TIER_RELS = [isMailto ? undefined : "noopener noreferrer", undefined, "noo
 <section
   id="donate"
   aria-labelledby="donate-heading"
-  style="padding: var(--spacing-section); background: var(--s-4); border-top: 1px solid var(--b-default)"
+  style="padding: var(--spacing-section); background: var(--s-4); border-top: 1px solid var(--b-default); position: relative; overflow: hidden"
 >
-  <div style="max-width: 1280px; margin: 0 auto; padding: 0 20px">
+  <canvas
+    class="interactive-grid-canvas"
+    style="position:absolute;inset:0;pointer-events:none;z-index:0;opacity:0;transition:opacity 0.4s ease"
+    aria-hidden="true"
+  ></canvas>
+  <div
+    class="grid-layer"
+    style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.01) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.01) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(ellipse 85% 80% at 50% 30%,rgba(0,0,0,0.65) 0%,transparent 72%);-webkit-mask-image:radial-gradient(ellipse 85% 80% at 50% 30%,rgba(0,0,0,0.65) 0%,transparent 72%)"
+  ></div>
+  <div
+    class="grid-layer"
+    style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:128px 128px;mask-image:radial-gradient(ellipse 65% 60% at 50% 28%,rgba(0,0,0,0.5) 0%,transparent 65%);-webkit-mask-image:radial-gradient(ellipse 65% 60% at 50% 28%,rgba(0,0,0,0.5) 0%,transparent 65%)"
+  ></div>
+  <div style="max-width: 1280px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2">
 
     <div class="reveal donate-header">
       <div>
@@ -54,6 +67,7 @@ const TIER_RELS = [isMailto ? undefined : "noopener noreferrer", undefined, "noo
           href={TIER_HREFS[i]}
           target={TIER_TARGETS[i]}
           rel={TIER_RELS[i]}
+          data-grid-exclude
           class={`reveal-scale state donate-tier-card${i === 0 ? " donate-tier-card--highlight" : ""}`}
           style={`transition-delay: ${i * 0.1}s`}
         >
@@ -226,3 +240,16 @@ const TIER_RELS = [isMailto ? undefined : "noopener noreferrer", undefined, "noo
     .donate-tiers-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
+
+<script>
+  import { initInteractiveGrid } from "../../utils/interactiveGrid";
+
+  function init() {
+    const section = document.getElementById("donate") as HTMLElement | null;
+    if (!section) return;
+    const cleanup = initInteractiveGrid(section);
+    document.addEventListener("astro:before-swap", () => cleanup?.(), { once: true });
+  }
+
+  document.addEventListener("astro:page-load", init);
+</script>

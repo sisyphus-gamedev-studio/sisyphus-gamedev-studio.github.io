@@ -1,3 +1,4 @@
+
 @keyframes orb-drift {
   0%,
   100% {
@@ -443,5 +444,9 @@
   }
   .glitch-noise {
     display: none !important;
+  }
+  .grid-jitter,
+  .grid-jitter-slow {
+    animation: none !important;
   }
 }
