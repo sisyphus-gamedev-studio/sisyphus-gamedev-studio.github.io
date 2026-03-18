@@ -172,7 +172,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
             height={32}
             style={{ borderRadius: 8, objectFit: "cover", flexShrink: 0 }}
           />
-          <span className="hidden sm:block t-brand-lg">
+          <span className="t-brand-lg">
             {BRAND.prefix}
             <span style={{ color: COLORS.orange }}>{BRAND.suffix}</span>
           </span>
