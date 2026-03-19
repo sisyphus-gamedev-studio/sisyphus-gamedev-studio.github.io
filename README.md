@@ -33,27 +33,27 @@ Pre-commit хук запускает `lint-staged` автоматически ч
 ```
 src/
 ├── components/
-│   ├── common/
-│   │   ├── DisciplineIcon.astro
-│   │   ├── ErrorBoundary.tsx
-│   │   └── SkeletonCard.tsx
-│   ├── features/
+│   ├── common/              — переиспользуемые компоненты
+│   │   ├── DisciplineIcon.astro   — иконки дисциплин для About
+│   │   ├── ErrorBoundary.tsx      — обработка ошибок React
+│   │   └── SkeletonCard.tsx       — скелетон-загрузчик
+│   ├── features/            — функциональные компоненты
 │   │   ├── ProjectsCarousel/
-│   │   │   ├── DesktopCarousel.tsx
-│   │   │   ├── MobileCarousel.tsx
-│   │   │   ├── tagIcons.ts
-│   │   │   └── index.tsx
-│   │   ├── ContactForm.tsx
-│   │   ├── NewsCarousel.tsx
-│   │   └── NewsModal.tsx
-│   ├── layout/
-│   │   ├── Navbar.tsx
-│   │   └── Footer.tsx
-│   └── sections/
-│       ├── Hero.astro
-│       ├── About.astro
-│       ├── Contact.astro
-│       └── Donate.astro
+│   │   │   ├── DesktopCarousel.tsx  — раскрывающиеся панели
+│   │   │   ├── MobileCarousel.tsx   — свайп-версия
+│   │   │   ├── tagIcons.ts          — маппинг тегов на иконки
+│   │   │   └── index.tsx            — переключение desktop/mobile
+│   │   ├── ContactForm.tsx          — форма с валидацией
+│   │   ├── NewsCarousel.tsx         — карусель новостей
+│   │   └── NewsModal.tsx            — модальное окно новости
+│   ├── layout/              — компоненты макета
+│   │   ├── Navbar.tsx       — навигация с языком и меню
+│   │   └── Footer.tsx       — футер с навигацией
+│   └── sections/            — секции страницы
+│       ├── Hero.astro       — главная секция
+│       ├── About.astro      — о студии
+│       ├── Contact.astro    — контакты и форма
+│       └── Donate.astro     — поддержка студии
 ├── config/
 │   ├── constants.ts   — общие константы (анимации, бренд, карусели, валидация, UI)
 │   ├── design.ts      — дизайн-система (цвета, размеры, отступы, стили тегов)
@@ -88,9 +88,10 @@ src/
 │   ├── typography.css   — типографика
 │   └── global.css       — точка входа
 ├── utils/
-│   ├── helpers.ts       — утилиты (isMailtoLink)
-│   ├── images.ts        — обработка изображений
-│   └── news.ts          — категории новостей
+│   ├── helpers.ts          — утилиты (isMailtoLink)
+│   ├── images.ts           — обработка изображений
+│   ├── interactiveGrid.ts  — анимация фоновой сетки
+│   └── news.ts             — категории новостей
 └── types.ts             — TypeScript типы
 ```
 

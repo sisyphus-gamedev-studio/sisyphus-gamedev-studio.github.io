@@ -19,7 +19,16 @@
 
 ### `layout/` — Макет
 - **`Navbar.tsx`** — навигация с мобильным меню, переключателем языка и соцсетями
+  - Sticky позиционирование с прозрачностью при скролле
+  - Мобильное меню с анимацией (hamburger → close)
+  - Переключатель языка (en/ru) с синхронизацией в localStorage
+  - Ссылки на соцсети (YouTube, Email)
+  - Accessibility: aria-labels, focus management, keyboard navigation
 - **`Footer.tsx`** — футер с навигацией и копирайтом
+  - Навигационные ссылки (About, Projects, News, Contact)
+  - Кнопка "Back to top" с плавной прокруткой
+  - Копирайт с динамическим годом
+  - Адаптивная сетка для desktop/mobile
 
 ### `sections/` — Секции страницы
 - **`Hero.astro`** — главная секция с заголовком, статистикой и карточками проектов
@@ -92,9 +101,13 @@
 
 ## `/src/utils/` — Утилиты
 
-- **`helpers.ts`** — `isMailtoLink(href)`
-- **`images.ts`** — `getHeroImage`, `handleImageError`, `nativeImageFallback`
-- **`news.ts`** — `getNewsCategories`, `getCategoryLabel`, `getCategoryColor`
+- **`helpers.ts`** — `isMailtoLink(href)` — проверка mailto ссылок
+- **`images.ts`** — `getHeroImage`, `handleImageError`, `nativeImageFallback` — обработка изображений
+- **`interactiveGrid.ts`** — `initInteractiveGrid(section)` — анимация фоновой сетки с плавным дрейфом слоев
+  - Автоматически отключается при `prefers-reduced-motion`
+  - Использует requestAnimationFrame для плавной анимации
+  - Применяется к элементам с классом `.grid-layer`
+- **`news.ts`** — `getNewsCategories`, `getCategoryLabel`, `getCategoryColor` — работа с категориями новостей
 
 ---
 
