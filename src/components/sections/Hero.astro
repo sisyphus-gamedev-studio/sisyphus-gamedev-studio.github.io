@@ -123,8 +123,8 @@ const progressPct = `${featured.progress ?? 0}%`;
         </div>
 
         <div
-          class="anim d5"
-          style="display:flex;border-top:1px solid var(--b-default);padding-top:28px"
+          class="anim d5 stats-container"
+          style="display:flex;align-items:center;gap:32px;margin-top:8px;flex-wrap:wrap"
         >
           {
             [
@@ -132,19 +132,28 @@ const progressPct = `${featured.progress ?? 0}%`;
               { val: String(BRAND.foundedYear), label: t.stats.founded },
               { val: UI.hero.stats.independent, label: t.stats.independent },
             ].map((s, i) => (
-              <div
-                style={`flex:1;padding-right:24px;border-right:${i < 2 ? "1px solid var(--b-default)" : "none"};padding-left:${i > 0 ? "24px" : "0"}`}
-              >
-                <div class="t-stat-num" style="font-size:34px">
-                  {s.val}
+              <>
+                <div style="display:flex;align-items:center;gap:12px" class="stat-card">
+                  <div
+                    class="t-stat-num"
+                    style="font-size:42px;line-height:1;color:var(--c-orange)"
+                  >
+                    {s.val}
+                  </div>
+                  <div
+                    class="t-label-sm"
+                    style="color:var(--c-secondary);letter-spacing:.6px;font-size:11px;max-width:80px;line-height:1.3"
+                  >
+                    {s.label}
+                  </div>
                 </div>
-                <div
-                  class="t-label-sm"
-                  style="color:var(--c-tertiary);margin-top:5px;letter-spacing:.8px"
-                >
-                  {s.label}
-                </div>
-              </div>
+                {i < 2 && (
+                  <div
+                    class="stat-dot"
+                    style="width:4px;height:4px;border-radius:50%;background:var(--c-orange);opacity:.3;flex-shrink:0"
+                  />
+                )}
+              </>
             ))
           }
         </div>
@@ -268,6 +277,89 @@ const progressPct = `${featured.progress ?? 0}%`;
     </div>
   </div>
 </section>
+
+<style>
+  .stat-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .stat-card .t-stat-num {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+  }
+
+  .stat-card:hover {
+    opacity: 1;
+  }
+
+  .stat-card:hover .t-stat-num {
+    transform: scale(1.08);
+    color: #ff9d5c;
+  }
+
+  @media (max-width: 768px) {
+    .stats-container {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px !important;
+      margin-top: 8px;
+    }
+
+    .stat-dot {
+      display: none !important;
+    }
+
+    .stat-card {
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center;
+      gap: 8px !important;
+      padding: 16px 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-card .t-stat-num {
+      font-size: 32px !important;
+    }
+
+    .stat-card .t-label-sm {
+      max-width: 100% !important;
+      font-size: 9px !important;
+      letter-spacing: 0.5px !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats-container {
+      grid-template-columns: 1fr !important;
+      gap: 12px !important;
+    }
+
+    .stat-card {
+      flex-direction: row !important;
+      justify-content: flex-start !important;
+      text-align: left !important;
+      padding: 14px 16px;
+    }
+
+    .stat-card .t-stat-num {
+      font-size: 36px !important;
+    }
+
+    .stat-card .t-label-sm {
+      font-size: 10px !important;
+      max-width: 120px !important;
+    }
+  }
+
+  @media (hover: none) {
+    .stat-card:hover .t-stat-num {
+      transform: none;
+    }
+  }
+</style>
 
 <script>
   import { initInteractiveGrid } from "../../utils/interactiveGrid";
