@@ -37,7 +37,9 @@ const socialLinks = [
         <div class="section-eyebrow-line"></div>
         <span class="section-eyebrow-label">{t.sectionLabel}</span>
       </div>
-      <h2 id="contact-heading" class="t-display-md" style="color: #f0ece8">{t.heading}</h2>
+      <h2 id="contact-heading" class="t-display-md" style="color: var(--c-on-surface)">
+        {t.heading}
+      </h2>
     </div>
 
     <div class="contact-layout">
@@ -57,7 +59,7 @@ const socialLinks = [
                   style="width: 32px; height: 32px; border-radius: var(--r-sm); background: var(--s-4); border: 1px solid var(--b-subtle); display: flex; align-items: center; justify-content: center; flex-shrink: 0"
                   set:html={item.icon}
                 />
-                <span class="t-body-sm" style="color: #737373">
+                <span class="t-body-sm" style="color: var(--c-tertiary)">
                   {item.text}
                 </span>
               </div>
@@ -77,7 +79,7 @@ const socialLinks = [
                 style="flex-direction: row; width: auto; padding: 10px 16px; border-radius: 8px; gap: 10px"
               >
                 <Fragment set:html={social.icon} />
-                <span style="font-size: 9px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #737373">
+                <span style="font-size: 9px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--c-tertiary)">
                   {social.label}
                 </span>
               </a>
@@ -88,7 +90,7 @@ const socialLinks = [
 
       <div
         class="reveal reveal-right"
-        style="background: var(--s-2); border-radius: var(--r-2xl); border: 1px solid var(--b-subtle); overflow: hidden"
+        style="border-radius: var(--r-2xl); border: 1px solid var(--b-subtle); overflow: hidden; background: var(--s-4)"
       >
         <div
           style="height: 1px; background: linear-gradient(90deg, var(--c-orange) 0%, rgba(248,126,15,.15) 40%, transparent 70%)"

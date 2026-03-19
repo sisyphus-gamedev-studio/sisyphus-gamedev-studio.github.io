@@ -1,5 +1,7 @@
 :root {
   --c-orange: #f87e0f;
+  --c-orange-light: #ff9d5c;
+  --c-orange-accent: #ffb86b;
   --c-orange-dim: rgba(248, 126, 15, 0.1);
   --c-orange-border: rgba(248, 126, 15, 0.2);
 

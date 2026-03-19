@@ -1,5 +1,7 @@
 export const COLORS = {
   orange: "#f87e0f",
+  orangeLight: "#ff9d5c",
+  orangeAccent: "#ffb86b",
   orangeDim: "rgba(248,126,15,.1)",
   orangeBorder: "rgba(248,126,15,.2)",
   error: "#f87272",

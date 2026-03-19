@@ -37,6 +37,17 @@ const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
     return () => window.removeEventListener("resize", check);
   }, []);
 
+  useEffect(() => {
+    if (isMobile !== null) {
+      setActiveIndex(0);
+      setDisplayedIndex(0);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    }
+  }, [isMobile]);
+
   useEffect(
     () => () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -77,6 +88,7 @@ const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
       <ErrorBoundary>
         {isMobile ? (
           <MobileCarousel
+            key="mobile"
             projects={projects}
             activeIndex={activeIndex}
             onSelect={handleClick}
@@ -84,6 +96,7 @@ const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
           />
         ) : (
           <DesktopCarousel
+            key="desktop"
             projects={projects}
             activeIndex={activeIndex}
             displayedIndex={displayedIndex}

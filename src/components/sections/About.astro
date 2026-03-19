@@ -34,19 +34,8 @@ const workspaceImg = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgC
 <section
   id="about"
   aria-labelledby="about-heading"
-  style="background:var(--s-4);padding:100px 0;border-top:1px solid var(--b-default);position:relative;overflow:hidden"
+  style="padding:100px 0;border-top:1px solid var(--b-default);position:relative;overflow:hidden"
 >
-  <div
-    class="grid-layer"
-    style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(90deg,transparent 0%,black 12%,black 88%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,black 12%,black 88%,transparent 100%)"
-  >
-  </div>
-  <div
-    class="grid-layer"
-    style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:128px 128px;mask-image:linear-gradient(90deg,transparent 0%,black 12%,black 88%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,black 12%,black 88%,transparent 100%)"
-  >
-  </div>
-
   <div style="max-width:1280px;margin:0 auto;padding:0 20px;position:relative;z-index:2">
     <div class="reveal" style="margin-bottom:56px">
       <div class="section-eyebrow">
@@ -84,7 +73,7 @@ const workspaceImg = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgC
               </p>
             </div>
             <div
-              style="padding:4px 12px;border-radius:var(--r-full);background:var(--c-orange-dim);border:1px solid var(--c-orange-border);color:#ffb86b;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase"
+              style="padding:4px 12px;border-radius:var(--r-full);background:var(--c-orange-dim);border:1px solid var(--c-orange-border);color:var(--c-orange-accent);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase"
             >
               {t.indieLabel}
             </div>
@@ -174,16 +163,3 @@ const workspaceImg = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgC
     </div>
   </div>
 </section>
-
-<script>
-  import { initInteractiveGrid } from "../../utils/interactiveGrid";
-
-  function init() {
-    const section = document.getElementById("about") as HTMLElement | null;
-    if (!section) return;
-    const cleanup = initInteractiveGrid(section);
-    document.addEventListener("astro:before-swap", () => cleanup?.(), { once: true });
-  }
-
-  document.addEventListener("astro:page-load", init);
-</script>

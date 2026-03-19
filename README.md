@@ -1,114 +1,44 @@
 # Sisyphus Studio
 
-Сайт независимой игровой студии. Astro 5 + React 19 + Tailwind CSS.
+Сайт независимой игровой студии на Astro 5 + React 19 + Tailwind CSS.
 
-## Документация
-
-- **[DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)** — Подробное руководство разработчика
-
-## Запуск
+## Быстрый старт
 
 ```bash
 npm install
-npm run dev       # localhost:4321
-npm run build     # сборка в ./dist
-npm run preview   # превью сборки
+npm run dev       # http://localhost:4321
 ```
 
-## Скрипты качества кода
+## Команды
 
 ```bash
-npm run typecheck     # astro check + tsc --noEmit
-npm run lint          # ESLint
-npm run lint:fix      # ESLint с автоисправлением
-npm run format        # Prettier
-npm run format:check  # Проверка форматирования
-npm run ci            # typecheck + lint + format:check
+npm run dev          # Запуск dev сервера
+npm run build        # Сборка в ./dist
+npm run preview      # Превью сборки
+npm run ci           # Проверка кода (typecheck + lint + format)
 ```
 
-Pre-commit хук запускает `lint-staged` автоматически через Husky.
-
-## Структура проекта
+## Структура
 
 ```
 src/
 ├── components/
-│   ├── common/              — переиспользуемые компоненты
-│   │   ├── DisciplineIcon.astro   — иконки дисциплин для About
-│   │   ├── ErrorBoundary.tsx      — обработка ошибок React
-│   │   └── SkeletonCard.tsx       — скелетон-загрузчик
-│   ├── features/            — функциональные компоненты
-│   │   ├── ProjectsCarousel/
-│   │   │   ├── DesktopCarousel.tsx  — раскрывающиеся панели
-│   │   │   ├── MobileCarousel.tsx   — свайп-версия
-│   │   │   ├── tagIcons.ts          — маппинг тегов на иконки
-│   │   │   └── index.tsx            — переключение desktop/mobile
-│   │   ├── ContactForm.tsx          — форма с валидацией
-│   │   ├── NewsCarousel.tsx         — карусель новостей
-│   │   └── NewsModal.tsx            — модальное окно новости
-│   ├── layout/              — компоненты макета
-│   │   ├── Navbar.tsx       — навигация с языком и меню
-│   │   └── Footer.tsx       — футер с навигацией
-│   └── sections/            — секции страницы
-│       ├── Hero.astro       — главная секция
-│       ├── About.astro      — о студии
-│       ├── Contact.astro    — контакты и форма
-│       └── Donate.astro     — поддержка студии
-├── config/
-│   ├── constants.ts   — общие константы (анимации, бренд, карусели, валидация, UI)
-│   ├── design.ts      — дизайн-система (цвета, размеры, отступы, стили тегов)
-│   ├── links.ts       — ссылки, контакты, соцсети, иконки
-│   ├── seo.ts         — SEO константы (meta, og, schema.org)
-│   └── index.ts       — централизованный экспорт
-├── content/
-│   ├── config.ts      — схемы коллекций
-│   ├── news/          — JSON файлы новостей
-│   └── projects/      — JSON файлы проектов
-├── hooks/
-│   ├── useCarouselKeyboard.ts
-│   ├── useLanguagePreference.ts
-│   └── useReducedMotion.ts
-├── i18n/
-│   └── translations.ts  — строки интерфейса (en + ru)
-├── layouts/
-│   └── Layout.astro     — базовый layout с SEO
-├── pages/
-│   ├── [lang]/
-│   │   ├── index.astro
-│   │   └── rss.xml.ts
-│   ├── 404.astro
-│   └── index.astro
-├── styles/
-│   ├── animations.css   — keyframes, reveal анимации
-│   ├── base.css         — reset, scrollbar
-│   ├── buttons.css      — стили кнопок
-│   ├── components.css   — карточки, бейджи
-│   ├── skeleton.css     — loading состояния
-│   ├── tokens.css       — CSS переменные
-│   ├── typography.css   — типографика
-│   └── global.css       — точка входа
-├── utils/
-│   ├── helpers.ts          — утилиты (isMailtoLink)
-│   ├── images.ts           — обработка изображений
-│   ├── interactiveGrid.ts  — анимация фоновой сетки
-│   └── news.ts             — категории новостей
-└── types.ts             — TypeScript типы
+│   ├── common/          # AnimatedBackground, DisciplineIcon, ErrorBoundary
+│   ├── features/        # ContactForm, NewsCarousel, ProjectsCarousel
+│   ├── layout/          # Navbar, Footer
+│   └── sections/        # Hero, About, Contact, Donate
+├── config/              # Все константы и настройки
+├── content/             # Новости и проекты (JSON)
+├── i18n/                # Переводы (en/ru)
+├── styles/              # CSS (tokens, animations, components)
+└── utils/               # Вспомогательные функции
 ```
 
-## Конфигурация
+## Добавление контента
 
-Все настройки централизованы в `src/config/`:
+### Новость
 
-- `constants.ts` — общие константы (анимации, бренд, карусели, валидация, UI строки)
-- `design.ts` — дизайн-система (цвета, размеры, layout)
-- `links.ts` — все ссылки, контакты, соцсети, иконки
-- `seo.ts` — SEO константы (meta теги, Open Graph, Schema.org)
-
-Все переводы в `src/i18n/translations.ts`.
-
-## Добавление новости
-
-Создать файл `src/content/news/05.json`:
+Создай `src/content/news/05.json`:
 
 ```json
 {
@@ -116,52 +46,52 @@ src/
   "image": "/images/news/news-5.jpg",
   "type": "announcement",
   "en": {
-    "title": "...",
+    "title": "Title",
     "date": "Jun 01, 2025",
-    "summary": "...",
-    "body": "Paragraph one.\n\nParagraph two."
+    "summary": "Short text...",
+    "body": "Full text.\n\nSecond paragraph."
   },
   "ru": {
-    "title": "...",
+    "title": "Заголовок",
     "date": "01 Июн, 2025",
-    "summary": "...",
-    "body": "Абзац первый.\n\nАбзац второй."
+    "summary": "Краткий текст...",
+    "body": "Полный текст.\n\nВторой абзац."
   }
 }
 ```
 
-Доступные типы: `announcement`, `dev-diary`, `update`
+Типы: `announcement`, `dev-diary`, `update`
 
-## Добавление проекта
+### Проект
 
-Создать файл `src/content/projects/03.json`:
+Создай `src/content/projects/03.json`:
 
 ```json
 {
   "id": 3,
   "image": "/images/projects/project-3.jpg",
-  "progress": 0,
+  "progress": 25,
   "wishlistUrl": "https://store.steampowered.com/app/...",
   "en": {
-    "title": "...",
-    "description": "...",
+    "title": "Game Title",
+    "description": "Description...",
     "price": "In Development",
     "tags": ["Co-op", "Shooter"]
   },
   "ru": {
-    "title": "...",
-    "description": "...",
+    "title": "Название",
+    "description": "Описание...",
     "price": "В разработке",
     "tags": ["Кооп", "Шутер"]
   }
 }
 ```
 
-Поле `tags` опциональное. Иконки для тегов подбираются автоматически по ключевым словам в `src/components/features/ProjectsCarousel/tagIcons.ts`.
+## Настройка
 
-## Переменные окружения
+### Переменные окружения
 
-Скопировать `.env.example` в `.env`:
+Скопируй `.env.example` в `.env` и заполни:
 
 ```env
 PUBLIC_SITE_URL=https://sisyphus.studio
@@ -170,3 +100,39 @@ PUBLIC_YOUTUBE_URL=https://www.youtube.com/@YourChannel
 PUBLIC_DONATE_URL=https://your-donation-link.com
 PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_ID
 ```
+
+### Конфигурация
+
+Все настройки в `src/config/`:
+- `constants.ts` — анимации, бренд, UI
+- `design.ts` — цвета, размеры, отступы
+- `links.ts` — ссылки, соцсети, контакты
+- `seo.ts` — SEO и meta теги
+
+### Переводы
+
+Все тексты в `src/i18n/translations.ts` (en/ru)
+
+### CSS переменные
+
+Все цвета в `src/styles/tokens.css`:
+
+```css
+--c-orange: #f87e0f;
+--c-orange-light: #ff9d5c;
+--c-orange-accent: #ffb86b;
+--s-1 до --s-5: фоновые поверхности
+--c-tertiary, --c-secondary: текстовые цвета
+```
+
+## Особенности
+
+- **Анимированный фон** — полноэкранная сетка с плавной анимацией
+- **Двуязычность** — en/ru с синхронизацией в localStorage
+- **Адаптивность** — desktop/mobile версии компонентов
+- **Доступность** — ARIA-метки, keyboard navigation
+- **Производительность** — lazy loading, оптимизация изображений
+
+## Документация
+
+Подробнее в [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)

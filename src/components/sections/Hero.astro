@@ -18,22 +18,7 @@ const heroCard1Img = getHeroImage("hero-card-1");
 const progressPct = `${featured.progress ?? 0}%`;
 ---
 
-<section
-  id="home"
-  class="min-h-screen flex flex-col justify-center relative overflow-hidden"
-  style="background:var(--s-4)"
->
-  <div
-    class="grid-layer"
-    style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(90deg,transparent 0%,black 12%,black 88%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,black 12%,black 88%,transparent 100%)"
-  >
-  </div>
-  <div
-    class="grid-layer"
-    style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:128px 128px;mask-image:linear-gradient(90deg,transparent 0%,black 12%,black 88%,transparent 100%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,black 12%,black 88%,transparent 100%)"
-  >
-  </div>
-
+<section id="home" class="min-h-screen flex flex-col justify-center relative overflow-hidden">
   <div
     class="relative max-w-7xl mx-auto w-full px-5 sm:px-8"
     style="padding-top:120px;padding-bottom:96px;z-index:2"
@@ -294,7 +279,7 @@ const progressPct = `${featured.progress ?? 0}%`;
 
   .stat-card:hover .t-stat-num {
     transform: scale(1.08);
-    color: #ff9d5c;
+    color: var(--c-orange-light);
   }
 
   @media (max-width: 768px) {
@@ -360,19 +345,6 @@ const progressPct = `${featured.progress ?? 0}%`;
     }
   }
 </style>
-
-<script>
-  import { initInteractiveGrid } from "../../utils/interactiveGrid";
-
-  function initHeroGrid() {
-    const section = document.getElementById("home") as HTMLElement | null;
-    if (!section) return;
-    const cleanup = initInteractiveGrid(section);
-    document.addEventListener("astro:before-swap", () => cleanup?.(), { once: true });
-  }
-
-  document.addEventListener("astro:page-load", initHeroGrid);
-</script>
 
 <script>
   function initGlitch() {

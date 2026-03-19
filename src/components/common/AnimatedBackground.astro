@@ -1,0 +1,119 @@
+---
+// Полноэкранный анимированный фон с двумя слоями сетки
+---
+
+<div id="animated-bg" class="animated-background">
+  <div class="grid-layer grid-layer-fine"></div>
+  <div class="grid-layer grid-layer-coarse"></div>
+</div>
+
+<style>
+  .animated-background {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: var(--s-4);
+  }
+
+  .grid-layer {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+  }
+
+  .grid-layer-fine {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 12%,
+      black 88%,
+      transparent 100%
+    );
+  }
+
+  .grid-layer-coarse {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 128px 128px;
+    mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 12%,
+      black 88%,
+      transparent 100%
+    );
+  }
+</style>
+
+<script>
+  function animateBackground() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const bg = document.getElementById("animated-bg");
+    if (!bg) return;
+
+    const layers = bg.querySelectorAll<HTMLElement>(".grid-layer");
+    if (!layers.length) return;
+
+    const states = Array.from(layers).map((_, i) => ({
+      x: 0,
+      y: 0,
+      tx: 0,
+      ty: 0,
+      speed: i === 0 ? 0.018 : 0.011,
+      amp: i === 0 ? 12 : 20,
+      timer: 0,
+      interval: i === 0 ? 1800 : 2600,
+    }));
+
+    let raf = 0;
+    let last = performance.now();
+
+    function pickTarget(s: (typeof states)[0]) {
+      const a = s.amp;
+      s.tx = (Math.random() * 2 - 1) * a;
+      s.ty = (Math.random() * 2 - 1) * a;
+    }
+
+    states.forEach(pickTarget);
+
+    function tick(now: number) {
+      const dt = now - last;
+      last = now;
+
+      layers.forEach((el, i) => {
+        const s = states[i];
+        s.timer += dt;
+        if (s.timer >= s.interval) {
+          s.timer = 0;
+          pickTarget(s);
+        }
+        s.x += (s.tx - s.x) * s.speed * (dt / 16);
+        s.y += (s.ty - s.y) * s.speed * (dt / 16);
+        el.style.transform = `translate(${s.x.toFixed(2)}px, ${s.y.toFixed(2)}px)`;
+      });
+
+      raf = requestAnimationFrame(tick);
+    }
+
+    raf = requestAnimationFrame(tick);
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        cancelAnimationFrame(raf);
+      },
+      { once: true },
+    );
+  }
+
+  document.addEventListener("astro:page-load", animateBackground);
+</script>

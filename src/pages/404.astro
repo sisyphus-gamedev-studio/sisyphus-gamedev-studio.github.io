@@ -26,7 +26,7 @@ const ctaHref = `/${lang}/`;
     />
   </head>
   <body
-    style="background:#1a1a1a;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px"
+    style="background:var(--s-4);display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px"
   >
     <div style="text-align:center;max-width:480px">
       <div style="position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0">
@@ -37,28 +37,29 @@ const ctaHref = `/${lang}/`;
       </div>
       <div style="position:relative;z-index:1">
         <div
-          style="display:inline-flex;align-items:center;gap:7px;padding:4px 12px;border-radius:9999px;background:rgba(248,126,15,.1);border:1px solid rgba(248,126,15,.2);color:#ffb86b;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:28px"
+          style="display:inline-flex;align-items:center;gap:7px;padding:4px 12px;border-radius:var(--r-full);background:var(--c-orange-dim);border:1px solid var(--c-orange-border);color:var(--c-orange-accent);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:28px"
         >
-          <span style="width:6px;height:6px;border-radius:50%;background:#f87e0f;flex-shrink:0"
+          <span
+            style="width:6px;height:6px;border-radius:50%;background:var(--c-orange);flex-shrink:0"
           ></span>
           {t.badge}
         </div>
         <div
-          style="font-family:'Exo 2',sans-serif;font-size:clamp(80px,20vw,140px);font-weight:800;line-height:1;color:#f0ece8;letter-spacing:-4px;margin-bottom:8px"
+          style="font-family:'Exo 2',sans-serif;font-size:clamp(80px,20vw,140px);font-weight:800;line-height:1;color:var(--c-on-surface);letter-spacing:-4px;margin-bottom:8px"
         >
-          4<span style="color:#f87e0f">0</span>4
+          4<span style="color:var(--c-orange)">0</span>4
         </div>
         <h1
-          style="font-family:'Exo 2',sans-serif;font-size:clamp(22px,4vw,32px);font-weight:700;text-transform:uppercase;color:#f0ece8;margin-bottom:16px;line-height:1.1"
+          style="font-family:'Exo 2',sans-serif;font-size:clamp(22px,4vw,32px);font-weight:700;text-transform:uppercase;color:var(--c-on-surface);margin-bottom:16px;line-height:1.1"
         >
           {t.title}
         </h1>
         <div
-          style="width:36px;height:2px;background:linear-gradient(90deg,#f87e0f,transparent);border-radius:9999px;margin:0 auto 20px"
+          style="width:36px;height:2px;background:linear-gradient(90deg,var(--c-orange),transparent);border-radius:var(--r-full);margin:0 auto 20px"
         >
         </div>
         <p
-          style="font-family:'Exo 2',sans-serif;font-size:15px;color:#737373;line-height:1.7;margin-bottom:36px"
+          style="font-family:'Exo 2',sans-serif;font-size:15px;color:var(--c-tertiary);line-height:1.7;margin-bottom:36px"
         >
           {t.subtitle}
         </p>
@@ -84,8 +85,10 @@ const ctaHref = `/${lang}/`;
             alt="Sisyphus Studio"
             style="width:22px;height:22px;border-radius:5px;object-fit:cover"
           />
-          <span style="font-family:'Exo 2',sans-serif;font-size:15px;font-weight:700;color:#f0ece8">
-            Sisyphus<span style="color:#f87e0f">Studio</span>
+          <span
+            style="font-family:'Exo 2',sans-serif;font-size:15px;font-weight:700;color:var(--c-on-surface)"
+          >
+            Sisyphus<span style="color:var(--c-orange)">Studio</span>
           </span>
         </div>
       </div>

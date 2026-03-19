@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import { URLS, SEO, UI, BRAND } from "../config";
+import AnimatedBackground from "../components/common/AnimatedBackground.astro";
 
 interface Props {
   lang: "en" | "ru";
@@ -118,12 +119,13 @@ const jsonLd = {
     <ClientRouter />
   </head>
   <body>
+    <AnimatedBackground />
     <a href="#main-content" class="skip-link">
       {UI.skipLink[lang]}
     </a>
     <noscript>
       <div
-        style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#1a1a1a;border-top:1px solid rgba(248,126,15,.3);padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Exo 2',sans-serif;font-size:13px;color:#999;"
+        style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:var(--s-4);border-top:1px solid var(--c-orange-border);padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Exo 2',sans-serif;font-size:13px;color:var(--c-secondary);"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +133,7 @@ const jsonLd = {
           height="16"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#f87e0f"
+          stroke="var(--c-orange)"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -145,7 +147,7 @@ const jsonLd = {
       </div>
     </noscript>
 
-    <div id="main-content">
+    <div id="main-content" style="position: relative; z-index: 1">
       <slot />
     </div>
 
