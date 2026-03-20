@@ -370,9 +370,11 @@ const progressPct = `${featured.progress ?? 0}%`;
       if (!ctx || !canvas) return;
       const img = ctx.createImageData(canvas.width, canvas.height);
       for (let i = 0; i < img.data.length; i += 4) {
-        const on = Math.random() > 0.52;
-        img.data[i] = img.data[i + 1] = img.data[i + 2] = on ? 255 : 0;
-        img.data[i + 3] = on ? Math.floor(Math.random() * 160 + 60) : 0;
+        const on = Math.random() > 0.48;
+        img.data[i] = on ? Math.floor(Math.random() * 255) : 0;
+        img.data[i + 1] = on ? Math.floor(Math.random() * 80) : 0;
+        img.data[i + 2] = on ? Math.floor(Math.random() * 255) : 0;
+        img.data[i + 3] = on ? Math.floor(Math.random() * 180 + 75) : 0;
       }
       ctx.putImageData(img, 0, 0);
     }
@@ -392,11 +394,12 @@ const progressPct = `${featured.progress ?? 0}%`;
     }
 
     const dur = {
-      "g-burst": 550,
-      "g-echo": 380,
-      "g-tick": 200,
-      "g-drift": 900,
-      "g-stutter": 140,
+      "g-burst": 600,
+      "g-echo": 420,
+      "g-tick": 220,
+      "g-drift": 1000,
+      "g-stutter": 160,
+      "g-shred": 750,
     } as const;
     type G = keyof typeof dur;
 
@@ -416,37 +419,55 @@ const progressPct = `${featured.progress ?? 0}%`;
 
     async function seqClassic() {
       fire("g-burst");
-      await delay(dur["g-burst"] + 280 + Math.random() * 180);
+      await delay(dur["g-burst"] + 220 + Math.random() * 180);
       fire("g-echo");
-      await delay(dur["g-echo"] + 520 + Math.random() * 380);
+      await delay(dur["g-echo"] + 420 + Math.random() * 300);
       fire("g-tick");
     }
 
     async function seqStutter() {
-      const count = 3 + Math.floor(Math.random() * 3);
+      const count = 4 + Math.floor(Math.random() * 4);
       for (let i = 0; i < count; i++) {
         fire("g-stutter");
-        await delay(dur["g-stutter"] + 40 + Math.random() * 60);
+        await delay(dur["g-stutter"] + 30 + Math.random() * 50);
       }
-      await delay(120 + Math.random() * 80);
+      await delay(80 + Math.random() * 60);
       fire("g-echo");
     }
 
     async function seqDrift() {
       fire("g-drift");
-      await delay(dur["g-drift"] + 200 + Math.random() * 200);
+      await delay(dur["g-drift"] + 150 + Math.random() * 200);
       fire("g-tick");
     }
 
     async function seqCorrupt() {
       fire("g-burst");
-      await delay(dur["g-burst"] + 900 + Math.random() * 600);
+      await delay(dur["g-burst"] + 700 + Math.random() * 500);
       fire("g-stutter");
-      await delay(dur["g-stutter"] + 50 + Math.random() * 40);
+      await delay(dur["g-stutter"] + 40 + Math.random() * 30);
       fire("g-stutter");
+      await delay(dur["g-stutter"] + 60 + Math.random() * 40);
+      fire("g-burst");
     }
 
-    const sequences = [seqClassic, seqStutter, seqDrift, seqCorrupt];
+    async function seqShred() {
+      fire("g-shred");
+      await delay(dur["g-shred"] + 300 + Math.random() * 250);
+      fire("g-tick");
+      await delay(dur["g-tick"] + 120 + Math.random() * 80);
+      fire("g-echo");
+    }
+
+    async function seqDoubleShred() {
+      fire("g-stutter");
+      await delay(dur["g-stutter"] + 80);
+      fire("g-shred");
+      await delay(dur["g-shred"] + 500 + Math.random() * 300);
+      fire("g-burst");
+    }
+
+    const sequences = [seqClassic, seqStutter, seqDrift, seqCorrupt, seqShred, seqDoubleShred];
     let lastSeq = -1;
 
     async function run() {
@@ -456,10 +477,10 @@ const progressPct = `${featured.progress ?? 0}%`;
       } while (idx === lastSeq);
       lastSeq = idx;
       await sequences[idx]();
-      timer = setTimeout(run, 2200 + Math.random() * 2800);
+      timer = setTimeout(run, 1800 + Math.random() * 2400);
     }
 
-    timer = setTimeout(run, 1400 + Math.random() * 600);
+    timer = setTimeout(run, 1000 + Math.random() * 500);
 
     document.addEventListener(
       "astro:before-swap",
