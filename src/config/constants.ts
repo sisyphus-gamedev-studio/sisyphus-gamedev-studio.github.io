@@ -5,13 +5,6 @@ export const TRANSITIONS = {
   smooth: ".25s cubic-bezier(0.2,0,0,1)",
 } as const;
 
-export const INTERSECTION_OBSERVER = {
-  navbar: {
-    rootMargin: "-35% 0px -55% 0px",
-    threshold: 0,
-  },
-} as const;
-
 interface BrandConfig {
   prefix: string;
   suffix: string;

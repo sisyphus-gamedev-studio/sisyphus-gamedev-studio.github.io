@@ -1,15 +1,7 @@
 import { useState, useEffect, useCallback, useRef, useMemo, type FC } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import type { Language, TranslationStructure } from "../../types";
-import {
-  BRAND,
-  SOCIAL_LINKS,
-  COLORS,
-  LAYOUT,
-  SPACING,
-  TRANSITIONS,
-  INTERSECTION_OBSERVER,
-} from "../../config";
+import { BRAND, SOCIAL_LINKS, COLORS, LAYOUT, SPACING, TRANSITIONS } from "../../config";
 import { useLanguageSync } from "../../hooks/useLanguagePreference";
 import { isMailtoLink } from "../../utils/helpers";
 
@@ -53,17 +45,25 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
 
   const sectionIds = links.map((l) => l.id).join(",");
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    links.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting && !manualNavRef.current) setActive(id);
-      }, INTERSECTION_OBSERVER.navbar);
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
+    const onScroll = () => {
+      if (manualNavRef.current) return;
+      const trigger = window.scrollY + window.innerHeight * 0.35;
+      let bestId = links[0].id;
+      let bestTop = -Infinity;
+      links.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        if (top <= trigger && top > bestTop) {
+          bestTop = top;
+          bestId = id;
+        }
+      });
+      setActive(bestId);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, [sectionIds, links]);
 
   const handleNavClick = useCallback((id: string) => {
