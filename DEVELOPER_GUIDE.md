@@ -1,226 +1,205 @@
-# Руководство разработчика
+# Developer Guide
 
-## Архитектура
+## Architecture Overview
 
-### Компоненты
+Single-page site with two language routes (`/en/`, `/ru/`). Astro handles static generation and server-side data fetching; React components handle interactivity. All pages are prerendered at build time.
 
-**common/** — переиспользуемые
-- `AnimatedBackground.astro` — полноэкранный фон с анимацией
-- `DisciplineIcon.astro` — иконки для секции About
-- `ErrorBoundary.tsx` — обработка ошибок React
-- `SkeletonCard.tsx` — загрузочные состояния
+The root `/` redirects to the default language. A 404 page detects language from the URL and renders the appropriate translation.
 
-**features/** — функциональные
-- `ContactForm.tsx` — форма с валидацией
-- `NewsCarousel.tsx` — карусель новостей с фильтрами
-- `NewsModal.tsx` — модальное окно новости
-- `ProjectsCarousel/` — карусель проектов (desktop/mobile)
+---
 
-**layout/** — макет
-- `Navbar.tsx` — навигация с меню и языком
-- `Footer.tsx` — футер
+## Routing & Pages
 
-**sections/** — секции страницы
-- `Hero.astro` — главная секция
-- `About.astro` — о студии
-- `Donate.astro` — поддержка
-- `Contact.astro` — контакты
+Routes are generated from `src/pages/[lang]/index.astro` with static paths for each supported language. The page fetches content collections, transforms them into typed arrays using the current language, and passes data down to all section components.
 
-### Конфигурация
+An RSS feed is available at `/{lang}/rss.xml`.
 
-Все константы в `src/config/`:
+---
 
-```typescript
-// constants.ts
-TRANSITIONS        // настройки анимаций
-BRAND             // название, год, команда
-NEWS_CAROUSEL     // настройки карусели
-EMAIL_REGEX       // валидация
+## Layout
 
-// design.ts
-COLORS            // цветовая палитра
-LAYOUT            // maxWidth, padding
-SPACING           // отступы
-SIZES             // размеры компонентов
+`src/layouts/Layout.astro` is the root HTML shell. It sets up:
 
-// links.ts
-URLS              // внешние ссылки
-CONTACT           // email, formspree
-SOCIAL_LINKS      // соцсети с иконками
+- Full `<head>` with meta, Open Graph, Twitter Card, hreflang, canonical, and RSS link
+- JSON-LD structured data (Organization + VideoGame entries)
+- Font loading and critical image preloads
+- Inline language redirect script (reads persisted language from `localStorage`, redirects if URL doesn't match)
+- Astro `<ClientRouter />` for view transitions
+- Skip-to-content link and `<noscript>` warning
+- Client-side scripts: scroll progress bar, button ripple effect, intersection observer for scroll reveal animations
 
-// seo.ts
-SEO               // meta теги, Open Graph
-```
+---
 
-### Контент
+## Components
 
-**Content Collections** в `src/content/`:
+### common/
 
-```typescript
-// news/
-{
-  isoDate: string;
-  image: string;
-  type: "announcement" | "dev-diary" | "update";
-  en: { title, date, summary, body };
-  ru: { title, date, summary, body };
-}
+Reusable primitives shared across the site.
 
-// projects/
-{
-  id: number;
-  image: string;
-  progress?: number;
-  wishlistUrl?: string;
-  en: { title, description, price, tags? };
-  ru: { title, description, price, tags? };
-}
-```
+- **AnimatedBackground** — fixed full-screen animated grid background. Two overlapping grid layers animated with `requestAnimationFrame`. Disabled when `prefers-reduced-motion` is set.
+- **DisciplineIcon** — renders discipline-specific icons by name.
+- **ErrorBoundary** — React class component. Catches errors in subtrees and renders a fallback UI. Used to wrap major interactive sections.
+- **SkeletonCard** — loading placeholder with shimmer animation. Used during SSR before hydration.
 
-### Стили
+### features/
 
-**tokens.css** — все CSS переменные:
-```css
---c-orange, --c-orange-light, --c-orange-accent
---s-1 до --s-5 (поверхности)
---c-tertiary, --c-secondary (текст)
---b-subtle, --b-default (границы)
---r-sm, --r-xl, --r-2xl (радиусы)
-```
+Interactive components that handle user input and state.
 
-**Остальные файлы:**
-- `base.css` — reset, scrollbar
-- `typography.css` — классы `t-*`
-- `buttons.css` — `btn-*`, `icon-btn-*`
-- `components.css` — карточки, бейджи
-- `animations.css` — keyframes, reveal
+- **ContactForm** — controlled form with client-side validation and Formspree submission. Manages field values, validation errors, focus state, and submission status.
+- **NewsCarousel** — auto-advancing carousel with category filters, touch swipe, keyboard navigation, and a modal for full articles. Respects `prefers-reduced-motion`.
+- **NewsModal** — full-screen modal with focus trap, Escape to close, click-outside to close, and scroll lock.
+- **ProjectsCarousel** — responsive carousel that renders a desktop accordion or mobile swipe view depending on viewport width.
 
-### Утилиты
+### layout/
 
-```typescript
-// helpers.ts
-isMailtoLink(href)
+- **Navbar** — fixed top navigation with scroll-based background transition, active section tracking, mobile menu with focus management, and a language switcher.
+- **Footer** — site footer with navigation links, copyright, and back-to-top button.
 
-// images.ts
-getHeroImage(name)
-handleImageError(e, width, height)
-nativeImageFallback(width, height)
+### sections/
 
-// news.ts
-getNewsCategories()
-getCategoryLabel(type, lang)
-getCategoryColor(type)
-```
+Astro components for each page section. They receive translations and data as props and contain no client-side logic of their own.
 
-### Хуки
+- **Hero** — main landing section with animated title, stats, and featured project cards.
+- **About** — studio info with team stats, disciplines, and mission statement.
+- **Donate** — support tiers linking to donation, sponsor contact, and Steam wishlist.
+- **Contact** — contact info alongside the `ContactForm` component.
 
-```typescript
-useCarouselKeyboard()      // навигация стрелками
-useLanguagePreference()    // синхронизация языка
-useReducedMotion()         // prefers-reduced-motion
-```
+---
 
-## Работа с контентом
+## Configuration
 
-### Добавить новость
+All constants are in `src/config/` and re-exported from a single index file.
 
-1. Создай `src/content/news/XX.json`
-2. Добавь изображение в `public/images/news/`
-3. Заполни оба языка (en/ru)
+- **constants.ts** — brand info, transition timings, carousel intervals, validation patterns, UI strings
+- **design.ts** — color palette, easing functions, layout dimensions, spacing, image filters, gradients, component sizes
+- **links.ts** — external URLs (from env vars), contact details, social link definitions
+- **seo.ts** — default title/description, OG image path and dimensions, game schema entries
 
-### Добавить проект
+Use config constants instead of magic numbers:
 
-1. Создай `src/content/projects/XX.json`
-2. Добавь изображение в `public/images/projects/`
-3. Заполни оба языка (en/ru)
-4. Для новых тегов обнови `tagIcons.ts`
+```ts
+// wrong
+const interval = 5500;
 
-### Изменить тексты
-
-Все переводы в `src/i18n/translations.ts`:
-```typescript
-TRANSLATIONS = {
-  en: { nav, hero, projects, about, news, contact, footer, notFound, meta },
-  ru: { ... }
-}
-```
-
-## Стилизация
-
-### Использование цветов
-
-❌ Плохо:
-```css
-color: #f87e0f;
-background: #1a1a1a;
-```
-
-✅ Хорошо:
-```css
-color: var(--c-orange);
-background: var(--s-4);
-```
-
-### Использование констант
-
-❌ Плохо:
-```typescript
-const interval = 5000;
-const maxWidth = 1280;
-```
-
-✅ Хорошо:
-```typescript
-import { NEWS_CAROUSEL, LAYOUT } from "@/config";
+// right
+import { NEWS_CAROUSEL } from "@/config";
 const interval = NEWS_CAROUSEL.AUTO_INTERVAL;
-const maxWidth = LAYOUT.maxWidth;
 ```
 
-## Анимированный фон
+---
 
-Реализован в `AnimatedBackground.astro`:
-- Fixed position на всех страницах
-- Два слоя сетки (32px и 128px)
-- Анимация через requestAnimationFrame
-- Отключается при `prefers-reduced-motion`
-- Контент поверх фона (z-index: 1)
+## Types
 
-## Порядок секций
+Defined in `src/types.ts`:
+
+- `Language` — supported locale values
+- `NewsCategory` — valid news post types
+- `Project` — project data shape
+- `NewsItem` — news post data shape
+- `TranslationStructure` — full shape of the translations object, used to type all translation props
+
+---
+
+## Content Collections
+
+Defined in `src/content/config.ts` using Astro Content Collections with Zod validation.
+
+**News** fields: `isoDate` (YYYY-MM-DD), `image` path, `type` enum, localized `title`/`date`/`summary`/`body` for each language.
+
+**Projects** fields: `id` (used for sort order), `image` path, optional `progress` (0–100), optional `wishlistUrl`, localized `title`/`description`/`price`/`tags` for each language.
+
+---
+
+## i18n & Translations
+
+`src/i18n/translations.ts` exports a single `TRANSLATIONS` object typed against `TranslationStructure`. It covers all sections: nav, meta, hero, projects, about, news, contact, footer, and 404.
+
+Language is persisted to `localStorage`. On page load, the inline script in the layout redirects if the URL language doesn't match the stored preference.
+
+---
+
+## Hooks
+
+- **useCarouselKeyboard** — attaches keyboard navigation (Arrow keys, Home, End) to a container ref. Returns the ref to attach to the carousel element.
+- **useLanguageSync** — writes the current language to `localStorage` on change.
+- **useReducedMotion** — returns `true` if `prefers-reduced-motion: reduce` is active. Updates reactively on media query change.
+
+---
+
+## Utilities
+
+- **helpers.ts** — `isMailtoLink(href)` checks if a link is a mailto, used to conditionally set `target` and `rel` attributes.
+- **images.ts** — `getHeroImage(name)` builds an image path; `handleImageError` (React) and `nativeImageFallback` (Astro) replace broken images with an inline SVG placeholder.
+- **news.ts** — `getNewsCategories()`, `getCategoryLabel(type, lang)`, `getCategoryColor(type)` for working with news category metadata.
+
+---
+
+## Styles
+
+CSS is split into focused files, all imported in `src/styles/global.css`:
+
+| File | Contents |
+|---|---|
+| `tokens.css` | CSS custom properties: colors, surfaces, borders, radii, easing |
+| `base.css` | Reset, scrollbar, selection, focus-visible |
+| `typography.css` | `t-*` text utility classes |
+| `buttons.css` | Button variants |
+| `components.css` | Cards, chips, badges, progress bars, layout utilities, reveal classes |
+| `animations.css` | Keyframes, entrance animations, glitch effects |
+| `skeleton.css` | Shimmer animation for loading states |
+
+### CSS Variables
+
+Key variables defined in `tokens.css`:
+
+```css
+/* Orange accent */
+--c-orange, --c-orange-light, --c-orange-accent
+--c-orange-dim, --c-orange-border
+
+/* Text */
+--c-on-surface, --c-secondary, --c-tertiary
+
+/* Surfaces */
+--s-1 through --s-5
+
+/* Borders */
+--b-subtle, --b-default, --b-strong, --b-accent
+
+/* Easing */
+--ease-em, --ease-dec
+
+/* Border radii */
+--r-sm, --r-xl, --r-2xl, --r-full
+```
+
+### Scroll Reveal
+
+Add one of these classes to any element to animate it in when it enters the viewport:
 
 ```
-Navbar (fixed, прозрачный → полупрозрачный)
-├── Hero          (прозрачный)
-├── Projects      (--s-2)
-├── About         (прозрачный)
-├── News          (--s-2)
-├── Donate        (прозрачный)
-├── Contact       (--s-2)
-└── Footer        (полупрозрачный с blur)
+.reveal          fade up
+.reveal-left     slide from left
+.reveal-right    slide from right
+.reveal-scale    scale up
 ```
 
-## Команды
+The layout's intersection observer adds `.in` when the element becomes visible.
 
-```bash
-npm run dev          # dev сервер
-npm run build        # сборка
-npm run preview      # превью
+---
 
-npm run typecheck    # проверка типов
-npm run lint         # ESLint
-npm run lint:fix     # автофикс
-npm run format       # Prettier
-npm run ci           # полная проверка
-```
+## Pre-commit Checklist
 
-## Чеклист перед коммитом
+- [ ] `npm run ci` passes
+- [ ] Translations added for all supported languages
+- [ ] CSS variables used instead of raw values
+- [ ] Config constants used instead of magic numbers
+- [ ] `aria-label` added on interactive elements without visible text
+- [ ] Content JSON is valid against the collection schema
 
-- [ ] `npm run ci` проходит без ошибок
-- [ ] Добавлены переводы на оба языка
-- [ ] Использованы CSS переменные
-- [ ] Использованы константы из config
-- [ ] Добавлены aria-labels где нужно
+---
 
-## Полезные ссылки
+## Useful Links
 
 - [Astro Docs](https://docs.astro.build)
 - [React Docs](https://react.dev)

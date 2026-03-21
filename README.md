@@ -1,138 +1,116 @@
 # Sisyphus Studio
 
-Сайт независимой игровой студии на Astro 5 + React 19 + Tailwind CSS.
+Website for an independent game studio.
 
-## Быстрый старт
+## Quick Start
 
 ```bash
 npm install
-npm run dev       # http://localhost:4321
+cp .env.example .env
+npm run dev
 ```
 
-## Команды
+## Commands
 
-```bash
-npm run dev          # Запуск dev сервера
-npm run build        # Сборка в ./dist
-npm run preview      # Превью сборки
-npm run ci           # Проверка кода (typecheck + lint + format)
-```
+| Command | Description |
+|---|---|
+| `npm run dev` | Start dev server |
+| `npm run build` | Build to `./dist` |
+| `npm run preview` | Preview production build |
+| `npm run ci` | Full check: typecheck + lint + format |
 
-## Структура
+## Environment Variables
+
+Copy `.env.example` to `.env` and fill in your values. All variables are prefixed `PUBLIC_` and available in both server and client code.
+
+## Project Structure
 
 ```
 src/
-├── components/
-│   ├── common/          # AnimatedBackground, DisciplineIcon, ErrorBoundary
-│   ├── features/        # ContactForm, NewsCarousel, ProjectsCarousel
-│   ├── layout/          # Navbar, Footer
-│   └── sections/        # Hero, About, Contact, Donate
-├── config/              # Все константы и настройки
-├── content/             # Новости и проекты (JSON)
-├── i18n/                # Переводы (en/ru)
-├── styles/              # CSS (tokens, animations, components)
-└── utils/               # Вспомогательные функции
+├── components/      # UI components (common, features, layout, sections)
+├── config/          # Constants, design tokens, links, SEO
+├── content/         # News and project JSON files
+├── hooks/           # React hooks
+├── i18n/            # Translations
+├── layouts/         # Root HTML layout
+├── pages/           # Routes
+├── styles/          # CSS
+├── types.ts         # Shared TypeScript types
+└── utils/           # Helper functions
 ```
 
-## Добавление контента
+## Adding Content
 
-### Новость
+### News post
 
-Создай `src/content/news/05.json`:
+Create a new JSON file in `src/content/news/`:
 
 ```json
 {
-  "isoDate": "2025-06-01",
-  "image": "/images/news/news-5.jpg",
+  "isoDate": "YYYY-MM-DD",
+  "image": "/images/news/filename.jpg",
   "type": "announcement",
   "en": {
     "title": "Title",
     "date": "Jun 01, 2025",
-    "summary": "Short text...",
-    "body": "Full text.\n\nSecond paragraph."
+    "summary": "Short preview text.",
+    "body": "Full article text.\n\nSeparate paragraphs with a blank line."
   },
-  "ru": {
-    "title": "Заголовок",
-    "date": "01 Июн, 2025",
-    "summary": "Краткий текст...",
-    "body": "Полный текст.\n\nВторой абзац."
-  }
+  "ru": { ... }
 }
 ```
 
-Типы: `announcement`, `dev-diary`, `update`
+Valid `type` values: `announcement` · `dev-diary` · `update`
 
-### Проект
+### Project
 
-Создай `src/content/projects/03.json`:
+Create a new JSON file in `src/content/projects/`:
 
 ```json
 {
-  "id": 3,
-  "image": "/images/projects/project-3.jpg",
-  "progress": 25,
-  "wishlistUrl": "https://store.steampowered.com/app/...",
+  "id": 1,
+  "image": "/images/projects/filename.jpg",
+  "progress": 50,
+  "wishlistUrl": "https://...",
   "en": {
     "title": "Game Title",
-    "description": "Description...",
+    "description": "Short description.",
     "price": "In Development",
     "tags": ["Co-op", "Shooter"]
   },
-  "ru": {
-    "title": "Название",
-    "description": "Описание...",
-    "price": "В разработке",
-    "tags": ["Кооп", "Шутер"]
-  }
+  "ru": { ... }
 }
 ```
 
-## Настройка
+`progress` (0–100) and `wishlistUrl` are optional.
 
-### Переменные окружения
+## Configuration
 
-Скопируй `.env.example` в `.env` и заполни:
+All settings live in `src/config/`:
 
-```env
-PUBLIC_SITE_URL=https://sisyphus.studio
-PUBLIC_STEAM_URL=https://store.steampowered.com/app/YOUR_APP_ID
-PUBLIC_YOUTUBE_URL=https://www.youtube.com/@YourChannel
-PUBLIC_DONATE_URL=https://your-donation-link.com
-PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_ID
-```
+| File | What it controls |
+|---|---|
+| `constants.ts` | Brand info, animation timings, carousel settings |
+| `design.ts` | Colors, layout dimensions, spacing, gradients |
+| `links.ts` | External URLs, contact email, social links |
+| `seo.ts` | Meta tags, OG image, structured data |
 
-### Конфигурация
+## Translations
 
-Все настройки в `src/config/`:
-- `constants.ts` — анимации, бренд, UI
-- `design.ts` — цвета, размеры, отступы
-- `links.ts` — ссылки, соцсети, контакты
-- `seo.ts` — SEO и meta теги
+All UI strings are in `src/i18n/translations.ts`. Both `en` and `ru` objects must always have identical key shapes.
 
-### Переводы
+## Styling
 
-Все тексты в `src/i18n/translations.ts` (en/ru)
-
-### CSS переменные
-
-Все цвета в `src/styles/tokens.css`:
+CSS is split into focused files imported via `src/styles/global.css`. Always use CSS variables instead of raw values:
 
 ```css
---c-orange: #f87e0f;
---c-orange-light: #ff9d5c;
---c-orange-accent: #ffb86b;
---s-1 до --s-5: фоновые поверхности
---c-tertiary, --c-secondary: текстовые цвета
+/* wrong */
+color: #f87e0f;
+
+/* right */
+color: var(--c-orange);
 ```
 
-## Особенности
+## Developer Guide
 
-- **Анимированный фон** — полноэкранная сетка с плавной анимацией
-- **Двуязычность** — en/ru с синхронизацией в localStorage
-- **Адаптивность** — desktop/mobile версии компонентов
-- **Доступность** — ARIA-метки, keyboard navigation
-- **Производительность** — lazy loading, оптимизация изображений
-
-## Документация
-
-Подробнее в [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)
+See [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md) for full architecture reference.
