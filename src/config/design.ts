@@ -6,7 +6,7 @@ export const EASING = {
 
 export const IMAGE_FILTERS = {
   activeProject: "brightness(.85) saturate(.9)",
-  inactiveProject: "brightness(.45) saturate(.6)",
+  inactiveProject: "brightness(.6) saturate(.7)",
   mobileProject: "brightness(.75) saturate(.85)",
   modal: "brightness(.65) saturate(.75)",
 } as const;

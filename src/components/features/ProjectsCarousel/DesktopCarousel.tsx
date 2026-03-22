@@ -18,6 +18,7 @@ interface DesktopCarouselProps {
   projects: Project[];
   activeIndex: number;
   displayedIndex: number;
+  textVisible: boolean;
   onSelect: (i: number) => void;
   t: TranslationStructure["projects"];
 }
@@ -26,6 +27,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
   projects,
   activeIndex,
   displayedIndex,
+  textVisible,
   onSelect,
   t,
 }) => {
@@ -93,6 +95,11 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
+              opacity: textVisible ? 1 : 0,
+              transform: textVisible ? "translateY(0)" : "translateY(6px)",
+              transition: textVisible
+                ? `opacity 260ms ${EASING.decelerate}, transform 260ms ${EASING.decelerate}`
+                : `opacity 160ms ${EASING.accelerate}, transform 160ms ${EASING.accelerate}`,
             }}
           >
             <div>
@@ -238,11 +245,13 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
             style={{
               flex: 1,
               display: "flex",
+              gap: 2,
               height: 520,
               borderRadius: 20,
               overflow: "hidden",
               border: `1px solid ${COLORS.border.default}`,
               outline: "none",
+              background: COLORS.surface.s1,
             }}
           >
             {projects.map((project, i) => {
@@ -297,6 +306,16 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                       background: GRADIENTS.cardOverlay,
                       opacity: isActive ? 1 : 0.5,
                       transition: `opacity ${PROJECTS_EXPAND_MS}ms ${EASING.standard}`,
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "rgba(0,0,0,.60)",
+                      opacity: isActive ? 0 : 1,
+                      transition: `opacity ${PROJECTS_EXPAND_MS}ms ${EASING.standard}`,
+                      pointerEvents: "none",
                     }}
                   />
                   <div

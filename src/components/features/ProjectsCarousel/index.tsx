@@ -14,6 +14,7 @@ interface ProjectsCarouselProps {
 const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [displayedIndex, setDisplayedIndex] = useState(0);
+  const [textVisible, setTextVisible] = useState(true);
   const [isMobile, setIsMobile] = useState<boolean>(() =>
     typeof window !== "undefined" ? window.innerWidth < 768 : false,
   );
@@ -25,8 +26,18 @@ const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
       if (i === activeIndex) return;
       setActiveIndex(i);
       if (timerRef.current) clearTimeout(timerRef.current);
-      const delay = reducedMotion ? 0 : PROJECTS_EXPAND_MS * PROJECTS_CONTENT_REVEAL_RATIO;
-      timerRef.current = setTimeout(() => setDisplayedIndex(i), delay);
+
+      if (reducedMotion) {
+        setDisplayedIndex(i);
+        return;
+      }
+
+      setTextVisible(false);
+      const revealDelay = PROJECTS_EXPAND_MS * PROJECTS_CONTENT_REVEAL_RATIO;
+      timerRef.current = setTimeout(() => {
+        setDisplayedIndex(i);
+        setTextVisible(true);
+      }, revealDelay);
     },
     [activeIndex, reducedMotion],
   );
@@ -40,6 +51,7 @@ const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
   useEffect(() => {
     setActiveIndex(0);
     setDisplayedIndex(0);
+    setTextVisible(true);
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
@@ -70,6 +82,7 @@ const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
             projects={projects}
             activeIndex={activeIndex}
             displayedIndex={displayedIndex}
+            textVisible={textVisible}
             onSelect={handleClick}
             t={t}
           />
