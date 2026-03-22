@@ -90,149 +90,152 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
           <div
             className="reveal-left"
             suppressHydrationWarning
-            style={{
-              width: 380,
-              flexShrink: 0,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              opacity: textVisible ? 1 : 0,
-              transform: textVisible ? "translateY(0)" : "translateY(6px)",
-              transition: textVisible
-                ? `opacity 260ms ${EASING.decelerate}, transform 260ms ${EASING.decelerate}`
-                : `opacity 160ms ${EASING.accelerate}, transform 160ms ${EASING.accelerate}`,
-            }}
+            style={{ width: 380, flexShrink: 0 }}
           >
-            <div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  marginBottom: 20,
-                }}
-              >
-                <span className="t-eyebrow-accent">
-                  {String(activeIndex + 1).padStart(2, "0")} /{" "}
-                  {String(projects.length).padStart(2, "0")}
-                </span>
-                <div className="md-badge-primary md-badge">{shown.price}</div>
-              </div>
-
-              <h3
-                className="t-card-title"
-                style={{
-                  fontSize: "clamp(32px,3.8vw,52px)",
-                  lineHeight: 1.05,
-                  marginBottom: 16,
-                  color: COLORS.text.primary,
-                  transition: `opacity 280ms ${EASING.standard}`,
-                }}
-              >
-                {shown.title}
-              </h3>
-
-              {shown.tags && shown.tags.length > 0 && (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 20 }}>
-                  {shown.tags.map((tag) => {
-                    const Icon = getTagIcon(tag);
-                    return (
-                      <span
-                        key={tag}
-                        style={{
-                          ...TAG_STYLE.base,
-                          ...TAG_STYLE.desktop,
-                          color: COLORS.text.secondary,
-                        }}
-                      >
-                        <Icon size={10} color={COLORS.orange} />
-                        {tag}
-                      </span>
-                    );
-                  })}
-                </div>
-              )}
-
-              <div style={{ height: 1, background: COLORS.border.strong, marginBottom: 20 }} />
-
-              <p
-                className="t-body-md"
-                style={{ color: COLORS.text.secondary, lineHeight: 1.72, marginBottom: 28 }}
-              >
-                {shown.description}
-              </p>
-
-              {shown.progress !== undefined && (
-                <div style={{ marginBottom: 28 }}>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      marginBottom: 8,
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 700,
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        color: COLORS.text.tertiary,
-                      }}
-                    >
-                      {t.progressLabel}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: 13,
-                        fontWeight: 700,
-                        color: COLORS.orange,
-                        fontVariantNumeric: "tabular-nums",
-                      }}
-                    >
-                      {shown.progress}%
-                    </span>
-                  </div>
-                  <div
-                    style={{
-                      height: 4,
-                      borderRadius: 2,
-                      background: "rgba(255,255,255,.07)",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      style={{
-                        height: "100%",
-                        width: `${shown.progress}%`,
-                        borderRadius: 2,
-                        background: `linear-gradient(90deg, ${COLORS.orange}, ${COLORS.orangeLight})`,
-                        transition: `width 600ms ${EASING.standard}`,
-                      }}
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <a
-              href={shown.wishlistUrl || "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-filled"
+            <div
               style={{
-                alignSelf: "flex-start",
-                height: 44,
-                fontSize: 13,
-                gap: 8,
-                paddingLeft: 24,
-                paddingRight: 24,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                height: "100%",
+                opacity: textVisible ? 1 : 0,
+                transform: textVisible ? "translateY(0)" : "translateY(6px)",
+                transition: textVisible
+                  ? `opacity 260ms ${EASING.decelerate}, transform 260ms ${EASING.decelerate}`
+                  : `opacity 160ms ${EASING.accelerate}, transform 160ms ${EASING.accelerate}`,
               }}
             >
-              <ExternalLink size={14} />
-              {t.wishlist}
-            </a>
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: 20,
+                  }}
+                >
+                  <span className="t-eyebrow-accent">
+                    {String(activeIndex + 1).padStart(2, "0")} /{" "}
+                    {String(projects.length).padStart(2, "0")}
+                  </span>
+                  <div className="md-badge-primary md-badge">{shown.price}</div>
+                </div>
+
+                <h3
+                  className="t-card-title"
+                  style={{
+                    fontSize: "clamp(32px,3.8vw,52px)",
+                    lineHeight: 1.05,
+                    marginBottom: 16,
+                    color: COLORS.text.primary,
+                    transition: `opacity 280ms ${EASING.standard}`,
+                  }}
+                >
+                  {shown.title}
+                </h3>
+
+                {shown.tags && shown.tags.length > 0 && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 20 }}>
+                    {shown.tags.map((tag) => {
+                      const Icon = getTagIcon(tag);
+                      return (
+                        <span
+                          key={tag}
+                          style={{
+                            ...TAG_STYLE.base,
+                            ...TAG_STYLE.desktop,
+                            color: COLORS.text.secondary,
+                          }}
+                        >
+                          <Icon size={10} color={COLORS.orange} />
+                          {tag}
+                        </span>
+                      );
+                    })}
+                  </div>
+                )}
+
+                <div style={{ height: 1, background: COLORS.border.strong, marginBottom: 20 }} />
+
+                <p
+                  className="t-body-md"
+                  style={{ color: COLORS.text.secondary, lineHeight: 1.72, marginBottom: 28 }}
+                >
+                  {shown.description}
+                </p>
+
+                {shown.progress !== undefined && (
+                  <div style={{ marginBottom: 28 }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        marginBottom: 8,
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontSize: 11,
+                          fontWeight: 700,
+                          letterSpacing: "0.08em",
+                          textTransform: "uppercase",
+                          color: COLORS.text.tertiary,
+                        }}
+                      >
+                        {t.progressLabel}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: 13,
+                          fontWeight: 700,
+                          color: COLORS.orange,
+                          fontVariantNumeric: "tabular-nums",
+                        }}
+                      >
+                        {shown.progress}%
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        height: 4,
+                        borderRadius: 2,
+                        background: "rgba(255,255,255,.07)",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <div
+                        style={{
+                          height: "100%",
+                          width: `${shown.progress}%`,
+                          borderRadius: 2,
+                          background: `linear-gradient(90deg, ${COLORS.orange}, ${COLORS.orangeLight})`,
+                          transition: `width 600ms ${EASING.standard}`,
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <a
+                href={shown.wishlistUrl || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-filled"
+                style={{
+                  alignSelf: "flex-start",
+                  height: 44,
+                  fontSize: 13,
+                  gap: 8,
+                  paddingLeft: 24,
+                  paddingRight: 24,
+                }}
+              >
+                <ExternalLink size={14} />
+                {t.wishlist}
+              </a>
+            </div>
           </div>
 
           <div
