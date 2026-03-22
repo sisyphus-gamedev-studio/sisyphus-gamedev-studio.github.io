@@ -101,16 +101,16 @@ export const TRANSLATIONS = {
         badge: "Independent · No investors",
         tiers: [
           {
-            label: "One-time",
-            title: "Buy Us a Coffee",
-            description: "A small donation goes a long way for an indie team.",
-            cta: "Donate",
-          },
-          {
             label: "Sponsor",
             title: "Become a Sponsor",
             description: "Get your name in the credits and support the studio long-term.",
             cta: "Contact Us",
+          },
+          {
+            label: "One-time",
+            title: "Buy Us a Coffee",
+            description: "A small donation goes a long way for an indie team.",
+            cta: "Donate",
           },
           {
             label: "Free",
@@ -236,16 +236,16 @@ export const TRANSLATIONS = {
         badge: "Независимые · Без инвесторов",
         tiers: [
           {
-            label: "Разово",
-            title: "Угостить кофе",
-            description: "Небольшой донат — большая помощь для инди-команды.",
-            cta: "Задонатить",
-          },
-          {
             label: "Спонсор",
             title: "Стать спонсором",
             description: "Ваше имя в титрах и долгосрочная поддержка студии.",
             cta: "Написать нам",
+          },
+          {
+            label: "Разово",
+            title: "Угостить кофе",
+            description: "Небольшой донат — большая помощь для инди-команды.",
+            cta: "Задонатить",
           },
           {
             label: "Бесплатно",
