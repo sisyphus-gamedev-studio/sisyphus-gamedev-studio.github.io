@@ -1,8 +1,7 @@
 import { type FC } from "react";
 import { ArrowUp } from "lucide-react";
 import type { Language, TranslationStructure } from "../../types";
-import { BRAND, COLORS, LAYOUT } from "../../config";
-import { SOCIAL_LINKS } from "../../config/links";
+import { BRAND, COLORS, LAYOUT, SOCIAL_LINKS, BACKDROP } from "../../config";
 import { ErrorBoundary } from "../common/ErrorBoundary";
 
 interface FooterProps {
@@ -31,8 +30,8 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
       <footer
         aria-labelledby="footer-heading"
         style={{
-          background: "rgba(13,13,13,0.97)",
-          backdropFilter: "blur(12px)",
+          background: COLORS.panelBg,
+          backdropFilter: BACKDROP.footer,
           borderTop: `1px solid ${COLORS.border.default}`,
         }}
       >
@@ -47,7 +46,7 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
             whiteSpace: "nowrap",
           }}
         >
-          Footer
+          {t.sectionLabel}
         </h2>
 
         <div
@@ -66,7 +65,6 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
               flexWrap: "wrap",
             }}
           >
-            {/* Brand */}
             <a
               href={`${base}#home`}
               className="state"
@@ -76,7 +74,7 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
                 gap: 10,
                 textDecoration: "none",
                 padding: "4px 8px 4px 4px",
-                borderRadius: 9999,
+                borderRadius: "var(--r-full)",
                 flexShrink: 0,
               }}
             >
@@ -120,11 +118,7 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
                   aria-label={link.label}
                   className="footer-social-icon state"
                 >
-                  {link.iconSvg ? (
-                    <span dangerouslySetInnerHTML={{ __html: link.iconSvg }} />
-                  ) : link.icon ? (
-                    <link.icon size={15} />
-                  ) : null}
+                  <span dangerouslySetInnerHTML={{ __html: link.iconSvg }} />
                 </a>
               ))}
 

@@ -136,7 +136,7 @@ SIZES          // news card, modal, hero card dimensions
 URLS           // site, steam, youtube, donate (all env-backed)
 CONTACT        // email, contactEmail, careerEmail, formspreeEndpoint (env-backed)
 SOCIAL_ICONS   // inline SVG strings for YouTube, Steam, email
-SOCIAL_LINKS   // array used by Navbar and Footer
+SOCIAL_LINKS   // array used by Navbar and Footer — all SVG-based (no Lucide components)
 CONTACT_PAGE_SOCIAL  // array used by Contact section
 isMailtoLink   // (href: string) => boolean
 ```
@@ -212,7 +212,7 @@ Language is persisted to `localStorage` under `LANGUAGE_STORAGE_KEY`. The inline
 | `handleImageError(e, w, h)` | React `onError` handler — replaces broken image with inline SVG placeholder |
 | `nativeImageFallback(w, h)` | Returns an `onerror` string for Astro `<img>` tags |
 
-Fallback dimensions should match `IMAGE_FALLBACK` in `src/config/images.ts`.
+Fallback dimensions should match `IMAGE_FALLBACK` in `src/config/images.ts`. Static image paths are centralized in `IMAGES` (also from `src/config/images.ts`).
 
 ---
 

@@ -79,4 +79,8 @@ export const UI = {
   about: {
     independent: { en: "Indie", ru: "Инди" },
   },
+  errorBoundary: {
+    title: { en: "Something went wrong", ru: "Что-то пошло не так" },
+    subtitle: { en: "Try refreshing the page.", ru: "Попробуйте обновить страницу." },
+  },
 } as const;

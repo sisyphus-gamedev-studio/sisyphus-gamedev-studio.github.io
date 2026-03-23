@@ -12,6 +12,7 @@ import {
   EASING,
   IMAGE_FILTERS,
   GRADIENTS,
+  SIZES,
 } from "../../../config";
 import { getTagIcon } from "./tagIcons";
 
@@ -128,7 +129,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                 <h3
                   className="t-card-title"
                   style={{
-                    fontSize: "clamp(32px,3.8vw,52px)",
+                    fontSize: SIZES.projects.desktopTitleSize,
                     lineHeight: 1.05,
                     marginBottom: 16,
                     color: COLORS.text.primary,
@@ -376,7 +377,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                       <span
                         className="t-eyebrow-accent"
                         style={{
-                          color: "#e8e4e0",
+                          color: COLORS.text.primary,
                           textShadow: "0 1px 8px rgba(0,0,0,.9), 0 0 20px rgba(0,0,0,.6)",
                         }}
                       >

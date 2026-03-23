@@ -167,6 +167,7 @@ export const TRANSLATIONS = {
     },
     footer: {
       followUs: "Follow Us",
+      sectionLabel: "Footer",
       copyright: "© {year} Sisyphus Studio",
       cta: {
         title: "Support The",
@@ -385,6 +386,7 @@ export const TRANSLATIONS = {
     },
     footer: {
       followUs: "Свяжитесь",
+      sectionLabel: "Подвал",
       copyright: "© {year} Sisyphus Studio",
       cta: {
         title: "Поддержи",

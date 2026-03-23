@@ -266,7 +266,7 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  minHeight: 200,
+                  minHeight: SIZES.newsCarousel.emptyStateMinHeight,
                   borderRadius: "var(--r-2xl)",
                   border: "1px solid var(--b-subtle)",
                   background: "var(--s-4)",

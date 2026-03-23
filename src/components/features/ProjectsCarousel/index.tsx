@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, type FC } from "react";
 import type { Project, TranslationStructure } from "../../../types";
-import { PROJECTS_EXPAND_MS, PROJECTS_CONTENT_REVEAL_RATIO } from "../../../config";
+import { PROJECTS_EXPAND_MS, PROJECTS_CONTENT_REVEAL_RATIO, LAYOUT, SIZES } from "../../../config";
 import { useReducedMotion } from "../../../hooks/useReducedMotion";
 import { ErrorBoundary } from "../../common/ErrorBoundary";
 import MobileCarousel from "./MobileCarousel";
@@ -10,8 +10,6 @@ interface ProjectsCarouselProps {
   projects: Project[];
   t: TranslationStructure["projects"];
 }
-
-const MOBILE_BREAKPOINT = 768;
 
 const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -23,7 +21,7 @@ const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    setIsMobile(window.innerWidth < LAYOUT.mobileBreakpoint);
   }, []);
 
   const handleClick = useCallback(
@@ -51,7 +49,7 @@ const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
     const check = () => {
       if (resizeTimerRef.current) clearTimeout(resizeTimerRef.current);
       resizeTimerRef.current = setTimeout(() => {
-        setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+        setIsMobile(window.innerWidth < LAYOUT.mobileBreakpoint);
       }, 100);
     };
     window.addEventListener("resize", check, { passive: true });
@@ -79,7 +77,8 @@ const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
     [],
   );
 
-  if (isMobile === null) return <section id="projects" style={{ minHeight: 768 }} />;
+  if (isMobile === null)
+    return <section id="projects" style={{ minHeight: SIZES.projects.skeletonMinHeight }} />;
 
   return (
     <section id="projects">

@@ -1,7 +1,7 @@
 ---
 import type { TranslationStructure, Language } from "../../types";
-import { PARTNERS } from "../../config/partners";
-import { LAYOUT } from "../../config";
+import { PARTNERS, PARTNER_LOGO_STYLES, PARTNER_CATEGORY_STYLES } from "../../config/partners";
+import { LAYOUT, SOCIAL_ICONS, OVERLAY } from "../../config";
 
 interface Props {
   t: NonNullable<TranslationStructure["partners"]>;
@@ -9,22 +9,12 @@ interface Props {
 }
 
 const { t, lang } = Astro.props;
-
-const logoStyles: Record<string, string> = {
-  orange:
-    "background:var(--c-orange-dim);border:1px solid var(--c-orange-border);color:var(--c-orange)",
-  blue: "background:rgba(100,140,255,.10);border:1px solid rgba(100,140,255,.20);color:#7c9ef8",
-  green: "background:rgba(100,200,100,.09);border:1px solid rgba(100,200,100,.20);color:#7ec87e",
-  purple: "background:rgba(160,100,255,.09);border:1px solid rgba(160,100,255,.20);color:#b87ef8",
-};
-
-
 ---
 
 <section
   id="partners"
   aria-labelledby="partners-heading"
-  style="padding:100px 0;background:transparent;border-top:1px solid var(--b-default);position:relative"
+  style="padding:var(--spacing-section);background:transparent;border-top:1px solid var(--b-default);position:relative"
 >
   <div
     style={`max-width:${LAYOUT.maxWidth}px;margin:0 auto;padding:0 ${LAYOUT.padding}px;position:relative;z-index:1`}
@@ -61,7 +51,7 @@ const logoStyles: Record<string, string> = {
     </div>
 
     <div
-      class="reveal"
+      class="reveal partners-grid"
       style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:40px"
       role="list"
       aria-label={t.sectionLabel}
@@ -71,11 +61,8 @@ const logoStyles: Record<string, string> = {
           const localData = partner[lang];
           const isFeatured = !!partner.featured;
           const catLabel = t.categoryLabels[partner.category];
-          const catStyle =
-            partner.category === "strategic"
-              ? "background:var(--c-orange-dim);border-color:var(--c-orange-border);color:#ffb86b"
-              : "";
-          const logoStyle = logoStyles[partner.logoStyle] ?? logoStyles.orange;
+          const catStyle = PARTNER_CATEGORY_STYLES[partner.category];
+          const logoStyle = PARTNER_LOGO_STYLES[partner.logoStyle] ?? PARTNER_LOGO_STYLES.orange;
 
           return (
             <div
@@ -86,14 +73,14 @@ const logoStyles: Record<string, string> = {
             >
               <div style="position:relative;z-index:1;display:flex;flex-direction:column;height:100%">
                 <div
-                  style={`width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:17px;font-weight:900;letter-spacing:-1px;font-family:'Exo 2',sans-serif;flex-shrink:0;${logoStyle}`}
+                  style={`width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:17px;font-weight:900;letter-spacing:-1px;flex-shrink:0;${logoStyle}`}
                   aria-hidden="true"
                 >
                   {partner.logoInitials}
                 </div>
 
                 <span
-                  style={`display:inline-flex;align-items:center;padding:3px 10px;border-radius:var(--r-full);font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;background:rgba(255,255,255,.04);border:1px solid var(--b-subtle);color:var(--c-tertiary);margin-bottom:10px;width:fit-content;${catStyle}`}
+                  style={`display:inline-flex;align-items:center;padding:3px 10px;border-radius:var(--r-full);font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;background:${OVERLAY.tagBg};border:1px solid var(--b-subtle);color:var(--c-tertiary);margin-bottom:10px;width:fit-content;${catStyle}`}
                 >
                   {catLabel}
                 </span>
@@ -145,21 +132,7 @@ const logoStyles: Record<string, string> = {
                       style="height:32px;padding:0 13px;font-size:11px;gap:5px"
                       aria-label={`${localData.name} — ${t.linkLabels.steam}`}
                     >
-                      <svg
-                        width="11"
-                        height="11"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.2"
-                        stroke-linecap="round"
-                        aria-hidden="true"
-                      >
-                        <rect x="6" y="11" width="4" height="6" rx="2" />
-                        <path d="M10 11V6a2 2 0 1 1 4 0v5" />
-                        <rect x="14" y="8" width="4" height="9" rx="2" />
-                        <path d="M2 19h20" />
-                      </svg>
+                      <Fragment set:html={SOCIAL_ICONS.steamSm} />
                       {t.linkLabels.steam}
                     </a>
                   )}
@@ -235,16 +208,8 @@ const logoStyles: Record<string, string> = {
   }
 
   @media (max-width: 680px) {
-    #partners [style*="grid-template-columns:repeat(2,1fr)"] {
+    #partners .partners-grid {
       grid-template-columns: 1fr !important;
-    }
-  }
-  @media (max-width: 580px) {
-    #partners [style*="padding:28px 32px"] {
-      padding: 24px 20px !important;
-    }
-    #partners [style*="flex-wrap:wrap;flex-shrink:0"] {
-      width: 100%;
     }
   }
 </style>

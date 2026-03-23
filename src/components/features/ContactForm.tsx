@@ -1,6 +1,6 @@
 import { useState, useCallback, type ChangeEvent } from "react";
 import type { TranslationStructure } from "../../types";
-import { CONTACT, EMAIL_REGEX, COLORS } from "../../config";
+import { CONTACT, EMAIL_REGEX, COLORS, SIZES } from "../../config";
 
 interface Props {
   t: TranslationStructure["contact"];
@@ -80,7 +80,7 @@ export default function ContactForm({ t }: Props) {
             height="20"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="var(--c-orange)"
+            stroke="currentColor"
             strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -268,7 +268,7 @@ function Field({
           borderRadius: "var(--r-sm)",
           padding: "10px 14px",
           color: "var(--c-on-surface)",
-          fontSize: 13,
+          fontSize: SIZES.form.inputFontSize,
           fontWeight: 500,
           outline: "none",
           transition: "border-color 0.2s",
@@ -341,11 +341,11 @@ function TextareaField({
           borderRadius: "var(--r-sm)",
           padding: "10px 14px",
           color: "var(--c-on-surface)",
-          fontSize: 13,
+          fontSize: SIZES.form.inputFontSize,
           fontWeight: 500,
           outline: "none",
           resize: "vertical",
-          minHeight: 120,
+          minHeight: SIZES.form.textareaMinHeight,
           transition: "border-color 0.2s",
           boxSizing: "border-box",
         }}

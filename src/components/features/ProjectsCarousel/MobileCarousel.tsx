@@ -11,6 +11,7 @@ import {
   TAG_STYLE,
   IMAGE_FILTERS,
   GRADIENTS,
+  SIZES,
 } from "../../../config";
 import { getTagIcon } from "./tagIcons";
 
@@ -150,7 +151,10 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
             <span className="t-eyebrow-accent" style={{ display: "block", marginBottom: 8 }}>
               {String(activeIndex + 1).padStart(2, "0")} — {t.sectionLabel}
             </span>
-            <h3 className="t-card-title" style={{ fontSize: 32, marginBottom: 10 }}>
+            <h3
+              className="t-card-title"
+              style={{ fontSize: SIZES.projects.mobileTitleSize, marginBottom: 10 }}
+            >
               {p.title}
             </h3>
             {p.tags && p.tags.length > 0 && (
@@ -231,7 +235,7 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
                 height: 6,
                 borderRadius: 3,
                 border: "none",
-                background: i === activeIndex ? COLORS.orange : "rgba(255,255,255,.2)",
+                background: i === activeIndex ? COLORS.orange : COLORS.border.medium,
                 cursor: "pointer",
                 transition: "width .3s, background .3s",
                 padding: 0,

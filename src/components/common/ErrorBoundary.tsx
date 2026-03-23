@@ -1,9 +1,11 @@
 import { Component, type ReactNode } from "react";
-import { COLORS } from "../../config";
+import { COLORS, UI, SIZES } from "../../config";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
   fallback?: ReactNode;
+  errorTitle?: string;
+  errorSubtitle?: string;
 }
 
 interface ErrorBoundaryState {
@@ -39,7 +41,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             border: `1px solid ${COLORS.border.default}`,
             textAlign: "center",
             color: COLORS.text.tertiary,
-            fontSize: 14,
+            fontSize: SIZES.errorBoundary.bodyFontSize,
           }}
         >
           <div
@@ -72,9 +74,11 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             </svg>
           </div>
           <p style={{ color: COLORS.text.primary, fontWeight: 600, marginBottom: 6 }}>
-            Something went wrong
+            {this.props.errorTitle ?? UI.errorBoundary.title.en}
           </p>
-          <p style={{ fontSize: 12 }}>Try refreshing the page.</p>
+          <p style={{ fontSize: SIZES.errorBoundary.subtitleFontSize }}>
+            {this.props.errorSubtitle ?? UI.errorBoundary.subtitle.en}
+          </p>
         </div>
       );
     }

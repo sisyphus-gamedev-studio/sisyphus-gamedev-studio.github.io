@@ -2,7 +2,7 @@
 import DisciplineIcon from "../common/DisciplineIcon.astro";
 import type { IconName } from "../common/DisciplineIcon.astro";
 import type { Language, TranslationStructure } from "../../types";
-import { BRAND, UI } from "../../config";
+import { BRAND, UI, IMAGES, LAYOUT } from "../../config";
 import { nativeImageFallback } from "../../utils/images";
 
 interface Props {
@@ -20,7 +20,7 @@ const stats = [
   { value: UI.hero.stats.independent, label: t.stats.independent },
 ];
 
-const aboutImg = "/images/about/about.jpg";
+const aboutImg = IMAGES.about;
 
 const disciplines: { label: string; icon: IconName }[] = [
   { label: t.disciplines.engineering, icon: "engineering" },
@@ -33,9 +33,11 @@ const disciplines: { label: string; icon: IconName }[] = [
 <section
   id="about"
   aria-labelledby="about-heading"
-  style="padding:100px 0;background:var(--s-2);border-top:1px solid var(--b-default);position:relative;overflow:hidden"
+  style="padding:var(--spacing-section);background:var(--s-2);border-top:1px solid var(--b-default);position:relative;overflow:hidden"
 >
-  <div style="max-width:1280px;margin:0 auto;padding:0 20px;position:relative;z-index:2">
+  <div
+    style={`max-width:${LAYOUT.maxWidth}px;margin:0 auto;padding:0 ${LAYOUT.padding}px;position:relative;z-index:2`}
+  >
     <div class="reveal" style="margin-bottom:56px">
       <div class="section-eyebrow">
         <div class="section-eyebrow-line"></div>

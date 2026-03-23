@@ -5,3 +5,7 @@ export const IMAGE_FALLBACK = {
 } as const;
 
 export const HERO_PRELOAD_IMAGE_SRC = "/images/hero/hero-main.jpg";
+
+export const IMAGES = {
+  about: "/images/about/about.jpg",
+} as const;

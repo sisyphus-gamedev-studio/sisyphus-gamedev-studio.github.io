@@ -46,7 +46,9 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
         </div>
 
         <div style="margin-top:40px">
-          <p class="t-eyebrow-accent" style="margin-bottom:12px;display:block">{t.vacanciesTitle}</p>
+          <p class="t-eyebrow-accent" style="margin-bottom:12px;display:block">
+            {t.vacanciesTitle}
+          </p>
           <ul class="careers-vacancies" role="list">
             {
               t.vacancies.map((v) => (
@@ -176,7 +178,7 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
     border-radius: var(--r-full);
     font-size: 11px;
     font-weight: 600;
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--b-subtle);
     border: 1px solid var(--b-default);
     color: var(--c-tertiary);
   }
@@ -238,11 +240,14 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
     border-radius: 14px;
     position: relative;
     overflow: hidden;
-    transition: border-color .25s, transform .25s var(--ease-em), box-shadow .25s;
+    transition:
+      border-color 0.25s,
+      transform 0.25s var(--ease-em),
+      box-shadow 0.25s;
   }
 
   .careers-vacancy-item::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -250,13 +255,13 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
     height: 1px;
     background: linear-gradient(90deg, var(--c-orange), transparent);
     opacity: 0;
-    transition: opacity .25s;
+    transition: opacity 0.25s;
   }
 
   .careers-vacancy-item:hover {
     border-color: var(--c-orange-border);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   }
 
   .careers-vacancy-item:hover::before {
@@ -266,10 +271,10 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
   .vacancy-type {
     font-size: 9px;
     font-weight: 700;
-    letter-spacing: .8px;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
     color: var(--c-orange);
-    opacity: .8;
+    opacity: 0.8;
   }
 
   .vacancy-title {

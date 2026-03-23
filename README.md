@@ -114,8 +114,8 @@ All config is exported from `src/config/index.ts`.
 | `donate.ts` | SVG icons for donation tier cards |
 | `fonts.ts` | Google Fonts stylesheet URL |
 | `i18n.ts` | `LANGUAGE_STORAGE_KEY`, `SUPPORTED_LANGUAGES` |
-| `images.ts` | Fallback image dimensions, hero preload path |
-| `links.ts` | Env-backed URLs, Formspree endpoint, social links, `isMailtoLink` |
+| `images.ts` | Fallback image dimensions, hero preload path, static image paths (`IMAGES`) |
+| `links.ts` | Env-backed URLs, Formspree endpoint, social links (all SVG-based), `isMailtoLink` |
 | `news.ts` | Category order, labels per language, category colors |
 | `partners.ts` | Partner data and types |
 | `seo.ts` | Default meta title/description, OG image dimensions, JSON-LD game list |

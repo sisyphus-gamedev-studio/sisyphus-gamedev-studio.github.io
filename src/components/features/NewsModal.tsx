@@ -2,7 +2,16 @@ import { useEffect, useRef, useCallback } from "react";
 import { X, Calendar } from "lucide-react";
 import type { NewsItem, TranslationStructure } from "../../types";
 import { handleImageError } from "../../utils/images";
-import { FOCUSABLE_SELECTORS, COLORS, SIZES, IMAGE_FILTERS, IMAGE_FALLBACK } from "../../config";
+import {
+  FOCUSABLE_SELECTORS,
+  COLORS,
+  SIZES,
+  IMAGE_FILTERS,
+  IMAGE_FALLBACK,
+  BACKDROP,
+  OVERLAY,
+  Z_INDEX,
+} from "../../config";
 
 interface NewsModalProps {
   item: NewsItem;
@@ -70,9 +79,9 @@ const NewsModal = ({ item, onClose, closeLabel }: NewsModalProps) => {
       style={{
         position: "fixed",
         inset: 0,
-        zIndex: 200,
-        background: "rgba(0,0,0,.72)",
-        backdropFilter: "blur(6px)",
+        zIndex: Z_INDEX.modal,
+        background: OVERLAY.modalBg,
+        backdropFilter: BACKDROP.modal,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -85,7 +94,7 @@ const NewsModal = ({ item, onClose, closeLabel }: NewsModalProps) => {
         className="news-modal-panel"
         style={{
           background: COLORS.surface.s3,
-          border: "1px solid rgba(255,255,255,.09)",
+          border: `1px solid ${COLORS.border.strong}`,
           borderRadius: 20,
           width: "100%",
           maxWidth: SIZES.modal.maxWidth,
@@ -93,7 +102,7 @@ const NewsModal = ({ item, onClose, closeLabel }: NewsModalProps) => {
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
-          boxShadow: "0 32px 80px rgba(0,0,0,.8)",
+          boxShadow: SIZES.modal.boxShadow,
         }}
       >
         <div style={{ position: "relative", height: SIZES.modal.imageHeight, flexShrink: 0 }}>
@@ -148,9 +157,9 @@ const NewsModal = ({ item, onClose, closeLabel }: NewsModalProps) => {
                 width: 34,
                 height: 34,
                 borderRadius: "50%",
-                border: "1px solid rgba(255,255,255,.15)",
-                background: "rgba(0,0,0,.45)",
-                backdropFilter: "blur(8px)",
+                border: `1px solid ${OVERLAY.modalCloseBorder}`,
+                background: OVERLAY.modalCloseBg,
+                backdropFilter: BACKDROP.modalClose,
                 color: COLORS.text.primary,
                 cursor: "pointer",
                 display: "flex",
@@ -176,7 +185,7 @@ const NewsModal = ({ item, onClose, closeLabel }: NewsModalProps) => {
             <h2
               id="modal-title"
               className="t-card-title"
-              style={{ fontSize: "clamp(22px,4vw,32px)", lineHeight: 1.05 }}
+              style={{ fontSize: SIZES.modal.titleSize, lineHeight: 1.05 }}
             >
               {item.title}
             </h2>

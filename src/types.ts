@@ -163,6 +163,7 @@ export interface TranslationStructure {
   };
   footer: {
     followUs: string;
+    sectionLabel: string;
     copyright: string;
     cta: {
       title: string;

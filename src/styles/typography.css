@@ -1,7 +1,7 @@
 .t-stat-num {
   font-family: "Exo 2", sans-serif;
   font-weight: 800;
-  color: #f87e0f;
+  color: var(--c-orange);
   line-height: 1;
 }
 .t-card-title {
@@ -9,7 +9,7 @@
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1;
-  color: #f0ece8;
+  color: var(--c-on-surface);
 }
 .t-eyebrow-accent {
   font-family: "Exo 2", sans-serif;
@@ -17,7 +17,7 @@
   font-weight: 700;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: #f87e0f;
+  color: var(--c-orange);
 }
 .t-eyebrow-muted {
   font-family: "Exo 2", sans-serif;
@@ -25,13 +25,13 @@
   font-weight: 700;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  color: #737373;
+  color: var(--c-tertiary);
 }
 .t-brand-lg {
   font-family: "Exo 2", sans-serif;
   font-size: 18px;
   font-weight: 700;
-  color: #f0ece8;
+  color: var(--c-on-surface);
 }
 .t-brand-sm {
   font-family: "Exo 2", sans-serif;

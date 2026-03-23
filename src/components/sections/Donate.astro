@@ -1,6 +1,6 @@
 ---
 import type { TranslationStructure } from "../../types";
-import { DONATE_TIER_ICONS, URLS, CONTACT, isMailtoLink } from "../../config";
+import { DONATE_TIER_ICONS, URLS, CONTACT, isMailtoLink, LAYOUT } from "../../config";
 
 interface Props {
   t: TranslationStructure["footer"]["cta"];
@@ -20,7 +20,9 @@ const TIER_RELS = [undefined, isMailto ? undefined : "noopener noreferrer", "noo
   aria-labelledby="donate-heading"
   style="padding: var(--spacing-section); background: var(--s-2); border-top: 1px solid var(--b-default); position: relative; overflow: hidden"
 >
-  <div style="max-width: 1280px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2">
+  <div
+    style={`max-width:${LAYOUT.maxWidth}px;margin:0 auto;padding:0 ${LAYOUT.padding}px;position:relative;z-index:2`}
+  >
     <div class="reveal donate-header">
       <div>
         <div class="section-eyebrow" style="margin-bottom: 16px">

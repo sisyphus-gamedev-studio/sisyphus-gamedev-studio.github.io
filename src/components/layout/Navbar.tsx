@@ -1,7 +1,17 @@
 import { useState, useEffect, useCallback, useRef, useMemo, type FC } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import type { Language, TranslationStructure } from "../../types";
-import { BRAND, SOCIAL_LINKS, COLORS, LAYOUT, TRANSITIONS, isMailtoLink } from "../../config";
+import {
+  BRAND,
+  SOCIAL_LINKS,
+  COLORS,
+  LAYOUT,
+  TRANSITIONS,
+  BACKDROP,
+  Z_INDEX,
+  SIZES,
+  isMailtoLink,
+} from "../../config";
 import { useLanguageSync } from "../../hooks/useLanguageSync";
 
 interface NavbarProps {
@@ -9,7 +19,6 @@ interface NavbarProps {
   t: TranslationStructure["nav"];
 }
 
-const NAV_BG_SCROLLED = "rgba(13,13,13,0.92)";
 const NAV_HEIGHT = LAYOUT.navHeight;
 
 const Navbar: FC<NavbarProps> = ({ lang, t }) => {
@@ -135,10 +144,10 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
         top: 0,
         left: 0,
         right: 0,
-        zIndex: 50,
+        zIndex: Z_INDEX.nav,
         height: NAV_HEIGHT,
-        background: scrolled ? NAV_BG_SCROLLED : "transparent",
-        backdropFilter: scrolled ? "blur(24px) saturate(1.6)" : "none",
+        background: scrolled ? COLORS.navBg : "transparent",
+        backdropFilter: scrolled ? BACKDROP.navScrolled : "none",
         borderBottom: scrolled ? `1px solid ${COLORS.border.default}` : "1px solid transparent",
         transition: `background ${TRANSITIONS.default}, border-color ${TRANSITIONS.default}, backdrop-filter ${TRANSITIONS.default}`,
       }}
@@ -175,7 +184,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
             height={56}
             style={{ borderRadius: 8, objectFit: "cover", flexShrink: 0 }}
           />
-          <span className="t-brand-lg" style={{ fontSize: 16 }}>
+          <span className="t-brand-lg" style={{ fontSize: SIZES.nav.brandFontSize }}>
             {BRAND.prefix}
             <span style={{ color: COLORS.orange }}>{BRAND.suffix}</span>
           </span>
@@ -190,7 +199,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
                 href={href}
                 onClick={() => handleNavClick(id)}
                 className={`nav-desktop-link state ${isActive ? "active" : ""}`}
-                style={{ fontSize: 15 }}
+                style={{ fontSize: SIZES.nav.linkFontSize }}
               >
                 {label}
                 {isActive && (
@@ -216,7 +225,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
           className="hidden md:flex"
           style={{ alignItems: "center", gap: 2, marginLeft: "auto" }}
         >
-          {SOCIAL_LINKS.map(({ icon: Icon, iconSvg, href, label }) => (
+          {SOCIAL_LINKS.map(({ iconSvg, href, label }) => (
             <a
               key={label}
               href={href}
@@ -225,20 +234,22 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
               rel={isMailtoLink(href) ? undefined : "noopener noreferrer"}
               className="icon-btn"
             >
-              {Icon ? (
-                <Icon size={15} strokeWidth={1.8} />
-              ) : (
-                <span dangerouslySetInnerHTML={{ __html: iconSvg || "" }} />
-              )}
+              <span dangerouslySetInnerHTML={{ __html: iconSvg }} />
             </a>
           ))}
           <div
-            style={{ width: 1, height: 16, background: "rgba(255,255,255,.08)", margin: "0 6px" }}
+            style={{ width: 1, height: 16, background: COLORS.border.strong, margin: "0 6px" }}
           />
           <a
             href={langSwitchHref}
             className="chip"
-            style={{ height: 26, fontSize: 11, letterSpacing: 1, textDecoration: "none", gap: 5 }}
+            style={{
+              height: 26,
+              fontSize: SIZES.nav.chipFontSize,
+              letterSpacing: SIZES.nav.chipLetterSpacing,
+              textDecoration: "none",
+              gap: 5,
+            }}
           >
             <Globe size={11} />
             {otherLang.toUpperCase()}
@@ -267,10 +278,10 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
           maxHeight: mobileOpen ? "420px" : 0,
           opacity: mobileOpen ? 1 : 0,
           overflow: "hidden",
-          background: "rgba(13,13,13,.97)",
-          backdropFilter: "blur(24px)",
+          background: COLORS.panelBg,
+          backdropFilter: BACKDROP.panel,
           borderTop: mobileOpen ? `1px solid ${COLORS.border.default}` : "1px solid transparent",
-          transition: "max-height .3s cubic-bezier(0.2,0,0,1), opacity .22s",
+          transition: `max-height ${TRANSITIONS.default}, opacity ${TRANSITIONS.fast}`,
           visibility: mobileOpen ? "visible" : "hidden",
         }}
       >
@@ -294,7 +305,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
               style={{
                 padding: "11px 16px",
                 borderRadius: 10,
-                fontSize: 14,
+                fontSize: SIZES.nav.mobileLinkFontSize,
                 fontWeight: 600,
                 color: active === id ? COLORS.text.primary : COLORS.text.tertiary,
                 background: active === id ? COLORS.orangeDim : "transparent",
@@ -308,7 +319,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
           ))}
           <div style={{ height: 1, background: COLORS.border.default, margin: "8px 0" }} />
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            {SOCIAL_LINKS.map(({ icon: Icon, iconSvg, href, label }) => (
+            {SOCIAL_LINKS.map(({ iconSvg, href, label }) => (
               <a
                 key={label}
                 href={href}
@@ -318,18 +329,19 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
                 target={isMailtoLink(href) ? undefined : "_blank"}
                 rel={isMailtoLink(href) ? undefined : "noopener noreferrer"}
               >
-                {Icon ? (
-                  <Icon size={14} strokeWidth={1.8} />
-                ) : (
-                  <span dangerouslySetInnerHTML={{ __html: iconSvg || "" }} />
-                )}
+                <span dangerouslySetInnerHTML={{ __html: iconSvg }} />
               </a>
             ))}
             <a
               href={langSwitchHref}
               className="chip"
               tabIndex={mobileOpen ? 0 : -1}
-              style={{ marginLeft: "auto", height: 26, textDecoration: "none", fontSize: 12 }}
+              style={{
+                marginLeft: "auto",
+                height: 26,
+                textDecoration: "none",
+                fontSize: SIZES.nav.mobileLangFontSize,
+              }}
               onClick={() => setMobileOpen(false)}
             >
               <Globe size={11} />

@@ -51,7 +51,7 @@
   height: 42px;
   padding: 0 26px;
   background: var(--c-orange-dim);
-  color: #ffb86b;
+  color: var(--c-orange-accent);
   border-radius: var(--r-full);
   border: 1px solid var(--c-orange-border);
   cursor: pointer;

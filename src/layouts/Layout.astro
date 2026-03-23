@@ -1,8 +1,16 @@
 ---
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
-import { URLS, SEO, UI, BRAND, FONTS, HERO_PRELOAD_IMAGE_SRC } from "../config";
-import { LANGUAGE_STORAGE_KEY, SUPPORTED_LANGUAGES } from "../config/i18n";
+import {
+  URLS,
+  SEO,
+  UI,
+  BRAND,
+  FONTS,
+  HERO_PRELOAD_IMAGE_SRC,
+  LANGUAGE_STORAGE_KEY,
+  SUPPORTED_LANGUAGES,
+} from "../config";
 import { TRANSLATIONS } from "../i18n/translations";
 import AnimatedBackground from "../components/common/AnimatedBackground.astro";
 
@@ -115,7 +123,7 @@ const jsonLd = {
           height="16"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="var(--c-orange)"
+          stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -210,14 +218,12 @@ const jsonLd = {
           window.scrollTo({ top: savedScrollY, behavior: "instant" });
         }
         requestAnimationFrame(() => {
-          document
-            .querySelectorAll<HTMLElement>(".reveal, .reveal-left, .reveal-right, .reveal-scale")
-            .forEach((el) => {
-              const rect = el.getBoundingClientRect();
-              if (rect.top < window.innerHeight * 1.1) {
-                el.classList.add("in");
-              }
-            });
+          document.querySelectorAll<HTMLElement>(REVEAL_ANIMATION_SELECTOR).forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 1.1) {
+              el.classList.add("in");
+            }
+          });
         });
       });
     </script>
