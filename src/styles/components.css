@@ -312,3 +312,34 @@
 .gap-16 {
   gap: 16px;
 }
+
+.footer-grid {
+  grid-template-columns: 1fr auto auto;
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.footer-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--s-4);
+  border: 1px solid var(--b-subtle);
+  color: var(--c-secondary);
+  text-decoration: none;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+.footer-social-icon:hover {
+  border-color: var(--c-orange-border);
+  color: var(--c-orange);
+}

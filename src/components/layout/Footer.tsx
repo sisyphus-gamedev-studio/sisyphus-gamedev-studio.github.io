@@ -2,6 +2,7 @@ import { type FC } from "react";
 import { ArrowUp } from "lucide-react";
 import type { Language, TranslationStructure } from "../../types";
 import { BRAND, COLORS, LAYOUT } from "../../config";
+import { SOCIAL_LINKS } from "../../config/links";
 import { ErrorBoundary } from "../common/ErrorBoundary";
 
 interface FooterProps {
@@ -29,8 +30,8 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
       <footer
         aria-labelledby="footer-heading"
         style={{
-          background: "rgba(17, 17, 17, 0.8)",
-          backdropFilter: "blur(10px)",
+          background: "rgba(13,13,13,0.97)",
+          backdropFilter: "blur(12px)",
           borderTop: `1px solid ${COLORS.border.default}`,
         }}
       >
@@ -52,29 +53,38 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
           style={{
             maxWidth: LAYOUT.maxWidth,
             margin: "0 auto",
-            padding: `32px ${LAYOUT.padding}px 28px`,
+            padding: `40px ${LAYOUT.padding}px 32px`,
           }}
         >
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 32,
+              flexWrap: "wrap",
+            }}
+          >
+            {/* Brand */}
             <a
               href={`${base}#home`}
               className="state"
               style={{
-                display: "flex",
+                display: "inline-flex",
                 alignItems: "center",
-                gap: 8,
+                gap: 10,
                 textDecoration: "none",
-                padding: "4px 8px",
-                borderRadius: "9999px",
-                overflow: "hidden",
+                padding: "4px 8px 4px 4px",
+                borderRadius: 9999,
+                flexShrink: 0,
               }}
             >
               <img
                 src="/favicon.png"
                 alt="Sisyphus Studio"
-                width={24}
-                height={24}
-                style={{ borderRadius: 6, objectFit: "cover", flexShrink: 0 }}
+                width={28}
+                height={28}
+                style={{ borderRadius: 8, objectFit: "cover" }}
               />
               <span className="t-brand-lg" style={{ fontSize: 15 }}>
                 {BRAND.prefix}
@@ -82,7 +92,16 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
               </span>
             </a>
 
-            <nav aria-label="Footer navigation">
+            <nav
+              aria-label="Footer navigation"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 2,
+                flexWrap: "wrap",
+                justifyContent: "center",
+              }}
+            >
               {footerLinks.map((link) => (
                 <a key={link.href} href={link.href} className="footer-nav-link state">
                   {link.label}
@@ -90,19 +109,57 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
               ))}
             </nav>
 
-            <div className="flex-row gap-12" style={{ alignItems: "center" }}>
-              <p className="t-body-sm" style={{ color: COLORS.text.tertiary }}>
-                {copyright}
-              </p>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+              {SOCIAL_LINKS.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                  rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                  aria-label={link.label}
+                  className="footer-social-icon state"
+                >
+                  {link.iconSvg ? (
+                    <span dangerouslySetInnerHTML={{ __html: link.iconSvg }} />
+                  ) : link.icon ? (
+                    <link.icon size={15} />
+                  ) : null}
+                </a>
+              ))}
+
+              <div
+                style={{ width: 1, height: 20, background: COLORS.border.subtle, margin: "0 4px" }}
+              />
+
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                 className="icon-btn-outlined"
                 title={t.backToTop}
-                style={{ width: 30, height: 30, flexShrink: 0 }}
+                style={{ width: 32, height: 32, flexShrink: 0 }}
               >
-                <ArrowUp size={12} />
+                <ArrowUp size={13} />
               </button>
             </div>
+          </div>
+
+          <div
+            style={{
+              borderTop: `1px solid ${COLORS.border.subtle}`,
+              marginTop: 24,
+              paddingTop: 20,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 12,
+              flexWrap: "wrap",
+            }}
+          >
+            <p className="t-body-sm" style={{ color: COLORS.text.muted }}>
+              {copyright}
+            </p>
+            <p className="t-body-sm" style={{ color: COLORS.text.muted }}>
+              {t.cta.badge}
+            </p>
           </div>
         </div>
       </footer>
