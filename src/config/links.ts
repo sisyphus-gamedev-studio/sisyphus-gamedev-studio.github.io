@@ -13,6 +13,7 @@ export const isMailtoLink = (href: string): boolean => href.startsWith("mailto:"
 
 export const CONTACT = {
   email: "sisyphus.gamedev.studio@gmail.com",
+  contactEmail: "sisyphus.social.studio@gmail.com",
   careerEmail: "sisyphus.gamedev.studio@gmail.com",
   formspreeEndpoint:
     import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || "https://formspree.io/f/YOUR_FORM_ID",

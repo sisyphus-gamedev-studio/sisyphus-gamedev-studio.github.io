@@ -158,7 +158,7 @@ export default function ContactForm({ t }: Props) {
         }}
       >
         <p className="t-label-sm" style={{ color: COLORS.text.tertiary }}>
-          {CONTACT.email}
+          {CONTACT.contactEmail}
         </p>
         <button
           type="submit"
