@@ -114,10 +114,9 @@ export interface TranslationStructure {
     description: string;
     activeCount: string;
     categoryLabels: {
-      strategic: string;
-      audio: string;
-      tech: string;
-      media: string;
+      gold: string;
+      silver: string;
+      bronze: string;
     };
     linkLabels: {
       website: string;

@@ -1,4 +1,14 @@
-import { Users, Crosshair, Swords, Shuffle, TreePine, Globe, BookOpen, Zap, type LucideIcon } from "lucide-react";
+import {
+  Users,
+  Crosshair,
+  Swords,
+  Shuffle,
+  TreePine,
+  Globe,
+  BookOpen,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 
 type IconComponent = LucideIcon;
 

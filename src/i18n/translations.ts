@@ -116,10 +116,9 @@ export const TRANSLATIONS = {
         "Studios and teams who share our love of craft. These are the people making our games possible.",
       activeCount: "1 Active Sponsor",
       categoryLabels: {
-        strategic: "Strategic Partner",
-        audio: "Audio Partner",
-        tech: "Tech Partner",
-        media: "Media Partner",
+        gold: "Gold Sponsor",
+        silver: "Silver Sponsor",
+        bronze: "Bronze Sponsor",
       },
       linkLabels: {
         website: "Website",
@@ -335,10 +334,9 @@ export const TRANSLATIONS = {
         "Студии и команды, разделяющие нашу любовь к мастерству. Люди, которые помогают создавать наши игры.",
       activeCount: "1 активный спонсор",
       categoryLabels: {
-        strategic: "Стратегический партнёр",
-        audio: "Аудиопартнёр",
-        tech: "Технологический партнёр",
-        media: "Медиапартнёр",
+        gold: "Золотой спонсор",
+        silver: "Серебряный спонсор",
+        bronze: "Бронзовый спонсор",
       },
       linkLabels: {
         website: "Сайт",

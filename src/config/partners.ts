@@ -1,5 +1,5 @@
 export type PartnerLogoStyle = "orange" | "blue" | "green" | "purple";
-export type PartnerCategory = "strategic" | "audio" | "tech" | "media";
+export type PartnerCategory = "gold" | "silver" | "bronze";
 
 export const PARTNER_LOGO_STYLES: Record<PartnerLogoStyle, string> = {
   orange:
@@ -10,11 +10,9 @@ export const PARTNER_LOGO_STYLES: Record<PartnerLogoStyle, string> = {
 } as const;
 
 export const PARTNER_CATEGORY_STYLES: Record<PartnerCategory, string> = {
-  strategic:
-    "background:var(--c-orange-dim);border-color:var(--c-orange-border);color:var(--c-orange-accent)",
-  audio: "background:rgba(100,140,255,.10);border-color:rgba(100,140,255,.20);color:#7c9ef8",
-  tech: "background:rgba(100,200,100,.09);border-color:rgba(100,200,100,.20);color:#7ec87e",
-  media: "background:rgba(160,100,255,.09);border-color:rgba(160,100,255,.20);color:#b87ef8",
+  gold: "background:var(--c-orange-dim);border-color:var(--c-orange-border);color:var(--c-orange-accent)",
+  silver: "background:rgba(180,180,200,.10);border-color:rgba(180,180,200,.20);color:#b0b8cc",
+  bronze: "background:rgba(180,120,80,.10);border-color:rgba(180,120,80,.20);color:#c8906a",
 } as const;
 
 export interface PartnerLink {
@@ -37,25 +35,23 @@ export interface Partner {
 
 export const PARTNERS: Partner[] = [
   {
-    id: "dark-night",
-    logoInitials: "DN",
+    id: "placeholder",
+    logoInitials: "SP",
     logoStyle: "orange",
-    category: "strategic",
+    category: "gold",
     featured: false,
     links: {
-      website: "https://darknightstudio.com",
-      steam: "https://store.steampowered.com",
-      twitter: "https://twitter.com",
+      website: "#",
     },
     en: {
-      name: "Dark Night",
+      name: "Your Company",
       description:
-        "Our closest creative ally — an independent studio with deep roots in narrative and atmospheric design. We share pipeline tools, asset libraries, and run cross-studio playtesting sessions.",
+        "Become our title sponsor and get your brand in front of our growing community. Your logo, name, and link featured prominently across the studio.",
     },
     ru: {
-      name: "Dark Night",
+      name: "Ваша компания",
       description:
-        "Наш ближайший творческий союзник — независимая студия с глубокими корнями в нарративном дизайне. Делимся инструментами пайплайна, библиотеками ассетов и проводим совместные плейтесты.",
+        "Станьте нашим титульным спонсором и представьте свой бренд нашей растущей аудитории. Ваш логотип, название и ссылка будут размещены на видном месте.",
     },
   },
 ];
