@@ -71,7 +71,6 @@ export const SPACING = {
     news: "clamp(14px,4vw,26px) clamp(14px,5vw,28px) clamp(16px,4vw,32px)",
     project: "32px 40px 36px",
   },
-  navLinkMargin: 20,
 } as const;
 
 export const BACKDROP = {
@@ -133,6 +132,9 @@ export const SIZES = {
     desktopTitleSize: "clamp(32px,3.8vw,52px)",
     mobileTitleSize: 32,
     skeletonMinHeight: 768,
+    desktopSidebarWidth: 380,
+    desktopCarouselHeight: 520,
+    mobileImageHeight: 220,
   },
   form: {
     inputFontSize: 13,
@@ -152,6 +154,14 @@ export const SIZES = {
     chipLetterSpacing: 1,
     mobileLinkFontSize: 14,
     mobileLangFontSize: 12,
+    burgerSize: 34,
+    desktopDividerHeight: 16,
+  },
+  footer: {
+    logoSize: 28,
+    backToTopSize: 32,
+    paddingTop: 40,
+    paddingBottom: 32,
   },
 } as const;
 

@@ -185,18 +185,7 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
           borderTop: `1px solid ${COLORS.border.default}`,
         }}
       >
-        <div
-          aria-live="polite"
-          aria-atomic="true"
-          style={{
-            position: "absolute",
-            width: 1,
-            height: 1,
-            overflow: "hidden",
-            clip: "rect(0,0,0,0)",
-            whiteSpace: "nowrap",
-          }}
-        >
+        <div aria-live="polite" aria-atomic="true" className="sr-only">
           {item.title}
         </div>
 

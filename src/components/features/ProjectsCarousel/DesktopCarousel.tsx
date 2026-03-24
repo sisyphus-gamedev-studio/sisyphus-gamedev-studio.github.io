@@ -64,18 +64,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
         borderTop: `1px solid ${COLORS.border.default}`,
       }}
     >
-      <div
-        aria-live="polite"
-        aria-atomic="true"
-        style={{
-          position: "absolute",
-          width: 1,
-          height: 1,
-          overflow: "hidden",
-          clip: "rect(0,0,0,0)",
-          whiteSpace: "nowrap",
-        }}
-      >
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
         {shown.title} — {shown.price}
       </div>
 
@@ -96,7 +85,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
           <div
             className="reveal-left"
             suppressHydrationWarning
-            style={{ width: 380, flexShrink: 0 }}
+            style={{ width: SIZES.projects.desktopSidebarWidth, flexShrink: 0 }}
           >
             <div
               style={{
@@ -256,7 +245,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
               flex: 1,
               display: "flex",
               gap: 2,
-              height: 520,
+              height: SIZES.projects.desktopCarouselHeight,
               borderRadius: 20,
               overflow: "hidden",
               border: `1px solid ${COLORS.border.default}`,

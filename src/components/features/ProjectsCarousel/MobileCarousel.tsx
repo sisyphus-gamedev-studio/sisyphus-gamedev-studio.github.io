@@ -68,18 +68,7 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
         borderTop: `1px solid ${COLORS.border.default}`,
       }}
     >
-      <div
-        aria-live="polite"
-        aria-atomic="true"
-        style={{
-          position: "absolute",
-          width: 1,
-          height: 1,
-          overflow: "hidden",
-          clip: "rect(0,0,0,0)",
-          whiteSpace: "nowrap",
-        }}
-      >
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
         {p.title} — {p.price}
       </div>
 
@@ -112,7 +101,7 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
           onTouchEnd={onTouchEnd}
           onTouchCancel={onTouchCancel}
         >
-          <div style={{ position: "relative", height: 220 }}>
+          <div style={{ position: "relative", height: SIZES.projects.mobileImageHeight }}>
             <img
               src={p.image}
               alt={p.title}
@@ -184,8 +173,8 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
             >
               {p.description}
             </p>
-            <div className="flex-between">
-              <div className="flex-row gap-4">
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <button
                   onClick={prev}
                   className="icon-btn-outlined"

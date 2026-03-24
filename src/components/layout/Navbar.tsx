@@ -166,7 +166,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
         <a
           href="#home"
           onClick={() => handleNavClick("home")}
-          className="state"
+          className="state nav-brand-link"
           style={{
             display: "flex",
             alignItems: "center",
@@ -175,6 +175,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
             marginRight: 16,
             padding: "5px 10px 5px 5px",
             borderRadius: "var(--r-full)",
+            flexShrink: 0,
           }}
         >
           <img
@@ -182,9 +183,10 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
             alt={`${BRAND.prefix} ${BRAND.suffix}`}
             width={56}
             height={56}
+            className="nav-brand-logo"
             style={{ borderRadius: 8, objectFit: "cover", flexShrink: 0 }}
           />
-          <span className="t-brand-lg" style={{ fontSize: SIZES.nav.brandFontSize }}>
+          <span className="t-brand-lg nav-brand-text" style={{ fontSize: SIZES.nav.brandFontSize }}>
             {BRAND.prefix}
             <span style={{ color: COLORS.orange }}>{BRAND.suffix}</span>
           </span>
@@ -238,7 +240,12 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
             </a>
           ))}
           <div
-            style={{ width: 1, height: 16, background: COLORS.border.strong, margin: "0 6px" }}
+            style={{
+              width: 1,
+              height: SIZES.nav.desktopDividerHeight,
+              background: COLORS.border.strong,
+              margin: "0 6px",
+            }}
           />
           <a
             href={langSwitchHref}
@@ -259,7 +266,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
         <button
           ref={burgerRef}
           className="md:hidden icon-btn-outlined"
-          style={{ marginLeft: "auto", width: 34, height: 34 }}
+          style={{ marginLeft: "auto", width: SIZES.nav.burgerSize, height: SIZES.nav.burgerSize }}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={t.toggleNav}
           aria-expanded={mobileOpen}
@@ -275,9 +282,10 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
         onKeyDown={handleMenuKeyDown}
         {...(mobileOpen ? { role: "dialog", "aria-modal": "true", "aria-label": t.navMenu } : {})}
         style={{
-          maxHeight: mobileOpen ? "420px" : 0,
+          maxHeight: mobileOpen ? "calc(100dvh - 76px)" : 0,
           opacity: mobileOpen ? 1 : 0,
           overflow: "hidden",
+          overflowY: mobileOpen ? "auto" : "hidden",
           background: COLORS.panelBg,
           backdropFilter: BACKDROP.panel,
           borderTop: mobileOpen ? `1px solid ${COLORS.border.default}` : "1px solid transparent",
