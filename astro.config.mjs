@@ -4,7 +4,7 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: import.meta.env.PUBLIC_SITE_URL || "https://sisyphus.studio",
+  site: import.meta.env.PUBLIC_SITE_URL || "https://sisyphus.github.io",
 
   integrations: [
     react(),
