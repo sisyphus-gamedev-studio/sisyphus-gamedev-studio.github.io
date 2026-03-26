@@ -16,12 +16,12 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
   const base = `/${lang}/`;
 
   const footerLinks = [
+    { label: nav.home, href: `${base}#home` },
     { label: nav.about, href: `${base}#about` },
     { label: nav.projects, href: `${base}#projects` },
     { label: nav.news, href: `${base}#news` },
     { label: nav.careers, href: `${base}#careers` },
     { label: nav.donate, href: `${base}#donate` },
-    { label: nav.partners, href: `${base}#partners` },
     { label: nav.contact, href: `${base}#contact` },
   ];
 
