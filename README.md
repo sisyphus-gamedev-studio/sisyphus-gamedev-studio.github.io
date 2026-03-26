@@ -6,7 +6,7 @@ Built with Astro 5, React 19, TypeScript, and Tailwind CSS. Current language is 
 ## Quick Start
 
 ```bash
-npm ci
+npm install
 cp .env.example .env
 # fill in `PUBLIC_*` env values
 npm run dev

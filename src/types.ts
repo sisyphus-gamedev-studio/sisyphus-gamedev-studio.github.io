@@ -108,6 +108,7 @@ export interface TranslationStructure {
       gold: string;
       silver: string;
       bronze: string;
+      partner: string;
     };
     linkLabels: {
       website: string;

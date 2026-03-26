@@ -109,6 +109,7 @@ export const TRANSLATIONS = {
         gold: "Gold Sponsor",
         silver: "Silver Sponsor",
         bronze: "Bronze Sponsor",
+        partner: "Partner",
       },
       linkLabels: {
         website: "Website",
@@ -300,6 +301,7 @@ export const TRANSLATIONS = {
         gold: "Золотой спонсор",
         silver: "Серебряный спонсор",
         bronze: "Бронзовый спонсор",
+        partner: "Партнёр",
       },
       linkLabels: {
         website: "Сайт",
