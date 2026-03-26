@@ -78,6 +78,7 @@ export const TRANSLATIONS = {
       formCardLabel: "Application Form",
       formCardTitle: "Work with us",
       formCardDesc: "Fill in the form — tell us who you are and what you make.",
+      checkItemsLabel: "What you get:",
       checkItems: [
         "Freedom to realize your boldest creative ideas",
         "A healthy environment: technical support and moral backing",
@@ -121,7 +122,7 @@ export const TRANSLATIONS = {
     news: {
       heading: "Studio",
       headingSuffix: "News",
-      sectionLabel: "Studio News",
+      sectionLabel: "News",
       readMore: "Read more",
       of: "of",
       updates: "updates",
@@ -138,8 +139,8 @@ export const TRANSLATIONS = {
       description:
         "If you want to become a sponsor, propose a collaboration, or have ideas for a joint project — feel free to reach out!",
       form: {
-        name: "Brand name",
-        namePlaceholder: "John Doe",
+        name: "Your brand",
+        namePlaceholder: "BrandCorp",
         email: "Email",
         emailPlaceholder: "hello@example.com",
         message: "Message",
@@ -270,6 +271,7 @@ export const TRANSLATIONS = {
       formCardLabel: "Форма заявки",
       formCardTitle: "Работай с нами",
       formCardDesc: "Заполни форму — расскажи о себе и своих работах.",
+      checkItemsLabel: "Что ты получишь у нас:",
       checkItems: [
         "Свободу для реализации самых смелых творческих идей",
         "Экологичную среду: техническую взаимовыручку и моральную поддержку",
@@ -313,7 +315,7 @@ export const TRANSLATIONS = {
     news: {
       heading: "Обновления",
       headingSuffix: "Студии",
-      sectionLabel: "Новости студии",
+      sectionLabel: "Новости",
       readMore: "Читать",
       of: "из",
       updates: "обновлений",
@@ -330,8 +332,8 @@ export const TRANSLATIONS = {
       description:
         "Если вы хотите стать спонсором, предложить сотрудничество или у вас есть идеи для совместного проекта, то обязательно свяжитесь с нами!",
       form: {
-        name: "Наименование бренда",
-        namePlaceholder: "Иван Иванов",
+        name: "Ваш бренд",
+        namePlaceholder: "АртГрупп",
         email: "Email",
         emailPlaceholder: "hello@example.com",
         message: "Сообщение",

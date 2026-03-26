@@ -92,6 +92,7 @@ export interface TranslationStructure {
     formCardLabel: string;
     formCardTitle: string;
     formCardDesc: string;
+    checkItemsLabel: string;
     checkItems: [string, string, string, string];
     formBtnLabel: string;
     statusLabel: string;

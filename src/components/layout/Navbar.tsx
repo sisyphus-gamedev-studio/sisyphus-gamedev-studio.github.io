@@ -275,7 +275,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
               gap: 5,
             }}
           >
-            <Globe size={11} />
+            <Globe size={18} />
             {otherLang.toUpperCase()}
           </a>
         </div>
@@ -369,7 +369,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
               }}
               onClick={() => setMobileOpen(false)}
             >
-              <Globe size={11} />
+              <Globe size={18} />
               {lang === "en" ? "Русский" : "English"}
             </a>
           </div>
