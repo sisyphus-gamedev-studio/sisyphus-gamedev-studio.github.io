@@ -20,8 +20,8 @@ const progressPct = `${featured.progress ?? 0}%`;
 
 <section id="home" class="min-h-screen flex flex-col justify-center relative overflow-hidden">
   <div
-    class="relative mx-auto w-full px-5 sm:px-8"
-    style={`max-width:${LAYOUT.maxWidth}px;padding-top:${SIZES.hero.paddingTop}px;padding-bottom:${SIZES.hero.paddingBottom}px`}
+    class="hero-inner relative w-full"
+    style={`box-sizing:border-box;max-width:${LAYOUT.maxWidth}px;margin-left:auto;margin-right:auto;padding-top:${SIZES.hero.paddingTop}px;padding-bottom:${SIZES.hero.paddingBottom}px;padding-left:calc(clamp(${LAYOUT.padding}px, 3vw + 14px, 44px) + env(safe-area-inset-left, 0px));padding-right:calc(clamp(${LAYOUT.padding}px, 3vw + 14px, 44px) + env(safe-area-inset-right, 0px))`}
   >
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
       <div class="lg:col-span-7">

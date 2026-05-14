@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 
 const localizedFields = z.object({
@@ -32,7 +33,7 @@ const projectsCollection = defineCollection({
     id: z.number().int().positive(),
     image: z.string().startsWith("/images/"),
     progress: z.number().min(0).max(100).optional(),
-    wishlistUrl: z.string().url().optional(),
+    wishlistUrl: z.url().optional(),
     en: projectLocalizedFields,
     ru: projectLocalizedFields,
   }),

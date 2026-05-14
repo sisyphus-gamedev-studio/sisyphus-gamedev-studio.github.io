@@ -159,8 +159,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
           height: NAV_HEIGHT,
           display: "flex",
           alignItems: "center",
-          gap: 4,
-          position: "relative",
+          gap: 8,
         }}
       >
         <a
@@ -192,16 +191,13 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
         </a>
 
         <div
-          className="hidden md:flex"
+          className="nav-desktop-toolbar nav-desktop-links"
           style={{
             flex: 1,
+            minWidth: 0,
             alignItems: "center",
             justifyContent: "center",
             gap: 2,
-            position: "absolute",
-            left: 0,
-            right: 0,
-            pointerEvents: "none",
           }}
         >
           {links.map(({ id, label, href }) => {
@@ -212,7 +208,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
                 href={href}
                 onClick={() => handleNavClick(id)}
                 className={`nav-desktop-link state ${isActive ? "active" : ""}`}
-                style={{ fontSize: SIZES.nav.linkFontSize, pointerEvents: "auto" }}
+                style={{ fontSize: SIZES.nav.linkFontSize, flexShrink: 0 }}
               >
                 {label}
                 {isActive && (
@@ -235,12 +231,11 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
         </div>
 
         <div
-          className="hidden md:flex"
+          className="nav-desktop-toolbar"
           style={{
+            flexShrink: 0,
             alignItems: "center",
             gap: 2,
-            marginLeft: "auto",
-            width: 160,
             justifyContent: "flex-end",
           }}
         >
@@ -282,8 +277,8 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
 
         <button
           ref={burgerRef}
-          className="md:hidden icon-btn-outlined"
-          style={{ marginLeft: "auto", width: SIZES.nav.burgerSize, height: SIZES.nav.burgerSize }}
+          className="nav-burger-btn icon-btn-outlined"
+          style={{ width: SIZES.nav.burgerSize, height: SIZES.nav.burgerSize }}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={t.toggleNav}
           aria-expanded={mobileOpen}
@@ -295,6 +290,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
 
       <div
         id="mobile-menu"
+        className="nav-mobile-sheet"
         ref={mobileMenuRef}
         onKeyDown={handleMenuKeyDown}
         {...(mobileOpen ? { role: "dialog", "aria-modal": "true", "aria-label": t.navMenu } : {})}
