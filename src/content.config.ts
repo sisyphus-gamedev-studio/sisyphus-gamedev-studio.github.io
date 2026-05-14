@@ -1,4 +1,5 @@
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const localizedFields = z.object({
   title: z.string().min(1),
@@ -8,7 +9,7 @@ const localizedFields = z.object({
 });
 
 const newsCollection = defineCollection({
-  type: "data",
+  loader: glob({ pattern: "**/*.json", base: "./src/content/news" }),
   schema: z.object({
     isoDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Must be YYYY-MM-DD"),
     image: z.string().startsWith("/images/"),
@@ -26,7 +27,7 @@ const projectLocalizedFields = z.object({
 });
 
 const projectsCollection = defineCollection({
-  type: "data",
+  loader: glob({ pattern: "**/*.json", base: "./src/content/projects" }),
   schema: z.object({
     id: z.number().int().positive(),
     image: z.string().startsWith("/images/"),

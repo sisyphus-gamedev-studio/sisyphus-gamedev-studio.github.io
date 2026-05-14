@@ -1,14 +1,13 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
-import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: import.meta.env.PUBLIC_SITE_URL || "https://sisyphus-gamedev-studio.github.io",
 
   integrations: [
     react(),
-    tailwind({ applyBaseStyles: false }),
     sitemap({
       i18n: {
         defaultLocale: "en",
@@ -30,6 +29,10 @@ export default defineConfig({
       },
     }),
   ],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 
   i18n: {
     defaultLocale: "en",

@@ -1,72 +1,86 @@
 {
-  "$ref": "#/definitions/news",
-  "definitions": {
-    "news": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "isoDate": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "image": {
+      "type": "string",
+      "pattern": "^\\/images\\/.*"
+    },
+    "type": {
+      "default": "update",
+      "type": "string",
+      "enum": [
+        "announcement",
+        "dev-diary",
+        "update"
+      ]
+    },
+    "en": {
       "type": "object",
       "properties": {
-        "isoDate": {
+        "title": {
           "type": "string",
-          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
-          "errorMessage": {
-            "pattern": "Must be YYYY-MM-DD"
-          }
+          "minLength": 1
         },
-        "image": {
+        "date": {
           "type": "string",
-          "pattern": "^\\/images\\/"
+          "minLength": 1
         },
-        "type": {
+        "summary": {
           "type": "string",
-          "enum": [
-            "announcement",
-            "dev-diary",
-            "update"
-          ],
-          "default": "update"
+          "minLength": 1
         },
-        "en": {
-          "type": "object",
-          "properties": {
-            "title": {
-              "type": "string",
-              "minLength": 1
-            },
-            "date": {
-              "type": "string",
-              "minLength": 1
-            },
-            "summary": {
-              "type": "string",
-              "minLength": 1
-            },
-            "body": {
-              "type": "string",
-              "minLength": 1
-            }
-          },
-          "required": [
-            "title",
-            "date",
-            "summary",
-            "body"
-          ],
-          "additionalProperties": false
-        },
-        "ru": {
-          "$ref": "#/definitions/news/properties/en"
-        },
-        "$schema": {
-          "type": "string"
+        "body": {
+          "type": "string",
+          "minLength": 1
         }
       },
       "required": [
-        "isoDate",
-        "image",
-        "en",
-        "ru"
-      ],
-      "additionalProperties": false
+        "title",
+        "date",
+        "summary",
+        "body"
+      ]
+    },
+    "ru": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "body": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "title",
+        "date",
+        "summary",
+        "body"
+      ]
+    },
+    "$schema": {
+      "type": "string"
     }
   },
-  "$schema": "http://json-schema.org/draft-07/schema#"
+  "required": [
+    "isoDate",
+    "image",
+    "en",
+    "ru"
+  ]
 }

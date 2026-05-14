@@ -1,3 +1,11 @@
+@import "tailwindcss";
+@source "../**/*.{astro,ts,tsx,js,jsx}";
+ 
+@theme {
+  --font-display: "Exo 2", sans-serif;
+  --font-sans: "Exo 2", sans-serif;
+}
+ 
 @import "./tokens.css";
 @import "./base.css";
 @import "./typography.css";
@@ -5,7 +13,3 @@
 @import "./components.css";
 @import "./animations.css";
 @import "./skeleton.css";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
