@@ -7,6 +7,9 @@ import {
   Globe,
   BookOpen,
   Zap,
+  Target,
+  Shield,
+  TrendingUp,
   type LucideIcon,
 } from "lucide-react";
 
@@ -27,6 +30,10 @@ const TAG_ICONS: Record<string, IconComponent> = {
   "открытый мир": Globe,
   "slavic mythology": BookOpen,
   "слав. мифология": BookOpen,
+  fps: Target,
+  rpg: Shield,
+  "infinite progression": TrendingUp,
+  "бесконечная прогрессия": TrendingUp,
 };
 
 export function getTagIcon(tag: string): IconComponent {

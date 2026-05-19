@@ -44,7 +44,7 @@ export const TRANSLATIONS = {
       headingSuffix: "Games",
       sectionLabel: "Projects",
       of: "of",
-      wishlist: "Wishlist on Steam",
+      learnMore: "Learn More",
       prevGame: "Previous game",
       nextGame: "Next game",
       swipeHint: "swipe",
@@ -180,6 +180,35 @@ export const TRANSLATIONS = {
       allCategories: "All",
       noNews: "No news in this category yet",
     },
+    donate: {
+      title: "Support The",
+      titleSuffix: "Journey",
+      description:
+        "Our work is hard, but unlike the myth, our mountain has a peak — the release of a cool game. The main idea of sponsorship is mutual benefit and support. Do you want to become a part of this story and accelerate our rise? Support us, and we will make our entire community aware of your help!",
+      sectionLabel: "Sponsorship",
+      note: "100% of donations go directly to development.",
+      tiers: [
+        {
+          label: "Sponsor",
+          title: "Become a Sponsor",
+          description: "Get your name in the credits and support the studio long-term.",
+          cta: "Contact Us",
+        },
+        {
+          label: "One-time",
+          title: "Buy Us a Coffee",
+          description: "A small donation goes a long way for an indie team.",
+          cta: "Donate",
+        },
+        {
+          label: "Steam",
+          title: "Wishlist on Steam",
+          description: "Our Steam page is coming soon. Stay tuned — we'll announce it here first!",
+          cta: "Coming Soon",
+          comingSoon: true,
+        },
+      ],
+    },
     contact: {
       heading: "Get in Touch",
       headingSuffix: "With Us",
@@ -204,34 +233,6 @@ export const TRANSLATIONS = {
     footer: {
       sectionLabel: "Footer",
       copyright: "© {year} Sisyphus Studio",
-      cta: {
-        title: "Support The",
-        titleSuffix: "Journey",
-        description:
-          "If you'd like to become a sponsor or simply support our company financially, you can do so here!",
-        sectionLabel: "Sponsorship",
-        note: "100% of donations go directly to development.",
-        tiers: [
-          {
-            label: "Sponsor",
-            title: "Become a Sponsor",
-            description: "Get your name in the credits and support the studio long-term.",
-            cta: "Contact Us",
-          },
-          {
-            label: "One-time",
-            title: "Buy Us a Coffee",
-            description: "A small donation goes a long way for an indie team.",
-            cta: "Donate",
-          },
-          {
-            label: "Free",
-            title: "Wishlist on Steam",
-            description: "Just add Frog Frag to your wishlist.",
-            cta: "Wishlist",
-          },
-        ],
-      },
       backToTop: "Back to top",
     },
     notFound: {
@@ -284,7 +285,7 @@ export const TRANSLATIONS = {
       headingSuffix: "Игры",
       sectionLabel: "Проекты",
       of: "из",
-      wishlist: "Вишлист в Steam",
+      learnMore: "Узнать больше",
       prevGame: "Предыдущая игра",
       nextGame: "Следующая игра",
       swipeHint: "свайп",
@@ -421,6 +422,36 @@ export const TRANSLATIONS = {
       allCategories: "Все",
       noNews: "В этой категории пока нет новостей",
     },
+    donate: {
+      title: "Поддержи",
+      titleSuffix: "Нас",
+      description:
+        "Наш труд тяжел, но, в отличие от мифа, у нашей горы есть вершина — релиз крутой игры. Главная идея спонсорства — это взаимная польза и поддержка. Хотите стать частью этой истории и ускорить наш подъем? Поддержите нас, а мы сделаем так, чтобы о вашей помощи узнало всё наше комьюнити!",
+      sectionLabel: "Спонсорство",
+      note: "100% пожертвований идут напрямую в разработку.",
+      tiers: [
+        {
+          label: "Спонсор",
+          title: "Стать спонсором",
+          description: "Ваше имя в титрах и долгосрочная поддержка студии.",
+          cta: "Написать нам",
+        },
+        {
+          label: "Разово",
+          title: "Угостить кофе",
+          description: "Небольшой донат — большая помощь для инди-команды.",
+          cta: "Задонатить",
+        },
+        {
+          label: "Steam",
+          title: "Вишлист в Steam",
+          description:
+            "Страница в Steam скоро появится. Следите за обновлениями — объявим здесь первыми!",
+          cta: "Скоро",
+          comingSoon: true,
+        },
+      ],
+    },
     contact: {
       heading: "Связаться",
       headingSuffix: "с нами",
@@ -445,34 +476,6 @@ export const TRANSLATIONS = {
     footer: {
       sectionLabel: "Подвал",
       copyright: "© {year} Sisyphus Studio",
-      cta: {
-        title: "Поддержи",
-        titleSuffix: "Нас",
-        description:
-          "Если вы хотите стать спонсором или просто поддержать нашу компанию финансово, вы можете это сделать тут!",
-        sectionLabel: "Спонсорство",
-        note: "100% пожертвований идут напрямую в разработку.",
-        tiers: [
-          {
-            label: "Спонсор",
-            title: "Стать спонсором",
-            description: "Ваше имя в титрах и долгосрочная поддержка студии.",
-            cta: "Написать нам",
-          },
-          {
-            label: "Разово",
-            title: "Угостить кофе",
-            description: "Небольшой донат — большая помощь для инди-команды.",
-            cta: "Задонатить",
-          },
-          {
-            label: "Бесплатно",
-            title: "Вишлист в Steam",
-            description: "Просто добавьте нашу игру в вишлист.",
-            cta: "Вишлист",
-          },
-        ],
-      },
       backToTop: "Наверх",
     },
     notFound: {

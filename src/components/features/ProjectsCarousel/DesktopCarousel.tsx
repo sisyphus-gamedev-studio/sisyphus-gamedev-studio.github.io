@@ -229,7 +229,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                 }}
               >
                 <ExternalLink size={14} />
-                {t.wishlist}
+                {t.learnMore}
               </a>
             </div>
           </div>

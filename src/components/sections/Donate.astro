@@ -3,16 +3,16 @@ import type { TranslationStructure } from "../../types";
 import { DONATE_TIER_ICONS, URLS, CONTACT, isMailtoLink, LAYOUT } from "../../config";
 
 interface Props {
-  t: TranslationStructure["footer"]["cta"];
+  t: TranslationStructure["donate"];
 }
 
 const { t } = Astro.props;
 const donateUrl = URLS.donate;
 const isMailto = isMailtoLink(donateUrl);
 
-const TIER_HREFS = [`mailto:${CONTACT.email}`, donateUrl, URLS.steam];
-const TIER_TARGETS = [undefined, isMailto ? undefined : "_blank", "_blank"];
-const TIER_RELS = [undefined, isMailto ? undefined : "noopener noreferrer", "noopener noreferrer"];
+const TIER_HREFS = [`mailto:${CONTACT.email}`, donateUrl, "#"];
+const TIER_TARGETS = [undefined, isMailto ? undefined : "_blank", undefined];
+const TIER_RELS = [undefined, isMailto ? undefined : "noopener noreferrer", undefined];
 ---
 
 <section
@@ -39,39 +39,71 @@ const TIER_RELS = [undefined, isMailto ? undefined : "noopener noreferrer", "noo
 
     <div class="donate-tiers-grid">
       {
-        t.tiers.map((tier, i) => (
-          <a
-            href={TIER_HREFS[i]}
-            target={TIER_TARGETS[i]}
-            rel={TIER_RELS[i]}
-            class={`reveal-scale state donate-tier-card${i === 1 ? " donate-tier-card--highlight" : ""}`}
-            style={`transition-delay: ${i * 0.1}s`}
-          >
-            <div class="donate-tier-icon" aria-hidden="true" set:html={DONATE_TIER_ICONS[i]} />
-            <div class="donate-tier-label">{tier.label}</div>
-            <p class="t-title-sm donate-tier-title">{tier.title}</p>
-            <p class="t-body-sm donate-tier-desc">{tier.description}</p>
-            <div class="donate-tier-cta">
-              {tier.cta}
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <>
-                  <path d="M7 7h10v10" />
-                  <path d="M7 17 17 7" />
-                </>
-              </svg>
-            </div>
-          </a>
-        ))
+        t.tiers.map((tier, i) => {
+          const isComingSoon = !!tier.comingSoon;
+          return (
+            <a
+              href={isComingSoon ? "#" : TIER_HREFS[i]}
+              target={isComingSoon ? undefined : TIER_TARGETS[i]}
+              rel={isComingSoon ? undefined : TIER_RELS[i]}
+              aria-disabled={isComingSoon ? "true" : undefined}
+              class={`reveal-scale state donate-tier-card${i === 1 ? " donate-tier-card--highlight" : ""}${isComingSoon ? " donate-tier-card--soon" : ""}`}
+              style={`transition-delay: ${i * 0.1}s`}
+              onclick={isComingSoon ? "event.preventDefault()" : undefined}
+            >
+              {isComingSoon && (
+                <div class="donate-soon-badge" aria-label="Coming Soon">
+                  <span class="pulse donate-soon-dot" aria-hidden="true" />
+                  {tier.cta}
+                </div>
+              )}
+
+              <div class="donate-tier-icon" aria-hidden="true" set:html={DONATE_TIER_ICONS[i]} />
+              <div class="donate-tier-label">{tier.label}</div>
+              <p class="t-title-sm donate-tier-title">{tier.title}</p>
+              <p class="t-body-sm donate-tier-desc">{tier.description}</p>
+
+              {!isComingSoon && (
+                <div class="donate-tier-cta">
+                  {tier.cta}
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <>
+                      <path d="M7 7h10v10" />
+                      <path d="M7 17 17 7" />
+                    </>
+                  </svg>
+                </div>
+              )}
+
+              {isComingSoon && (
+                <div class="donate-soon-footer">
+                  <svg
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    style="opacity:.5;flex-shrink:0"
+                  >
+                    <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0z" />
+                  </svg>
+                  <span>Steam</span>
+                </div>
+              )}
+            </a>
+          );
+        })
       }
     </div>
 
@@ -101,7 +133,7 @@ const TIER_RELS = [undefined, isMailto ? undefined : "noopener noreferrer", "noo
   .donate-description {
     color: var(--c-secondary);
     line-height: 1.75;
-    max-width: 480px;
+    max-width: 680px;
   }
 
   .donate-tiers-grid {
@@ -119,6 +151,7 @@ const TIER_RELS = [undefined, isMailto ? undefined : "noopener noreferrer", "noo
     border: 1px solid var(--b-subtle);
     background: var(--s-5);
     text-decoration: none;
+    position: relative;
     transition:
       border-color 0.2s,
       transform 0.2s var(--ease-em),
@@ -135,6 +168,48 @@ const TIER_RELS = [undefined, isMailto ? undefined : "noopener noreferrer", "noo
   .donate-tier-card--highlight:hover {
     border-color: rgba(248, 126, 15, 0.4);
     box-shadow: 0 12px 32px rgba(248, 126, 15, 0.12);
+  }
+  .donate-tier-card--soon {
+    cursor: default;
+    opacity: 0.7;
+    border-style: dashed;
+  }
+  .donate-tier-card--soon:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .donate-soon-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: var(--r-full);
+    background: var(--s-3);
+    border: 1px solid var(--b-default);
+    color: var(--c-secondary);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+  .donate-soon-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--c-orange);
+    flex-shrink: 0;
+  }
+  .donate-soon-footer {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--c-tertiary);
+    margin-top: auto;
   }
 
   .donate-tier-icon {
@@ -197,6 +272,7 @@ const TIER_RELS = [undefined, isMailto ? undefined : "noopener noreferrer", "noo
     font-size: 13px;
     font-weight: 600;
     color: var(--c-secondary);
+    margin-top: auto;
   }
   .donate-tier-card--highlight .donate-tier-cta {
     color: var(--c-orange);

@@ -65,7 +65,7 @@ export interface TranslationStructure {
     headingSuffix: string;
     sectionLabel: string;
     of: string;
-    wishlist: string;
+    learnMore: string;
     prevGame: string;
     nextGame: string;
     swipeHint: string;
@@ -143,6 +143,20 @@ export interface TranslationStructure {
     allCategories: string;
     noNews: string;
   };
+  donate: {
+    title: string;
+    titleSuffix: string;
+    description: string;
+    sectionLabel: string;
+    note: string;
+    tiers: Array<{
+      label: string;
+      title: string;
+      description: string;
+      cta: string;
+      comingSoon?: boolean;
+    }>;
+  };
   contact: {
     heading: string;
     headingSuffix: string;
@@ -166,19 +180,6 @@ export interface TranslationStructure {
   footer: {
     sectionLabel: string;
     copyright: string;
-    cta: {
-      title: string;
-      titleSuffix: string;
-      description: string;
-      sectionLabel: string;
-      note: string;
-      tiers: Array<{
-        label: string;
-        title: string;
-        description: string;
-        cta: string;
-      }>;
-    };
     backToTop: string;
   };
   notFound: {

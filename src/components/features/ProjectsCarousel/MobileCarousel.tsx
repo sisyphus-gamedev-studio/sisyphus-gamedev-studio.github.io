@@ -201,7 +201,7 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
                 style={{ height: 40, fontSize: 13, gap: 7, paddingLeft: 20, paddingRight: 20 }}
               >
                 <ExternalLink size={14} />
-                {t.wishlist}
+                {t.learnMore}
               </a>
             </div>
           </div>
