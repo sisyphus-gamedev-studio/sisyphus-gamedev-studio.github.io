@@ -152,7 +152,7 @@ export const TRANSLATIONS = {
       heading: "Our",
       headingSuffix: "Sponsors",
       description:
-        "Our partners and like-minded people — studios, teams, and individuals who share our passion for game dev. Thank you to everyone who believes in us and helps bring our game worlds to life!",
+        "Our work is hard, but unlike the myth, our mountain has a peak — the release of a cool game. The main idea of sponsorship is mutual benefit and support. Do you want to become a part of this story and accelerate our rise? Support us, and we will make our entire community aware of your help!",
       activeCount: "1 Active Sponsor",
       categoryLabels: {
         gold: "Gold Sponsor",
@@ -184,7 +184,7 @@ export const TRANSLATIONS = {
       title: "Support The",
       titleSuffix: "Journey",
       description:
-        "Our work is hard, but unlike the myth, our mountain has a peak — the release of a cool game. The main idea of sponsorship is mutual benefit and support. Do you want to become a part of this story and accelerate our rise? Support us, and we will make our entire community aware of your help!",
+        "If you'd like to become a sponsor or simply support our company financially, you can do so here!",
       sectionLabel: "Sponsorship",
       note: "100% of donations go directly to development.",
       tiers: [
@@ -394,7 +394,7 @@ export const TRANSLATIONS = {
       heading: "Наши",
       headingSuffix: "Спонсоры",
       description:
-        "Наши партнеры и единомышленники — студии, команды и люди, которые разделяют нашу страсть к геймдеву. Спасибо всем, кто верит в нас и помогает воплощать наши игровые миры в реальность!",
+        "Наш труд тяжел, но, в отличие от мифа, у нашей горы есть вершина — релиз крутой игры. Главная идея спонсорства — это взаимная польза и поддержка. Хотите стать частью этой истории и ускорить наш подъем? Поддержите нас, а мы сделаем так, чтобы о вашей помощи узнало всё наше комьюнити!",
       activeCount: "1 активный спонсор",
       categoryLabels: {
         gold: "Золотой спонсор",
@@ -426,7 +426,7 @@ export const TRANSLATIONS = {
       title: "Поддержи",
       titleSuffix: "Нас",
       description:
-        "Наш труд тяжел, но, в отличие от мифа, у нашей горы есть вершина — релиз крутой игры. Главная идея спонсорства — это взаимная польза и поддержка. Хотите стать частью этой истории и ускорить наш подъем? Поддержите нас, а мы сделаем так, чтобы о вашей помощи узнало всё наше комьюнити!",
+        "Если вы хотите стать спонсором или просто поддержать нашу компанию финансово, вы можете это сделать тут!",
       sectionLabel: "Спонсорство",
       note: "100% пожертвований идут напрямую в разработку.",
       tiers: [
