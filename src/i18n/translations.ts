@@ -32,7 +32,7 @@ export const TRANSLATIONS = {
         founded: "Founded",
         independent: "Team Members",
       },
-      featuredSub: "Death match · Frog Frag · Wishlist on Steam",
+      featuredSub: "Death match · FPS",
       progressLabel: "Development Progress",
       conceptSub: "Survival · Slavic mythology",
       scroll: "SCROLL",
@@ -74,7 +74,7 @@ export const TRANSLATIONS = {
       heading: "Join The",
       headingSuffix: "Team",
       description:
-        "We're an independent studio united by a passion for creating deep and memorable games. Right now we run on pure enthusiasm, investing the most valuable thing we have — our talent and time. We're not looking for just executors, but full partners in development. People who are ready to grow with us, take ownership, and see things through to the end.",
+        "We are an independent studio united by a passion for creating deep and memorable games. We are looking not just for performers, but for full—fledged development partners - those who are ready to take responsibility and bring the matter to an end.",
       formCardLabel: "Application Form",
       formCardTitle: "Work with us",
       formCardDesc: "Fill in the form — tell us who you are and what you make.",
@@ -98,6 +98,54 @@ export const TRANSLATIONS = {
         { title: "3D Animation Designer", type: "UE5 / Maya" },
         { title: "UE5 Developer", type: "Code" },
       ],
+      faq: {
+        triggerLabel: "FAQ — Frequently asked questions about the project",
+        title: "Common Questions",
+        subtitle: "Everything about how we work and how earnings are split",
+        closeLabel: "Close FAQ",
+        items: [
+          {
+            question: "Why is there no salary?",
+            answer:
+              "We're starting from scratch and are honest about it. We have no investor and no payroll fund — only an idea, a team, and a plan to ship the game. Instead of a salary, each member gets a real share of the result: ~50% of the project's first net profit will be distributed among contributors proportionally to their tracked contribution in Trello. The remaining ~50% is reinvested into the studio and a future salary fund. This isn't working for someone else — it's co-authorship.",
+          },
+          {
+            question: "How is profit split?",
+            answer:
+              "Fairly and transparently. Half of the first net profit is shared among everyone who contributed to development — proportionally to their contribution. The other half goes back into the studio: operating costs, project development, and future salaries. No magic — just clear math.",
+          },
+          {
+            question: "How is my contribution tracked?",
+            answer:
+              "All work is logged in Trello: every task, participation in others' tasks, completions, and deadlines. Your final share is calculated based on your total volume of completed tasks at the time of product launch. The system is open — every participant sees their own picture and the overall one.",
+          },
+          {
+            question: "What if I leave?",
+            answer:
+              "If a member decides to leave, we lock in their contribution made up to that point and retain the studio's right to use the work results, transferred under the agreement, within the project. To protect both sides, we sign a written agreement before work begins, covering the transfer of exclusive rights, contribution accounting, and exit terms. The right to participate in first-profit distribution is retained by those who were on the team for at least 6 months and completed the agreed scope of work, unless otherwise agreed by the parties.",
+          },
+          {
+            question: "Are you legally registered?",
+            answer:
+              "The studio is not currently registered as a legal entity. However, participants can enter into written agreements as individuals — this is lawful and locks in the arrangements between parties. We are open to signing such documents on request.",
+          },
+          {
+            question: "When will I get paid?",
+            answer:
+              "Payments happen after receiving the first net profit from the project's sales. Exact timelines cannot be guaranteed — it depends directly on the game's commercial success. We keep the team regularly informed of the project's financial status.",
+          },
+          {
+            question: "What if the project doesn't ship or breaks even?",
+            answer:
+              "We're honest: this risk exists in any indie project. If the project doesn't recoup — there are no payouts. That's exactly why we recommend treating studio participation as an investment in your portfolio, commercial dev experience, and co-authorship of an IP — not as a replacement for a primary income. That's not a consolation prize — for many specialists it's the main value.",
+          },
+          {
+            question: "Can I combine this with my main job?",
+            answer:
+              "Of course. We do too. Tasks are planned with real workloads in mind — nobody expects 40 hours a week. The main thing is to do your part of the work and communicate with the team.",
+          },
+        ],
+      },
     },
     partners: {
       sectionLabel: "Sponsors",
@@ -224,7 +272,7 @@ export const TRANSLATIONS = {
         founded: "Основана",
         independent: "В команде",
       },
-      featuredSub: "Бой на смерть · Frog Frag · Wishlist в Steam",
+      featuredSub: "Бой на смерть · FPS",
       progressLabel: "Прогресс разработки",
       conceptSub: "Выживание · Славянская мифология",
       scroll: "ПРОКРУТКА",
@@ -267,7 +315,7 @@ export const TRANSLATIONS = {
       heading: "Присоединяйся к",
       headingSuffix: "Команде",
       description:
-        "Мы — независимая студия, объединенная страстью к созданию глубоких и запоминающихся игр. Сейчас мы работаем на чистом энтузиазме и инвестируем в проект самое ценное — наш талант и время. Мы ищем не просто исполнителей, а полноправных партнеров по разработке. Тех, кто готов расти вместе с нами, брать на себя ответственность и доводить дело до конца.",
+        "Мы — независимая студия, объединённая страстью к созданию глубоких и запоминающихся игр. Мы ищем не просто исполнителей, а полноправных партнёров по разработке — тех, кто готов брать на себя ответственность и доводить дело до конца.",
       formCardLabel: "Форма заявки",
       formCardTitle: "Работай с нами",
       formCardDesc: "Заполни форму — расскажи о себе и своих работах.",
@@ -291,6 +339,54 @@ export const TRANSLATIONS = {
         { title: "3D дизайнер анимации", type: "UE5 / Maya" },
         { title: "UE5 разработчик", type: "Код" },
       ],
+      faq: {
+        triggerLabel: "FAQ — Частые вопросы о проекте",
+        title: "Частые вопросы",
+        subtitle: "Всё о том, как мы работаем и как делится прибыль",
+        closeLabel: "Закрыть FAQ",
+        items: [
+          {
+            question: "Почему нет зарплаты?",
+            answer:
+              "Мы начинаем с нуля и честны в этом. У нас нет инвестора и нет фонда оплаты труда — только идея, команда и план довести игру до релиза. Вместо зарплаты каждый участник получает реальную долю в результате: ~50% от первой прибыли проекта будут распределяться среди участников пропорционально их вкладу (который отслеживается в Trello). Остальные ~50% — реинвестиции в студию и будущий фонд оплаты. Это не «работа на дядю» и не волонтёрство — это соавторство.",
+          },
+          {
+            question: "Как делится прибыль?",
+            answer:
+              "Честно и прозрачно. Половина от первой чистой прибыли делится между всеми, кто участвовал в разработке, — пропорционально вкладу. Оставшаяся половина возвращается в студию: на расходы, развитие проекта и будущие зарплаты. Никакой магии — просто понятная математика.",
+          },
+          {
+            question: "Как считается мой вклад?",
+            answer:
+              "Вся работа фиксируется в Trello: каждая задача, участие в задачах других специалистов, выполнение и сроки. Итоговая доля рассчитывается на основе суммарного объёма выполненных задач на момент выхода продукта. Система открыта: каждый участник видит свою и общую картину.",
+          },
+          {
+            question: "Что если я уйду?",
+            answer:
+              "Если участник решает покинуть команду, мы фиксируем его вклад, выполненный к моменту ухода, и сохраняем за студией право использовать результаты работ, переданные по договору, в рамках проекта. Чтобы защитить интересы обеих сторон, до начала работы мы подписываем письменное соглашение, где заранее прописываются передача исключительных прав, порядок учёта вклада и условия выхода из команды. Право на участие в распределении первой прибыли сохраняется за теми, кто был в команде не менее 6 месяцев и выполнил согласованный объём работ, если иное не будет отдельно согласовано сторонами.",
+          },
+          {
+            question: "Вы юридически оформлены?",
+            answer:
+              "Студия сейчас не зарегистрирована как юридическое лицо. Однако участники могут заключать письменные соглашения как физические лица — это законно и фиксирует договорённости между сторонами. Мы открыты к подписанию таких документов по запросу.",
+          },
+          {
+            question: "Когда я получу деньги?",
+            answer:
+              "Выплаты происходят после получения первой чистой прибыли от продаж проекта. Точных сроков гарантировать невозможно — это прямо зависит от коммерческого успеха игры. Мы регулярно держим команду в курсе финансового статуса проекта.",
+          },
+          {
+            question: "Что если проект не выйдет или не окупится?",
+            answer:
+              "Мы честны: такой риск существует в любом инди-проекте. Если проект не окупится — выплат не будет. Именно поэтому мы рекомендуем воспринимать участие в студии как вложение в портфолио, опыт коммерческой разработки и соавторство в IP — а не как замену основной занятости. Это не утешительный приз — для многих специалистов это основная ценность.",
+          },
+          {
+            question: "Можно совмещать с основной работой?",
+            answer:
+              "Конечно. Мы сами так живём. Планируем задачи с учётом реальной загрузки, никто не требует 40 часов в неделю. Главное — делать свою часть работы и коммуницировать с командой.",
+          },
+        ],
+      },
     },
     partners: {
       sectionLabel: "Спонсоры",

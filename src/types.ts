@@ -23,6 +23,11 @@ export interface NewsItem {
   type: NewsCategory;
 }
 
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 export interface TranslationStructure {
   nav: {
     home: string;
@@ -98,6 +103,13 @@ export interface TranslationStructure {
     statusLabel: string;
     vacanciesTitle: string;
     vacancies: Array<{ title: string; type: string }>;
+    faq: {
+      triggerLabel: string;
+      title: string;
+      subtitle: string;
+      closeLabel: string;
+      items: FAQItem[];
+    };
   };
   partners: {
     sectionLabel: string;

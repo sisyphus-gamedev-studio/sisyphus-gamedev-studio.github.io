@@ -1,6 +1,7 @@
 ---
 import type { TranslationStructure } from "../../types";
 import { LAYOUT } from "../../config";
+import CareersFAQ from "../features/CareersFAQ";
 
 interface Props {
   t: TranslationStructure["careers"];
@@ -133,6 +134,9 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
               </svg>
               {t.formBtnLabel}
             </a>
+
+            <!-- FAQ island — opens the accordion modal -->
+            <CareersFAQ t={t.faq} client:load />
           </div>
 
           <div
