@@ -1,8 +1,6 @@
 export const TRANSITIONS = {
   default: ".3s cubic-bezier(0.2,0,0,1)",
   fast: ".2s cubic-bezier(0.2,0,0,1)",
-  slow: ".65s cubic-bezier(0.2,0,0,1)",
-  smooth: ".25s cubic-bezier(0.2,0,0,1)",
 } as const;
 
 interface BrandConfig {
@@ -70,10 +68,6 @@ export const UI = {
   hero: {
     stats: {
       independent: String(BRAND.teamSize),
-    },
-    badges: {
-      inDev: { en: "In Development", ru: "В разработке" },
-      comingSoon: { en: "Coming Soon", ru: "Скоро" },
     },
   },
   errorBoundary: {

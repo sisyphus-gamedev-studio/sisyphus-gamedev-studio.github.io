@@ -1,6 +1,6 @@
 ---
 import type { Language, TranslationStructure } from "../../types";
-import { BRAND, IMAGES, LAYOUT } from "../../config";
+import { BRAND, IMAGES } from "../../config";
 import { nativeImageFallback } from "../../utils/images";
 
 interface Props {
@@ -23,13 +23,11 @@ const aboutImg = IMAGES.about;
 
 <section
   id="about"
+  class="site-section site-section--filled about-section"
   aria-labelledby="about-heading"
-  style="padding:var(--spacing-section);background:var(--s-2);border-top:1px solid var(--b-default);position:relative;overflow:hidden"
 >
-  <div
-    style={`max-width:${LAYOUT.maxWidth}px;margin:0 auto;padding:0 ${LAYOUT.padding}px;position:relative;z-index:2`}
-  >
-    <div class="reveal" style="margin-bottom:56px">
+  <div class="site-section__container">
+    <div class="about-section__head reveal">
       <div class="section-eyebrow">
         <div class="section-eyebrow-line"></div>
         <span class="section-eyebrow-label">{t.sectionLabel}</span>
@@ -39,12 +37,9 @@ const aboutImg = IMAGES.about;
       </h2>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-      <div class="reveal-left">
-        <div
-          class="about-img-wrap"
-          style="border-radius:20px;overflow:hidden;position:relative;margin-bottom:28px;border:1px solid var(--b-default)"
-        >
+    <div class="about-grid">
+      <div class="about-column about-column--main reveal-left">
+        <figure class="about-media about-img-wrap">
           <img
             src={aboutImg}
             alt="Studio workspace"
@@ -52,106 +47,56 @@ const aboutImg = IMAGES.about;
             height="400"
             loading="lazy"
             decoding="async"
-            style="width:100%;height:100%;object-fit:cover;display:block"
             onerror={nativeImageFallback(700, 400)}
           />
-          <div
-            style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--s-4) 100%)"
-          >
-          </div>
-          <div
-            style="position:absolute;bottom:0;left:0;right:0;padding:16px 20px;display:flex;align-items:flex-end;justify-content:space-between"
-          >
+          <div class="about-media__scrim" aria-hidden="true"></div>
+          <figcaption class="about-media__meta">
             <div>
-              <p class="t-label-sm" style="color:var(--c-tertiary)">{t.foundedLabel}</p>
-              <p class="t-display-sm" style="color:var(--c-on-surface)">
-                {String(BRAND.foundedYear)}
-              </p>
+              <p class="t-label-sm about-media__founded-label">{t.foundedLabel}</p>
+              <p class="t-display-sm about-media__founded-year">{String(BRAND.foundedYear)}</p>
             </div>
-            <div
-              style="padding:4px 12px;border-radius:var(--r-full);background:var(--c-orange-dim);border:1px solid var(--c-orange-border);color:var(--c-orange-accent);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase"
-            >
-              {t.indieLabel}
-            </div>
-          </div>
-        </div>
+            <span class="about-media__badge">{t.indieLabel}</span>
+          </figcaption>
+        </figure>
 
-        <p class="t-body-lg" style="color:var(--c-secondary);line-height:1.75;margin-bottom:28px">
-          {t.description}
-        </p>
+        <div class="about-prose">
+          {
+            t.descriptionParagraphs.map((paragraph) => (
+              <p class="t-body-lg about-prose__paragraph">{paragraph}</p>
+            ))
+          }
+        </div>
       </div>
 
-      <div class="reveal-right" style="display:flex;flex-direction:column;gap:8px">
-        <dl style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <aside class="about-column about-column--aside reveal-right">
+        <dl class="about-stats">
           {
             stats.map((s) => (
-              <div
-                class="state"
-                style="padding:20px 18px;cursor:default;background:var(--s-5);border:1px solid var(--b-subtle);border-radius:16px;overflow:hidden;position:relative;display:flex;flex-direction:column"
-              >
-                <dd
-                  class="t-stat-num"
-                  style="font-size:40px"
-                  aria-label={`${s.value} — ${s.label}`}
-                >
+              <div class="about-stat state">
+                <dd class="t-stat-num about-stat__value" aria-label={`${s.value} — ${s.label}`}>
                   {s.value}
                 </dd>
-                <dt class="t-body-sm" style="color:var(--c-tertiary);margin-top:6px">
-                  {s.label}
-                </dt>
+                <dt class="t-body-sm about-stat__label">{s.label}</dt>
               </div>
             ))
           }
         </dl>
 
-        <div
-          style="padding:22px 24px;border-radius:16px;background:var(--s-5);border:1px solid var(--b-subtle);border-left:2px solid var(--c-orange)"
-        >
-          <p class="t-label-sm" style="color:var(--c-orange);margin-bottom:12px">
-            {t.missionLabel}
-          </p>
-          <blockquote
-            lang={lang}
-            class="t-body-lg"
-            style="color:var(--c-on-surface);font-style:italic;line-height:1.65;font-weight:400;margin:0"
-          >
+        <div class="content-panel about-mission">
+          <p class="t-label-sm about-mission__label">{t.missionLabel}</p>
+          <blockquote lang={lang} class="t-body-lg about-mission__quote">
             {t.missionQuote}
           </blockquote>
         </div>
 
-        <div
-          style="padding:14px 18px;display:flex;align-items:center;gap:12px;background:var(--s-5);border:1px solid var(--b-subtle);border-radius:12px"
-        >
-          <div
-            class="pulse"
-            style="width:8px;height:8px;border-radius:50%;background:var(--c-orange);flex-shrink:0"
-            aria-hidden="true"
-          >
-          </div>
+        <div class="status-card about-status">
+          <div class="pulse" style="width:8px;height:8px;border-radius:50%;background:var(--c-orange);flex-shrink:0" aria-hidden="true"></div>
           <div>
-            <p class="t-title-sm" style="color:var(--c-on-surface)">{t.statusLabel}</p>
-            <p class="t-body-sm" style="color:var(--c-tertiary);margin-top:2px">{t.statusSub}</p>
+            <p class="t-title-sm about-status__title">{t.statusLabel}</p>
+            <p class="t-body-sm about-status__sub">{t.statusSub}</p>
           </div>
         </div>
-      </div>
+      </aside>
     </div>
   </div>
 </section>
-
-<style>
-  .about-img-wrap {
-    height: 220px;
-  }
-
-  @media (min-width: 480px) {
-    .about-img-wrap {
-      height: 272px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .about-img-wrap {
-      height: 320px;
-    }
-  }
-</style>

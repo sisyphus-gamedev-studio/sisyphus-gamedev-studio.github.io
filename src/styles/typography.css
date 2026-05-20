@@ -19,25 +19,11 @@
   text-transform: uppercase;
   color: var(--c-orange);
 }
-.t-eyebrow-muted {
-  font-family: "Exo 2", sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: var(--c-tertiary);
-}
 .t-brand-lg {
   font-family: "Exo 2", sans-serif;
   font-size: 18px;
   font-weight: 700;
   color: var(--c-on-surface);
-}
-.t-brand-sm {
-  font-family: "Exo 2", sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  color: #111;
 }
 .t-display-lg {
   font-family: "Exo 2", sans-serif;
@@ -86,11 +72,6 @@
   font-size: 12px;
   line-height: 1.55;
   font-weight: 700;
-}
-.t-label-lg {
-  font-size: 14px;
-  line-height: 1.43;
-  font-weight: 600;
 }
 .t-label-md {
   font-size: 12px;

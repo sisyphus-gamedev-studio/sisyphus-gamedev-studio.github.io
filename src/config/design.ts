@@ -52,11 +52,12 @@ export const COLORS = {
   },
   news: {
     announcement: "var(--c-orange)",
-    devDiary: "#7c9ef8",
-    update: "#7ec87e",
+    devDiary: "var(--accent-blue-text)",
+    update: "var(--accent-green-text)",
   },
 } as const;
 
+/** Keep in sync with CSS vars in styles/tokens.css (--layout-*). */
 export const LAYOUT = {
   maxWidth: 1280,
   padding: 20,
@@ -69,7 +70,6 @@ export const SPACING = {
   sectionPaddingMobile: "72px 0",
   cardPadding: {
     news: "clamp(14px,4vw,26px) clamp(14px,5vw,28px) clamp(16px,4vw,32px)",
-    project: "32px 40px 36px",
   },
 } as const;
 
@@ -98,7 +98,7 @@ export const TAG_STYLE = {
     fontWeight: 600,
     letterSpacing: "0.05em",
     textTransform: "uppercase" as const,
-    background: "rgba(255,255,255,.04)",
+    background: OVERLAY.tagBg,
     border: "1px solid rgba(255,255,255,.07)",
     borderRadius: 4,
   },
@@ -118,6 +118,9 @@ export const SIZES = {
     imageHeight: 240,
     titleSize: "clamp(22px,4vw,32px)",
     boxShadow: "0 32px 80px rgba(0,0,0,.8)",
+  },
+  about: {
+    statNumSize: 40,
   },
   hero: {
     cardHeight: 264,

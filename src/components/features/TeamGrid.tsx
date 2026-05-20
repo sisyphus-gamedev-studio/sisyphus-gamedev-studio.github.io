@@ -46,6 +46,8 @@ const TeamCard: FC<TeamCardProps> = ({
   const panelId = useId();
   const local = member[lang];
   const roleParts = parseRoleParts(local.role);
+  const leadRole = roleParts[0];
+  const otherRoles = roleParts.slice(1);
   const hasQuote = Boolean(local.quote?.trim());
 
   const sideProjects = useMemo(
@@ -66,32 +68,31 @@ const TeamCard: FC<TeamCardProps> = ({
   }, []);
 
   return (
-    <article className={`team-card state team-card--${member.accent}`}>
+    <article className="team-card state">
       <div className="team-card-main">
-        <header className="team-card-header">
-          <div className={avatarClass(member.accent, Boolean(member.image))}>
+        <header className="team-card-editorial">
+          <div className="team-card-identity">
+            <h3 className="team-card-name t-card-title">{local.name}</h3>
+            {leadRole && <span className="team-card-role-lead">{leadRole}</span>}
+            {otherRoles.length > 0 && (
+              <p className="team-card-roles-secondary t-body-sm" aria-label={local.role}>
+                {otherRoles.join(" · ")}
+              </p>
+            )}
+          </div>
+          <div className={`${avatarClass(member.accent, Boolean(member.image))} team-card-avatar--hero`}>
             {member.image ? (
-              <img src={member.image} alt="" width={52} height={52} loading="lazy" decoding="async" />
+              <img src={member.image} alt="" width={56} height={56} loading="lazy" decoding="async" />
             ) : (
               <span aria-hidden="true">{member.initials}</span>
             )}
-          </div>
-          <div className="team-card-identity">
-            <h3 className="team-card-name">{local.name}</h3>
-            <ul className="team-card-roles" aria-label={local.role}>
-              {roleParts.map((part) => (
-                <li key={part} className="team-card-role-chip">
-                  {part}
-                </li>
-              ))}
-            </ul>
           </div>
         </header>
 
         {hasQuote && (
           <figure className="team-card-quote">
             <span className="sr-only">{t.quoteLabel}</span>
-            <blockquote className="team-card-quote-text">{local.quote}</blockquote>
+            <blockquote className="team-card-quote-text">«{local.quote}»</blockquote>
           </figure>
         )}
       </div>

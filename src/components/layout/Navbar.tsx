@@ -296,7 +296,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
         onKeyDown={handleMenuKeyDown}
         {...(mobileOpen ? { role: "dialog", "aria-modal": "true", "aria-label": t.navMenu } : {})}
         style={{
-          maxHeight: mobileOpen ? "calc(100dvh - 76px)" : 0,
+          maxHeight: mobileOpen ? `calc(100dvh - ${NAV_HEIGHT}px)` : 0,
           opacity: mobileOpen ? 1 : 0,
           overflow: "hidden",
           overflowY: mobileOpen ? "auto" : "hidden",

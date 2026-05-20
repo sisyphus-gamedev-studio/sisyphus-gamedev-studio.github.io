@@ -1,7 +1,7 @@
 ---
 import type { TranslationStructure, Language } from "../../types";
 import { PARTNERS, PARTNER_LOGO_STYLES, PARTNER_CATEGORY_STYLES } from "../../config/partners";
-import { LAYOUT, SOCIAL_ICONS } from "../../config";
+import { SOCIAL_ICONS } from "../../config";
 
 interface Props {
   t: NonNullable<TranslationStructure["partners"]>;
@@ -12,10 +12,7 @@ const { t, lang } = Astro.props;
 ---
 
 <section id="partners" class="site-section site-section--filled" aria-labelledby="partners-heading">
-  <div
-    class="site-section__container"
-    style={`max-width:${LAYOUT.maxWidth}px;padding:0 ${LAYOUT.padding}px`}
-  >
+  <div class="site-section__container">
     <div
       class="reveal"
       style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:52px"
@@ -208,7 +205,7 @@ const { t, lang } = Astro.props;
   }
   #partners .state:hover {
     transform: translateY(-3px);
-    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-card-hover);
   }
   #partners .state:focus-visible {
     outline: 2px solid var(--c-orange);

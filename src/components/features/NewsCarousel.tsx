@@ -361,7 +361,7 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                       />
 
                       <p
-                        className="t-body-md news-card-summary"
+                        className="t-body-md"
                         style={{
                           color: COLORS.text.secondary,
                           maxWidth: SIZES.newsCard.maxSummaryWidth,

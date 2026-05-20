@@ -1,20 +1,16 @@
-export type PartnerLogoStyle = "orange" | "blue" | "green" | "purple";
-export type PartnerCategory = "gold" | "silver" | "bronze" | "partner";
+import { SPONSOR_CATEGORY_STYLES, toAccentInlineStyle, type AccentKey } from "./accents";
+
+export type PartnerLogoStyle = AccentKey;
+export type PartnerCategory = keyof typeof SPONSOR_CATEGORY_STYLES;
 
 export const PARTNER_LOGO_STYLES: Record<PartnerLogoStyle, string> = {
-  orange:
-    "background:var(--c-orange-dim);border:1px solid var(--c-orange-border);color:var(--c-orange)",
-  blue: "background:rgba(100,140,255,.10);border:1px solid rgba(100,140,255,.20);color:#7c9ef8",
-  green: "background:rgba(100,200,100,.09);border:1px solid rgba(100,200,100,.20);color:#7ec87e",
-  purple: "background:rgba(160,100,255,.09);border:1px solid rgba(160,100,255,.20);color:#b87ef8",
-} as const;
+  orange: toAccentInlineStyle("orange"),
+  blue: toAccentInlineStyle("blue"),
+  green: toAccentInlineStyle("green"),
+  purple: toAccentInlineStyle("purple"),
+};
 
-export const PARTNER_CATEGORY_STYLES: Record<PartnerCategory, string> = {
-  gold: "background:var(--c-orange-dim);border-color:var(--c-orange-border);color:var(--c-orange-accent)",
-  silver: "background:rgba(180,180,200,.10);border-color:rgba(180,180,200,.20);color:#b0b8cc",
-  bronze: "background:rgba(180,120,80,.10);border-color:rgba(180,120,80,.20);color:#c8906a",
-  partner: "background:rgba(100,200,100,.09);border-color:rgba(100,200,100,.20);color:#7ec87e",
-} as const;
+export { SPONSOR_CATEGORY_STYLES as PARTNER_CATEGORY_STYLES };
 
 export interface PartnerLink {
   website?: string;

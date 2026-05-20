@@ -9,3 +9,5 @@ export * from "./news";
 export * from "./seo";
 export * from "./team";
 export * from "./careers";
+export * from "./partners";
+export * from "./accents";

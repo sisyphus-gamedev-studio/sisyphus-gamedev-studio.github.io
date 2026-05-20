@@ -30,4 +30,31 @@
   --r-full: 9999px;
 
   --spacing-section: 100px 0;
+
+  --layout-max-width: 1280px;
+  --layout-padding: 20px;
+  --layout-nav-height: 76px;
+  --about-stat-size: 40px;
+
+  --shadow-card-hover: 0 14px 38px rgba(0, 0, 0, 0.5);
+
+  --accent-blue-bg: rgba(100, 140, 255, 0.1);
+  --accent-blue-border: rgba(100, 140, 255, 0.2);
+  --accent-blue-text: #7c9ef8;
+
+  --accent-green-bg: rgba(100, 200, 100, 0.09);
+  --accent-green-border: rgba(100, 200, 100, 0.2);
+  --accent-green-text: #7ec87e;
+
+  --accent-purple-bg: rgba(160, 100, 255, 0.09);
+  --accent-purple-border: rgba(160, 100, 255, 0.2);
+  --accent-purple-text: #b87ef8;
+
+  --accent-silver-bg: rgba(180, 180, 200, 0.1);
+  --accent-silver-border: rgba(180, 180, 200, 0.2);
+  --accent-silver-text: #b0b8cc;
+
+  --accent-bronze-bg: rgba(180, 120, 80, 0.1);
+  --accent-bronze-border: rgba(180, 120, 80, 0.2);
+  --accent-bronze-text: #c8906a;
 }

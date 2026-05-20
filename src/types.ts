@@ -65,7 +65,6 @@ export interface TranslationStructure {
     heading: string;
     headingSuffix: string;
     sectionLabel: string;
-    of: string;
     learnMore: string;
     prevGame: string;
     nextGame: string;
@@ -76,7 +75,7 @@ export interface TranslationStructure {
     heading: string;
     headingSuffix: string;
     sectionLabel: string;
-    description: string;
+    descriptionParagraphs: [string, string, string];
     foundedLabel: string;
     indieLabel: string;
     stats: {
@@ -152,8 +151,6 @@ export interface TranslationStructure {
     headingSuffix: string;
     sectionLabel: string;
     readMore: string;
-    of: string;
-    updates: string;
     closeArticle: string;
     paused: string;
     swipeHint: string;

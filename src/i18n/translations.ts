@@ -44,7 +44,6 @@ export const TRANSLATIONS = {
       heading: "Our",
       headingSuffix: "Games",
       sectionLabel: "Projects",
-      of: "of",
       learnMore: "Learn More",
       prevGame: "Previous game",
       nextGame: "Next game",
@@ -55,8 +54,11 @@ export const TRANSLATIONS = {
       heading: "Sisyphus",
       headingSuffix: "studio",
       sectionLabel: "About Us",
-      description:
-        "We're a small independent studio founded in 2025. Everyone on the development team was deeply involved with games, and at a certain point, we realized that simply playing games wasn't enough—it was time to create them. Thus began our story of overcoming the challenges of an indie company in pursuit of lofty ideals. No sponsors. No compromises. Just sheer willpower.",
+      descriptionParagraphs: [
+        "Sisyphus Studio is an indie company founded in 2025. We understand that game development tolerates no illusions. Here, ambition is weighed strictly against capability, and projects are built on sober calculation—holding up to market realities through mutual trust among specialists who know their craft.",
+        "The indie sphere is a heavy boulder that tries to grind its maker into the ground. That is why our mascot is Sisyphus. His myth is not about futile labor, but about extraordinary cunning, daring, and unbreakable determination that challenged the gods.",
+        "And when Sisyphus acts alongside a team of equally resourceful like-minded people, their combined strength is enough to defy fate itself.",
+      ],
       foundedLabel: "Founded",
       indieLabel: "Indie Company",
       stats: {
@@ -75,7 +77,7 @@ export const TRANSLATIONS = {
       heading: "Our",
       headingSuffix: "Team",
       description:
-        "This is our team. We know indie development is hard work that can feel pointless and endless. But we believe that, alongside diligent effort, using cunning, strategy, and a drive for self-improvement, we can change Sisyphus's fate. Every day we push this boulder together, and with every new mechanic, every fixed bug, and every thrilled player review, the summit draws nearer.",
+        "This is our team. We brought together people who care not only about the idea, but about actually building the product. What unites us is a shared pace, commitment to the process, and the willingness to take the game to release, one step at a time.",
       quoteLabel: "Quote",
       expandSideProject: "Show side project",
       collapseSideProject: "Hide side project",
@@ -190,8 +192,6 @@ export const TRANSLATIONS = {
       headingSuffix: "News",
       sectionLabel: "News",
       readMore: "Read more",
-      of: "of",
-      updates: "updates",
       closeArticle: "Close article",
       paused: "paused",
       swipeHint: "swipe",
@@ -303,7 +303,6 @@ export const TRANSLATIONS = {
       heading: "Наши",
       headingSuffix: "Игры",
       sectionLabel: "Проекты",
-      of: "из",
       learnMore: "Узнать больше",
       prevGame: "Предыдущая игра",
       nextGame: "Следующая игра",
@@ -314,8 +313,11 @@ export const TRANSLATIONS = {
       heading: "Sisyphus",
       headingSuffix: "studio",
       sectionLabel: "О нас",
-      description:
-        "Мы небольшая независимая студия, основанная в 2025 году. Каждый из команды разработки был тесно связан с играми и в определенный момент времени мы поняли, что просто играть в игры недостаточно, пора их создавать. Так началась наша история борьбы с трудностями инди-компании, ради высоких идей. Без спонсоров. Без компромиссов. Только сила воли.",
+      descriptionParagraphs: [
+        "Sisyphus Studio — инди-компания, основанная в 2025 году. Мы понимаем, что разработка игр не терпит иллюзий. Здесь амбиции жестко соизмеряются с возможностями, а проекты строятся на трезвом расчете, выдерживая реалии рынка благодаря взаимному доверию профильных специалистов.",
+        "Инди-сфера — тяжелый валун, норовящий сровнять создателя с землей. Поэтому нашим маскотом стал Сизиф. Его миф — не о бесполезном труде, а о невероятной хитрости, дерзости и несгибаемой целеустремленности, бросившей вызов богам.",
+        "И когда Сизиф действует вместе с командой таких же находчивых единомышленников, их общих сил достаточно, чтобы пойти против самого предопределения.",
+      ],
       foundedLabel: "Основана",
       indieLabel: "Инди-компания",
       stats: {
@@ -335,7 +337,7 @@ export const TRANSLATIONS = {
       heading: "Наша",
       headingSuffix: "Команда",
       description:
-        "Это наша команда. Мы знаем, что инди-разработка — это тяжелый труд, который порой кажется бесполезным и бесконечным. Но мы верим, что, помимо усердного труда, используя хитрость, стратегию и свою жажду к самосовершенствованию, мы сможем изменить судьбу Сизифа. Ведь каждый день мы вместе толкаем этот камень, и с каждой новой механикой, с каждым исправленным багом и восторженным отзывом игрока, вершина становится все ближе.",
+        "Это наша команда. Мы собрали людей, которым интересна не только идея, но и реальная работа над продуктом. Нас объединяют общий темп, вовлечённость в процесс и готовность шаг за шагом доводить игру до релиза.",
       quoteLabel: "Цитата",
       expandSideProject: "Показать другой проект",
       collapseSideProject: "Свернуть",
@@ -450,8 +452,6 @@ export const TRANSLATIONS = {
       headingSuffix: "Студии",
       sectionLabel: "Новости",
       readMore: "Читать",
-      of: "из",
-      updates: "обновлений",
       closeArticle: "Закрыть статью",
       paused: "пауза",
       swipeHint: "свайп",
