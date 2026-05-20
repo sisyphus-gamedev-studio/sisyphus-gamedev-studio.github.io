@@ -7,3 +7,5 @@ export * from "./donate";
 export * from "./links";
 export * from "./news";
 export * from "./seo";
+export * from "./team";
+export * from "./careers";

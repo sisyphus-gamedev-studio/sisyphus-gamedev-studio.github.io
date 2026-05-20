@@ -11,13 +11,10 @@ interface Props {
 const { t, lang } = Astro.props;
 ---
 
-<section
-  id="partners"
-  aria-labelledby="partners-heading"
-  style="padding:var(--spacing-section);background:transparent;border-top:1px solid var(--b-default);position:relative"
->
+<section id="partners" class="site-section site-section--filled" aria-labelledby="partners-heading">
   <div
-    style={`max-width:${LAYOUT.maxWidth}px;margin:0 auto;padding:0 ${LAYOUT.padding}px;position:relative;z-index:1`}
+    class="site-section__container"
+    style={`max-width:${LAYOUT.maxWidth}px;padding:0 ${LAYOUT.padding}px`}
   >
     <div
       class="reveal"

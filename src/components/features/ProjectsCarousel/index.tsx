@@ -78,10 +78,16 @@ const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
   );
 
   if (isMobile === null)
-    return <section id="projects" style={{ minHeight: SIZES.projects.skeletonMinHeight }} />;
+    return (
+      <section
+        id="projects"
+        className="site-section site-section--filled"
+        style={{ minHeight: SIZES.projects.skeletonMinHeight }}
+      />
+    );
 
   return (
-    <section id="projects">
+    <section id="projects" className="site-section site-section--filled">
       <ErrorBoundary>
         {isMobile ? (
           <MobileCarousel

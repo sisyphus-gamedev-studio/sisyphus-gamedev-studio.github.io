@@ -59,9 +59,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
     <div
       aria-labelledby="projects-heading"
       style={{
-        background: "transparent",
         padding: SPACING.sectionPadding,
-        borderTop: `1px solid ${COLORS.border.default}`,
       }}
     >
       <div aria-live="polite" aria-atomic="true" className="sr-only">

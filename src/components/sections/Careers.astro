@@ -1,24 +1,23 @@
 ---
-import type { TranslationStructure } from "../../types";
+import type { Language, TranslationStructure } from "../../types";
 import { LAYOUT } from "../../config";
+import { CAREER_STACK } from "../../config/careers";
 import CareersFAQ from "../features/CareersFAQ";
 
 interface Props {
   t: TranslationStructure["careers"];
+  lang: Language;
 }
 
-const { t } = Astro.props;
+const { t, lang } = Astro.props;
 
 const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
 ---
 
-<section
-  id="careers"
-  aria-labelledby="careers-heading"
-  style="padding:var(--spacing-section);background:transparent;border-top:1px solid var(--b-default);position:relative;overflow:hidden"
->
+<section id="careers" class="site-section site-section--filled" aria-labelledby="careers-heading">
   <div
-    style={`max-width:${LAYOUT.maxWidth}px;margin:0 auto;padding:0 ${LAYOUT.padding}px;position:relative;z-index:1`}
+    class="site-section__container"
+    style={`max-width:${LAYOUT.maxWidth}px;padding:0 ${LAYOUT.padding}px`}
   >
     <div class="reveal" style="margin-bottom:56px">
       <div class="section-eyebrow">
@@ -35,6 +34,25 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
         <p class="t-body-lg" style="color:var(--c-secondary);line-height:1.78;margin-bottom:32px">
           {t.description}
         </p>
+
+        <div class="careers-stack" style="margin-bottom:32px">
+          <p class="t-eyebrow-accent" style="margin-bottom:12px;display:block">
+            {t.stackTitle}
+          </p>
+          <dl class="careers-stack-list">
+            {
+              CAREER_STACK.map((item) => {
+                const local = item[lang];
+                return (
+                  <div class="careers-stack-item">
+                    <dt class="careers-stack-label">{local.label}</dt>
+                    <dd class="careers-stack-value">{local.value}</dd>
+                  </div>
+                );
+              })
+            }
+          </dl>
+        </div>
 
         <div style="margin-bottom:32px">
           <p class="t-eyebrow-accent" style="margin-bottom:12px;display:block">
@@ -199,6 +217,42 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
       grid-template-columns: 1fr;
       gap: 40px;
     }
+  }
+
+  .careers-stack-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .careers-stack-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 16px;
+    background: var(--s-4);
+    border: 1px solid var(--b-subtle);
+    border-radius: 14px;
+  }
+
+  .careers-stack-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--c-orange);
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .careers-stack-value {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--c-on-surface);
+    line-height: 1.25;
+    margin: 0;
   }
 
   .careers-vacancies {

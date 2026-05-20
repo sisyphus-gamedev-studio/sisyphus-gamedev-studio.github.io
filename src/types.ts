@@ -35,6 +35,7 @@ export interface TranslationStructure {
     projects: string;
     news: string;
     partners: string;
+    team: string;
     careers: string;
     donate: string;
     contact: string;
@@ -89,6 +90,21 @@ export interface TranslationStructure {
     statusLabel: string;
     statusSub: string;
   };
+  team: {
+    sectionLabel: string;
+    heading: string;
+    headingSuffix: string;
+    description: string;
+    quoteLabel: string;
+    expandSideProject: string;
+    collapseSideProject: string;
+    sideProjectsLabel: string;
+    placeholderProject: {
+      name: string;
+      description: string;
+      badge: string;
+    };
+  };
   careers: {
     sectionLabel: string;
     heading: string;
@@ -101,6 +117,7 @@ export interface TranslationStructure {
     checkItems: [string, string, string, string];
     formBtnLabel: string;
     statusLabel: string;
+    stackTitle: string;
     vacanciesTitle: string;
     vacancies: Array<{ title: string; type: string }>;
     faq: {

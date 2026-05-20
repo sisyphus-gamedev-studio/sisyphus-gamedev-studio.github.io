@@ -134,15 +134,12 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
     return (
       <section
         id="news"
+        className="site-section site-section--grid"
         aria-labelledby="news-heading"
-        style={{
-          background: COLORS.surface.s2,
-          padding: SPACING.sectionPadding,
-          borderTop: `1px solid ${COLORS.border.default}`,
-        }}
       >
         <div
-          style={{ maxWidth: LAYOUT.maxWidth, margin: "0 auto", padding: `0 ${LAYOUT.padding}px` }}
+          className="site-section__container"
+          style={{ maxWidth: LAYOUT.maxWidth, padding: `0 ${LAYOUT.padding}px` }}
         >
           <div style={{ marginBottom: 40 }}>
             <div className="section-eyebrow">
@@ -177,22 +174,15 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
         <NewsModal item={modalItem} onClose={handleModalClose} closeLabel={t.closeArticle} />
       )}
 
-      <section
-        id="news"
-        aria-labelledby="news-heading"
-        style={{
-          background: COLORS.surface.s2,
-          padding: SPACING.sectionPadding,
-          borderTop: `1px solid ${COLORS.border.default}`,
-        }}
-      >
-        <div aria-live="polite" aria-atomic="true" className="sr-only">
-          {item.title}
-        </div>
-
+      <section id="news" className="site-section site-section--grid" aria-labelledby="news-heading">
         <div
-          style={{ maxWidth: LAYOUT.maxWidth, margin: "0 auto", padding: `0 ${LAYOUT.padding}px` }}
+          className="site-section__container"
+          style={{ maxWidth: LAYOUT.maxWidth, padding: `0 ${LAYOUT.padding}px` }}
         >
+          <div aria-live="polite" aria-atomic="true" className="sr-only">
+            {item.title}
+          </div>
+
           <div
             className="reveal"
             suppressHydrationWarning

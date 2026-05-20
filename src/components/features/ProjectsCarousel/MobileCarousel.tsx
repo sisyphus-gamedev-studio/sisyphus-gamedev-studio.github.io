@@ -63,9 +63,7 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
     <div
       aria-labelledby="projects-heading"
       style={{
-        background: "transparent",
         padding: SPACING.sectionPaddingMobile,
-        borderTop: `1px solid ${COLORS.border.default}`,
       }}
     >
       <div aria-live="polite" aria-atomic="true" className="sr-only">

@@ -1,0 +1,41 @@
+---
+import type { Language, TranslationStructure } from "../../types";
+import { LAYOUT } from "../../config";
+import TeamGrid from "../features/TeamGrid";
+
+interface Props {
+  t: TranslationStructure["team"];
+  partnerCategoryLabels: TranslationStructure["partners"]["categoryLabels"];
+  partnerLinkLabels: TranslationStructure["partners"]["linkLabels"];
+  lang: Language;
+}
+
+const { t, lang, partnerCategoryLabels, partnerLinkLabels } = Astro.props;
+---
+
+<section id="team" class="site-section site-section--grid" aria-labelledby="team-heading">
+  <div class="site-section__container" style={`max-width:${LAYOUT.maxWidth}px;padding:0 ${LAYOUT.padding}px`}>
+    <div class="reveal" style="margin-bottom:52px">
+      <div class="section-eyebrow">
+        <div class="section-eyebrow-line"></div>
+        <span class="section-eyebrow-label">{t.sectionLabel}</span>
+      </div>
+      <h2 id="team-heading" class="t-display-md" style="color:var(--c-on-surface)">
+        {t.heading}<span style="color:var(--c-orange)"> {t.headingSuffix}</span>
+      </h2>
+      <p class="t-body-lg" style="color:var(--c-secondary);max-width:760px;line-height:1.78;margin-top:14px">
+        {t.description}
+      </p>
+    </div>
+
+    <div class="reveal">
+      <TeamGrid
+        t={t}
+        lang={lang}
+        partnerCategoryLabels={partnerCategoryLabels}
+        partnerLinkLabels={partnerLinkLabels}
+        client:visible
+      />
+    </div>
+  </div>
+</section>

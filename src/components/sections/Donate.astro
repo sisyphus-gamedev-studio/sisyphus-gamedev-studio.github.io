@@ -15,13 +15,10 @@ const TIER_TARGETS = [undefined, isMailto ? undefined : "_blank", undefined];
 const TIER_RELS = [undefined, isMailto ? undefined : "noopener noreferrer", undefined];
 ---
 
-<section
-  id="donate"
-  aria-labelledby="donate-heading"
-  style="padding: var(--spacing-section); background: var(--s-2); border-top: 1px solid var(--b-default); position: relative; overflow: hidden"
->
+<section id="donate" class="site-section site-section--grid" aria-labelledby="donate-heading">
   <div
-    style={`max-width:${LAYOUT.maxWidth}px;margin:0 auto;padding:0 ${LAYOUT.padding}px;position:relative;z-index:2`}
+    class="site-section__container"
+    style={`max-width:${LAYOUT.maxWidth}px;padding:0 ${LAYOUT.padding}px`}
   >
     <div class="reveal donate-header">
       <div>

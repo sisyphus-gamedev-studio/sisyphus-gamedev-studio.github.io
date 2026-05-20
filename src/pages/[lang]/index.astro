@@ -6,6 +6,7 @@ import About from "../../components/sections/About.astro";
 import Partners from "../../components/sections/Partners.astro";
 import Contact from "../../components/sections/Contact.astro";
 import Donate from "../../components/sections/Donate.astro";
+import Team from "../../components/sections/Team.astro";
 import Careers from "../../components/sections/Careers.astro";
 import Navbar from "../../components/layout/Navbar";
 import ProjectsCarousel from "../../components/features/ProjectsCarousel";
@@ -59,9 +60,15 @@ const news: NewsItem[] = newsEntries
   <main>
     <Hero t={t.hero} projects={projects} titlesCount={titlesCount} />
     <About t={t.about} lang={lang} titlesCount={titlesCount} />
+    <Team
+      t={t.team}
+      lang={lang}
+      partnerCategoryLabels={t.partners.categoryLabels}
+      partnerLinkLabels={t.partners.linkLabels}
+    />
     <ProjectsCarousel t={t.projects} projects={projects} client:visible />
     <NewsCarousel news={news} t={t.news} lang={lang} client:visible />
-    <Careers t={t.careers} />
+    <Careers t={t.careers} lang={lang} />
     <Donate t={t.donate} />
     <Partners t={t.partners} lang={lang} />
     <Contact t={t.contact} />

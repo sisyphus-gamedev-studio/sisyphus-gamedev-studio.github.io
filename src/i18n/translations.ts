@@ -15,6 +15,7 @@ export const TRANSLATIONS = {
       about: "About",
       projects: "Projects",
       news: "News",
+      team: "Team",
       careers: "Career",
       donate: "Sponsorship",
       partners: "Sponsors",
@@ -69,6 +70,22 @@ export const TRANSLATIONS = {
       statusLabel: "Active Development",
       statusSub: "Frog Frag",
     },
+    team: {
+      sectionLabel: "Team",
+      heading: "Our",
+      headingSuffix: "Team",
+      description:
+        "This is our team. We know indie development is hard work that can feel pointless and endless. But we believe that, alongside diligent effort, using cunning, strategy, and a drive for self-improvement, we can change Sisyphus's fate. Every day we push this boulder together, and with every new mechanic, every fixed bug, and every thrilled player review, the summit draws nearer.",
+      quoteLabel: "Quote",
+      expandSideProject: "Show side project",
+      collapseSideProject: "Hide side project",
+      sideProjectsLabel: "Other projects",
+      placeholderProject: {
+        name: "Personal project",
+        description: "Not tied to the studio lineup — we'll share details when it's ready.",
+        badge: "Coming soon",
+      },
+    },
     careers: {
       sectionLabel: "Careers",
       heading: "Join The",
@@ -87,6 +104,7 @@ export const TRANSLATIONS = {
       ] as [string, string, string, string],
       formBtnLabel: "Submit Application",
       statusLabel: "Actively reviewing applications",
+      stackTitle: "Our stack and tools:",
       vacanciesTitle: "Open Positions",
       vacancies: [
         { title: "VFX Designer", type: "Visual Effects" },
@@ -256,6 +274,7 @@ export const TRANSLATIONS = {
       about: "О нас",
       projects: "Проекты",
       news: "Новости",
+      team: "Команда",
       careers: "Карьера",
       donate: "Спонсорство",
       partners: "Спонсоры",
@@ -311,6 +330,22 @@ export const TRANSLATIONS = {
       statusLabel: "Активная разработка",
       statusSub: "Frog Frag",
     },
+    team: {
+      sectionLabel: "Команда",
+      heading: "Наша",
+      headingSuffix: "Команда",
+      description:
+        "Это наша команда. Мы знаем, что инди-разработка — это тяжелый труд, который порой кажется бесполезным и бесконечным. Но мы верим, что, помимо усердного труда, используя хитрость, стратегию и свою жажду к самосовершенствованию, мы сможем изменить судьбу Сизифа. Ведь каждый день мы вместе толкаем этот камень, и с каждой новой механикой, с каждым исправленным багом и восторженным отзывом игрока, вершина становится все ближе.",
+      quoteLabel: "Цитата",
+      expandSideProject: "Показать другой проект",
+      collapseSideProject: "Свернуть",
+      sideProjectsLabel: "Другие проекты",
+      placeholderProject: {
+        name: "Личный проект",
+        description: "Не связан с играми студии — расскажем подробнее, когда будет готов.",
+        badge: "Скоро",
+      },
+    },
     careers: {
       sectionLabel: "Карьера",
       heading: "Присоединяйся к",
@@ -329,6 +364,7 @@ export const TRANSLATIONS = {
       ] as [string, string, string, string],
       formBtnLabel: "Отправить заявку",
       statusLabel: "Активно рассматриваем заявки",
+      stackTitle: "Наш стек и инструменты:",
       vacanciesTitle: "Открытые вакансии",
       vacancies: [
         { title: "VFX дизайнер", type: "Видео-эффекты" },

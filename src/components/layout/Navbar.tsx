@@ -39,6 +39,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
     () => [
       { id: "home", label: t.home, href: "#home" },
       { id: "about", label: t.about, href: "#about" },
+      { id: "team", label: t.team, href: "#team" },
       { id: "projects", label: t.projects, href: "#projects" },
       { id: "news", label: t.news, href: "#news" },
       { id: "careers", label: t.careers, href: "#careers" },

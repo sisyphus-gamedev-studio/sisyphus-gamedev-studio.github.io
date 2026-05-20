@@ -18,7 +18,7 @@ export const BRAND = {
   suffix: "Studio",
   short: "SS",
   foundedYear: 2025,
-  teamSize: 6,
+  teamSize: 4,
 } satisfies BrandConfig;
 
 export const NEWS_CAROUSEL = {
