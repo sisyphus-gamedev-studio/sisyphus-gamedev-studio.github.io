@@ -18,100 +18,28 @@ interface AccordionItemProps {
 }
 
 const AccordionItem: FC<AccordionItemProps> = ({ question, answer, index, isOpen, onToggle }) => (
-  <div
-    style={{
-      borderRadius: 12,
-      border: `1px solid ${isOpen ? "rgba(255,255,255,.10)" : "rgba(255,255,255,.06)"}`,
-      background: isOpen ? "rgba(255,255,255,.03)" : "transparent",
-      transition: "border-color 0.2s, background 0.2s",
-    }}
-  >
+  <div className={`faq-accordion-item${isOpen ? " faq-accordion-item--open" : ""}`}>
     <button
       onClick={onToggle}
       aria-expanded={isOpen}
-      style={{
-        width: "100%",
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "space-between",
-        gap: 12,
-        padding: "15px 16px",
-        background: "transparent",
-        border: "none",
-        cursor: "pointer",
-        textAlign: "left",
-      }}
+      className="faq-accordion-trigger"
     >
       <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flex: 1, minWidth: 0 }}>
+        <span className="faq-accordion-index">{String(index + 1).padStart(2, "0")}</span>
         <span
-          style={{
-            fontSize: 10,
-            fontWeight: 700,
-            letterSpacing: "0.1em",
-            color: COLORS.orange,
-            opacity: 0.65,
-            flexShrink: 0,
-            marginTop: 2,
-            fontVariantNumeric: "tabular-nums",
-          }}
-        >
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <span
-          style={{
-            fontSize: 14,
-            fontWeight: 600,
-            color: isOpen ? COLORS.text.primary : COLORS.text.secondary,
-            lineHeight: 1.45,
-            transition: "color 0.2s",
-          }}
+          className={`faq-accordion-question${isOpen ? " faq-accordion-question--open" : " faq-accordion-question--closed"}`}
         >
           {question}
         </span>
       </div>
-      <span
-        style={{
-          flexShrink: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: 24,
-          height: 24,
-          borderRadius: "50%",
-          background: isOpen ? COLORS.orangeDim : "rgba(255,255,255,.04)",
-          border: `1px solid ${isOpen ? COLORS.orangeBorder : "rgba(255,255,255,.07)"}`,
-          color: isOpen ? COLORS.orange : COLORS.text.tertiary,
-          transition:
-            "background 0.2s, border-color 0.2s, color 0.2s, transform 0.28s cubic-bezier(0.05,0.7,0.1,1)",
-          transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-          marginTop: 1,
-        }}
-      >
+      <span className={`faq-accordion-chevron${isOpen ? " faq-accordion-chevron--open" : ""}`}>
         <ChevronDown size={13} strokeWidth={2.5} />
       </span>
     </button>
 
-    {/* CSS grid-rows trick — text never gets overflow-clipped */}
-    <div
-      style={{
-        display: "grid",
-        gridTemplateRows: isOpen ? "1fr" : "0fr",
-        transition: "grid-template-rows 0.3s cubic-bezier(0.05,0.7,0.1,1)",
-      }}
-    >
-      <div style={{ overflow: "hidden" }}>
-        <p
-          style={{
-            padding: "0 16px 16px 44px",
-            fontSize: 13,
-            color: COLORS.text.secondary,
-            lineHeight: 1.78,
-            fontWeight: 400,
-            margin: 0,
-          }}
-        >
-          {answer}
-        </p>
+    <div className={`faq-accordion-body${isOpen ? " faq-accordion-body--open" : ""}`}>
+      <div className="faq-accordion-body__inner">
+        <p className="faq-accordion-answer">{answer}</p>
       </div>
     </div>
   </div>
@@ -203,11 +131,8 @@ const FAQModal: FC<FAQModalProps> = ({ t, onClose }) => {
     >
       <div
         ref={panelRef}
-        className="news-modal-panel"
+        className="news-modal-panel card faq-modal-panel"
         style={{
-          background: "#151515",
-          border: "1px solid rgba(255,255,255,.08)",
-          borderRadius: 20,
           width: "100%",
           maxWidth: SIZES.modal.maxWidth,
           maxHeight: "90vh",
@@ -217,11 +142,10 @@ const FAQModal: FC<FAQModalProps> = ({ t, onClose }) => {
           overflow: "hidden",
         }}
       >
-        {/* Header */}
         <div
+          className="faq-modal-header"
           style={{
             padding: "22px 24px 18px",
-            borderBottom: "1px solid rgba(255,255,255,.06)",
             flexShrink: 0,
             position: "relative",
           }}
@@ -245,18 +169,7 @@ const FAQModal: FC<FAQModalProps> = ({ t, onClose }) => {
             }}
           >
             <div>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 6,
-                  padding: "3px 10px",
-                  borderRadius: "9999px",
-                  background: COLORS.orangeDim,
-                  border: `1px solid ${COLORS.orangeBorder}`,
-                  marginBottom: 10,
-                }}
-              >
+              <div className="md-badge-primary md-badge" style={{ marginBottom: 10 }}>
                 <HelpCircle size={10} color={COLORS.orange} aria-hidden="true" />
                 <span
                   style={{
@@ -286,20 +199,12 @@ const FAQModal: FC<FAQModalProps> = ({ t, onClose }) => {
               ref={closeRef}
               onClick={onClose}
               aria-label={t.closeLabel}
-              className="state"
+              className="state faq-modal-close icon-btn-outlined"
               style={{
                 width: 34,
                 height: 34,
-                borderRadius: "50%",
-                border: "1px solid rgba(255,255,255,.15)",
-                background: "rgba(0,0,0,.45)",
                 backdropFilter: "blur(8px)",
                 WebkitBackdropFilter: "blur(8px)" as unknown as string,
-                color: COLORS.text.primary,
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
                 flexShrink: 0,
               }}
             >

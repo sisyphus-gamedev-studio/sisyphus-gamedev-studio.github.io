@@ -1,6 +1,5 @@
 ---
 import type { Language, TranslationStructure } from "../../types";
-import { LAYOUT } from "../../config";
 import { CAREER_STACK } from "../../config/careers";
 import CareersFAQ from "../features/CareersFAQ";
 
@@ -15,36 +14,29 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
 ---
 
 <section id="careers" class="site-section site-section--filled" aria-labelledby="careers-heading">
-  <div
-    class="site-section__container"
-    style={`max-width:${LAYOUT.maxWidth}px;padding:0 ${LAYOUT.padding}px`}
-  >
-    <div class="reveal" style="margin-bottom:56px">
+  <div class="site-section__container">
+    <div class="site-section__head reveal">
       <div class="section-eyebrow">
         <div class="section-eyebrow-line"></div>
         <span class="section-eyebrow-label">{t.sectionLabel}</span>
       </div>
-      <h2 id="careers-heading" class="t-display-md" style="color:var(--c-on-surface)">
-        {t.heading}<span style="color:var(--c-orange)"> {t.headingSuffix}</span>
+      <h2 id="careers-heading" class="t-display-md section-heading">
+        {t.heading}<span class="section-heading__accent"> {t.headingSuffix}</span>
       </h2>
     </div>
 
     <div class="careers-layout">
       <div class="reveal-left">
-        <p class="t-body-lg" style="color:var(--c-secondary);line-height:1.78;margin-bottom:32px">
-          {t.description}
-        </p>
+        <p class="t-body-lg section-lead careers-intro">{t.description}</p>
 
-        <div class="careers-stack" style="margin-bottom:32px">
-          <p class="t-eyebrow-accent" style="margin-bottom:12px;display:block">
-            {t.stackTitle}
-          </p>
+        <div class="careers-block careers-stack">
+          <p class="t-eyebrow-accent careers-block__title">{t.stackTitle}</p>
           <dl class="careers-stack-list">
             {
               CAREER_STACK.map((item) => {
                 const local = item[lang];
                 return (
-                  <div class="careers-stack-item">
+                  <div class="careers-stack-item card card--compact">
                     <dt class="careers-stack-label">{local.label}</dt>
                     <dd class="careers-stack-value">{local.value}</dd>
                   </div>
@@ -54,14 +46,12 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
           </dl>
         </div>
 
-        <div style="margin-bottom:32px">
-          <p class="t-eyebrow-accent" style="margin-bottom:12px;display:block">
-            {t.vacanciesTitle}
-          </p>
+        <div class="careers-block">
+          <p class="t-eyebrow-accent careers-block__title">{t.vacanciesTitle}</p>
           <ul class="careers-vacancies" role="list">
             {
               t.vacancies.map((v) => (
-                <li class="careers-vacancy-item" role="listitem">
+                <li class="careers-vacancy-item card card--compact card--interactive state" role="listitem">
                   <span class="vacancy-type">{v.type}</span>
                   <span class="vacancy-title">{v.title}</span>
                 </li>
@@ -72,38 +62,16 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
       </div>
 
       <div class="reveal-right">
-        <div
-          style="padding:32px;background:var(--s-4);border:1px solid var(--b-subtle);border-radius:var(--r-2xl);position:relative;overflow:hidden"
-        >
-          <div
-            style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--c-orange),rgba(248,126,15,.15) 50%,transparent)"
-          >
+        <div class="card card-accent-top careers-form-panel">
+          <div class="careers-form-panel__header">
+            <p class="t-eyebrow-accent" style="margin-bottom:6px;display:block">{t.formCardLabel}</p>
+            <h3 class="careers-form-panel__title">{t.formCardTitle}</h3>
+            <p class="t-body-sm" style="color:var(--c-secondary);line-height:1.7">{t.formCardDesc}</p>
           </div>
 
-          <div style="margin-bottom:20px">
-            <p class="t-eyebrow-accent" style="margin-bottom:6px;display:block">
-              {t.formCardLabel}
-            </p>
-            <h3
-              style="font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:-.2px;color:var(--c-on-surface);line-height:1.05;margin-bottom:10px"
-            >
-              {t.formCardTitle}
-            </h3>
-            <p class="t-body-sm" style="color:var(--c-secondary);line-height:1.7">
-              {t.formCardDesc}
-            </p>
-          </div>
+          <div class="careers-form-panel__divider" role="separator" aria-hidden="true"></div>
 
-          <div
-            style="height:1px;background:var(--b-default);margin-bottom:20px"
-            role="separator"
-            aria-hidden="true"
-          >
-          </div>
-
-          <p class="t-eyebrow-accent" style="margin-bottom:10px;display:block">
-            {t.checkItemsLabel}
-          </p>
+          <p class="t-eyebrow-accent careers-form-panel__checks-title">{t.checkItemsLabel}</p>
           <ul class="careers-checklist">
             {
               t.checkItems.map((item) => (
@@ -128,13 +96,12 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
             }
           </ul>
 
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:24px">
+          <div class="careers-form-actions">
             <a
               href={formUrl}
               target={formUrl !== "#" ? "_blank" : undefined}
               rel={formUrl !== "#" ? "noopener noreferrer" : undefined}
               class="btn-filled"
-              style="width:100%;justify-content:center;height:42px;font-size:13px"
             >
               <svg
                 width="14"
@@ -153,19 +120,11 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
               {t.formBtnLabel}
             </a>
 
-            <!-- FAQ island — opens the accordion modal -->
             <CareersFAQ t={t.faq} client:load />
           </div>
 
-          <div
-            style="display:flex;align-items:center;gap:8px;margin-top:16px;padding:12px 14px;background:var(--s-3);border:1px solid var(--b-subtle);border-radius:var(--r-sm)"
-          >
-            <div
-              class="pulse"
-              style="width:7px;height:7px;border-radius:50%;background:var(--c-orange);flex-shrink:0"
-              aria-hidden="true"
-            >
-            </div>
+          <div class="careers-status-bar">
+            <div class="pulse careers-status-bar__dot" aria-hidden="true"></div>
             <p class="t-body-sm" style="color:var(--c-tertiary)">{t.statusLabel}</p>
           </div>
         </div>
@@ -173,148 +132,3 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
     </div>
   </div>
 </section>
-
-<style>
-  .careers-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
-  }
-
-  .careers-checklist {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .careers-check-item {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    font-size: 13px;
-    color: var(--c-secondary);
-    line-height: 1.5;
-  }
-
-  .careers-check-icon {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--c-orange-dim);
-    border: 1px solid var(--c-orange-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  @media (max-width: 860px) {
-    .careers-layout {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-  }
-
-  .careers-stack-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin: 0;
-    padding: 0;
-  }
-
-  .careers-stack-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 14px 16px;
-    background: var(--s-4);
-    border: 1px solid var(--b-subtle);
-    border-radius: 14px;
-  }
-
-  .careers-stack-label {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: var(--c-orange);
-    opacity: 0.8;
-    margin: 0;
-  }
-
-  .careers-stack-value {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--c-on-surface);
-    line-height: 1.25;
-    margin: 0;
-  }
-
-  .careers-vacancies {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .careers-vacancy-item {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 14px 16px;
-    background: var(--s-4);
-    border: 1px solid var(--b-subtle);
-    border-radius: 14px;
-    position: relative;
-    overflow: hidden;
-    transition:
-      border-color 0.25s,
-      transform 0.25s var(--ease-em),
-      box-shadow 0.25s;
-  }
-
-  .careers-vacancy-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, var(--c-orange), transparent);
-    opacity: 0;
-    transition: opacity 0.25s;
-  }
-
-  .careers-vacancy-item:hover {
-    border-color: var(--c-orange-border);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  }
-
-  .careers-vacancy-item:hover::before {
-    opacity: 1;
-  }
-
-  .vacancy-type {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: var(--c-orange);
-    opacity: 0.8;
-  }
-
-  .vacancy-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--c-on-surface);
-    line-height: 1.25;
-  }
-</style>

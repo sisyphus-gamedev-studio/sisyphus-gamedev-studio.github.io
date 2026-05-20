@@ -19,38 +19,7 @@
   opacity: 0.09;
 }
 
-.card-filled {
-  background: var(--s-4);
-  border-radius: var(--r-xl);
-  border: 1px solid var(--b-subtle);
-  position: relative;
-  overflow: hidden;
-  transition:
-    border-color 0.2s,
-    transform 0.3s var(--ease-em);
-}
-.card-filled:hover {
-  border-color: var(--b-default);
-  transform: translateY(-2px);
-}
-
-.card-game {
-  border-radius: var(--r-2xl);
-  overflow: hidden;
-  position: relative;
-  border: 1px solid var(--b-subtle);
-  background: var(--s-4);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  transition:
-    box-shadow 0.35s var(--ease-em),
-    transform 0.35s var(--ease-em),
-    border-color 0.25s;
-}
-.card-game:hover {
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
-  transform: translateY(-3px);
-  border-color: var(--b-accent);
-}
+/* Card primitives live in cards.css */
 
 .chip {
   display: inline-flex;
@@ -166,6 +135,60 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--c-orange);
+}
+
+.section-heading {
+  color: var(--c-on-surface);
+}
+
+.section-heading__accent {
+  color: var(--c-orange);
+}
+
+.section-lead {
+  color: var(--c-secondary);
+  line-height: 1.75;
+  margin-top: 14px;
+}
+
+.section-lead--narrow {
+  max-width: 360px;
+}
+
+.section-lead--wide {
+  max-width: 680px;
+}
+
+.section-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: var(--r-full);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border: 1px solid var(--b-default);
+  background: var(--s-5);
+  color: var(--c-secondary);
+  flex-shrink: 0;
+}
+
+.news-filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.section-status-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-orange);
+  flex-shrink: 0;
+  display: inline-block;
 }
 
 .skip-link {
@@ -378,7 +401,7 @@
 }
 
 .footer-bottom-row {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--b-subtle);
   margin-top: 24px;
   padding-top: 20px;
   display: flex;
@@ -406,7 +429,7 @@
 .footer-divider {
   width: 1px;
   height: 20px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--b-subtle);
   margin: 0 4px;
   flex-shrink: 0;
 }

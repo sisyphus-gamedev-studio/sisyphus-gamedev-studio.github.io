@@ -6,8 +6,6 @@ import { IMAGE_FALLBACK } from "../../../config";
 import {
   PROJECTS_EXPAND_MS,
   COLORS,
-  LAYOUT,
-  SPACING,
   TAG_STYLE,
   EASING,
   IMAGE_FILTERS,
@@ -56,29 +54,21 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
   );
 
   return (
-    <div
-      aria-labelledby="projects-heading"
-      style={{
-        padding: SPACING.sectionPadding,
-      }}
-    >
+    <div className="site-section__container" aria-labelledby="projects-heading">
       <div aria-live="polite" aria-atomic="true" className="sr-only">
         {shown.title} — {shown.price}
       </div>
 
-      <div
-        style={{ maxWidth: LAYOUT.maxWidth, margin: "0 auto", padding: `0 ${LAYOUT.padding}px` }}
-      >
-        <div className="reveal" suppressHydrationWarning style={{ marginBottom: 48 }}>
-          <div className="section-eyebrow">
-            <div className="section-eyebrow-line" />
-            <span className="section-eyebrow-label">{t.sectionLabel}</span>
-          </div>
-          <h2 id="projects-heading" className="t-display-md" style={{ color: COLORS.text.primary }}>
-            {t.heading}
-            <span style={{ color: COLORS.orange }}> {t.headingSuffix}</span>
-          </h2>
+      <div className="site-section__head reveal" suppressHydrationWarning>
+        <div className="section-eyebrow">
+          <div className="section-eyebrow-line" />
+          <span className="section-eyebrow-label">{t.sectionLabel}</span>
         </div>
+        <h2 id="projects-heading" className="t-display-md section-heading">
+          {t.heading}
+          <span className="section-heading__accent"> {t.headingSuffix}</span>
+        </h2>
+      </div>
 
         <div style={{ display: "flex", gap: 48, alignItems: "stretch" }}>
           <div
@@ -421,7 +411,6 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
             })}
           </div>
         </div>
-      </div>
     </div>
   );
 };

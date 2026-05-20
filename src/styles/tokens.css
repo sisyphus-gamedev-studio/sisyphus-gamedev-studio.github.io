@@ -14,6 +14,7 @@
   --s-3: #151515;
   --s-4: #1a1a1a;
   --s-5: #202020;
+  --s-6: #242424;
 
   --b-subtle: rgba(255, 255, 255, 0.06);
   --b-default: rgba(255, 255, 255, 0.07);
@@ -23,13 +24,19 @@
 
   --ease-em: cubic-bezier(0.2, 0, 0, 1);
   --ease-dec: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --duration-expand: 0.42s;
 
   --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
   --r-xl: 20px;
   --r-2xl: 24px;
   --r-full: 9999px;
 
   --spacing-section: 100px 0;
+  --spacing-section-mobile: 72px 0;
+  --spacing-section-head: 48px;
 
   --layout-max-width: 1280px;
   --layout-padding: 20px;
@@ -37,6 +44,15 @@
   --about-stat-size: 40px;
 
   --shadow-card-hover: 0 14px 38px rgba(0, 0, 0, 0.5);
+  --shadow-card-media: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-card-media-hover: 0 16px 48px rgba(0, 0, 0, 0.6);
+
+  --card-padding: 28px;
+  --card-padding-compact: 14px 16px;
+  --card-radius: var(--r-2xl);
+  --card-radius-secondary: var(--r-xl);
+  --card-hover-lift: -3px;
+  --card-hover-shadow: var(--shadow-card-hover);
 
   --accent-blue-bg: rgba(100, 140, 255, 0.1);
   --accent-blue-border: rgba(100, 140, 255, 0.2);

@@ -79,9 +79,9 @@ export const TRANSLATIONS = {
       description:
         "This is our team. We brought together people who care not only about the idea, but about actually building the product. What unites us is a shared pace, commitment to the process, and the willingness to take the game to release, one step at a time.",
       quoteLabel: "Quote",
-      expandSideProject: "Show side project",
-      collapseSideProject: "Hide side project",
-      sideProjectsLabel: "Other projects",
+      expandSideProject: "Show activities",
+      collapseSideProject: "Hide activities",
+      sideProjectsLabel: "Other activities",
       placeholderProject: {
         name: "Personal project",
         description: "Not tied to the studio lineup — we'll share details when it's ready.",
@@ -339,9 +339,9 @@ export const TRANSLATIONS = {
       description:
         "Это наша команда. Мы собрали людей, которым интересна не только идея, но и реальная работа над продуктом. Нас объединяют общий темп, вовлечённость в процесс и готовность шаг за шагом доводить игру до релиза.",
       quoteLabel: "Цитата",
-      expandSideProject: "Показать другой проект",
+      expandSideProject: "Показать активности",
       collapseSideProject: "Свернуть",
-      sideProjectsLabel: "Другие проекты",
+      sideProjectsLabel: "Другие активности",
       placeholderProject: {
         name: "Личный проект",
         description: "Не связан с играми студии — расскажем подробнее, когда будет готов.",

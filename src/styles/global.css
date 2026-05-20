@@ -13,5 +13,14 @@
 @import "./components.css";
 @import "./animations.css";
 @import "./skeleton.css";
+@import "./cards.css";
+@import "./forms.css";
 @import "./sections.css";
+@import "./news-section.css";
 @import "./about-section.css";
+@import "./partners-section.css";
+@import "./contact-section.css";
+@import "./careers-section.css";
+@import "./donate-section.css";
+@import "./careers-faq.css";
+@import "./not-found.css";

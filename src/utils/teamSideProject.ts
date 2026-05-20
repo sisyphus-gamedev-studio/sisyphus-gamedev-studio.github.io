@@ -1,5 +1,5 @@
 import type { Language } from "../types";
-import { PARTNERS, type PartnerCategory, type PartnerLink } from "../config/partners";
+import { PARTNERS, type PartnerLink } from "../config/partners";
 import type { PartnerLogoStyle } from "../config/partners";
 import type { TeamMemberAccent, TeamSideProject } from "../config/team";
 
@@ -25,7 +25,6 @@ export function resolveTeamSideProject(
   project: TeamSideProject,
   lang: Language,
   options?: {
-    categoryLabels?: Record<PartnerCategory, string>;
     placeholder?: TeamPlaceholderCopy;
   },
 ): ResolvedTeamSideProject | null {
@@ -56,7 +55,6 @@ export function resolveTeamSideProject(
       logoInitials: partner.logoInitials,
       logoAccent: partner.logoStyle,
       links: partner.links,
-      categoryLabel: options?.categoryLabels?.[partner.category],
     };
   }
 
@@ -78,7 +76,6 @@ export function resolveTeamSideProjects(
   projects: TeamSideProject[],
   lang: Language,
   options?: {
-    categoryLabels?: Record<PartnerCategory, string>;
     placeholder?: TeamPlaceholderCopy;
   },
 ): ResolvedTeamSideProject[] {

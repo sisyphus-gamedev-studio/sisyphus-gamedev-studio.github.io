@@ -36,6 +36,7 @@ export const COLORS = {
     s3: "#151515",
     s4: "#1a1a1a",
     s5: "#202020",
+    s6: "#242424",
   },
   text: {
     primary: "#f0ece8",
@@ -65,9 +66,13 @@ export const LAYOUT = {
   mobileBreakpoint: 768,
 } as const;
 
+/** Keep in sync with CSS vars in styles/tokens.css (--spacing-section*, --card-*). */
 export const SPACING = {
   sectionPadding: "100px 0",
   sectionPaddingMobile: "72px 0",
+  sectionHead: 48,
+  cardPaddingDefault: 28,
+  cardPaddingCompact: "14px 16px",
   cardPadding: {
     news: "clamp(14px,4vw,26px) clamp(14px,5vw,28px) clamp(16px,4vw,32px)",
   },

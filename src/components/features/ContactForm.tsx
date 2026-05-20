@@ -53,28 +53,8 @@ export default function ContactForm({ t }: Props) {
 
   if (status === "success") {
     return (
-      <div
-        style={{
-          padding: "40px 32px",
-          textAlign: "center",
-          background: "var(--s-4)",
-          borderRadius: "var(--r-2xl)",
-          border: "1px solid var(--b-accent)",
-        }}
-      >
-        <div
-          style={{
-            width: 48,
-            height: 48,
-            borderRadius: "50%",
-            background: "var(--c-orange-dim)",
-            border: "1px solid var(--c-orange-border)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "0 auto 18px",
-          }}
-        >
+      <div className="form-success">
+        <div className="form-success__icon">
           <svg
             width="20"
             height="20"
@@ -142,7 +122,7 @@ export default function ContactForm({ t }: Props) {
       />
 
       {status === "error" && (
-        <p className="t-label-md" style={{ color: COLORS.error, marginTop: -4 }}>
+        <p className="t-label-md form-label--error" style={{ marginTop: -4 }}>
           {f.error}
         </p>
       )}
@@ -221,6 +201,17 @@ interface FieldProps {
   onBlur: () => void;
 }
 
+function labelClass(hasError: boolean, focused: boolean) {
+  const parts = ["t-label-sm", "form-label"];
+  if (hasError) parts.push("form-label--error");
+  else if (focused) parts.push("form-label--focused");
+  return parts.join(" ");
+}
+
+function fieldClass(hasError: boolean) {
+  return hasError ? "form-field form-field--error" : "form-field";
+}
+
 function Field({
   id,
   name,
@@ -238,14 +229,7 @@ function Field({
   const hasError = !!error;
   return (
     <div className="flex-col gap-6">
-      <label
-        htmlFor={id}
-        className="t-label-sm"
-        style={{
-          color: hasError ? COLORS.error : focused ? "var(--c-orange)" : COLORS.text.tertiary,
-          transition: "color 0.2s",
-        }}
-      >
+      <label htmlFor={id} className={labelClass(hasError, focused)}>
         {label}
       </label>
       <input
@@ -258,28 +242,10 @@ function Field({
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-        style={{
-          width: "100%",
-          background: "var(--s-3)",
-          border: `1px solid ${hasError ? COLORS.error : focused ? "var(--b-accent)" : "var(--b-subtle)"}`,
-          borderRadius: "var(--r-sm)",
-          padding: "10px 14px",
-          color: "var(--c-on-surface)",
-          fontSize: SIZES.form.inputFontSize,
-          fontWeight: 500,
-          outline: "none",
-          transition: "border-color 0.2s",
-          boxSizing: "border-box",
-        }}
+        className={fieldClass(hasError)}
+        style={{ fontSize: SIZES.form.inputFontSize }}
       />
-      {hasError && (
-        <p
-          className="t-label-sm"
-          style={{ color: COLORS.error, letterSpacing: 0, textTransform: "none", marginTop: -2 }}
-        >
-          {error}
-        </p>
-      )}
+      {hasError && <p className="t-label-sm form-error">{error}</p>}
     </div>
   );
 }
@@ -312,14 +278,7 @@ function TextareaField({
   const hasError = !!error;
   return (
     <div className="flex-col gap-6">
-      <label
-        htmlFor={id}
-        className="t-label-sm"
-        style={{
-          color: hasError ? COLORS.error : focused ? "var(--c-orange)" : COLORS.text.tertiary,
-          transition: "color 0.2s",
-        }}
-      >
+      <label htmlFor={id} className={labelClass(hasError, focused)}>
         {label}
       </label>
       <textarea
@@ -331,30 +290,10 @@ function TextareaField({
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-        style={{
-          width: "100%",
-          background: "var(--s-3)",
-          border: `1px solid ${hasError ? COLORS.error : focused ? "var(--b-accent)" : "var(--b-subtle)"}`,
-          borderRadius: "var(--r-sm)",
-          padding: "10px 14px",
-          color: "var(--c-on-surface)",
-          fontSize: SIZES.form.inputFontSize,
-          fontWeight: 500,
-          outline: "none",
-          resize: "vertical",
-          minHeight: SIZES.form.textareaMinHeight,
-          transition: "border-color 0.2s",
-          boxSizing: "border-box",
-        }}
+        className={`${fieldClass(hasError)} form-field--textarea`}
+        style={{ fontSize: SIZES.form.inputFontSize, minHeight: SIZES.form.textareaMinHeight }}
       />
-      {hasError && (
-        <p
-          className="t-label-sm"
-          style={{ color: COLORS.error, letterSpacing: 0, textTransform: "none", marginTop: -2 }}
-        >
-          {error}
-        </p>
-      )}
+      {hasError && <p className="t-label-sm form-error">{error}</p>}
     </div>
   );
 }

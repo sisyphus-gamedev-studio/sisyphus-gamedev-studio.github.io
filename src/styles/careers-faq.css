@@ -1,0 +1,119 @@
+.faq-accordion-item {
+  border-radius: var(--r-md);
+  border: 1px solid var(--b-subtle);
+  background: transparent;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.faq-accordion-item--open {
+  border-color: var(--b-strong);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.faq-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.faq-accordion-index {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--c-orange);
+  opacity: 0.65;
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.faq-accordion-question {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  transition: color 0.2s;
+}
+
+.faq-accordion-question--open {
+  color: var(--c-on-surface);
+}
+
+.faq-accordion-question--closed {
+  color: var(--c-secondary);
+}
+
+.faq-accordion-chevron {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--b-default);
+  color: var(--c-tertiary);
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    transform var(--duration-expand) var(--ease-out);
+  margin-top: 1px;
+}
+
+.faq-accordion-chevron--open {
+  background: var(--c-orange-dim);
+  border-color: var(--c-orange-border);
+  color: var(--c-orange);
+  transform: rotate(180deg);
+}
+
+.faq-accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-expand) var(--ease-out);
+  interpolate-size: allow-keywords;
+}
+
+.faq-accordion-body--open {
+  grid-template-rows: 1fr;
+}
+
+.faq-accordion-body__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.faq-accordion-answer {
+  padding: 0 16px 16px 44px;
+  font-size: 13px;
+  color: var(--c-secondary);
+  line-height: 1.78;
+  font-weight: 400;
+  margin: 0;
+}
+
+.faq-modal-panel {
+  padding: 0;
+  background: var(--s-3);
+  border: 1px solid var(--b-strong);
+  border-radius: var(--card-radius-secondary);
+}
+
+.faq-modal-header {
+  border-bottom: 1px solid var(--b-subtle);
+}
+
+.faq-modal-close {
+  border: 1px solid var(--b-medium);
+  background: rgba(0, 0, 0, 0.45);
+}

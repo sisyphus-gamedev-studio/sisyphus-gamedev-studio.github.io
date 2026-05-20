@@ -1,0 +1,195 @@
+/* Base card shell */
+.card,
+.card-panel {
+  background: var(--s-4);
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.25s,
+    transform 0.3s var(--ease-em),
+    box-shadow 0.3s;
+}
+
+.card--elevated,
+.card-panel--elevated {
+  background: var(--s-5);
+}
+
+.card--accent,
+.card-panel--accent {
+  border-color: var(--c-orange-border);
+}
+
+.card--secondary {
+  border-radius: var(--card-radius-secondary);
+  padding: 14px 16px;
+}
+
+.card--flush {
+  padding: 0;
+}
+
+.card--compact {
+  padding: var(--card-padding-compact);
+  border-radius: var(--r-md);
+}
+
+.card--quote,
+.content-panel {
+  padding: 20px 22px;
+  border-radius: var(--r-lg);
+  background: var(--s-5);
+  border: 1px solid var(--b-subtle);
+  border-left: 2px solid var(--c-orange);
+}
+
+.card--status,
+.status-card {
+  padding: var(--card-padding-compact);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--s-5);
+  border: 1px solid var(--b-subtle);
+  border-radius: var(--r-md);
+}
+
+.card--media,
+.card-game {
+  padding: 0;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  border: 1px solid var(--b-subtle);
+  background: var(--s-4);
+  box-shadow: var(--shadow-card-media);
+  transition:
+    box-shadow 0.35s var(--ease-em),
+    transform 0.35s var(--ease-em),
+    border-color 0.25s;
+}
+
+.card--interactive:hover,
+.card-panel.card--interactive:hover,
+.card-panel.state.card--interactive:hover,
+.team-card.card--interactive:hover,
+.partner-card.card--interactive:hover,
+.donate-tier-card.card--interactive:hover {
+  border-color: var(--b-default);
+  transform: translateY(var(--card-hover-lift));
+  box-shadow: var(--card-hover-shadow);
+}
+
+.card--media.card--interactive:hover,
+.card-game:hover {
+  box-shadow: var(--shadow-card-media-hover);
+  transform: translateY(var(--card-hover-lift));
+  border-color: var(--b-accent);
+}
+
+.card--filled,
+.card-filled {
+  background: var(--s-4);
+  border-radius: var(--card-radius-secondary);
+  border: 1px solid var(--b-subtle);
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.2s,
+    transform 0.3s var(--ease-em);
+}
+
+.card--filled.card--interactive:hover,
+.card-filled:hover {
+  border-color: var(--b-default);
+  transform: translateY(var(--card-hover-lift));
+  box-shadow: var(--card-hover-shadow);
+}
+
+.card-accent-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--c-orange), rgba(248, 126, 15, 0.15) 50%, transparent);
+  pointer-events: none;
+}
+
+.card-accent-top--contact::before {
+  background: linear-gradient(90deg, var(--c-orange) 0%, rgba(248, 126, 15, 0.15) 40%, transparent 70%);
+}
+
+/* Shared person / org block (team, partners) */
+.card-entity__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.card-entity__media {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--b-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.card-entity__media--sm {
+  width: 44px;
+  height: 44px;
+  font-size: 12px;
+}
+
+.card-entity__media--image {
+  background: var(--s-6);
+}
+
+.card-entity__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-entity__body {
+  min-width: 0;
+  flex: 1;
+}
+
+.card-entity__title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--c-on-surface);
+  letter-spacing: -0.2px;
+  line-height: 1.1;
+  margin: 0 0 6px;
+}
+
+.card-entity__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-entity__desc {
+  color: var(--c-secondary);
+  line-height: 1.68;
+  margin: 0 0 10px;
+}
+
+.card-entity__desc--flush {
+  margin-bottom: 0;
+}

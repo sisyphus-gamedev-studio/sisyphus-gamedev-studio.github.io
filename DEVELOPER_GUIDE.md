@@ -90,12 +90,17 @@ All are `.astro` files. They receive translations and data as props and contain 
 
 | Section | Background | Notes |
 |---|---|---|
-| `Hero` | transparent | Animated glitch title, stats (titles in dev, founded year, team size), featured project cards |
-| `About` | `var(--s-2)` | 4 stat cards (team, titles, founded, enthusiasm), mission quote, active development status |
-| `Careers` | transparent | Two-column: description + vacancies list + application card with checklist |
-| `Donate` | `var(--s-2)` | Three-tier support cards (sponsor, one-time, wishlist) |
-| `Partners` | transparent | Partner cards with category badges and social links |
-| `Contact` | `var(--s-2)` | Two-column: info + `ContactForm` island |
+| `Hero` | transparent | Animated glitch title, stats, featured project cards; grid from `AnimatedBackground` |
+| `About` | `--filled` (`--s-2`) | Stats, mission quote, active development status |
+| `Team` | `--grid` (transparent) | Team grid island; animated grid visible |
+| `ProjectsCarousel` | `--filled` | Desktop/mobile carousel |
+| `NewsCarousel` | `--grid` | News carousel + filters; animated grid visible |
+| `Careers` | `--filled` | Two-column: vacancies + application card |
+| `Donate` | `--grid` | Three-tier support cards |
+| `Partners` | `--filled` | Partner cards with category badges |
+| `Contact` | `--grid` | Info + `ContactForm` island |
+
+Sections after Hero alternate `--filled` / `--grid` so the fixed `AnimatedBackground` grid shows through transparent blocks.
 
 ---
 
@@ -116,12 +121,43 @@ FOCUSABLE_SELECTORS  // for focus trap in modals
 UI             // small strings: skipLink, noScript, hero stats/badges, errorBoundary
 ```
 
+### Section layout (styling)
+
+Every content section (except Hero) follows the same shell:
+
+1. `site-section` (+ optional `site-section--filled` or `site-section--grid`)
+2. `site-section__container` — max-width and horizontal padding (do not repeat inline)
+3. `site-section__head` — eyebrow + `section-heading` + optional `section-lead` (48px bottom margin)
+4. Content blocks — use the card system in `src/styles/cards.css`
+
+### Card system (`cards.css`)
+
+| Class | Use |
+|---|---|
+| `.card` / `.card-panel` | Default panel (`--s-4`, `--card-radius`, 28px padding) |
+| `.card--elevated` | Raised surface (`--s-5`) — donate tiers, stats |
+| `.card--accent` | Orange border — featured partners/donate |
+| `.card--compact` | List tiles — careers stack/vacancies |
+| `.card--quote` | Mission quote with orange left edge |
+| `.card--status` | Compact status row |
+| `.card--media` | Hero featured game card (shadow) |
+| `.card--secondary` | Smaller radius/padding — Hero concept link |
+| `.card--interactive` | Unified hover lift + shadow |
+| `.card--flush` | No padding — news main, contact form shell |
+| `.card-accent-top` | Orange gradient top line |
+
+Forms: `form-field`, `form-label`, `form-success` in `forms.css`. News layout: `news-section.css`.
+
+Shared heading classes: `section-heading`, `section-heading__accent`, `section-lead`, `section-lead--narrow`, `section-lead--wide`.
+
+Tokens live in `src/styles/tokens.css` (`--card-*`); section-specific CSS in `src/styles/*-section.css`. Prefer CSS classes over inline styles for static layout.
+
 ### design.ts
 
 ```ts
-COLORS         // orange palette, surfaces, text, borders, news category colors
+COLORS         // orange palette, surfaces (s1–s6), text, borders, news category colors
 LAYOUT         // { maxWidth: 1280, padding: 20, navHeight: 76, mobileBreakpoint: 768 }
-SPACING        // section padding, card padding
+SPACING        // section padding, sectionHead (48), card padding — sync with tokens.css
 EASING         // CSS easing strings
 GRADIENTS      // card overlays, orange tint, news card gradient
 IMAGE_FILTERS  // brightness/saturation for project/news/hero images

@@ -5,6 +5,24 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .site-section {
+    padding: var(--spacing-section-mobile);
+  }
+}
+
+.site-section__head {
+  margin-bottom: var(--spacing-section-head);
+}
+
+.site-section__head--row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
 .site-section--filled {
   background: var(--s-2);
 }
@@ -21,20 +39,4 @@
   z-index: 1;
 }
 
-.content-panel {
-  padding: 20px 22px;
-  border-radius: 16px;
-  background: var(--s-5);
-  border: 1px solid var(--b-subtle);
-  border-left: 2px solid var(--c-orange);
-}
-
-.status-card {
-  padding: 14px 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--s-5);
-  border: 1px solid var(--b-subtle);
-  border-radius: 12px;
-}
+/* Card primitives live in cards.css */

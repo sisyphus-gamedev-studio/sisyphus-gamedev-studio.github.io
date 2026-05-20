@@ -1,7 +1,3 @@
-.about-section__head {
-  margin-bottom: 56px;
-}
-
 .about-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -23,7 +19,7 @@
 }
 
 .about-media {
-  border-radius: 20px;
+  border-radius: var(--r-xl);
   overflow: hidden;
   position: relative;
   margin-bottom: 28px;
@@ -121,9 +117,6 @@
 .about-stat {
   padding: 20px 18px;
   cursor: default;
-  background: var(--s-5);
-  border: 1px solid var(--b-subtle);
-  border-radius: 16px;
   display: flex;
   flex-direction: column;
 }

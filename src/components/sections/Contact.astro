@@ -1,7 +1,7 @@
 ---
 import type { TranslationStructure } from "../../types";
 import ContactForm from "../features/ContactForm";
-import { CONTACT, CONTACT_PAGE_SOCIAL, LAYOUT, SOCIAL_ICONS } from "../../config";
+import { CONTACT, CONTACT_PAGE_SOCIAL, SOCIAL_ICONS } from "../../config";
 
 interface Props {
   t: TranslationStructure["contact"];
@@ -13,47 +13,34 @@ const contactInfo = [{ icon: SOCIAL_ICONS.email, text: CONTACT.contactEmail }];
 ---
 
 <section id="contact" class="site-section site-section--grid" aria-labelledby="contact-heading">
-  <div
-    class="site-section__container"
-    style={`max-width: ${LAYOUT.maxWidth}px; padding: 0 ${LAYOUT.padding}px`}
-  >
-    <div style="margin-bottom: 40px" class="reveal">
+  <div class="site-section__container">
+    <div class="site-section__head reveal">
       <div class="section-eyebrow">
         <div class="section-eyebrow-line"></div>
         <span class="section-eyebrow-label">{t.sectionLabel}</span>
       </div>
-      <h2 id="contact-heading" class="t-display-md" style="color: var(--c-on-surface)">
+      <h2 id="contact-heading" class="t-display-md section-heading">
         {t.heading}
-        <span style="color: var(--c-orange)">{t.headingSuffix}</span>
+        <span class="section-heading__accent">{t.headingSuffix}</span>
       </h2>
     </div>
 
     <div class="contact-layout">
-      <div class="reveal reveal-left" style="padding-top: 6px">
-        <p
-          class="t-body-md"
-          style="color: var(--c-secondary); line-height: 1.75; max-width: 360px; margin-bottom: 40px"
-        >
-          {t.description}
-        </p>
+      <div class="reveal reveal-left contact-sidebar">
+        <p class="t-body-md section-lead section-lead--narrow contact-sidebar__lead">{t.description}</p>
 
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px">
+        <div class="contact-info-list">
           {
             contactInfo.map((item) => (
-              <div style="display: flex; align-items: center; gap: 12px">
-                <div
-                  style="width: 32px; height: 32px; border-radius: var(--r-sm); background: var(--s-4); border: 1px solid var(--b-subtle); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--c-orange)"
-                  set:html={item.icon}
-                />
-                <span class="t-body-sm" style="color: var(--c-tertiary)">
-                  {item.text}
-                </span>
+              <div class="contact-info-row">
+                <div class="contact-info-icon" set:html={item.icon} />
+                <span class="t-body-sm" style="color:var(--c-tertiary)">{item.text}</span>
               </div>
             ))
           }
         </div>
 
-        <div style="display: flex; gap: 8px; flex-wrap: wrap">
+        <div class="contact-social-row">
           {
             CONTACT_PAGE_SOCIAL.map((social) => (
               <a
@@ -61,46 +48,21 @@ const contactInfo = [{ icon: SOCIAL_ICONS.email, text: CONTACT.contactEmail }];
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                class="footer-social-link state"
-                style="flex-direction: row; width: auto; padding: 10px 16px; border-radius: 8px; gap: 10px"
+                class="footer-social-link state contact-social-link"
               >
                 <Fragment set:html={social.iconSvg} />
-                <span style="font-size: 9px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--c-tertiary)">
-                  {social.label}
-                </span>
+                <span class="contact-social-link__label">{social.label}</span>
               </a>
             ))
           }
         </div>
       </div>
 
-      <div
-        class="reveal-right"
-        style="border-radius: var(--r-2xl); border: 1px solid var(--b-subtle); overflow: hidden; background: var(--s-4)"
-      >
-        <div
-          style="height: 1px; background: linear-gradient(90deg, var(--c-orange) 0%, rgba(248,126,15,.15) 40%, transparent 70%)"
-        >
-        </div>
-        <div style="padding: 20px 24px">
+      <div class="reveal-right card card--flush contact-form-panel card-accent-top card-accent-top--contact">
+        <div class="contact-form-panel__body">
           <ContactForm t={t} client:load />
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<style>
-  .contact-layout {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 64px;
-    align-items: start;
-  }
-  @media (max-width: 768px) {
-    .contact-layout {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-  }
-</style>

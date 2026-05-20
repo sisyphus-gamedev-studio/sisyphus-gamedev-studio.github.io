@@ -27,13 +27,13 @@ const aboutImg = IMAGES.about;
   aria-labelledby="about-heading"
 >
   <div class="site-section__container">
-    <div class="about-section__head reveal">
+    <div class="site-section__head reveal">
       <div class="section-eyebrow">
         <div class="section-eyebrow-line"></div>
         <span class="section-eyebrow-label">{t.sectionLabel}</span>
       </div>
-      <h2 id="about-heading" class="t-display-md" style="color:var(--c-on-surface)">
-        {t.heading}<span style="color:var(--c-orange)"> {t.headingSuffix}</span>
+      <h2 id="about-heading" class="t-display-md section-heading">
+        {t.heading}<span class="section-heading__accent"> {t.headingSuffix}</span>
       </h2>
     </div>
 
@@ -72,7 +72,7 @@ const aboutImg = IMAGES.about;
         <dl class="about-stats">
           {
             stats.map((s) => (
-              <div class="about-stat state">
+              <div class="about-stat card card--compact card--elevated state">
                 <dd class="t-stat-num about-stat__value" aria-label={`${s.value} — ${s.label}`}>
                   {s.value}
                 </dd>
@@ -82,14 +82,14 @@ const aboutImg = IMAGES.about;
           }
         </dl>
 
-        <div class="content-panel about-mission">
+        <div class="card card--quote about-mission">
           <p class="t-label-sm about-mission__label">{t.missionLabel}</p>
           <blockquote lang={lang} class="t-body-lg about-mission__quote">
             {t.missionQuote}
           </blockquote>
         </div>
 
-        <div class="status-card about-status">
+        <div class="card card--status about-status">
           <div class="pulse" style="width:8px;height:8px;border-radius:50%;background:var(--c-orange);flex-shrink:0" aria-hidden="true"></div>
           <div>
             <p class="t-title-sm about-status__title">{t.statusLabel}</p>

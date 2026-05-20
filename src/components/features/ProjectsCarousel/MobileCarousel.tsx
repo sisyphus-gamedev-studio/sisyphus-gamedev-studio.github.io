@@ -5,8 +5,6 @@ import { handleImageError } from "../../../utils/images";
 import { IMAGE_FALLBACK } from "../../../config";
 import {
   COLORS,
-  LAYOUT,
-  SPACING,
   SWIPE_THRESHOLD,
   TAG_STYLE,
   IMAGE_FILTERS,
@@ -60,40 +58,30 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
   }, []);
 
   return (
-    <div
-      aria-labelledby="projects-heading"
-      style={{
-        padding: SPACING.sectionPaddingMobile,
-      }}
-    >
+    <div className="site-section__container" aria-labelledby="projects-heading">
       <div aria-live="polite" aria-atomic="true" className="sr-only">
         {p.title} — {p.price}
       </div>
 
-      <div
-        style={{ maxWidth: LAYOUT.maxWidth, margin: "0 auto", padding: `0 ${LAYOUT.padding}px` }}
-      >
-        <div className="reveal" suppressHydrationWarning style={{ marginBottom: 32 }}>
-          <div className="section-eyebrow">
-            <div className="section-eyebrow-line" />
-            <span className="section-eyebrow-label">
-              {String(activeIndex + 1).padStart(2, "0")} /{" "}
-              {String(projects.length).padStart(2, "0")}
-            </span>
-          </div>
-          <h2 id="projects-heading" className="t-display-md" style={{ color: COLORS.text.primary }}>
-            {t.heading}
-            <span style={{ color: COLORS.orange }}> {t.headingSuffix}</span>
-          </h2>
+      <div className="site-section__head reveal" suppressHydrationWarning>
+        <div className="section-eyebrow">
+          <div className="section-eyebrow-line" />
+          <span className="section-eyebrow-label">
+            {String(activeIndex + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+          </span>
         </div>
+        <h2 id="projects-heading" className="t-display-md section-heading">
+          {t.heading}
+          <span className="section-heading__accent"> {t.headingSuffix}</span>
+        </h2>
+      </div>
 
         <div
-          className="reveal-scale"
+          className="reveal-scale card card--flush"
           suppressHydrationWarning
           style={{
-            borderRadius: 16,
+            padding: 0,
             overflow: "hidden",
-            border: `1px solid ${COLORS.border.default}`,
             position: "relative",
           }}
           onTouchStart={onTouchStart}
@@ -243,7 +231,6 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
         >
           ← {t.swipeHint} →
         </p>
-      </div>
     </div>
   );
 };

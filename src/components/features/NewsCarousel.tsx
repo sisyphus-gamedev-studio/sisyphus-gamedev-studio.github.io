@@ -7,8 +7,6 @@ import {
   NEWS_SUMMARY_PREVIEW_CHARS,
   SWIPE_THRESHOLD,
   COLORS,
-  LAYOUT,
-  SPACING,
   SIZES,
   GRADIENTS,
   getNewsCategories,
@@ -137,18 +135,15 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
         className="site-section site-section--grid"
         aria-labelledby="news-heading"
       >
-        <div
-          className="site-section__container"
-          style={{ maxWidth: LAYOUT.maxWidth, padding: `0 ${LAYOUT.padding}px` }}
-        >
-          <div style={{ marginBottom: 40 }}>
+        <div className="site-section__container">
+          <div className="site-section__head">
             <div className="section-eyebrow">
               <div className="section-eyebrow-line" />
               <span className="section-eyebrow-label">{t.sectionLabel}</span>
             </div>
-            <h2 id="news-heading" className="t-display-md" style={{ color: COLORS.text.primary }}>
+            <h2 id="news-heading" className="t-display-md section-heading">
               {t.heading}
-              <span style={{ color: COLORS.orange }}> {t.headingSuffix}</span>
+              <span className="section-heading__accent"> {t.headingSuffix}</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -175,48 +170,31 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
       )}
 
       <section id="news" className="site-section site-section--grid" aria-labelledby="news-heading">
-        <div
-          className="site-section__container"
-          style={{ maxWidth: LAYOUT.maxWidth, padding: `0 ${LAYOUT.padding}px` }}
-        >
+        <div className="site-section__container">
           <div aria-live="polite" aria-atomic="true" className="sr-only">
             {item.title}
           </div>
 
           <div
-            className="reveal"
+            className="site-section__head site-section__head--row reveal"
             suppressHydrationWarning
-            style={{
-              marginBottom: 32,
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              gap: 12,
-            }}
           >
             <div>
               <div className="section-eyebrow">
                 <div className="section-eyebrow-line" />
                 <span className="section-eyebrow-label">{t.sectionLabel}</span>
               </div>
-              <h2 id="news-heading" className="t-display-md" style={{ color: COLORS.text.primary }}>
+              <h2 id="news-heading" className="t-display-md section-heading">
                 {t.heading}
-                <span style={{ color: COLORS.orange }}> {t.headingSuffix}</span>
+                <span className="section-heading__accent"> {t.headingSuffix}</span>
               </h2>
             </div>
             {filtered.length > 0 ? (
-              <div className="md-badge" style={{ marginBottom: 4 }}>
-                {String(current + 1).padStart(2, "0")} / {String(filtered.length).padStart(2, "0")}
-              </div>
+              <div className="md-badge">{String(current + 1).padStart(2, "0")} / {String(filtered.length).padStart(2, "0")}</div>
             ) : null}
           </div>
 
-          <div
-            className="reveal"
-            suppressHydrationWarning
-            style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 24 }}
-          >
+          <div className="reveal news-filters" suppressHydrationWarning>
             <button
               className={`chip ${activeCategory === "all" ? "active" : ""}`}
               onClick={() => setActiveCategory("all")}
@@ -242,19 +220,8 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {!item ? (
               <div
-                className="lg:col-span-3"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  minHeight: SIZES.newsCarousel.emptyStateMinHeight,
-                  borderRadius: "var(--r-2xl)",
-                  border: "1px solid var(--b-subtle)",
-                  background: "var(--s-4)",
-                  color: COLORS.text.tertiary,
-                  fontSize: 14,
-                  letterSpacing: "0.04em",
-                }}
+                className="news-empty lg:col-span-3"
+                style={{ minHeight: SIZES.newsCarousel.emptyStateMinHeight }}
               >
                 {t.noNews}
               </div>
@@ -267,16 +234,8 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                     tabIndex={0}
                     role="region"
                     aria-label={t.heading}
-                    style={{
-                      position: "relative",
-                      borderRadius: "var(--r-2xl)",
-                      overflow: "hidden",
-                      background: "var(--s-4)",
-                      border: "1px solid var(--b-subtle)",
-                      height: SIZES.newsCard.height,
-                      width: "100%",
-                      outline: "none",
-                    }}
+                    className="news-card-main card card--flush"
+                    style={{ height: SIZES.newsCard.height }}
                     onTouchStart={handleTouchStart}
                     onTouchEnd={handleTouchEnd}
                     onTouchCancel={handleTouchCancel}
@@ -303,16 +262,11 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                     />
 
                     <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background: GRADIENTS.newsCard,
-                      }}
+                      className="news-card-main__gradient"
+                      style={{ background: GRADIENTS.newsCard }}
                     />
 
-                    <div
-                      style={{ position: "absolute", top: 18, left: 18, display: "flex", gap: 8 }}
-                    >
+                    <div className="news-card-main__badges">
                       <div className="md-badge-surface md-badge" style={{ gap: 6 }}>
                         <Calendar size={9} style={{ color: COLORS.orange }} aria-hidden="true" />
                         <time dateTime={item.isoDate}>{item.date}</time>
@@ -331,15 +285,7 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                       )}
                     </div>
 
-                    <div
-                      style={{
-                        position: "absolute",
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        padding: SPACING.cardPadding.news,
-                      }}
-                    >
+                    <div className="news-card-main__footer">
                       <h3
                         className="t-headline-lg"
                         style={{
@@ -352,13 +298,7 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                         {item.title}
                       </h3>
 
-                      <div
-                        style={{
-                          height: 1,
-                          background: COLORS.border.strong,
-                          marginBottom: "clamp(8px,1.5vw,12px)",
-                        }}
-                      />
+                      <div className="news-card-main__divider" />
 
                       <p
                         className="t-body-md"
@@ -439,17 +379,7 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                     </div>
                   </div>
 
-                  <p
-                    className="lg:hidden"
-                    style={{
-                      textAlign: "center",
-                      color: COLORS.text.muted,
-                      fontSize: 11,
-                      marginTop: 8,
-                      letterSpacing: 0.5,
-                    }}
-                    aria-hidden="true"
-                  >
+                  <p className="news-swipe-hint lg:hidden" aria-hidden="true">
                     ← {t.swipeHint} →
                   </p>
                 </div>
@@ -458,17 +388,8 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                   role="listbox"
                   aria-label={t.sectionLabel}
                   aria-activedescendant={`news-item-${current}`}
-                  className="reveal-right"
+                  className="reveal-right news-card-list"
                   suppressHydrationWarning
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 4,
-                    listStyle: "none",
-                    padding: 0,
-                    margin: 0,
-                    outline: "none",
-                  }}
                 >
                   {filtered.map((n, i) => {
                     const isActive = i === current;
@@ -479,67 +400,16 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                           role="option"
                           aria-selected={isActive}
                           onClick={() => goTo(i)}
-                          className="state"
+                          className={`state news-card-list-item${isActive ? " news-card-list-item--active" : ""}`}
                           aria-label={`${n.date} — ${n.title}`}
-                          style={{
-                            width: "100%",
-                            textAlign: "left",
-                            padding: "14px 16px",
-                            cursor: "pointer",
-                            borderRadius: 12,
-                            overflow: "hidden",
-                            border: "none",
-                            background: isActive ? COLORS.surface.s5 : "transparent",
-                            outline: isActive
-                              ? `1px solid ${COLORS.border.strong}`
-                              : "1px solid transparent",
-                            outlineOffset: -1,
-                            transition: reducedMotion ? "none" : "all .25s cubic-bezier(0.2,0,0,1)",
-                          }}
+                          style={reducedMotion ? { transition: "none" } : undefined}
                         >
-                          {isActive && (
-                            <div
-                              aria-hidden="true"
-                              style={{
-                                position: "absolute",
-                                left: 0,
-                                top: 10,
-                                bottom: 10,
-                                width: 2,
-                                borderRadius: "0 2px 2px 0",
-                                background: COLORS.orange,
-                              }}
-                            />
-                          )}
-                          <span
-                            className="t-label-sm"
-                            style={{
-                              color: isActive ? COLORS.orange : COLORS.text.tertiary,
-                              marginBottom: 6,
-                              display: "block",
-                              letterSpacing: 0.4,
-                              textTransform: "none" as const,
-                              fontSize: 11,
-                              transition: reducedMotion ? "none" : "color .2s",
-                            }}
-                          >
+                          {isActive && <div className="news-card-list-item__accent" aria-hidden="true" />}
+                          <span className="t-label-sm news-card-list-item__date">
                             <time dateTime={n.isoDate}>{n.date}</time>
                           </span>
-                          <p
-                            className="t-title-sm"
-                            style={{
-                              color: isActive ? COLORS.text.primary : COLORS.text.tertiary,
-                              fontWeight: isActive ? 600 : 400,
-                              lineHeight: 1.45,
-                              transition: reducedMotion ? "none" : "color .2s",
-                            }}
-                          >
-                            {n.title}
-                          </p>
-                          <p
-                            className="t-body-sm"
-                            style={{ color: COLORS.text.muted, marginTop: 4, lineHeight: 1.4 }}
-                          >
+                          <p className="t-title-sm news-card-list-item__title">{n.title}</p>
+                          <p className="t-body-sm news-card-list-item__summary">
                             {n.summary.slice(0, NEWS_SUMMARY_PREVIEW_CHARS)}…
                           </p>
                         </button>

@@ -13,43 +13,24 @@ const { t, lang } = Astro.props;
 
 <section id="partners" class="site-section site-section--filled" aria-labelledby="partners-heading">
   <div class="site-section__container">
-    <div
-      class="reveal"
-      style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:52px"
-    >
+    <div class="site-section__head site-section__head--row reveal">
       <div>
         <div class="section-eyebrow">
           <div class="section-eyebrow-line"></div>
           <span class="section-eyebrow-label">{t.sectionLabel}</span>
         </div>
-        <h2 id="partners-heading" class="t-display-md" style="color:var(--c-on-surface)">
-          {t.heading}<span style="color:var(--c-orange)"> {t.headingSuffix}</span>
+        <h2 id="partners-heading" class="t-display-md section-heading">
+          {t.heading}<span class="section-heading__accent"> {t.headingSuffix}</span>
         </h2>
-        <p
-          class="t-body-lg"
-          style="color:var(--c-secondary);max-width:680px;line-height:1.75;margin-top:14px"
-        >
-          {t.description}
-        </p>
+        <p class="t-body-lg section-lead section-lead--wide">{t.description}</p>
       </div>
-      <div
-        style="display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:var(--r-full);font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;border:1px solid var(--b-default);background:var(--s-5);color:var(--c-secondary)"
-      >
-        <span
-          class="pulse"
-          aria-hidden="true"
-          style="width:6px;height:6px;border-radius:50%;background:var(--c-orange);flex-shrink:0;display:inline-block"
-        ></span>
+      <div class="section-status-badge">
+        <span class="pulse section-status-badge__dot" aria-hidden="true"></span>
         {t.activeCount}
       </div>
     </div>
 
-    <div
-      class="reveal partners-grid"
-      style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:40px"
-      role="list"
-      aria-label={t.sectionLabel}
-    >
+    <div class="reveal partners-grid" role="list" aria-label={t.sectionLabel}>
       {
         PARTNERS.map((partner) => {
           const localData = partner[lang];
@@ -61,14 +42,14 @@ const { t, lang } = Astro.props;
           return (
             <div
               role="listitem"
-              class="state"
-              style={`background:var(--s-4);border:1px solid ${isFeatured ? "var(--c-orange-border)" : "var(--b-subtle)"};border-radius:var(--r-2xl);padding:28px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:border-color .25s,transform .3s var(--ease-em),box-shadow .3s`}
+              class={`card card--interactive state partner-card${isFeatured ? " card--accent" : ""}`}
               tabindex="0"
             >
-              <div style="position:relative;z-index:1;display:flex;flex-direction:column;height:100%">
-                <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+              <div class="partner-card__inner">
+                <div class="card-entity__header">
                   <div
-                    style={`width:64px;height:64px;border-radius:16px;overflow:hidden;flex-shrink:0;border:1px solid var(--b-subtle);${partner.logoImage ? "background:var(--s-6)" : logoStyle + ";display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;letter-spacing:-1px"}`}
+                    class={`card-entity__media${partner.logoImage ? " card-entity__media--image" : ""}`}
+                    style={partner.logoImage ? undefined : logoStyle}
                   >
                     {partner.logoImage ? (
                       <img
@@ -82,33 +63,26 @@ const { t, lang } = Astro.props;
                       <span aria-hidden="true">{partner.logoInitials}</span>
                     )}
                   </div>
-                  <div>
-                    <h3 style="font-size:18px;font-weight:800;color:var(--c-on-surface);letter-spacing:-.2px;line-height:1.1;margin-bottom:6px">
-                      {localData.name}
-                    </h3>
+                  <div class="card-entity__body">
+                    <h3 class="card-entity__title t-card-title">{localData.name}</h3>
                     <span
-                      style={`display:inline-flex;align-items:center;padding:2px 9px;border-radius:var(--r-full);font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;border:1px solid;width:fit-content;${catStyle}`}
+                      class="md-badge"
+                      style={`${catStyle}`}
                     >
                       {catLabel}
                     </span>
                   </div>
                 </div>
 
-                <p
-                  class="t-body-sm"
-                  style="color:var(--c-secondary);line-height:1.68;flex:1;margin-bottom:20px"
-                >
-                  {localData.description}
-                </p>
+                <p class="t-body-sm card-entity__desc">{localData.description}</p>
 
-                <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:auto">
+                <div class="partner-card__links">
                   {partner.links.website && partner.links.website !== "#" && (
                     <a
                       href={partner.links.website}
                       target="_blank"
                       rel="noopener noreferrer"
                       class={isFeatured ? "btn-tonal" : "btn-outlined"}
-                      style="height:32px;padding:0 13px;font-size:11px;gap:5px"
                       aria-label={`${localData.name} — ${t.linkLabels.website}`}
                     >
                       <svg
@@ -134,7 +108,6 @@ const { t, lang } = Astro.props;
                       target="_blank"
                       rel="noopener noreferrer"
                       class="btn-outlined"
-                      style="height:32px;padding:0 13px;font-size:11px;gap:5px"
                       aria-label={`${localData.name} — ${t.linkLabels.steam}`}
                     >
                       <Fragment set:html={SOCIAL_ICONS.steamSm} />
@@ -147,7 +120,6 @@ const { t, lang } = Astro.props;
                       target="_blank"
                       rel="noopener noreferrer"
                       class="btn-outlined"
-                      style="height:32px;padding:0 13px;font-size:11px;gap:5px"
                       aria-label={`${localData.name} — ${t.linkLabels.twitter}`}
                     >
                       <svg
@@ -171,7 +143,6 @@ const { t, lang } = Astro.props;
                       target="_blank"
                       rel="noopener noreferrer"
                       class="btn-outlined"
-                      style="height:32px;padding:0 13px;font-size:11px;gap:5px"
                       aria-label={`${localData.name} — ${t.linkLabels.github}`}
                     >
                       <svg
@@ -198,23 +169,3 @@ const { t, lang } = Astro.props;
     </div>
   </div>
 </section>
-
-<style>
-  #partners .state {
-    cursor: default;
-  }
-  #partners .state:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-card-hover);
-  }
-  #partners .state:focus-visible {
-    outline: 2px solid var(--c-orange);
-    outline-offset: 2px;
-  }
-
-  @media (max-width: 680px) {
-    #partners .partners-grid {
-      grid-template-columns: 1fr !important;
-    }
-  }
-</style>
