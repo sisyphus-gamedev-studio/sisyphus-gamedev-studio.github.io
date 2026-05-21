@@ -155,7 +155,6 @@
   text-align: center;
 }
 
-/* Align with team/partners single-column breakpoint (--card-grid-bp-single: 720px) */
 @media (max-width: 720px) {
   .donate-tiers-grid {
     grid-template-columns: 1fr;

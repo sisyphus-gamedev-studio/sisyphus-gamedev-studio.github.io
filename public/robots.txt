@@ -1,9 +1,6 @@
 User-agent: *
 Allow: /
 
-# Блокируем артефакты сборки — не нужны поисковикам
 Disallow: /_astro/
 
-# fix #9 — sitemap генерируется @astrojs/sitemap с i18n поддержкой,
-# sitemap-index.xml содержит ссылки на sitemap-0.xml с hreflang вариантами
 Sitemap: https://sisyphus.studio/sitemap-index.xml

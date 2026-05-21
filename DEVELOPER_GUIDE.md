@@ -65,7 +65,7 @@ Sections are rendered in this order in `pages/[lang]/index.astro`:
 | Component | Description |
 |---|---|
 | `AnimatedBackground` | Fixed full-screen animated grid. Two layers with `requestAnimationFrame`. Disabled on `prefers-reduced-motion`. |
-| `ErrorBoundary` | React class component. Catches errors in subtrees and renders a fallback UI. |
+| `ErrorBoundary` | React class component. Catches errors in subtrees; fallback UI uses `.error-boundary` classes. |
 | `SkeletonCard` | Shimmer loading placeholder. Used in `NewsCarousel` before hydration. |
 
 ### features/
@@ -81,8 +81,9 @@ Sections are rendered in this order in `pages/[lang]/index.astro`:
 
 | Component | Description |
 |---|---|
-| `Navbar` | Fixed top nav with scroll-based background, active section tracking, mobile menu with focus trap, language switcher. Centered links with symmetric logo/social spacing. |
-| `Footer` | Navigation links (from `nav` prop), social icons, copyright with dynamic year, back-to-top button. |
+| `BrandLink` | Shared logo + studio name link (`variant`: `nav` \| `footer`). Used by Navbar and Footer. |
+| `Navbar` | Fixed top nav (`.nav-shell` / `.nav-shell--scrolled`), active section tracking, mobile sheet, language switcher. Links built via `buildNavLinks()` from `navigation.ts`. |
+| `Footer` | Section links (`buildNavLinks(nav, \`/${lang}/\`)`), social icons, copyright, back-to-top. Styled with `.footer-shell` / `.footer-inner`. |
 
 ### sections/
 
@@ -112,13 +113,19 @@ All modules under `src/config/` are re-exported from `src/config/index.ts`.
 
 ```ts
 BRAND          // { prefix, suffix, short, foundedYear, teamSize }
-TRANSITIONS    // CSS transition strings
 NEWS_CAROUSEL  // { AUTO_INTERVAL, RESUME_DELAY }
 SCROLL_REVEAL  // IntersectionObserver options
 RIPPLE         // button selector + size multiplier
 EMAIL_REGEX    // validation
 FOCUSABLE_SELECTORS  // for focus trap in modals
 UI             // small strings: skipLink, noScript, hero stats/badges, errorBoundary
+```
+
+### navigation.ts
+
+```ts
+NAV_SECTION_IDS  // home, about, team, projects, news, careers, donate, contact
+buildNavLinks(nav, base?)  // { id, label, href }[] for Navbar (#hash) and Footer (/{lang}/#hash)
 ```
 
 ### Section layout (styling)
@@ -170,17 +177,15 @@ Forms: `form-field`, `form-label`, `form-success` in `forms.css`.
 
 Shared heading classes: `section-heading`, `section-heading__accent`, `section-lead`, `section-lead--narrow`, `section-lead--wide`.
 
-Tokens live in `src/styles/tokens.css` (`--card-*`, `--card-grid-gap`); keep `design.ts` in sync for JS-only dynamic values. Prefer CSS classes over inline styles for static layout.
+Tokens live in `src/styles/tokens.css` (`--card-*`, `--layout-*`, `--font-sans`, colors). `DESIGN_TOKENS` in `design.ts` mirrors hex/rgba values for JS-only code (e.g. SVG placeholders). Prefer CSS classes over inline styles for static layout.
 
 ### design.ts
 
 ```ts
-COLORS         // orange palette, surfaces, text, borders (Navbar, Footer, ErrorBoundary)
-LAYOUT         // { maxWidth: 1280, padding: 20, navHeight: 76, mobileBreakpoint: 768 }
+DESIGN_TOKENS  // orange, surfaces, borders — sync with tokens.css
+LAYOUT         // { maxWidth, padding, navHeight, mobileBreakpoint } — also as --layout-* in CSS
 IMAGE_FILTERS  // hero image filter (project/news filters live in section CSS)
-SIZES          // hero, form, nav, footer, error boundary dimensions
-Z_INDEX        // { nav: 50 }
-BACKDROP       // blur/saturate strings for nav, panels, footer
+SIZES          // hero and contact form dimensions still used inline in Hero.astro / ContactForm
 ```
 
 ### links.ts
@@ -268,10 +273,10 @@ Language is persisted to `localStorage` under `LANGUAGE_STORAGE_KEY` (currently 
 | Export | Description |
 |---|---|
 | `getHeroImage(name)` | Returns `/images/hero/{name}.jpg` |
-| `handleImageError(e, w, h)` | React `onError` handler — replaces broken image with inline SVG placeholder |
-| `nativeImageFallback(w, h)` | Returns an `onerror` string for Astro `<img>` tags |
+| `handleImageError(e, w, h)` | React `onError` — detailed SVG placeholder via `DESIGN_TOKENS` colors |
+| `nativeImageFallback(w, h)` | Astro `onerror` string — simple rect placeholder |
 
-Fallback dimensions should match `IMAGE_FALLBACK` in `src/config/images.ts`. Static image paths are centralized in `IMAGES` (also from `src/config/images.ts`).
+Both handlers share internal `buildPlaceholderDataUrl`. Fallback dimensions should match `IMAGE_FALLBACK` in `src/config/images.ts`. Static image paths are in `IMAGES` (`src/config/images.ts`). OG/Twitter image uses `HERO_PRELOAD_IMAGE_SRC` via `seo.ts`.
 
 ---
 
@@ -285,33 +290,29 @@ All files imported in `src/styles/global.css`:
 | `base.css` | Reset, scrollbar, selection, `focus-visible` |
 | `typography.css` | `t-*` text utility classes |
 | `buttons.css` | `btn-filled`, `btn-tonal`, `btn-outlined`, `icon-btn`, `icon-btn-outlined` |
-| `components.css` | `state`, cards, `chip`, badges, progress bars, section eyebrow, skip link, footer/nav links, flex utilities |
+| `components.css` | `state`, cards, `chip`, badges, nav/footer shells (`.nav-shell`, `.footer-shell`, `.brand-link`), flex utilities (`.flex-col`, `.gap-6`, `.gap-10`) |
 | `animations.css` | Keyframes, entrance animations (`anim`, `reveal`, `reveal-left`, `reveal-right`, `reveal-scale`), glitch effects, reduced-motion overrides |
 | `skeleton.css` | `skeleton-shimmer` shimmer animation |
 
 ### Key CSS variables (`tokens.css`)
 
 ```css
-/* Accent */
---c-orange, --c-orange-light, --c-orange-accent, --c-orange-dim, --c-orange-border
+--font-sans
 
-/* Text */
---c-on-surface, --c-secondary, --c-tertiary
+--c-orange, --c-orange-light, --c-orange-dim, --c-orange-border
+--c-orange-07, --c-orange-15, --c-orange-30, --c-orange-40
+--c-on-accent, --c-on-white, --c-on-surface, --c-muted, --c-modal-lead
+--c-secondary, --c-tertiary
+--c-glitch-red, --c-glitch-cyan
 
-/* Surfaces (darkest → lightest) */
---s-1 (#0d0d0d) through --s-5 (#202020)
-
-/* Borders */
+--s-1 … --s-6
 --b-subtle, --b-default, --b-strong, --b-accent
 
-/* Easing */
+--layout-max-width, --layout-padding, --layout-nav-height
+
 --ease-em, --ease-dec
-
-/* Radii */
---r-sm (8px), --r-xl (20px), --r-2xl (24px), --r-full (9999px)
-
-/* Spacing */
---spacing-section: 100px 0
+--r-sm … --r-full
+--spacing-section
 ```
 
 ### Scroll reveal

@@ -19,8 +19,6 @@
   opacity: 0.09;
 }
 
-/* Card primitives live in cards.css */
-
 .chip {
   display: inline-flex;
   align-items: center;

@@ -1,4 +1,3 @@
-/* Base card shell */
 .card {
   background: var(--s-4);
   border: 1px solid var(--b-subtle);
@@ -113,7 +112,6 @@
   background: linear-gradient(90deg, var(--c-orange) 0%, var(--c-orange-15) 40%, transparent 70%);
 }
 
-/* Shared person / org block (team, partners) */
 .card-entity__header {
   display: flex;
   align-items: center;

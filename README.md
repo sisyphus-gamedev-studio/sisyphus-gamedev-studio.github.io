@@ -1,16 +1,17 @@
 # Sisyphus Studio
 
 Multilingual site for an indie game studio (Astro + React). Supports language-prefixed routes `/en/` and `/ru/` and uses prerendered content with small React “islands” for interactivity.
-Built with Astro 5, React 19, TypeScript, and Tailwind CSS. Current language is persisted in `localStorage` under `ss_lang` (`LANGUAGE_STORAGE_KEY`).
+Built with Astro 6, React 19, TypeScript, and Tailwind CSS. UI font: **Exo 2** (Google Fonts). Current language is persisted in `localStorage` under `ss_lang` (`LANGUAGE_STORAGE_KEY`).
 
 ## Quick Start
 
 ```bash
 npm install
 cp .env.example .env
-# fill in `PUBLIC_*` env values
 npm run dev
 ```
+
+Set `PUBLIC_*` variables in `.env` before running the dev server.
 
 ## Commands
 
@@ -62,7 +63,7 @@ src/
 ├── components/
 │   ├── common/      # Primitives: AnimatedBackground, ErrorBoundary, SkeletonCard
 │   ├── features/    # Interactive islands: ContactForm, NewsCarousel, NewsModal, ProjectsCarousel
-│   ├── layout/      # Navbar, Footer
+│   ├── layout/      # Navbar, Footer, BrandLink
 │   └── sections/    # Static Astro sections: Hero, About, Careers, Contact, Donate, Partners
 ├── config/          # Design tokens, URLs, constants — all re-exported from index.ts
 ├── content/         # Astro content collections: news, projects (JSON)
@@ -127,15 +128,16 @@ All config is exported from `src/config/index.ts`.
 | File | What it controls |
 |---|---|
 | `constants.ts` | Brand info (`BRAND`), carousel timings, swipe threshold, scroll/reveal, ripple, validation regex, small UI strings (`UI`) |
-| `design.ts` | Colors, layout dimensions, spacing, gradients, image filters, easing, component sizes, z-index |
+| `design.ts` | `DESIGN_TOKENS` (JS mirror of CSS vars), `LAYOUT`, `SIZES` (hero/form), `IMAGE_FILTERS` |
+| `navigation.ts` | `NAV_SECTION_IDS`, `buildNavLinks()` for Navbar and Footer |
 | `donate.ts` | SVG icons for donation tier cards |
-| `fonts.ts` | Google Fonts stylesheet URL |
+| `fonts.ts` | Google Fonts stylesheet URL (Exo 2) |
 | `i18n.ts` | `LANGUAGE_STORAGE_KEY`, `SUPPORTED_LANGUAGES` |
 | `images.ts` | Fallback image dimensions, hero preload path, static image paths |
 | `links.ts` | Env-backed URLs, Formspree endpoint, social links (SVG-based), `isMailtoLink` |
 | `news.ts` | Category order, labels per language, category colors |
 | `partners.ts` | Partner data and types |
-| `seo.ts` | Default meta title/description, OG image dimensions, JSON-LD game list |
+| `seo.ts` | Default meta title/description, OG image path (`HERO_PRELOAD_IMAGE_SRC`), JSON-LD game list |
 
 ## Translations
 
@@ -145,12 +147,15 @@ For every supported language, the translation object must have the same key shap
 
 ## Styling
 
-CSS is split into focused files imported via `src/styles/global.css`. Always use design tokens instead of raw values:
+CSS is split into focused files imported via `src/styles/global.css`. Design tokens live in `src/styles/tokens.css`; the site font is set once on `body` via `--font-sans` (Exo 2). Prefer CSS variables and layout classes over raw values and inline styles:
 
 ```css
+font-family: var(--font-sans);
 color: var(--c-orange);
 background: var(--s-2);
 border: 1px solid var(--b-default);
 ```
+
+Navbar and Footer use classes in `components.css` (e.g. `.nav-shell`, `.footer-shell`, `.brand-link`). For JS-only needs (SVG placeholders), use `DESIGN_TOKENS` from `design.ts` — keep values aligned with `tokens.css`.
 
 See [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md) for full architecture reference.

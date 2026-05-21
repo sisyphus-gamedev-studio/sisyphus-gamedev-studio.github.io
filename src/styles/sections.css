@@ -42,7 +42,3 @@
 .card-grid-gap {
   gap: var(--card-grid-gap);
 }
-
-/* Card grids switch to one column at 720px (see --card-grid-bp-single in tokens.css). */
-
-/* Card primitives live in cards.css */

@@ -5,7 +5,6 @@
   margin-bottom: 40px;
 }
 
-/* --card-grid-bp-single: 720px */
 @media (max-width: 720px) {
   .partners-grid {
     grid-template-columns: 1fr;
@@ -17,7 +16,6 @@
   flex-direction: column;
 }
 
-/* Match pre-unification scale (was card-entity__title + t-card-title + t-body-sm) */
 .partner-card .card-entity__title {
   font-size: 17px;
   font-weight: 700;
