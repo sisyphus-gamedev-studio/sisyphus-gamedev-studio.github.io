@@ -132,40 +132,55 @@ Every content section (except Hero) follows the same shell:
 
 ### Card system (`cards.css`)
 
+Use one of three families; avoid inline `background` / `border` / `border-radius` for static card shells.
+
+| Family | Sections | Base classes |
+|---|---|---|
+| **Entity** | Team, Partners | `card card--interactive state` + `card-entity__*` |
+| **Tier / CTA** | Donate | `card card--elevated card--interactive` + `md-badge` labels |
+| **Media** | Projects mobile, News main, Hero | `card card--flush` + section BEM (`projects-mobile`, `news-card-main`, …) |
+
 | Class | Use |
 |---|---|
-| `.card` / `.card-panel` | Default panel (`--s-4`, `--card-radius`, 28px padding) |
+| `.card` | Default panel (`--s-4`, `--card-radius`, `--card-padding`) |
 | `.card--elevated` | Raised surface (`--s-5`) — donate tiers, stats |
-| `.card--accent` | Orange border — featured partners/donate |
+| `.card--accent` | Orange border — featured partners/donate highlight |
 | `.card--compact` | List tiles — careers stack/vacancies |
 | `.card--quote` | Mission quote with orange left edge |
 | `.card--status` | Compact status row |
 | `.card--media` | Hero featured game card (shadow) |
 | `.card--secondary` | Smaller radius/padding — Hero concept link |
-| `.card--interactive` | Unified hover lift + shadow |
-| `.card--flush` | No padding — news main, contact form shell |
+| `.card--interactive` | Unified hover lift + `--card-hover-shadow` |
+| `.card--flush` | No padding — news main, projects mobile, contact form shell |
 | `.card-accent-top` | Orange gradient top line |
+| `.card-entity__media--accent-{orange,blue,green,purple}` | Placeholder avatars/logos |
+| `.card-grid-gap` | Grid/flex gap token (`--card-grid-gap`, 12px) |
 
-Forms: `form-field`, `form-label`, `form-success` in `forms.css`. News layout: `news-section.css`.
+**Badges:** `md-badge` + modifiers (`md-badge-primary`, `md-badge--tag`, `md-badge--gold|silver|bronze|partner`). Partner categories: `sponsorCategoryBadgeClass()` in `accents.ts`. Project tags: `md-badge md-badge--tag`.
+
+**Titles:** Person/org names → `card-entity__title` only. Game/project names → `t-card-title`.
+
+Section CSS: `team-grid.css`, `partners-section.css`, `donate-section.css`, `projects-section.css`, `news-section.css`, `hero-section.css`, `modal-panel.css`, etc. All imported from `global.css`.
+
+**Modals:** `.modal-backdrop` + `.modal-panel` (News article, Careers FAQ). Article titles use `.modal-panel__title` (sentence case), not `t-card-title`.
+
+**News titles:** Main carousel `.news-card-main__title`; list `.news-card-list-item__title`.
+
+Forms: `form-field`, `form-label`, `form-success` in `forms.css`.
 
 Shared heading classes: `section-heading`, `section-heading__accent`, `section-lead`, `section-lead--narrow`, `section-lead--wide`.
 
-Tokens live in `src/styles/tokens.css` (`--card-*`); section-specific CSS in `src/styles/*-section.css`. Prefer CSS classes over inline styles for static layout.
+Tokens live in `src/styles/tokens.css` (`--card-*`, `--card-grid-gap`); keep `design.ts` in sync for JS-only dynamic values. Prefer CSS classes over inline styles for static layout.
 
 ### design.ts
 
 ```ts
-COLORS         // orange palette, surfaces (s1–s6), text, borders, news category colors
+COLORS         // orange palette, surfaces, text, borders (Navbar, Footer, ErrorBoundary)
 LAYOUT         // { maxWidth: 1280, padding: 20, navHeight: 76, mobileBreakpoint: 768 }
-SPACING        // section padding, sectionHead (48), card padding — sync with tokens.css
-EASING         // CSS easing strings
-GRADIENTS      // card overlays, orange tint, news card gradient
-IMAGE_FILTERS  // brightness/saturation for project/news/hero images
-TAG_STYLE      // base + desktop/mobile tag styles for project tags
-SIZES          // news card, modal, hero, projects, form, nav, footer dimensions
-Z_INDEX        // { nav: 50, modal: 200 }
-BACKDROP       // blur/saturate strings for nav, panels, modals
-OVERLAY        // modal backgrounds, tag backgrounds
+IMAGE_FILTERS  // hero image filter (project/news filters live in section CSS)
+SIZES          // hero, form, nav, footer, error boundary dimensions
+Z_INDEX        // { nav: 50 }
+BACKDROP       // blur/saturate strings for nav, panels, footer
 ```
 
 ### links.ts

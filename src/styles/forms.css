@@ -65,3 +65,25 @@
   margin: 0 auto 18px;
   color: var(--c-orange);
 }
+
+.form-success__text {
+  color: var(--c-on-surface);
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 4px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.form-actions .btn-filled:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.form-error-banner {
+  margin-top: -4px;
+}

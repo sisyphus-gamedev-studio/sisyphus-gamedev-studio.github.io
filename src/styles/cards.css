@@ -1,6 +1,5 @@
 /* Base card shell */
-.card,
-.card-panel {
+.card {
   background: var(--s-4);
   border: 1px solid var(--b-subtle);
   border-radius: var(--card-radius);
@@ -13,13 +12,11 @@
     box-shadow 0.3s;
 }
 
-.card--elevated,
-.card-panel--elevated {
+.card--elevated {
   background: var(--s-5);
 }
 
-.card--accent,
-.card-panel--accent {
+.card--accent {
   border-color: var(--c-orange-border);
 }
 
@@ -37,8 +34,7 @@
   border-radius: var(--r-md);
 }
 
-.card--quote,
-.content-panel {
+.card--quote {
   padding: 20px 22px;
   border-radius: var(--r-lg);
   background: var(--s-5);
@@ -46,8 +42,7 @@
   border-left: 2px solid var(--c-orange);
 }
 
-.card--status,
-.status-card {
+.card--status {
   padding: var(--card-padding-compact);
   display: flex;
   align-items: center;
@@ -57,8 +52,7 @@
   border-radius: var(--r-md);
 }
 
-.card--media,
-.card-game {
+.card--media {
   padding: 0;
   border-radius: var(--card-radius);
   overflow: hidden;
@@ -72,25 +66,22 @@
 }
 
 .card--interactive:hover,
-.card-panel.card--interactive:hover,
-.card-panel.state.card--interactive:hover,
 .team-card.card--interactive:hover,
 .partner-card.card--interactive:hover,
-.donate-tier-card.card--interactive:hover {
+.donate-tier-card.card--interactive:hover,
+.projects-mobile.card--interactive:hover {
   border-color: var(--b-default);
   transform: translateY(var(--card-hover-lift));
   box-shadow: var(--card-hover-shadow);
 }
 
-.card--media.card--interactive:hover,
-.card-game:hover {
+.card--media.card--interactive:hover {
   box-shadow: var(--shadow-card-media-hover);
   transform: translateY(var(--card-hover-lift));
   border-color: var(--b-accent);
 }
 
-.card--filled,
-.card-filled {
+.card--filled {
   background: var(--s-4);
   border-radius: var(--card-radius-secondary);
   border: 1px solid var(--b-subtle);
@@ -101,8 +92,7 @@
     transform 0.3s var(--ease-em);
 }
 
-.card--filled.card--interactive:hover,
-.card-filled:hover {
+.card--filled.card--interactive:hover {
   border-color: var(--b-default);
   transform: translateY(var(--card-hover-lift));
   box-shadow: var(--card-hover-shadow);
@@ -156,6 +146,30 @@
   background: var(--s-6);
 }
 
+.card-entity__media--accent-orange {
+  background: var(--c-orange-dim);
+  border-color: var(--c-orange-border);
+  color: var(--c-orange);
+}
+
+.card-entity__media--accent-blue {
+  background: var(--accent-blue-bg);
+  border-color: var(--accent-blue-border);
+  color: var(--accent-blue-text);
+}
+
+.card-entity__media--accent-green {
+  background: var(--accent-green-bg);
+  border-color: var(--accent-green-border);
+  color: var(--accent-green-text);
+}
+
+.card-entity__media--accent-purple {
+  background: var(--accent-purple-bg);
+  border-color: var(--accent-purple-border);
+  color: var(--accent-purple-text);
+}
+
 .card-entity__media img {
   width: 100%;
   height: 100%;
@@ -177,16 +191,27 @@
   margin: 0 0 6px;
 }
 
+.card--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-tertiary);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
 .card-entity__meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 6px;
+  gap: var(--card-meta-gap);
 }
 
 .card-entity__desc {
+  font-size: 12px;
+  font-weight: 400;
   color: var(--c-secondary);
-  line-height: 1.68;
+  line-height: 1.55;
   margin: 0 0 10px;
 }
 

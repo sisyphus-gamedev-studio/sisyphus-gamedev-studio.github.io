@@ -6,12 +6,8 @@ import {
   NEWS_CAROUSEL,
   NEWS_SUMMARY_PREVIEW_CHARS,
   SWIPE_THRESHOLD,
-  COLORS,
-  SIZES,
-  GRADIENTS,
   getNewsCategories,
   getCategoryLabel,
-  getCategoryColor,
   IMAGE_FALLBACK,
 } from "../../config";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
@@ -146,11 +142,11 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
               <span className="section-heading__accent"> {t.headingSuffix}</span>
             </h2>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 card-grid-gap">
             <div className="lg:col-span-2">
               <NewsSkeletonCard wide />
             </div>
-            <div className="flex-col gap-4">
+            <div className="flex-col card-grid-gap">
               {[0, 1, 2].map((i) => (
                 <NewsSkeletonCard key={i} />
               ))}
@@ -204,27 +200,19 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
             {categoriesWithNews.map((cat) => (
               <button
                 key={cat}
+                type="button"
+                data-category={cat}
                 className={`chip ${activeCategory === cat ? "active" : ""}`}
                 onClick={() => setActiveCategory(cat)}
-                style={
-                  activeCategory === cat
-                    ? { borderColor: getCategoryColor(cat), color: getCategoryColor(cat) }
-                    : {}
-                }
               >
                 {getCategoryLabel(cat, lang)}
               </button>
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 card-grid-gap">
             {!item ? (
-              <div
-                className="news-empty lg:col-span-3"
-                style={{ minHeight: SIZES.newsCarousel.emptyStateMinHeight }}
-              >
-                {t.noNews}
-              </div>
+              <div className="news-empty card card--empty lg:col-span-3">{t.noNews}</div>
             ) : null}
             {item ? (
               <>
@@ -235,7 +223,6 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                     role="region"
                     aria-label={t.heading}
                     className="news-card-main card card--flush"
-                    style={{ height: SIZES.newsCard.height }}
                     onTouchStart={handleTouchStart}
                     onTouchEnd={handleTouchEnd}
                     onTouchCancel={handleTouchCancel}
@@ -244,14 +231,7 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                       key={item.isoDate}
                       src={item.image}
                       alt={item.title}
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        transition: reducedMotion ? "none" : "opacity .65s cubic-bezier(0.2,0,0,1)",
-                      }}
+                      className={`news-card-main__img${reducedMotion ? "" : " news-card-main__img--motion"}`}
                       onError={(e) =>
                         handleImageError(
                           e,
@@ -261,24 +241,17 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                       }
                     />
 
-                    <div
-                      className="news-card-main__gradient"
-                      style={{ background: GRADIENTS.newsCard }}
-                    />
+                    <div className="news-card-main__gradient" aria-hidden="true" />
 
                     <div className="news-card-main__badges">
-                      <div className="md-badge-surface md-badge" style={{ gap: 6 }}>
-                        <Calendar size={9} style={{ color: COLORS.orange }} aria-hidden="true" />
+                      <div className="md-badge-surface md-badge">
+                        <Calendar size={9} aria-hidden="true" />
                         <time dateTime={item.isoDate}>{item.date}</time>
                       </div>
                       {item.type && (
                         <div
                           className="md-badge-surface md-badge"
-                          style={{
-                            gap: 6,
-                            borderColor: getCategoryColor(item.type),
-                            color: getCategoryColor(item.type),
-                          }}
+                          data-category={item.type}
                         >
                           {getCategoryLabel(item.type, lang)}
                         </div>
@@ -286,41 +259,16 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                     </div>
 
                     <div className="news-card-main__footer">
-                      <h3
-                        className="t-headline-lg"
-                        style={{
-                          color: COLORS.text.primary,
-                          marginBottom: "clamp(6px,1.5vw,10px)",
-                          lineHeight: 1.28,
-                          fontSize: SIZES.newsCard.titleSize,
-                        }}
-                      >
-                        {item.title}
-                      </h3>
+                      <h3 className="news-card-main__title">{item.title}</h3>
 
                       <div className="news-card-main__divider" />
 
-                      <p
-                        className="t-body-md"
-                        style={{
-                          color: COLORS.text.secondary,
-                          maxWidth: SIZES.newsCard.maxSummaryWidth,
-                          lineHeight: 1.65,
-                          marginBottom: "clamp(12px,2.5vw,20px)",
-                          fontSize: SIZES.newsCard.summarySize,
-                          overflow: "hidden",
-                          display: "-webkit-box",
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: "vertical" as const,
-                        }}
-                      >
-                        {item.summary}
-                      </p>
+                      <p className="news-card-main__summary">{item.summary}</p>
 
-                      <div className="flex-row gap-12" style={{ alignItems: "center" }}>
+                      <div className="news-card-main__actions">
                         <button
-                          className="btn-tonal"
-                          style={{ gap: 7, height: 36, fontSize: 13, flexShrink: 0 }}
+                          type="button"
+                          className="btn-tonal news-card-main__read-btn"
                           onClick={() => setModalItem(item)}
                           aria-label={`${t.readMore}: ${item.title}`}
                         >
@@ -328,41 +276,14 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                           <ArrowUpRight size={14} aria-hidden="true" />
                         </button>
 
-                        <div
-                          style={{
-                            flex: 1,
-                            maxWidth: 130,
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 8,
-                          }}
-                          aria-hidden="true"
-                        >
-                          {paused || reducedMotion ? (
-                            paused ? (
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  gap: 5,
-                                  color: COLORS.text.muted,
-                                }}
-                              >
-                                <PauseCircle size={12} />
-                                <span
-                                  style={{
-                                    fontSize: 10,
-                                    fontWeight: 700,
-                                    letterSpacing: 1,
-                                    textTransform: "uppercase" as const,
-                                  }}
-                                >
-                                  {t.paused}
-                                </span>
-                              </div>
-                            ) : null
-                          ) : (
-                            <div className="md-progress-track" style={{ flex: 1 }}>
+                        <div className="news-card-main__progress-wrap" aria-hidden="true">
+                          {paused && !reducedMotion ? (
+                            <div className="news-card-main__paused">
+                              <PauseCircle size={12} />
+                              <span className="news-card-main__paused-label">{t.paused}</span>
+                            </div>
+                          ) : !reducedMotion ? (
+                            <div className="md-progress-track">
                               <div
                                 key={progressKey}
                                 className="md-progress-auto"
@@ -373,7 +294,7 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                                 }
                               />
                             </div>
-                          )}
+                          ) : null}
                         </div>
                       </div>
                     </div>
@@ -396,20 +317,20 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                     return (
                       <li key={n.isoDate} role="presentation">
                         <button
+                          type="button"
                           id={`news-item-${i}`}
                           role="option"
                           aria-selected={isActive}
                           onClick={() => goTo(i)}
-                          className={`state news-card-list-item${isActive ? " news-card-list-item--active" : ""}`}
+                          className={`state news-card-list-item${isActive ? " news-card-list-item--active" : ""}${reducedMotion ? " news-card-list-item--reduced-motion" : ""}`}
                           aria-label={`${n.date} — ${n.title}`}
-                          style={reducedMotion ? { transition: "none" } : undefined}
                         >
                           {isActive && <div className="news-card-list-item__accent" aria-hidden="true" />}
-                          <span className="t-label-sm news-card-list-item__date">
+                          <span className="news-card-list-item__date">
                             <time dateTime={n.isoDate}>{n.date}</time>
                           </span>
-                          <p className="t-title-sm news-card-list-item__title">{n.title}</p>
-                          <p className="t-body-sm news-card-list-item__summary">
+                          <p className="news-card-list-item__title">{n.title}</p>
+                          <p className="news-card-list-item__summary">
                             {n.summary.slice(0, NEWS_SUMMARY_PREVIEW_CHARS)}…
                           </p>
                         </button>

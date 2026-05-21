@@ -7,39 +7,17 @@ interface NewsSkeletonCardProps {
 export const NewsSkeletonCard: FC<NewsSkeletonCardProps> = ({ wide = false }) => {
   if (wide) {
     return (
-      <div
-        style={{
-          borderRadius: "var(--r-2xl)",
-          overflow: "hidden",
-          background: "var(--s-4)",
-          border: "1px solid var(--b-subtle)",
-          aspectRatio: "16/9",
-          position: "relative",
-        }}
-      >
-        <div className="skeleton-shimmer" style={{ position: "absolute", inset: 0 }} />
+      <div className="skeleton-card skeleton-card--wide">
+        <div className="skeleton-shimmer skeleton-card__shimmer" />
       </div>
     );
   }
 
   return (
-    <div
-      style={{
-        padding: "14px 16px",
-        borderRadius: 12,
-        background: "var(--s-4)",
-        border: "1px solid var(--b-subtle)",
-      }}
-    >
-      <div
-        className="skeleton-shimmer"
-        style={{ height: 10, width: "35%", borderRadius: 4, marginBottom: 10 }}
-      />
-      <div
-        className="skeleton-shimmer"
-        style={{ height: 14, width: "90%", borderRadius: 4, marginBottom: 6 }}
-      />
-      <div className="skeleton-shimmer" style={{ height: 11, width: "70%", borderRadius: 4 }} />
+    <div className="skeleton-card skeleton-card--list">
+      <div className="skeleton-shimmer skeleton-card__line skeleton-card__line--sm" />
+      <div className="skeleton-shimmer skeleton-card__line skeleton-card__line--lg" />
+      <div className="skeleton-shimmer skeleton-card__line skeleton-card__line--md" />
     </div>
   );
 };

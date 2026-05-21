@@ -2,17 +2,7 @@ import { useCallback, type FC, memo } from "react";
 import { ExternalLink } from "lucide-react";
 import type { Project, TranslationStructure } from "../../../types";
 import { handleImageError } from "../../../utils/images";
-import { IMAGE_FALLBACK } from "../../../config";
-import {
-  PROJECTS_EXPAND_MS,
-  COLORS,
-  TAG_STYLE,
-  EASING,
-  IMAGE_FILTERS,
-  GRADIENTS,
-  SIZES,
-  OVERLAY,
-} from "../../../config";
+import { IMAGE_FALLBACK, PROJECTS_EXPAND_MS } from "../../../config";
 import { getTagIcon } from "./tagIcons";
 
 interface DesktopCarouselProps {
@@ -70,347 +60,135 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
         </h2>
       </div>
 
-        <div style={{ display: "flex", gap: 48, alignItems: "stretch" }}>
+      <div className="projects-layout">
+        <div className="projects-sidebar reveal-left" suppressHydrationWarning>
           <div
-            className="reveal-left"
-            suppressHydrationWarning
-            style={{ width: SIZES.projects.desktopSidebarWidth, flexShrink: 0 }}
+            className={`projects-sidebar-inner${textVisible ? "" : " is-leaving"}`}
           >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                height: "100%",
-                opacity: textVisible ? 1 : 0,
-                transform: textVisible ? "translateY(0)" : "translateY(6px)",
-                transition: textVisible
-                  ? `opacity 260ms ${EASING.decelerate}, transform 260ms ${EASING.decelerate}`
-                  : `opacity 160ms ${EASING.accelerate}, transform 160ms ${EASING.accelerate}`,
-              }}
-            >
-              <div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    marginBottom: 20,
-                  }}
-                >
-                  <span className="t-eyebrow-accent">
-                    {String(activeIndex + 1).padStart(2, "0")} /{" "}
-                    {String(projects.length).padStart(2, "0")}
-                  </span>
-                  <div className="md-badge-primary md-badge">{shown.price}</div>
-                </div>
-
-                <h3
-                  className="t-card-title"
-                  style={{
-                    fontSize: SIZES.projects.desktopTitleSize,
-                    lineHeight: 1.05,
-                    marginBottom: 16,
-                    color: COLORS.text.primary,
-                    transition: `opacity 280ms ${EASING.standard}`,
-                  }}
-                >
-                  {shown.title}
-                </h3>
-
-                {shown.tags && shown.tags.length > 0 && (
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 20 }}>
-                    {shown.tags.map((tag) => {
-                      const Icon = getTagIcon(tag);
-                      return (
-                        <span
-                          key={tag}
-                          style={{
-                            ...TAG_STYLE.base,
-                            ...TAG_STYLE.desktop,
-                            color: COLORS.text.secondary,
-                          }}
-                        >
-                          <Icon size={10} color={COLORS.orange} />
-                          {tag}
-                        </span>
-                      );
-                    })}
-                  </div>
-                )}
-
-                <div style={{ height: 1, background: COLORS.border.strong, marginBottom: 20 }} />
-
-                <p
-                  className="t-body-md"
-                  style={{ color: COLORS.text.secondary, lineHeight: 1.72, marginBottom: 28 }}
-                >
-                  {shown.description}
-                </p>
-
-                {shown.progress !== undefined && (
-                  <div style={{ marginBottom: 28 }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        marginBottom: 8,
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontSize: 11,
-                          fontWeight: 700,
-                          letterSpacing: "0.08em",
-                          textTransform: "uppercase",
-                          color: COLORS.text.tertiary,
-                        }}
-                      >
-                        {t.progressLabel}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: 13,
-                          fontWeight: 700,
-                          color: COLORS.orange,
-                          fontVariantNumeric: "tabular-nums",
-                        }}
-                      >
-                        {shown.progress}%
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        height: 4,
-                        borderRadius: 2,
-                        background: COLORS.border.default,
-                        overflow: "hidden",
-                      }}
-                    >
-                      <div
-                        style={{
-                          height: "100%",
-                          width: `${shown.progress}%`,
-                          borderRadius: 2,
-                          background: `linear-gradient(90deg, ${COLORS.orange}, ${COLORS.orangeLight})`,
-                          transition: `width 600ms ${EASING.standard}`,
-                        }}
-                      />
-                    </div>
-                  </div>
-                )}
+            <div>
+              <div className="projects-sidebar-head">
+                <span className="t-eyebrow-accent">
+                  {String(activeIndex + 1).padStart(2, "0")} /{" "}
+                  {String(projects.length).padStart(2, "0")}
+                </span>
+                <div className="md-badge-primary md-badge">{shown.price}</div>
               </div>
 
-              <a
-                href={shown.wishlistUrl || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-filled"
-                style={{
-                  alignSelf: "flex-start",
-                  height: 44,
-                  fontSize: 13,
-                  gap: 8,
-                  paddingLeft: 24,
-                  paddingRight: 24,
-                }}
-              >
-                <ExternalLink size={14} />
-                {t.learnMore}
-              </a>
-            </div>
-          </div>
+              <h3 className="t-card-title projects-sidebar-title">{shown.title}</h3>
 
-          <div
-            role="listbox"
-            className="reveal-scale"
-            suppressHydrationWarning
-            aria-label={t.heading}
-            aria-activedescendant={`project-panel-${activeIndex}`}
-            tabIndex={0}
-            onKeyDown={handleContainerKeyDown}
-            style={{
-              flex: 1,
-              display: "flex",
-              gap: 2,
-              height: SIZES.projects.desktopCarouselHeight,
-              borderRadius: 20,
-              overflow: "hidden",
-              border: `1px solid ${COLORS.border.default}`,
-              outline: "none",
-              background: COLORS.surface.s1,
-            }}
-          >
-            {projects.map((project, i) => {
-              const isActive = i === activeIndex;
-              const isDisplayed = i === displayedIndex;
+              {shown.tags && shown.tags.length > 0 && (
+                <div className="projects-tags">
+                  {shown.tags.map((tag) => {
+                    const Icon = getTagIcon(tag);
+                    return (
+                      <span key={tag} className="md-badge md-badge--tag projects-tag">
+                        <Icon size={10} aria-hidden="true" />
+                        {tag}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
 
-              return (
-                <div
-                  key={project.id}
-                  id={`project-panel-${i}`}
-                  role="option"
-                  aria-selected={isActive}
-                  aria-label={project.title}
-                  tabIndex={-1}
-                  onClick={() => !isActive && onSelect(i)}
-                  style={{
-                    position: "relative",
-                    flexGrow: isActive ? 1 : 0,
-                    flexShrink: 0,
-                    flexBasis: "56px",
-                    cursor: isActive ? "default" : "pointer",
-                    overflow: "hidden",
-                    willChange: isActive || isDisplayed ? "flex-grow" : "auto",
-                    transition: `flex-grow ${PROJECTS_EXPAND_MS}ms ${EASING.standard}`,
-                    background: "transparent",
-                  }}
-                >
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    width={900}
-                    height={520}
-                    loading={i === 0 ? "eager" : "lazy"}
-                    decoding="async"
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      filter: isActive
-                        ? IMAGE_FILTERS.activeProject
-                        : IMAGE_FILTERS.inactiveProject,
-                      transition: `filter ${PROJECTS_EXPAND_MS}ms ${EASING.standard}`,
-                    }}
-                    onError={(e) =>
-                      handleImageError(
-                        e,
-                        IMAGE_FALLBACK.projectCard.width,
-                        IMAGE_FALLBACK.projectCard.height,
-                      )
-                    }
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: GRADIENTS.cardOverlay,
-                      opacity: isActive ? 1 : 0.5,
-                      transition: `opacity ${PROJECTS_EXPAND_MS}ms ${EASING.standard}`,
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: OVERLAY.inactivePanel,
-                      opacity: isActive ? 0 : 1,
-                      transition: `opacity ${PROJECTS_EXPAND_MS}ms ${EASING.standard}`,
-                      pointerEvents: "none",
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: GRADIENTS.orangeTint,
-                      opacity: isActive ? 1 : 0,
-                      transition: `opacity ${PROJECTS_EXPAND_MS}ms ${EASING.standard}`,
-                      pointerEvents: "none",
-                    }}
-                  />
-                  <div
-                    aria-hidden="true"
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      opacity: isActive ? 0 : 1,
-                      transition: isActive
-                        ? `opacity 180ms ${EASING.standard}`
-                        : `opacity 260ms ${EASING.standard} ${PROJECTS_EXPAND_MS * 0.5}ms`,
-                      pointerEvents: "none",
-                    }}
-                  >
-                    <div
-                      style={{
-                        transform: "rotate(-90deg)",
-                        whiteSpace: "nowrap",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        gap: 8,
-                      }}
-                    >
-                      <span
-                        className="t-eyebrow-accent"
-                        style={{ textShadow: "0 1px 6px rgba(0,0,0,.8)" }}
-                      >
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span
-                        className="t-eyebrow-accent"
-                        style={{
-                          color: COLORS.text.primary,
-                          textShadow: "0 1px 8px rgba(0,0,0,.9), 0 0 20px rgba(0,0,0,.6)",
-                        }}
-                      >
-                        {project.title}
-                      </span>
-                    </div>
+              <div className="projects-divider" />
+
+              <p className="t-body-md projects-desc">{shown.description}</p>
+
+              {shown.progress !== undefined && (
+                <div className="projects-progress">
+                  <div className="projects-progress-head">
+                    <span className="projects-progress-label">{t.progressLabel}</span>
+                    <span className="projects-progress-value">{shown.progress}%</span>
                   </div>
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      padding: "20px 28px",
-                      opacity: isActive && isDisplayed ? 1 : 0,
-                      transform: isActive && isDisplayed ? "translateY(0)" : "translateY(10px)",
-                      transition:
-                        isActive && isDisplayed
-                          ? `opacity 320ms ${EASING.standard}, transform 320ms ${EASING.standard}`
-                          : `opacity 150ms ${EASING.accelerate}`,
-                      pointerEvents: "none",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 700,
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        color: COLORS.orange,
-                        opacity: 0.8,
-                      }}
-                    >
+                  <div className="md-progress-track md-progress-track--lg projects-progress-track">
+                    <div
+                      className="projects-progress-bar"
+                      style={{ width: `${shown.progress}%` }}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <a
+              href={shown.wishlistUrl || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-filled projects-cta"
+            >
+              <ExternalLink size={14} aria-hidden="true" />
+              {t.learnMore}
+            </a>
+          </div>
+        </div>
+
+        <div
+          role="listbox"
+          className="projects-carousel reveal-scale"
+          suppressHydrationWarning
+          aria-label={t.heading}
+          aria-activedescendant={`project-panel-${activeIndex}`}
+          tabIndex={0}
+          onKeyDown={handleContainerKeyDown}
+          style={{ "--projects-expand-ms": `${PROJECTS_EXPAND_MS}ms` } as React.CSSProperties}
+        >
+          {projects.map((project, i) => {
+            const isActive = i === activeIndex;
+            const isDisplayed = i === displayedIndex;
+
+            return (
+              <div
+                key={project.id}
+                id={`project-panel-${i}`}
+                role="option"
+                aria-selected={isActive}
+                aria-label={project.title}
+                tabIndex={-1}
+                className={`projects-carousel__panel${isActive ? " is-active" : ""}`}
+                onClick={() => !isActive && onSelect(i)}
+                style={isActive || isDisplayed ? { willChange: "flex-grow" } : undefined}
+              >
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  width={900}
+                  height={520}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                  className="projects-carousel__img"
+                  onError={(e) =>
+                    handleImageError(
+                      e,
+                      IMAGE_FALLBACK.projectCard.width,
+                      IMAGE_FALLBACK.projectCard.height,
+                    )
+                  }
+                />
+                <div className="projects-carousel__overlay" aria-hidden="true" />
+                <div className="projects-carousel__inactive-mask" aria-hidden="true" />
+                <div className="projects-carousel__tint" aria-hidden="true" />
+                <div className="projects-carousel__collapsed-label" aria-hidden="true">
+                  <div className="projects-carousel__collapsed-inner">
+                    <span className="t-eyebrow-accent projects-carousel__collapsed-index">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="t-eyebrow-accent projects-carousel__collapsed-title">
                       {project.title}
                     </span>
                   </div>
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      height: 2,
-                      background: COLORS.orangeBorder,
-                      opacity: isActive ? 0 : 1,
-                      transition: `opacity ${PROJECTS_EXPAND_MS}ms ${EASING.standard}`,
-                      pointerEvents: "none",
-                    }}
-                  />
                 </div>
-              );
-            })}
-          </div>
+                <div
+                  className={`projects-carousel__footer${isActive && isDisplayed ? " is-visible" : ""}`}
+                  aria-hidden="true"
+                >
+                  <span className="projects-carousel__footer-title">{project.title}</span>
+                </div>
+                <div className="projects-carousel__accent-line" aria-hidden="true" />
+              </div>
+            );
+          })}
         </div>
+      </div>
     </div>
   );
 };

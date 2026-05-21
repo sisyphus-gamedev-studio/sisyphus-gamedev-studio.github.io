@@ -102,18 +102,22 @@
   margin: 0;
 }
 
-.faq-modal-panel {
+.faq-accordion-trigger__main {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.faq-modal-panel.card {
   padding: 0;
-  background: var(--s-3);
-  border: 1px solid var(--b-strong);
-  border-radius: var(--card-radius-secondary);
 }
 
-.faq-modal-header {
-  border-bottom: 1px solid var(--b-subtle);
-}
-
-.faq-modal-close {
-  border: 1px solid var(--b-medium);
-  background: rgba(0, 0, 0, 0.45);
+.careers-faq-trigger {
+  width: 100%;
+  justify-content: center;
+  height: 42px;
+  font-size: 13px;
+  gap: 7px;
 }

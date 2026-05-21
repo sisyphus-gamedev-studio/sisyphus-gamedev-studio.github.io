@@ -6,8 +6,6 @@ import { TEAM_MEMBERS } from "../../config/team";
 import type { TeamMember, TeamMemberAccent } from "../../config/team";
 import { resolveTeamSideProjects } from "../../utils/teamSideProject";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
-import "../../styles/team-grid.css";
-
 interface TeamGridProps {
   lang: Language;
   t: TranslationStructure["team"];
@@ -25,7 +23,7 @@ const avatarClass = (accent: TeamMemberAccent, hasImage: boolean, size: "lg" | "
   const parts = [
     "card-entity__media",
     size === "sm" ? "card-entity__media--sm" : "",
-    hasImage ? "card-entity__media--image" : `team-card-avatar--${accent}`,
+    hasImage ? "card-entity__media--image" : `card-entity__media--accent-${accent}`,
   ];
   return parts.filter(Boolean).join(" ");
 };
@@ -79,15 +77,17 @@ const TeamCard: FC<TeamCardProps> = ({
             )}
           </div>
           <div className="card-entity__body">
-            <h3 className="card-entity__title t-card-title">{local.name}</h3>
-            <div className="card-entity__meta">
-              {leadRole && <span className="md-badge-primary md-badge">{leadRole}</span>}
+            <h3 className="card-entity__title">{local.name}</h3>
+            <div className="card-entity__meta" aria-label={local.role}>
+              {leadRole && (
+                <span className="md-badge-primary md-badge team-card-role-badge">{leadRole}</span>
+              )}
+              {otherRoles.map((role) => (
+                <span key={role} className="md-badge team-card-role-badge">
+                  {role}
+                </span>
+              ))}
             </div>
-            {otherRoles.length > 0 && (
-              <p className="team-card-roles-secondary t-body-sm" aria-label={local.role}>
-                {otherRoles.join(" · ")}
-              </p>
-            )}
           </div>
         </header>
 
@@ -107,7 +107,7 @@ const TeamCard: FC<TeamCardProps> = ({
             aria-controls={panelId}
             onClick={toggleExpanded}
           >
-            <span className="t-eyebrow-accent" style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+            <span className="t-eyebrow-accent">
               {t.sideProjectsLabel}
               {sideProjects.length > 1 && (
                 <span className="md-badge-primary md-badge" aria-hidden="true">
@@ -161,7 +161,7 @@ const TeamCard: FC<TeamCardProps> = ({
                           <p className="team-card-side__name">{project.name}</p>
                           {project.categoryLabel && (
                             <span
-                              className={`md-badge${project.isPlaceholder ? "" : "-primary"} md-badge`}
+                              className={`md-badge${project.isPlaceholder ? "" : " md-badge-primary"}`}
                             >
                               {project.categoryLabel}
                             </span>

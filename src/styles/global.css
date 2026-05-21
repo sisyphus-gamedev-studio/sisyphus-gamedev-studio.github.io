@@ -14,8 +14,12 @@
 @import "./animations.css";
 @import "./skeleton.css";
 @import "./cards.css";
+@import "./modal-panel.css";
+@import "./hero-section.css";
 @import "./forms.css";
 @import "./sections.css";
+@import "./team-grid.css";
+@import "./projects-section.css";
 @import "./news-section.css";
 @import "./about-section.css";
 @import "./partners-section.css";

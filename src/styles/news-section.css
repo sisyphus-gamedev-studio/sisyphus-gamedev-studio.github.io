@@ -1,18 +1,54 @@
+.news-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--card-meta-gap);
+  margin-bottom: 24px;
+}
+
+.news-filters .chip[data-category="announcement"].active {
+  border-color: var(--c-orange);
+  color: var(--c-orange);
+}
+
+.news-filters .chip[data-category="dev-diary"].active {
+  border-color: var(--accent-blue-text);
+  color: var(--accent-blue-text);
+}
+
+.news-filters .chip[data-category="update"].active {
+  border-color: var(--accent-green-text);
+  color: var(--accent-green-text);
+}
+
 .news-card-main {
   position: relative;
-  border-radius: var(--card-radius);
-  overflow: hidden;
-  background: var(--s-4);
-  border: 1px solid var(--b-subtle);
   width: 100%;
   outline: none;
-  padding: 0;
+  min-height: clamp(260px, 55vw, 480px);
+}
+
+.news-card-main__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news-card-main__img--motion {
+  transition: opacity 0.65s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .news-card-main__gradient {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(21, 21, 21, 0.6) 40%,
+    rgba(21, 21, 21, 0.97) 72%
+  );
 }
 
 .news-card-main__badges {
@@ -20,7 +56,31 @@
   top: 18px;
   left: 18px;
   display: flex;
-  gap: 8px;
+  gap: var(--card-meta-gap);
+}
+
+.news-card-main__badges .md-badge {
+  gap: var(--card-meta-gap);
+}
+
+.news-card-main__badges .md-badge svg {
+  color: var(--c-orange);
+  flex-shrink: 0;
+}
+
+.news-card-main__badges .md-badge[data-category="announcement"] {
+  border-color: var(--c-orange-border);
+  color: var(--c-orange);
+}
+
+.news-card-main__badges .md-badge[data-category="dev-diary"] {
+  border-color: var(--accent-blue-border);
+  color: var(--accent-blue-text);
+}
+
+.news-card-main__badges .md-badge[data-category="update"] {
+  border-color: var(--accent-green-border);
+  color: var(--accent-green-text);
 }
 
 .news-card-main__footer {
@@ -31,10 +91,71 @@
   padding: clamp(14px, 4vw, 26px) clamp(14px, 5vw, 28px) clamp(16px, 4vw, 32px);
 }
 
+.news-card-main__title {
+  font-family: "Exo 2", sans-serif;
+  font-size: clamp(16px, 3.5vw, 26px);
+  font-weight: 700;
+  line-height: 1.28;
+  color: var(--c-on-surface);
+  text-transform: none;
+  margin: 0 0 clamp(6px, 1.5vw, 10px);
+}
+
+.news-card-main__summary {
+  color: var(--c-secondary);
+  max-width: 500px;
+  line-height: 1.65;
+  margin: 0 0 clamp(12px, 2.5vw, 20px);
+  font-size: clamp(12px, 2vw, 15px);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 .news-card-main__divider {
   height: 1px;
   background: var(--b-strong);
   margin-bottom: clamp(8px, 1.5vw, 12px);
+}
+
+.news-card-main__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.news-card-main__read-btn {
+  gap: 7px;
+  height: 36px;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.news-card-main__progress-wrap {
+  flex: 1;
+  max-width: 130px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.news-card-main__progress-wrap .md-progress-track {
+  flex: 1;
+}
+
+.news-card-main__paused {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #555;
+}
+
+.news-card-main__paused-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .news-swipe-hint {
@@ -46,29 +167,14 @@
   opacity: 0.65;
 }
 
-.news-card-main__overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
 .news-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 200px;
-  border-radius: var(--card-radius);
-  border: 1px solid var(--b-subtle);
-  background: var(--s-4);
-  color: var(--c-tertiary);
-  font-size: 14px;
-  letter-spacing: 0.04em;
 }
 
 .news-card-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--card-list-gap);
   list-style: none;
   padding: 0;
   margin: 0;
@@ -88,6 +194,10 @@
   outline: 1px solid transparent;
   outline-offset: -1px;
   transition: all 0.25s var(--ease-em);
+}
+
+.news-card-list-item--reduced-motion {
+  transition: none;
 }
 
 .news-card-list-item--active {
@@ -123,7 +233,9 @@
   display: block;
   line-height: 1.45;
   color: var(--c-tertiary);
+  font-size: 14px;
   font-weight: 400;
+  margin: 0;
   transition: color 0.2s;
 }
 
@@ -137,4 +249,5 @@
   margin-top: 4px;
   line-height: 1.4;
   opacity: 0.85;
+  font-size: 12px;
 }

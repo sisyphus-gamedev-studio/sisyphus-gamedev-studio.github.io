@@ -82,6 +82,23 @@ const aboutImg = IMAGES.about;
           }
         </dl>
 
+        <div class="card card--compact card--elevated about-pillars">
+          <p class="t-label-sm about-pillars__label">{t.pillarsLabel}</p>
+          <ul class="about-pillars__list">
+            {
+              t.pillars.map((item) => (
+                <li class="about-pillars__item">
+                  <span class="about-pillars__dot" aria-hidden="true"></span>
+                  <div class="about-pillars__body">
+                    <p class="about-pillars__title">{item.title}</p>
+                    <p class="about-pillars__text">{item.text}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
         <div class="card card--quote about-mission">
           <p class="t-label-sm about-mission__label">{t.missionLabel}</p>
           <blockquote lang={lang} class="t-body-lg about-mission__quote">
@@ -90,7 +107,7 @@ const aboutImg = IMAGES.about;
         </div>
 
         <div class="card card--status about-status">
-          <div class="pulse" style="width:8px;height:8px;border-radius:50%;background:var(--c-orange);flex-shrink:0" aria-hidden="true"></div>
+          <div class="pulse" aria-hidden="true"></div>
           <div>
             <p class="t-title-sm about-status__title">{t.statusLabel}</p>
             <p class="t-body-sm about-status__sub">{t.statusSub}</p>

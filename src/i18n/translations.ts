@@ -69,6 +69,21 @@ export const TRANSLATIONS = {
       },
       missionLabel: "Mission",
       missionQuote: '"Games not only help us escape reality, they also help us complement it."',
+      pillarsLabel: "How we work",
+      pillars: [
+        {
+          title: "Honest scope",
+          text: "Ambition matched to what we can actually ship.",
+        },
+        {
+          title: "Shared ownership",
+          text: "A real share of the project's first net profit.",
+        },
+        {
+          title: "Steady pace",
+          text: "Transparent milestones, step by step to release.",
+        },
+      ],
       statusLabel: "Active Development",
       statusSub: "Frog Frag",
     },
@@ -329,6 +344,21 @@ export const TRANSLATIONS = {
       missionLabel: "Миссия",
       missionQuote:
         "«Игры не только помогают бежать из реальности, они также помогают её дополнять»",
+      pillarsLabel: "Как мы работаем",
+      pillars: [
+        {
+          title: "Трезвый масштаб",
+          text: "Амбиции соизмеряем с тем, что реально доведём до релиза.",
+        },
+        {
+          title: "Общая доля",
+          text: "Реальная доля первой чистой прибыли проекта.",
+        },
+        {
+          title: "Ровный темп",
+          text: "Прозрачные вехи, шаг за шагом к релизу.",
+        },
+      ],
       statusLabel: "Активная разработка",
       statusSub: "Frog Frag",
     },

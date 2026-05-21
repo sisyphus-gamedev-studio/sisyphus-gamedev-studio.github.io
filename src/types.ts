@@ -86,6 +86,8 @@ export interface TranslationStructure {
     };
     missionLabel: string;
     missionQuote: string;
+    pillarsLabel: string;
+    pillars: { title: string; text: string }[];
     statusLabel: string;
     statusSub: string;
   };

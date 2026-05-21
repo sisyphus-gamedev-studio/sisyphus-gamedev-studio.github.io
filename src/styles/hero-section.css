@@ -1,0 +1,121 @@
+.hero-featured__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, var(--s-4) 100%);
+  pointer-events: none;
+}
+
+.hero-featured__badge-wrap {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+.hero-featured__badge.md-badge {
+  gap: 5px;
+  backdrop-filter: blur(8px);
+}
+
+.hero-featured__body {
+  padding: var(--card-padding);
+  position: relative;
+}
+
+.hero-featured__title {
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.hero-featured__sub {
+  color: var(--c-tertiary);
+  margin-bottom: 14px;
+}
+
+.hero-featured__progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-featured__progress-row .md-progress-track {
+  flex: 1;
+}
+
+.hero-featured__progress-value {
+  color: var(--c-orange);
+  flex-shrink: 0;
+}
+
+.hero-featured__progress-label {
+  color: var(--c-tertiary);
+  margin-top: 5px;
+}
+
+.hero-concept-card {
+  margin-top: var(--card-grid-gap);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.hero-concept__thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  filter: brightness(0.7) saturate(0.75);
+}
+
+.hero-concept__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-concept__title {
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.hero-concept__sub {
+  color: var(--c-tertiary);
+  margin-top: 1px;
+}
+
+.hero-concept__badge {
+  flex-shrink: 0;
+}
+
+.hero-eyebrow-badge {
+  display: inline-flex;
+  gap: 7px;
+  margin-bottom: 22px;
+}
+
+.hero-eyebrow-badge .pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-orange);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.hero-eyebrow-badge__label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+@media (max-width: 768px) {
+  .hero-stat {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center;
+    gap: 8px !important;
+    padding: 16px 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--r-md);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}

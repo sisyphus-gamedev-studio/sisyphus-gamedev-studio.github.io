@@ -2,13 +2,12 @@ import { useState, useEffect, useRef, useCallback, type FC } from "react";
 import { createPortal } from "react-dom";
 import { X, HelpCircle, ChevronDown } from "lucide-react";
 import type { TranslationStructure } from "../../types";
-import { COLORS, FOCUSABLE_SELECTORS, Z_INDEX, SIZES } from "../../config";
+import { FOCUSABLE_SELECTORS } from "../../config";
 
 interface CareersFAQProps {
   t: TranslationStructure["careers"]["faq"];
 }
 
-/* ─── Accordion item ──────────────────────────────────────────────── */
 interface AccordionItemProps {
   question: string;
   answer: string;
@@ -19,12 +18,8 @@ interface AccordionItemProps {
 
 const AccordionItem: FC<AccordionItemProps> = ({ question, answer, index, isOpen, onToggle }) => (
   <div className={`faq-accordion-item${isOpen ? " faq-accordion-item--open" : ""}`}>
-    <button
-      onClick={onToggle}
-      aria-expanded={isOpen}
-      className="faq-accordion-trigger"
-    >
-      <div style={{ display: "flex", alignItems: "flex-start", gap: 10, flex: 1, minWidth: 0 }}>
+    <button type="button" onClick={onToggle} aria-expanded={isOpen} className="faq-accordion-trigger">
+      <div className="faq-accordion-trigger__main">
         <span className="faq-accordion-index">{String(index + 1).padStart(2, "0")}</span>
         <span
           className={`faq-accordion-question${isOpen ? " faq-accordion-question--open" : " faq-accordion-question--closed"}`}
@@ -45,7 +40,6 @@ const AccordionItem: FC<AccordionItemProps> = ({ question, answer, index, isOpen
   </div>
 );
 
-/* ─── FAQ Modal ───────────────────────────────────────────────────── */
 interface FAQModalProps {
   t: TranslationStructure["careers"]["faq"];
   onClose: () => void;
@@ -101,131 +95,43 @@ const FAQModal: FC<FAQModalProps> = ({ t, onClose }) => {
 
   const toggle = useCallback((i: number) => setOpenIndex((p) => (p === i ? null : i)), []);
 
-  /*
-    Rendered via createPortal directly into document.body.
-    This bypasses any ancestor will-change / transform stacking contexts
-    that break position:fixed and backdrop-filter — the same reason
-    the news modal blur works correctly.
-  */
   const modal = (
     <div
       role="dialog"
       aria-modal="true"
       aria-labelledby="faq-modal-title"
+      className="modal-backdrop"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: Z_INDEX.modal,
-        background: "rgba(0,0,0,.72)",
-        backdropFilter: "blur(6px)",
-        WebkitBackdropFilter: "blur(6px)" as unknown as string,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "20px",
-        animation: "modal-bg-in .22s ease both",
-      }}
     >
-      <div
-        ref={panelRef}
-        className="news-modal-panel card faq-modal-panel"
-        style={{
-          width: "100%",
-          maxWidth: SIZES.modal.maxWidth,
-          maxHeight: "90vh",
-          display: "flex",
-          flexDirection: "column",
-          boxShadow: SIZES.modal.boxShadow,
-          overflow: "hidden",
-        }}
-      >
-        <div
-          className="faq-modal-header"
-          style={{
-            padding: "22px 24px 18px",
-            flexShrink: 0,
-            position: "relative",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              height: 1,
-              background: `linear-gradient(90deg,${COLORS.orange},rgba(248,126,15,.15) 50%,transparent)`,
-            }}
-          />
-          <div
-            style={{
-              display: "flex",
-              alignItems: "flex-start",
-              justifyContent: "space-between",
-              gap: 16,
-            }}
-          >
-            <div>
-              <div className="md-badge-primary md-badge" style={{ marginBottom: 10 }}>
-                <HelpCircle size={10} color={COLORS.orange} aria-hidden="true" />
-                <span
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: "1.5px",
-                    textTransform: "uppercase" as const,
-                    color: COLORS.orangeAccent,
-                  }}
-                >
-                  FAQ
-                </span>
+      <div ref={panelRef} className="modal-panel card faq-modal-panel">
+        <div className="modal-panel__header">
+          <div className="modal-panel__header-row">
+            <div className="modal-panel__header-text">
+              <div className="md-badge-primary md-badge">
+                <HelpCircle size={10} aria-hidden="true" />
+                FAQ
               </div>
-              <h2
-                id="faq-modal-title"
-                className="t-card-title"
-                style={{ fontSize: "clamp(18px,3vw,24px)", marginBottom: 5 }}
-              >
+              <h2 id="faq-modal-title" className="faq-modal__title">
                 {t.title}
               </h2>
-              <p style={{ fontSize: 13, color: COLORS.text.tertiary, lineHeight: 1.5, margin: 0 }}>
-                {t.subtitle}
-              </p>
+              <p className="modal-panel__subtitle">{t.subtitle}</p>
             </div>
 
             <button
               ref={closeRef}
+              type="button"
               onClick={onClose}
               aria-label={t.closeLabel}
-              className="state faq-modal-close icon-btn-outlined"
-              style={{
-                width: 34,
-                height: 34,
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)" as unknown as string,
-                flexShrink: 0,
-              }}
+              className="state modal-panel__close"
             >
               <X size={15} strokeWidth={2.2} />
             </button>
           </div>
         </div>
 
-        {/* Scrollable accordion body */}
-        <div
-          tabIndex={0}
-          style={{
-            overflowY: "auto",
-            flex: 1,
-            padding: "16px 20px 28px",
-            outline: "none",
-            display: "flex",
-            flexDirection: "column",
-            gap: 4,
-          }}
-        >
+        <div tabIndex={0} className="modal-panel__scroll">
           {t.items.map((item, i) => (
             <AccordionItem
               key={i}
@@ -244,18 +150,13 @@ const FAQModal: FC<FAQModalProps> = ({ t, onClose }) => {
   return createPortal(modal, document.body);
 };
 
-/* ─── Exported island ─────────────────────────────────────────────── */
 const CareersFAQ: FC<CareersFAQProps> = ({ t }) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        className="btn-outlined"
-        style={{ width: "100%", justifyContent: "center", height: 42, fontSize: 13, gap: 7 }}
-      >
-        <HelpCircle size={14} />
+      <button type="button" onClick={() => setOpen(true)} className="btn-outlined careers-faq-trigger">
+        <HelpCircle size={14} aria-hidden="true" />
         {t.triggerLabel}
       </button>
 

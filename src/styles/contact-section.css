@@ -61,12 +61,16 @@
   color: var(--c-tertiary);
 }
 
+.contact-info-row__text {
+  color: var(--c-tertiary);
+}
+
 .contact-form-panel {
   padding: 0;
 }
 
 .contact-form-panel__body {
-  padding: 20px 24px;
+  padding: var(--card-padding);
 }
 
 @media (max-width: 768px) {

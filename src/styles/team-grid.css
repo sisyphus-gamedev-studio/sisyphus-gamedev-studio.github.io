@@ -1,13 +1,20 @@
 .team-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: var(--card-grid-gap);
   align-items: start;
 }
 
+/* --card-grid-bp-single: 720px */
 @media (max-width: 720px) {
   .team-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-card-main {
+    padding: var(--card-padding);
   }
 }
 
@@ -28,10 +35,10 @@
   flex-direction: column;
 }
 
-.team-card-roles-secondary {
-  margin: 0;
-  color: var(--c-secondary);
-  line-height: 1.55;
+.team-card-role-badge {
+  text-transform: none;
+  letter-spacing: 0.2px;
+  font-weight: 600;
 }
 
 .team-card-quote {
@@ -49,6 +56,12 @@
 
 .team-card-expand {
   border-top: 1px solid var(--b-default);
+}
+
+.team-card-expand-btn .t-eyebrow-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--card-meta-gap);
 }
 
 .team-card-expand-btn {
@@ -210,30 +223,6 @@
   border-color: var(--b-default);
 }
 
-.team-card-avatar--orange {
-  background: var(--c-orange-dim);
-  border-color: var(--c-orange-border);
-  color: var(--c-orange);
-}
-
-.team-card-avatar--blue {
-  background: var(--accent-blue-bg);
-  border-color: var(--accent-blue-border);
-  color: var(--accent-blue-text);
-}
-
-.team-card-avatar--green {
-  background: var(--accent-green-bg);
-  border-color: var(--accent-green-border);
-  color: var(--accent-green-text);
-}
-
-.team-card-avatar--purple {
-  background: var(--accent-purple-bg);
-  border-color: var(--accent-purple-border);
-  color: var(--accent-purple-text);
-}
-
 .team-card-side .team-flip-links {
   display: inline-flex;
   flex-wrap: wrap;
@@ -254,10 +243,6 @@
 }
 
 @media (max-width: 480px) {
-  .team-card-main {
-    padding: 22px 20px 20px;
-  }
-
   .card-entity__media {
     width: 56px;
     height: 56px;

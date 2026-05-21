@@ -90,6 +90,37 @@
   backdrop-filter: blur(8px);
 }
 
+.md-badge--tag {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.md-badge--gold {
+  background: var(--c-orange-dim);
+  border-color: var(--c-orange-border);
+  color: var(--c-orange-accent);
+}
+
+.md-badge--silver {
+  background: var(--accent-silver-bg);
+  border-color: var(--accent-silver-border);
+  color: var(--accent-silver-text);
+}
+
+.md-badge--bronze {
+  background: var(--accent-bronze-bg);
+  border-color: var(--accent-bronze-border);
+  color: var(--accent-bronze-text);
+}
+
+.md-badge--partner {
+  background: var(--accent-green-bg);
+  border-color: var(--accent-green-border);
+  color: var(--accent-green-text);
+}
+
 .md-divider-accent {
   height: 2px;
   width: 36px;
@@ -102,6 +133,11 @@
   border-radius: var(--r-full);
   background: var(--b-default);
   overflow: hidden;
+}
+
+.md-progress-track--lg {
+  height: 4px;
+  border-radius: 2px;
 }
 .md-progress-bar {
   height: 100%;

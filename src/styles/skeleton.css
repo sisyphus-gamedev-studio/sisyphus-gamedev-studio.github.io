@@ -19,3 +19,47 @@
     background: var(--s-3);
   }
 }
+
+.skeleton-card {
+  background: var(--s-4);
+  border: 1px solid var(--b-subtle);
+  overflow: hidden;
+  position: relative;
+}
+
+.skeleton-card--wide {
+  border-radius: var(--card-radius);
+  aspect-ratio: 16 / 9;
+}
+
+.skeleton-card--list {
+  padding: var(--card-padding-compact);
+  border-radius: var(--r-md);
+}
+
+.skeleton-card__shimmer {
+  position: absolute;
+  inset: 0;
+}
+
+.skeleton-card__line {
+  border-radius: var(--r-sm);
+  margin-bottom: 6px;
+}
+
+.skeleton-card__line--sm {
+  height: 10px;
+  width: 35%;
+  margin-bottom: 10px;
+}
+
+.skeleton-card__line--lg {
+  height: 14px;
+  width: 90%;
+}
+
+.skeleton-card__line--md {
+  height: 11px;
+  width: 70%;
+  margin-bottom: 0;
+}

@@ -1,6 +1,7 @@
 ---
 import type { TranslationStructure, Language } from "../../types";
-import { PARTNERS, PARTNER_LOGO_STYLES, PARTNER_CATEGORY_STYLES } from "../../config/partners";
+import { PARTNERS } from "../../config/partners";
+import { accentMediaClass, sponsorCategoryBadgeClass } from "../../config/accents";
 import { SOCIAL_ICONS } from "../../config";
 
 interface Props {
@@ -36,8 +37,8 @@ const { t, lang } = Astro.props;
           const localData = partner[lang];
           const isFeatured = !!partner.featured;
           const catLabel = t.categoryLabels[partner.category];
-          const catStyle = PARTNER_CATEGORY_STYLES[partner.category];
-          const logoStyle = PARTNER_LOGO_STYLES[partner.logoStyle] ?? PARTNER_LOGO_STYLES.orange;
+          const badgeClass = sponsorCategoryBadgeClass(partner.category);
+          const logoAccentClass = accentMediaClass(partner.logoStyle);
 
           return (
             <div
@@ -48,8 +49,7 @@ const { t, lang } = Astro.props;
               <div class="partner-card__inner">
                 <div class="card-entity__header">
                   <div
-                    class={`card-entity__media${partner.logoImage ? " card-entity__media--image" : ""}`}
-                    style={partner.logoImage ? undefined : logoStyle}
+                    class={`card-entity__media${partner.logoImage ? " card-entity__media--image" : ` ${logoAccentClass}`}`}
                   >
                     {partner.logoImage ? (
                       <img
@@ -57,24 +57,20 @@ const { t, lang } = Astro.props;
                         alt={localData.name}
                         width="64"
                         height="64"
-                        style="width:100%;height:100%;object-fit:cover"
                       />
                     ) : (
                       <span aria-hidden="true">{partner.logoInitials}</span>
                     )}
                   </div>
                   <div class="card-entity__body">
-                    <h3 class="card-entity__title t-card-title">{localData.name}</h3>
-                    <span
-                      class="md-badge"
-                      style={`${catStyle}`}
-                    >
-                      {catLabel}
-                    </span>
+                    <h3 class="card-entity__title">{localData.name}</h3>
+                    <div class="card-entity__meta">
+                      <span class={badgeClass}>{catLabel}</span>
+                    </div>
                   </div>
                 </div>
 
-                <p class="t-body-sm card-entity__desc">{localData.description}</p>
+                <p class="card-entity__desc">{localData.description}</p>
 
                 <div class="partner-card__links">
                   {partner.links.website && partner.links.website !== "#" && (

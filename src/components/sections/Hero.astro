@@ -1,6 +1,6 @@
 ---
 import type { TranslationStructure, Project } from "../../types";
-import { BRAND, UI, SIZES, IMAGE_FILTERS, BACKDROP, LAYOUT } from "../../config";
+import { BRAND, UI, SIZES, IMAGE_FILTERS, LAYOUT } from "../../config";
 import { getHeroImage, nativeImageFallback } from "../../utils/images";
 
 interface Props {
@@ -25,13 +25,10 @@ const progressPct = `${featured.progress ?? 0}%`;
   >
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
       <div class="lg:col-span-7">
-        <div class="anim d1" style="margin-bottom:22px">
-          <div class="md-badge-primary md-badge" style="display:inline-flex;gap:7px">
-            <span
-              class="pulse"
-              style="width:6px;height:6px;border-radius:50%;background:var(--c-orange);flex-shrink:0;align-self:center"
-            ></span>
-            <span style="font-size:10px;letter-spacing:1.5px">{t.badge}</span>
+        <div class="anim d1 hero-eyebrow-badge">
+          <div class="md-badge-primary md-badge">
+            <span class="pulse" aria-hidden="true"></span>
+            <span class="hero-eyebrow-badge__label">{t.badge}</span>
           </div>
         </div>
 
@@ -154,15 +151,9 @@ const progressPct = `${featured.progress ?? 0}%`;
             style={`width:100%;height:${SIZES.hero.cardHeight}px;object-fit:cover;display:block;filter:${IMAGE_FILTERS.heroMain}`}
             onerror={nativeImageFallback(720, 480)}
           />
-          <div
-            style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,var(--s-4) 100%)"
-          >
-          </div>
-          <div style="position:absolute;top:14px;right:14px">
-            <div
-              class="md-badge-primary md-badge"
-              style={`backdrop-filter:${BACKDROP.heroBadge};gap:5px`}
-            >
+          <div class="hero-featured__overlay" aria-hidden="true"></div>
+          <div class="hero-featured__badge-wrap">
+            <div class="md-badge-primary md-badge hero-featured__badge">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="9"
@@ -180,27 +171,16 @@ const progressPct = `${featured.progress ?? 0}%`;
               {t.inDevLabel}
             </div>
           </div>
-          <div style="padding:16px 20px 22px;position:relative">
-            <h3
-              class="t-card-title"
-              style={`font-size:${SIZES.hero.featuredTitleSize}px;margin-bottom:6px`}
-            >
-              {featured.title}
-            </h3>
-            <p class="t-body-sm" style="color:var(--c-tertiary);margin-bottom:14px">
-              {t.featuredSub}
-            </p>
-            <div style="display:flex;align-items:center;gap:10px">
-              <div class="md-progress-track" style="flex:1">
+          <div class="hero-featured__body">
+            <h3 class="t-card-title hero-featured__title">{featured.title}</h3>
+            <p class="t-body-sm hero-featured__sub">{t.featuredSub}</p>
+            <div class="hero-featured__progress-row">
+              <div class="md-progress-track md-progress-track--lg">
                 <div class="md-progress-bar" style={`width:${progressPct}`}></div>
               </div>
-              <span class="t-label-md" style="color:var(--c-orange);flex-shrink:0"
-                >{progressPct}</span
-              >
+              <span class="t-label-md hero-featured__progress-value">{progressPct}</span>
             </div>
-            <p class="t-label-sm" style="color:var(--c-tertiary);margin-top:5px">
-              {t.progressLabel}
-            </p>
+            <p class="t-label-sm hero-featured__progress-label">{t.progressLabel}</p>
           </div>
         </a>
 
@@ -210,8 +190,7 @@ const progressPct = `${featured.progress ?? 0}%`;
               href={concept.wishlistUrl || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              class="card card--secondary card--interactive"
-              style="margin-top:8px;display:flex;align-items:center;gap:14px;text-decoration:none"
+              class="card card--secondary card--interactive hero-concept-card"
               aria-label={concept.title}
             >
               <img
@@ -221,23 +200,14 @@ const progressPct = `${featured.progress ?? 0}%`;
                 height={String(SIZES.hero.cardImageSize)}
                 loading="eager"
                 decoding="async"
-                style={`width:${SIZES.hero.cardImageSize}px;height:${SIZES.hero.cardImageSize}px;border-radius:var(--r-sm);object-fit:cover;flex-shrink:0;filter:${IMAGE_FILTERS.heroConcept}`}
+                class="hero-concept__thumb"
                 onerror={nativeImageFallback(200, 200)}
               />
-              <div style="flex:1;min-width:0">
-                <p
-                  class="t-card-title"
-                  style={`font-size:${SIZES.hero.conceptTitleSize}px;margin-bottom:2px`}
-                >
-                  {concept.title}
-                </p>
-                <p class="t-body-sm" style="color:var(--c-tertiary);margin-top:1px">
-                  {t.conceptSub}
-                </p>
+              <div class="hero-concept__body">
+                <p class="t-card-title hero-concept__title">{concept.title}</p>
+                <p class="t-body-sm hero-concept__sub">{t.conceptSub}</p>
               </div>
-              <div class="md-badge" style="flex-shrink:0">
-                {t.comingSoon}
-              </div>
+              <div class="md-badge hero-concept__badge">{t.comingSoon}</div>
             </a>
           )
         }
@@ -297,7 +267,7 @@ const progressPct = `${featured.progress ?? 0}%`;
       gap: 8px !important;
       padding: 16px 12px;
       background: rgba(255, 255, 255, 0.02);
-      border-radius: 10px;
+      border-radius: var(--r-md);
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 

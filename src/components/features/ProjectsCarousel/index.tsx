@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback, type FC } from "react";
 import type { Project, TranslationStructure } from "../../../types";
-import { PROJECTS_EXPAND_MS, PROJECTS_CONTENT_REVEAL_RATIO, LAYOUT, SIZES } from "../../../config";
+import { PROJECTS_EXPAND_MS, PROJECTS_CONTENT_REVEAL_RATIO, LAYOUT } from "../../../config";
 import { useReducedMotion } from "../../../hooks/useReducedMotion";
 import { ErrorBoundary } from "../../common/ErrorBoundary";
 import MobileCarousel from "./MobileCarousel";
@@ -79,11 +79,7 @@ const ProjectsCarousel: FC<ProjectsCarouselProps> = ({ projects, t }) => {
 
   if (isMobile === null)
     return (
-      <section
-        id="projects"
-        className="site-section site-section--filled"
-        style={{ minHeight: SIZES.projects.skeletonMinHeight }}
-      />
+      <section id="projects" className="site-section site-section--filled projects-skeleton" />
     );
 
   return (

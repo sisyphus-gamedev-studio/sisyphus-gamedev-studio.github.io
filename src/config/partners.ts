@@ -1,16 +1,7 @@
-import { SPONSOR_CATEGORY_STYLES, toAccentInlineStyle, type AccentKey } from "./accents";
+import type { AccentKey, SponsorCategory } from "./accents";
 
 export type PartnerLogoStyle = AccentKey;
-export type PartnerCategory = keyof typeof SPONSOR_CATEGORY_STYLES;
-
-export const PARTNER_LOGO_STYLES: Record<PartnerLogoStyle, string> = {
-  orange: toAccentInlineStyle("orange"),
-  blue: toAccentInlineStyle("blue"),
-  green: toAccentInlineStyle("green"),
-  purple: toAccentInlineStyle("purple"),
-};
-
-export { SPONSOR_CATEGORY_STYLES as PARTNER_CATEGORY_STYLES };
+export type PartnerCategory = SponsorCategory;
 
 export interface PartnerLink {
   website?: string;

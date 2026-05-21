@@ -53,6 +53,12 @@
   --card-radius-secondary: var(--r-xl);
   --card-hover-lift: -3px;
   --card-hover-shadow: var(--shadow-card-hover);
+  --shadow-card-accent: 0 12px 32px rgba(248, 126, 15, 0.12);
+
+  --card-grid-gap: 12px;
+  --card-grid-bp-single: 720px;
+  --card-meta-gap: 6px;
+  --card-list-gap: 4px;
 
   --accent-blue-bg: rgba(100, 140, 255, 0.1);
   --accent-blue-border: rgba(100, 140, 255, 0.2);

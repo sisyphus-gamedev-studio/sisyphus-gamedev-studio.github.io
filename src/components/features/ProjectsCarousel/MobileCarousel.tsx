@@ -2,15 +2,7 @@ import { useCallback, useRef, type FC, memo } from "react";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Project, TranslationStructure } from "../../../types";
 import { handleImageError } from "../../../utils/images";
-import { IMAGE_FALLBACK } from "../../../config";
-import {
-  COLORS,
-  SWIPE_THRESHOLD,
-  TAG_STYLE,
-  IMAGE_FILTERS,
-  GRADIENTS,
-  SIZES,
-} from "../../../config";
+import { IMAGE_FALLBACK, SWIPE_THRESHOLD } from "../../../config";
 import { getTagIcon } from "./tagIcons";
 
 interface MobileCarouselProps {
@@ -76,161 +68,107 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
         </h2>
       </div>
 
-        <div
-          className="reveal-scale card card--flush"
-          suppressHydrationWarning
-          style={{
-            padding: 0,
-            overflow: "hidden",
-            position: "relative",
-          }}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
-          onTouchCancel={onTouchCancel}
-        >
-          <div style={{ position: "relative", height: SIZES.projects.mobileImageHeight }}>
-            <img
-              src={p.image}
-              alt={p.title}
-              width={900}
-              height={220}
-              loading="lazy"
-              decoding="async"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                display: "block",
-                filter: IMAGE_FILTERS.mobileProject,
-              }}
-              onError={(e) =>
-                handleImageError(
-                  e,
-                  IMAGE_FALLBACK.projectCard.width,
-                  IMAGE_FALLBACK.projectCard.height,
-                )
-              }
-            />
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: GRADIENTS.cardOverlayStrong,
-              }}
-            />
-            <div style={{ position: "absolute", top: 14, right: 14 }}>
-              <div className="md-badge-primary md-badge">{p.price}</div>
-            </div>
+      <div
+        className="reveal-scale card card--flush card--interactive state projects-mobile"
+        suppressHydrationWarning
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+        onTouchCancel={onTouchCancel}
+      >
+        <div className="projects-mobile__media">
+          <img
+            src={p.image}
+            alt={p.title}
+            width={900}
+            height={220}
+            loading="lazy"
+            decoding="async"
+            onError={(e) =>
+              handleImageError(
+                e,
+                IMAGE_FALLBACK.projectCard.width,
+                IMAGE_FALLBACK.projectCard.height,
+              )
+            }
+          />
+          <div className="projects-mobile__overlay" aria-hidden="true" />
+          <div className="projects-mobile__price">
+            <div className="md-badge-primary md-badge">{p.price}</div>
           </div>
+        </div>
 
-          <div style={{ padding: "20px 24px 28px", background: COLORS.surface.s3 }}>
-            <span className="t-eyebrow-accent" style={{ display: "block", marginBottom: 8 }}>
-              {String(activeIndex + 1).padStart(2, "0")} — {t.sectionLabel}
-            </span>
-            <h3
-              className="t-card-title"
-              style={{ fontSize: SIZES.projects.mobileTitleSize, marginBottom: 10 }}
-            >
-              {p.title}
-            </h3>
-            {p.tags && p.tags.length > 0 && (
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 12 }}>
-                {p.tags.map((tag) => {
-                  const Icon = getTagIcon(tag);
-                  return (
-                    <span
-                      key={tag}
-                      style={{
-                        ...TAG_STYLE.base,
-                        ...TAG_STYLE.mobile,
-                        color: COLORS.text.secondary,
-                      }}
-                    >
-                      <Icon size={9} color={COLORS.orange} />
-                      {tag}
-                    </span>
-                  );
-                })}
-              </div>
-            )}
-            <div style={{ height: 1, background: COLORS.border.strong, marginBottom: 12 }} />
-            <p
-              className="t-body-md"
-              style={{ color: COLORS.text.secondary, lineHeight: 1.7, marginBottom: 20 }}
-            >
-              {p.description}
-            </p>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <button
-                  onClick={prev}
-                  className="icon-btn-outlined"
-                  style={{ width: 40, height: 40 }}
-                  aria-label={t.prevGame}
-                >
-                  <ChevronLeft size={18} />
-                </button>
-                <button
-                  onClick={next}
-                  className="icon-btn-outlined"
-                  style={{ width: 40, height: 40 }}
-                  aria-label={t.nextGame}
-                >
-                  <ChevronRight size={18} />
-                </button>
-              </div>
-              <a
-                href={p.wishlistUrl || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-filled"
-                style={{ height: 40, fontSize: 13, gap: 7, paddingLeft: 20, paddingRight: 20 }}
+        <div className="projects-mobile__body">
+          <span className="t-eyebrow-accent projects-mobile__eyebrow">
+            {String(activeIndex + 1).padStart(2, "0")} — {t.sectionLabel}
+          </span>
+          <h3 className="t-card-title projects-mobile__title">{p.title}</h3>
+          {p.tags && p.tags.length > 0 && (
+            <div className="projects-tags projects-tags--mobile">
+              {p.tags.map((tag) => {
+                const Icon = getTagIcon(tag);
+                return (
+                  <span key={tag} className="md-badge md-badge--tag projects-tag">
+                    <Icon size={9} aria-hidden="true" />
+                    {tag}
+                  </span>
+                );
+              })}
+            </div>
+          )}
+          <div className="projects-divider projects-divider--mobile" />
+          <p className="t-body-md projects-desc projects-desc--mobile">{p.description}</p>
+          <div className="projects-mobile__nav">
+            <div className="projects-mobile__nav-buttons">
+              <button
+                type="button"
+                onClick={prev}
+                className="icon-btn-outlined projects-mobile__nav-btn"
+                aria-label={t.prevGame}
               >
-                <ExternalLink size={14} />
-                {t.learnMore}
-              </a>
+                <ChevronLeft size={18} aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                className="icon-btn-outlined projects-mobile__nav-btn"
+                aria-label={t.nextGame}
+              >
+                <ChevronRight size={18} aria-hidden="true" />
+              </button>
             </div>
+            <a
+              href={p.wishlistUrl || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-filled projects-cta projects-cta--mobile"
+            >
+              <ExternalLink size={14} aria-hidden="true" />
+              {t.learnMore}
+            </a>
           </div>
         </div>
+      </div>
 
-        <div
-          className="flex-center gap-6"
-          style={{ marginTop: 16 }}
-          role="tablist"
-          aria-label={t.heading}
-        >
-          {projects.map((proj, i) => (
-            <button
-              key={i}
-              onClick={() => onSelect(i)}
-              role="tab"
-              aria-selected={i === activeIndex}
-              aria-label={proj.title}
-              style={{
-                width: i === activeIndex ? 20 : 6,
-                height: 6,
-                borderRadius: 3,
-                border: "none",
-                background: i === activeIndex ? COLORS.orange : COLORS.border.medium,
-                cursor: "pointer",
-                transition: "width .3s, background .3s",
-                padding: 0,
-              }}
-            />
-          ))}
-        </div>
-        <p
-          aria-hidden="true"
-          style={{
-            textAlign: "center",
-            color: COLORS.text.muted,
-            fontSize: 11,
-            marginTop: 8,
-            letterSpacing: 0.5,
-          }}
-        >
-          ← {t.swipeHint} →
-        </p>
+      <div
+        className="flex-center gap-6 projects-mobile-dots"
+        role="tablist"
+        aria-label={t.heading}
+      >
+        {projects.map((proj, i) => (
+          <button
+            key={proj.id}
+            type="button"
+            onClick={() => onSelect(i)}
+            role="tab"
+            aria-selected={i === activeIndex}
+            aria-label={proj.title}
+            className={`projects-mobile-dot${i === activeIndex ? " is-active" : ""}`}
+          />
+        ))}
+      </div>
+      <p className="projects-mobile-hint" aria-hidden="true">
+        ← {t.swipeHint} →
+      </p>
     </div>
   );
 };

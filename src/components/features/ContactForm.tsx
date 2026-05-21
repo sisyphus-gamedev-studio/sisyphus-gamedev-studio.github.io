@@ -1,6 +1,6 @@
 import { useState, useCallback, type ChangeEvent } from "react";
 import type { TranslationStructure } from "../../types";
-import { CONTACT, EMAIL_REGEX, COLORS, SIZES } from "../../config";
+import { CONTACT, EMAIL_REGEX, SIZES } from "../../config";
 
 interface Props {
   t: TranslationStructure["contact"];
@@ -68,16 +68,14 @@ export default function ContactForm({ t }: Props) {
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
-        <p className="t-body-md" style={{ color: "var(--c-on-surface)" }}>
-          {f.success}
-        </p>
+        <p className="t-body-md form-success__text">{f.success}</p>
       </div>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex-col gap-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2" style={{ gap: 8 }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 card-grid-gap">
         <Field
           id="cf-name"
           name="name"
@@ -122,30 +120,11 @@ export default function ContactForm({ t }: Props) {
       />
 
       {status === "error" && (
-        <p className="t-label-md form-label--error" style={{ marginTop: -4 }}>
-          {f.error}
-        </p>
+        <p className="t-label-md form-label--error form-error-banner">{f.error}</p>
       )}
 
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          marginTop: 4,
-          gap: 12,
-          flexWrap: "wrap",
-        }}
-      >
-        <button
-          type="submit"
-          disabled={status === "submitting"}
-          className="btn-filled"
-          style={{
-            opacity: status === "submitting" ? 0.65 : 1,
-            cursor: status === "submitting" ? "not-allowed" : "pointer",
-          }}
-        >
+      <div className="form-actions">
+        <button type="submit" disabled={status === "submitting"} className="btn-filled">
           {status === "submitting" ? (
             <>
               <svg
