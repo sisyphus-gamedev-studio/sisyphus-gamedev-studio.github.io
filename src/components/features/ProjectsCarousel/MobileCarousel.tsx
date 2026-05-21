@@ -149,11 +149,7 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
         </div>
       </div>
 
-      <div
-        className="flex-center gap-6 projects-mobile-dots"
-        role="tablist"
-        aria-label={t.heading}
-      >
+      <div className="flex-center gap-6 projects-mobile-dots" role="tablist" aria-label={t.heading}>
         {projects.map((proj, i) => (
           <button
             key={proj.id}

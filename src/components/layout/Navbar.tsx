@@ -1,25 +1,14 @@
 import { useState, useEffect, useCallback, useRef, useMemo, type FC } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import type { Language, TranslationStructure } from "../../types";
-import {
-  BRAND,
-  SOCIAL_LINKS,
-  COLORS,
-  LAYOUT,
-  TRANSITIONS,
-  BACKDROP,
-  Z_INDEX,
-  SIZES,
-  isMailtoLink,
-} from "../../config";
+import { SOCIAL_LINKS, buildNavLinks, isMailtoLink } from "../../config";
 import { useLanguageSync } from "../../hooks/useLanguageSync";
+import { BrandLink } from "./BrandLink";
 
 interface NavbarProps {
   lang: Language;
   t: TranslationStructure["nav"];
 }
-
-const NAV_HEIGHT = LAYOUT.navHeight;
 
 const Navbar: FC<NavbarProps> = ({ lang, t }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -35,19 +24,7 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
   const otherLang: Language = lang === "en" ? "ru" : "en";
   const langSwitchHref = `/${otherLang}/`;
 
-  const links = useMemo(
-    () => [
-      { id: "home", label: t.home, href: "#home" },
-      { id: "about", label: t.about, href: "#about" },
-      { id: "team", label: t.team, href: "#team" },
-      { id: "projects", label: t.projects, href: "#projects" },
-      { id: "news", label: t.news, href: "#news" },
-      { id: "careers", label: t.careers, href: "#careers" },
-      { id: "donate", label: t.donate, href: "#donate" },
-      { id: "contact", label: t.contact, href: "#contact" },
-    ],
-    [t],
-  );
+  const links = useMemo(() => buildNavLinks(t), [t]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -139,68 +116,12 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
   return (
     <nav
       aria-label="Main navigation"
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: Z_INDEX.nav,
-        height: NAV_HEIGHT,
-        background: scrolled ? COLORS.navBg : "transparent",
-        backdropFilter: scrolled ? BACKDROP.navScrolled : "none",
-        borderBottom: scrolled ? `1px solid ${COLORS.border.default}` : "1px solid transparent",
-        transition: `background ${TRANSITIONS.default}, border-color ${TRANSITIONS.default}, backdrop-filter ${TRANSITIONS.default}`,
-      }}
+      className={`nav-shell${scrolled ? " nav-shell--scrolled" : ""}`}
     >
-      <div
-        style={{
-          maxWidth: LAYOUT.maxWidth,
-          margin: "0 auto",
-          padding: `0 ${LAYOUT.padding}px`,
-          height: NAV_HEIGHT,
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-        }}
-      >
-        <a
-          href="#home"
-          onClick={() => handleNavClick("home")}
-          className="state nav-brand-link"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            textDecoration: "none",
-            padding: "5px 10px 5px 5px",
-            borderRadius: "var(--r-full)",
-            flexShrink: 0,
-          }}
-        >
-          <img
-            src="/favicon.png"
-            alt={`${BRAND.prefix} ${BRAND.suffix}`}
-            width={56}
-            height={56}
-            className="nav-brand-logo"
-            style={{ borderRadius: 8, objectFit: "cover", flexShrink: 0 }}
-          />
-          <span className="t-brand-lg nav-brand-text" style={{ fontSize: SIZES.nav.brandFontSize }}>
-            {BRAND.prefix}
-            <span style={{ color: COLORS.orange }}>{BRAND.suffix}</span>
-          </span>
-        </a>
+      <div className="nav-inner">
+        <BrandLink href="#home" variant="nav" onClick={() => handleNavClick("home")} />
 
-        <div
-          className="nav-desktop-toolbar nav-desktop-links"
-          style={{
-            flex: 1,
-            minWidth: 0,
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 2,
-          }}
-        >
+        <div className="nav-desktop-toolbar nav-desktop-links nav-desktop-toolbar--links">
           {links.map(({ id, label, href }) => {
             const isActive = active === id;
             return (
@@ -208,38 +129,16 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
                 key={id}
                 href={href}
                 onClick={() => handleNavClick(id)}
-                className={`nav-desktop-link state ${isActive ? "active" : ""}`}
-                style={{ fontSize: SIZES.nav.linkFontSize, flexShrink: 0 }}
+                className={`nav-desktop-link state${isActive ? " active" : ""}`}
               >
                 {label}
-                {isActive && (
-                  <span
-                    style={{
-                      position: "absolute",
-                      bottom: 3,
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      width: 14,
-                      height: 2,
-                      borderRadius: "var(--r-full)",
-                      background: COLORS.orange,
-                    }}
-                  />
-                )}
+                {isActive && <span className="nav-active-indicator" aria-hidden="true" />}
               </a>
             );
           })}
         </div>
 
-        <div
-          className="nav-desktop-toolbar"
-          style={{
-            flexShrink: 0,
-            alignItems: "center",
-            gap: 2,
-            justifyContent: "flex-end",
-          }}
-        >
+        <div className="nav-desktop-toolbar nav-desktop-toolbar--actions">
           {SOCIAL_LINKS.map(({ iconSvg, href, label }) => (
             <a
               key={label}
@@ -252,25 +151,8 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
               <span dangerouslySetInnerHTML={{ __html: iconSvg }} />
             </a>
           ))}
-          <div
-            style={{
-              width: 1,
-              height: SIZES.nav.desktopDividerHeight,
-              background: COLORS.border.strong,
-              margin: "0 6px",
-            }}
-          />
-          <a
-            href={langSwitchHref}
-            className="chip"
-            style={{
-              height: 26,
-              fontSize: SIZES.nav.chipFontSize,
-              letterSpacing: SIZES.nav.chipLetterSpacing,
-              textDecoration: "none",
-              gap: 5,
-            }}
-          >
+          <div className="nav-divider" aria-hidden="true" />
+          <a href={langSwitchHref} className="chip nav-lang-chip">
             <Globe size={18} />
             {otherLang.toUpperCase()}
           </a>
@@ -279,7 +161,6 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
         <button
           ref={burgerRef}
           className="nav-burger-btn icon-btn-outlined"
-          style={{ width: SIZES.nav.burgerSize, height: SIZES.nav.burgerSize }}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={t.toggleNav}
           aria-expanded={mobileOpen}
@@ -291,56 +172,25 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
 
       <div
         id="mobile-menu"
-        className="nav-mobile-sheet"
+        className={`nav-mobile-sheet${mobileOpen ? " nav-mobile-sheet--open" : ""}`}
         ref={mobileMenuRef}
         onKeyDown={handleMenuKeyDown}
         {...(mobileOpen ? { role: "dialog", "aria-modal": "true", "aria-label": t.navMenu } : {})}
-        style={{
-          maxHeight: mobileOpen ? `calc(100dvh - ${NAV_HEIGHT}px)` : 0,
-          opacity: mobileOpen ? 1 : 0,
-          overflow: "hidden",
-          overflowY: mobileOpen ? "auto" : "hidden",
-          background: COLORS.panelBg,
-          backdropFilter: BACKDROP.panel,
-          borderTop: mobileOpen ? `1px solid ${COLORS.border.default}` : "1px solid transparent",
-          transition: `max-height ${TRANSITIONS.default}, opacity ${TRANSITIONS.fast}`,
-          visibility: mobileOpen ? "visible" : "hidden",
-        }}
       >
-        <div
-          style={{
-            maxWidth: LAYOUT.maxWidth,
-            margin: "0 auto",
-            padding: "8px 16px 16px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-          }}
-        >
+        <div className="nav-mobile-inner">
           {links.map(({ id, label, href }) => (
             <a
               key={id}
               href={href}
-              className="state"
+              className={`nav-mobile-link state${active === id ? " nav-mobile-link--active" : ""}`}
               onClick={() => handleNavClick(id)}
               tabIndex={mobileOpen ? 0 : -1}
-              style={{
-                padding: "11px 16px",
-                borderRadius: 10,
-                fontSize: SIZES.nav.mobileLinkFontSize,
-                fontWeight: 600,
-                color: active === id ? COLORS.text.primary : COLORS.text.tertiary,
-                background: active === id ? COLORS.orangeDim : "transparent",
-                textDecoration: "none",
-                overflow: "hidden",
-                transition: "color .2s, background .2s",
-              }}
             >
               {label}
             </a>
           ))}
-          <div style={{ height: 1, background: COLORS.border.default, margin: "8px 0" }} />
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <div className="nav-mobile-divider" aria-hidden="true" />
+          <div className="nav-mobile-actions">
             {SOCIAL_LINKS.map(({ iconSvg, href, label }) => (
               <a
                 key={label}
@@ -356,14 +206,8 @@ const Navbar: FC<NavbarProps> = ({ lang, t }) => {
             ))}
             <a
               href={langSwitchHref}
-              className="chip"
+              className="chip nav-mobile-lang-chip"
               tabIndex={mobileOpen ? 0 : -1}
-              style={{
-                marginLeft: "auto",
-                height: 26,
-                textDecoration: "none",
-                fontSize: SIZES.nav.mobileLangFontSize,
-              }}
               onClick={() => setMobileOpen(false)}
             >
               <Globe size={18} />

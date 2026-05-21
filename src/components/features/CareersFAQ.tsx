@@ -18,7 +18,12 @@ interface AccordionItemProps {
 
 const AccordionItem: FC<AccordionItemProps> = ({ question, answer, index, isOpen, onToggle }) => (
   <div className={`faq-accordion-item${isOpen ? " faq-accordion-item--open" : ""}`}>
-    <button type="button" onClick={onToggle} aria-expanded={isOpen} className="faq-accordion-trigger">
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={isOpen}
+      className="faq-accordion-trigger"
+    >
       <div className="faq-accordion-trigger__main">
         <span className="faq-accordion-index">{String(index + 1).padStart(2, "0")}</span>
         <span
@@ -155,7 +160,11 @@ const CareersFAQ: FC<CareersFAQProps> = ({ t }) => {
 
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)} className="btn-outlined careers-faq-trigger">
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="btn-outlined careers-faq-trigger"
+      >
         <HelpCircle size={14} aria-hidden="true" />
         {t.triggerLabel}
       </button>

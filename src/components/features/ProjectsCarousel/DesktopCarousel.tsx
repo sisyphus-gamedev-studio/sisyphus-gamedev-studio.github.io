@@ -62,9 +62,7 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
 
       <div className="projects-layout">
         <div className="projects-sidebar reveal-left" suppressHydrationWarning>
-          <div
-            className={`projects-sidebar-inner${textVisible ? "" : " is-leaving"}`}
-          >
+          <div className={`projects-sidebar-inner${textVisible ? "" : " is-leaving"}`}>
             <div>
               <div className="projects-sidebar-head">
                 <span className="t-eyebrow-accent">

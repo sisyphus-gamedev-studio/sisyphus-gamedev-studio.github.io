@@ -25,12 +25,7 @@ const { t, lang, partnerLinkLabels } = Astro.props;
     </div>
 
     <div class="reveal">
-      <TeamGrid
-        t={t}
-        lang={lang}
-        partnerLinkLabels={partnerLinkLabels}
-        client:visible
-      />
+      <TeamGrid t={t} lang={lang} partnerLinkLabels={partnerLinkLabels} client:visible />
     </div>
   </div>
 </section>

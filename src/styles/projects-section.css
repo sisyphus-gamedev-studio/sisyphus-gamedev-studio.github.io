@@ -208,7 +208,7 @@
 .projects-carousel__tint {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(248, 126, 15, 0.07) 0%, transparent 55%);
+  background: linear-gradient(135deg, var(--c-orange-07) 0%, transparent 55%);
   opacity: 0;
   transition: opacity var(--projects-expand-ms, 500ms) cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
@@ -245,7 +245,9 @@
 
 .projects-carousel__collapsed-title {
   color: var(--c-on-surface);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.6);
+  text-shadow:
+    0 1px 8px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(0, 0, 0, 0.6);
 }
 
 .projects-carousel__collapsed-index {

@@ -126,11 +126,7 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
 
   if (!isMounted) {
     return (
-      <section
-        id="news"
-        className="site-section site-section--grid"
-        aria-labelledby="news-heading"
-      >
+      <section id="news" className="site-section site-section--grid" aria-labelledby="news-heading">
         <div className="site-section__container">
           <div className="site-section__head">
             <div className="section-eyebrow">
@@ -186,7 +182,9 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
               </h2>
             </div>
             {filtered.length > 0 ? (
-              <div className="md-badge">{String(current + 1).padStart(2, "0")} / {String(filtered.length).padStart(2, "0")}</div>
+              <div className="md-badge">
+                {String(current + 1).padStart(2, "0")} / {String(filtered.length).padStart(2, "0")}
+              </div>
             ) : null}
           </div>
 
@@ -249,10 +247,7 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                         <time dateTime={item.isoDate}>{item.date}</time>
                       </div>
                       {item.type && (
-                        <div
-                          className="md-badge-surface md-badge"
-                          data-category={item.type}
-                        >
+                        <div className="md-badge-surface md-badge" data-category={item.type}>
                           {getCategoryLabel(item.type, lang)}
                         </div>
                       )}
@@ -325,7 +320,9 @@ const NewsCarousel = ({ news, t, lang }: NewsCarouselProps) => {
                           className={`state news-card-list-item${isActive ? " news-card-list-item--active" : ""}${reducedMotion ? " news-card-list-item--reduced-motion" : ""}`}
                           aria-label={`${n.date} — ${n.title}`}
                         >
-                          {isActive && <div className="news-card-list-item__accent" aria-hidden="true" />}
+                          {isActive && (
+                            <div className="news-card-list-item__accent" aria-hidden="true" />
+                          )}
                           <span className="news-card-list-item__date">
                             <time dateTime={n.isoDate}>{n.date}</time>
                           </span>

@@ -92,7 +92,6 @@
 }
 
 .news-card-main__title {
-  font-family: "Exo 2", sans-serif;
   font-size: clamp(16px, 3.5vw, 26px);
   font-weight: 700;
   line-height: 1.28;
@@ -148,7 +147,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  color: #555;
+  color: var(--c-muted);
 }
 
 .news-card-main__paused-label {

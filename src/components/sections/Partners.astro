@@ -52,12 +52,7 @@ const { t, lang } = Astro.props;
                     class={`card-entity__media${partner.logoImage ? " card-entity__media--image" : ` ${logoAccentClass}`}`}
                   >
                     {partner.logoImage ? (
-                      <img
-                        src={partner.logoImage}
-                        alt={localData.name}
-                        width="64"
-                        height="64"
-                      />
+                      <img src={partner.logoImage} alt={localData.name} width="64" height="64" />
                     ) : (
                       <span aria-hidden="true">{partner.logoInitials}</span>
                     )}

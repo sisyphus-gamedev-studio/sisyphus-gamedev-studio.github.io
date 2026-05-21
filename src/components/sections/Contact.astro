@@ -27,7 +27,9 @@ const contactInfo = [{ icon: SOCIAL_ICONS.email, text: CONTACT.contactEmail }];
 
     <div class="contact-layout">
       <div class="reveal reveal-left contact-sidebar">
-        <p class="t-body-md section-lead section-lead--narrow contact-sidebar__lead">{t.description}</p>
+        <p class="t-body-md section-lead section-lead--narrow contact-sidebar__lead">
+          {t.description}
+        </p>
 
         <div class="contact-info-list">
           {
@@ -58,7 +60,9 @@ const contactInfo = [{ icon: SOCIAL_ICONS.email, text: CONTACT.contactEmail }];
         </div>
       </div>
 
-      <div class="reveal-right card card--flush contact-form-panel card-accent-top card-accent-top--contact">
+      <div
+        class="reveal-right card card--flush contact-form-panel card-accent-top card-accent-top--contact"
+      >
         <div class="contact-form-panel__body">
           <ContactForm t={t} client:load />
         </div>

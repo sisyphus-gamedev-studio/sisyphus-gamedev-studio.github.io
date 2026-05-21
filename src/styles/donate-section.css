@@ -42,11 +42,11 @@
 
 .donate-tier-card--highlight {
   border-color: var(--c-orange-border);
-  background: color-mix(in srgb, var(--s-5) 95%, rgba(248, 126, 15, 1) 5%);
+  background: color-mix(in srgb, var(--s-5) 95%, var(--c-orange) 5%);
 }
 
 .donate-tier-card--highlight.card--interactive:hover {
-  border-color: rgba(248, 126, 15, 0.4);
+  border-color: var(--c-orange-40);
   box-shadow: var(--shadow-card-accent);
 }
 

@@ -65,7 +65,9 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: "misha",
     initials: "YA",
     accent: "green",
-    sideProjects: [{ type: "placeholder", id: "misha-side-a", accent: "green", logoInitials: "···" }],
+    sideProjects: [
+      { type: "placeholder", id: "misha-side-a", accent: "green", logoInitials: "···" },
+    ],
     ru: {
       name: "Yakudzava",
       role: "Сосоздатель студии. Креативный директор. Игровой продюсер. Менеджер HR.",
@@ -81,7 +83,9 @@ export const TEAM_MEMBERS: TeamMember[] = [
     id: "zhenya",
     initials: "JO",
     accent: "purple",
-    sideProjects: [{ type: "placeholder", id: "zhenya-side-a", accent: "purple", logoInitials: "UE" }],
+    sideProjects: [
+      { type: "placeholder", id: "zhenya-side-a", accent: "purple", logoInitials: "UE" },
+    ],
     ru: {
       name: "Joneky",
       role: "Младший UE5 разработчик.",

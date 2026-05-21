@@ -1,8 +1,9 @@
 import { type FC } from "react";
 import { ArrowUp } from "lucide-react";
 import type { Language, TranslationStructure } from "../../types";
-import { BRAND, COLORS, LAYOUT, SOCIAL_LINKS, BACKDROP, SIZES, isMailtoLink } from "../../config";
+import { SOCIAL_LINKS, buildNavLinks, isMailtoLink } from "../../config";
 import { ErrorBoundary } from "../common/ErrorBoundary";
+import { BrandLink } from "./BrandLink";
 
 interface FooterProps {
   t: TranslationStructure["footer"];
@@ -14,77 +15,20 @@ interface FooterProps {
 const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
   const copyright = t.copyright.replace("{year}", String(year));
   const base = `/${lang}/`;
-
-  const footerLinks = [
-    { label: nav.home, href: `${base}#home` },
-    { label: nav.about, href: `${base}#about` },
-    { label: nav.team, href: `${base}#team` },
-    { label: nav.projects, href: `${base}#projects` },
-    { label: nav.news, href: `${base}#news` },
-    { label: nav.careers, href: `${base}#careers` },
-    { label: nav.donate, href: `${base}#donate` },
-    { label: nav.contact, href: `${base}#contact` },
-  ];
+  const footerLinks = buildNavLinks(nav, base);
 
   return (
     <ErrorBoundary>
-      <footer
-        aria-labelledby="footer-heading"
-        style={{
-          background: COLORS.panelBg,
-          backdropFilter: BACKDROP.footer,
-          borderTop: `1px solid ${COLORS.border.default}`,
-        }}
-      >
+      <footer aria-labelledby="footer-heading" className="footer-shell">
         <h2 id="footer-heading" className="sr-only">
           {t.sectionLabel}
         </h2>
 
-        <div
-          style={{
-            maxWidth: LAYOUT.maxWidth,
-            margin: "0 auto",
-            padding: `${SIZES.footer.paddingTop}px ${LAYOUT.padding}px ${SIZES.footer.paddingBottom}px`,
-          }}
-        >
+        <div className="footer-inner">
           <div className="footer-top-row">
-            <a
-              href={`${base}#home`}
-              className="state"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 10,
-                textDecoration: "none",
-                padding: "4px 8px 4px 4px",
-                borderRadius: "var(--r-full)",
-                flexShrink: 0,
-              }}
-            >
-              <img
-                src="/favicon.png"
-                alt={`${BRAND.prefix} ${BRAND.suffix}`}
-                width={SIZES.footer.logoSize}
-                height={SIZES.footer.logoSize}
-                style={{ borderRadius: 8, objectFit: "cover" }}
-              />
-              <span className="t-brand-lg" style={{ fontSize: SIZES.nav.brandFontSize }}>
-                {BRAND.prefix}
-                <span style={{ color: COLORS.orange }}>{BRAND.suffix}</span>
-              </span>
-            </a>
+            <BrandLink href={`${base}#home`} variant="footer" />
 
-            <nav
-              aria-label="Footer navigation"
-              className="footer-nav"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 2,
-                flexWrap: "wrap",
-                justifyContent: "center",
-              }}
-            >
+            <nav aria-label="Footer navigation" className="footer-nav">
               {footerLinks.map((link) => (
                 <a key={link.href} href={link.href} className="footer-nav-link state">
                   {link.label}
@@ -92,10 +36,7 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
               ))}
             </nav>
 
-            <div
-              className="footer-actions"
-              style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}
-            >
+            <div className="footer-actions">
               {SOCIAL_LINKS.map((link) => (
                 <a
                   key={link.label}
@@ -109,17 +50,12 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
                 </a>
               ))}
 
-              <div className="footer-divider" />
+              <div className="footer-divider" aria-hidden="true" />
 
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="icon-btn-outlined"
+                className="icon-btn-outlined footer-back-to-top"
                 title={t.backToTop}
-                style={{
-                  width: SIZES.footer.backToTopSize,
-                  height: SIZES.footer.backToTopSize,
-                  flexShrink: 0,
-                }}
               >
                 <ArrowUp size={13} />
               </button>
@@ -127,9 +63,7 @@ const Footer: FC<FooterProps> = ({ t, nav, year, lang }) => {
           </div>
 
           <div className="footer-bottom-row">
-            <p className="t-body-sm" style={{ color: COLORS.text.muted }}>
-              {copyright}
-            </p>
+            <p className="t-body-sm footer-copyright">{copyright}</p>
           </div>
         </div>
       </footer>

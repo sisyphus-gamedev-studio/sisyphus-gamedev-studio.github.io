@@ -60,11 +60,7 @@ const news: NewsItem[] = newsEntries
   <main>
     <Hero t={t.hero} projects={projects} titlesCount={titlesCount} />
     <About t={t.about} lang={lang} titlesCount={titlesCount} />
-    <Team
-      t={t.team}
-      lang={lang}
-      partnerLinkLabels={t.partners.linkLabels}
-    />
+    <Team t={t.team} lang={lang} partnerLinkLabels={t.partners.linkLabels} />
     <ProjectsCarousel t={t.projects} projects={projects} client:visible />
     <NewsCarousel news={news} t={t.news} lang={lang} client:visible />
     <Careers t={t.careers} lang={lang} />

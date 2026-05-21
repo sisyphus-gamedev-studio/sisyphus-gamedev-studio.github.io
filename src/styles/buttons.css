@@ -6,7 +6,7 @@
   height: 42px;
   padding: 0 26px;
   background: var(--c-orange);
-  color: #111111;
+  color: var(--c-on-accent);
   border-radius: var(--r-full);
   border: none;
   cursor: pointer;
@@ -31,8 +31,8 @@
 }
 .btn-filled:hover {
   box-shadow:
-    0 0 0 3px rgba(248, 126, 15, 0.18),
-    0 4px 14px rgba(248, 126, 15, 0.26);
+    0 0 0 3px var(--c-orange-border),
+    0 4px 14px var(--c-orange-30);
   transform: translateY(-1px);
 }
 .btn-filled:hover::before {
@@ -67,8 +67,8 @@
     transform 0.14s var(--ease-em);
 }
 .btn-tonal:hover {
-  background: rgba(248, 126, 15, 0.16);
-  border-color: rgba(248, 126, 15, 0.3);
+  background: var(--c-orange-dim);
+  border-color: var(--c-orange-30);
   transform: translateY(-1px);
 }
 
@@ -121,7 +121,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: #fff;
+  background: var(--c-on-white);
   opacity: 0;
   border-radius: inherit;
   transition: opacity 0.18s;
@@ -155,7 +155,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: #fff;
+  background: var(--c-on-white);
   opacity: 0;
   border-radius: inherit;
   transition: opacity 0.18s;

@@ -56,7 +56,9 @@ const TIER_RELS = [undefined, isMailto ? undefined : "noopener noreferrer", unde
                 aria-hidden="true"
                 set:html={DONATE_TIER_ICONS[i]}
               />
-              <span class={`md-badge donate-tier-label${i === 1 ? " md-badge-primary" : ""}`}>{tier.label}</span>
+              <span class={`md-badge donate-tier-label${i === 1 ? " md-badge-primary" : ""}`}>
+                {tier.label}
+              </span>
               <p class="donate-tier-title">{tier.title}</p>
               <p class="t-body-sm donate-tier-desc">{tier.description}</p>
 

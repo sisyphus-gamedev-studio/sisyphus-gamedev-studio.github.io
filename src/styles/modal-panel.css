@@ -111,7 +111,6 @@
 }
 
 .modal-panel__title {
-  font-family: "Exo 2", sans-serif;
   font-size: clamp(22px, 4vw, 32px);
   font-weight: 700;
   line-height: 1.05;
@@ -137,7 +136,7 @@
 }
 
 .modal-panel__body p:first-child {
-  color: #c8c4c0;
+  color: var(--c-modal-lead);
   font-size: 15px;
   font-weight: 500;
 }
@@ -162,7 +161,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, var(--c-orange), rgba(248, 126, 15, 0.15) 50%, transparent);
+  background: linear-gradient(90deg, var(--c-orange), var(--c-orange-15) 50%, transparent);
   pointer-events: none;
 }
 
@@ -195,7 +194,6 @@
 }
 
 .faq-modal__title {
-  font-family: "Exo 2", sans-serif;
   font-size: clamp(18px, 3vw, 24px);
   font-weight: 700;
   line-height: 1.05;

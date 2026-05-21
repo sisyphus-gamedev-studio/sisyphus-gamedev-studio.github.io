@@ -22,10 +22,10 @@
 @keyframes pulse-ring {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(248, 126, 15, 0.5);
+    box-shadow: 0 0 0 0 var(--c-orange-40);
   }
   50% {
-    box-shadow: 0 0 0 5px rgba(248, 126, 15, 0);
+    box-shadow: 0 0 0 5px transparent;
   }
 }
 
@@ -167,11 +167,11 @@
   opacity: 0;
 }
 .glitch-word::before {
-  color: #ff2020;
+  color: var(--c-glitch-red);
   mix-blend-mode: screen;
 }
 .glitch-word::after {
-  color: #00e8ff;
+  color: var(--c-glitch-cyan);
   mix-blend-mode: screen;
 }
 

@@ -1,18 +1,15 @@
 .t-stat-num {
-  font-family: "Exo 2", sans-serif;
   font-weight: 800;
   color: var(--c-orange);
   line-height: 1;
 }
 .t-card-title {
-  font-family: "Exo 2", sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1;
   color: var(--c-on-surface);
 }
 .t-eyebrow-accent {
-  font-family: "Exo 2", sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 2.5px;
@@ -20,13 +17,11 @@
   color: var(--c-orange);
 }
 .t-brand-lg {
-  font-family: "Exo 2", sans-serif;
   font-size: 18px;
   font-weight: 700;
   color: var(--c-on-surface);
 }
 .t-display-lg {
-  font-family: "Exo 2", sans-serif;
   font-size: clamp(40px, 7vw, 72px);
   line-height: 0.95;
   font-weight: 800;
@@ -34,7 +29,6 @@
   text-transform: uppercase;
 }
 .t-display-md {
-  font-family: "Exo 2", sans-serif;
   font-size: clamp(26px, 4.5vw, 44px);
   line-height: 1;
   font-weight: 800;
@@ -42,7 +36,6 @@
   text-transform: uppercase;
 }
 .t-display-sm {
-  font-family: "Exo 2", sans-serif;
   font-size: clamp(20px, 3.2vw, 30px);
   line-height: 1.08;
   font-weight: 800;

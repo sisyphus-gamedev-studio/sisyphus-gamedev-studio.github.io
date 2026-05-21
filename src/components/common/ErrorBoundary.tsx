@@ -1,5 +1,5 @@
 import { Component, type ReactNode } from "react";
-import { COLORS, UI, SIZES } from "../../config";
+import { UI } from "../../config";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -32,38 +32,15 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   render() {
     if (this.state.hasError) {
       return (
-        <div
-          role="alert"
-          style={{
-            padding: "32px 24px",
-            borderRadius: 12,
-            background: COLORS.surface.s4,
-            border: `1px solid ${COLORS.border.default}`,
-            textAlign: "center",
-            color: COLORS.text.tertiary,
-            fontSize: SIZES.errorBoundary.bodyFontSize,
-          }}
-        >
-          <div
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: "50%",
-              background: COLORS.orangeDim,
-              border: `1px solid ${COLORS.orangeBorder}`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "0 auto 14px",
-            }}
-          >
+        <div role="alert" className="error-boundary">
+          <div className="error-boundary__icon-wrap" aria-hidden="true">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
               viewBox="0 0 24 24"
               fill="none"
-              stroke={COLORS.orange}
+              stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -73,10 +50,10 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
               <line x1="12" y1="16" x2="12.01" y2="16" />
             </svg>
           </div>
-          <p style={{ color: COLORS.text.primary, fontWeight: 600, marginBottom: 6 }}>
+          <p className="error-boundary__title">
             {this.props.errorTitle ?? UI.errorBoundary.title.en}
           </p>
-          <p style={{ fontSize: SIZES.errorBoundary.subtitleFontSize }}>
+          <p className="error-boundary__subtitle">
             {this.props.errorSubtitle ?? UI.errorBoundary.subtitle.en}
           </p>
         </div>

@@ -1,9 +1,22 @@
 :root {
+  --font-sans: "Exo 2", sans-serif;
+
   --c-orange: #f87e0f;
   --c-orange-light: #ff9d5c;
   --c-orange-accent: #ffb86b;
   --c-orange-dim: rgba(248, 126, 15, 0.1);
   --c-orange-border: rgba(248, 126, 15, 0.2);
+  --c-orange-07: rgba(248, 126, 15, 0.07);
+  --c-orange-15: rgba(248, 126, 15, 0.15);
+  --c-orange-30: rgba(248, 126, 15, 0.3);
+  --c-orange-40: rgba(248, 126, 15, 0.4);
+
+  --c-on-accent: #111111;
+  --c-on-white: #ffffff;
+  --c-muted: #555555;
+  --c-modal-lead: #c8c4c0;
+  --c-glitch-red: #ff2020;
+  --c-glitch-cyan: #00e8ff;
 
   --c-secondary: #999999;
   --c-tertiary: #737373;

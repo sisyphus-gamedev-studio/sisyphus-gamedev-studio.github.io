@@ -34,12 +34,7 @@ const parseRoleParts = (role: string) =>
     .map((part) => part.trim())
     .filter(Boolean);
 
-const TeamCard: FC<TeamCardProps> = ({
-  member,
-  lang,
-  t,
-  partnerLinkLabels,
-}) => {
+const TeamCard: FC<TeamCardProps> = ({ member, lang, t, partnerLinkLabels }) => {
   const [expanded, setExpanded] = useState(false);
   const reducedMotion = useReducedMotion();
   const panelId = useId();
@@ -71,7 +66,14 @@ const TeamCard: FC<TeamCardProps> = ({
         <header className="card-entity__header">
           <div className={avatarClass(member.accent, Boolean(member.image))}>
             {member.image ? (
-              <img src={member.image} alt="" width={64} height={64} loading="lazy" decoding="async" />
+              <img
+                src={member.image}
+                alt=""
+                width={64}
+                height={64}
+                loading="lazy"
+                decoding="async"
+              />
             ) : (
               <span aria-hidden="true">{member.initials}</span>
             )}
@@ -141,7 +143,11 @@ const TeamCard: FC<TeamCardProps> = ({
                   >
                     <div className="team-card-side__row">
                       <div
-                        className={avatarClass(project.logoAccent, Boolean(project.logoImage), "sm")}
+                        className={avatarClass(
+                          project.logoAccent,
+                          Boolean(project.logoImage),
+                          "sm",
+                        )}
                       >
                         {project.logoImage ? (
                           <img
@@ -191,12 +197,7 @@ const TeamGrid: FC<TeamGridProps> = ({ lang, t, partnerLinkLabels }) => (
   <div className="team-grid" role="list" aria-label={t.sectionLabel}>
     {TEAM_MEMBERS.map((member) => (
       <div key={member.id} role="listitem">
-        <TeamCard
-          member={member}
-          lang={lang}
-          t={t}
-          partnerLinkLabels={partnerLinkLabels}
-        />
+        <TeamCard member={member} lang={lang} t={t} partnerLinkLabels={partnerLinkLabels} />
       </div>
     ))}
   </div>

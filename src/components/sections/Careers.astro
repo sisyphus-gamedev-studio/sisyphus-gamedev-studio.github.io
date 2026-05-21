@@ -51,7 +51,10 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
           <ul class="careers-vacancies" role="list">
             {
               t.vacancies.map((v) => (
-                <li class="careers-vacancy-item card card--compact card--interactive state" role="listitem">
+                <li
+                  class="careers-vacancy-item card card--compact card--interactive state"
+                  role="listitem"
+                >
                   <span class="vacancy-type">{v.type}</span>
                   <span class="vacancy-title">{v.title}</span>
                 </li>
@@ -64,9 +67,13 @@ const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
       <div class="reveal-right">
         <div class="card card-accent-top careers-form-panel">
           <div class="careers-form-panel__header">
-            <p class="t-eyebrow-accent" style="margin-bottom:6px;display:block">{t.formCardLabel}</p>
+            <p class="t-eyebrow-accent" style="margin-bottom:6px;display:block">
+              {t.formCardLabel}
+            </p>
             <h3 class="careers-form-panel__title">{t.formCardTitle}</h3>
-            <p class="t-body-sm" style="color:var(--c-secondary);line-height:1.7">{t.formCardDesc}</p>
+            <p class="t-body-sm" style="color:var(--c-secondary);line-height:1.7">
+              {t.formCardDesc}
+            </p>
           </div>
 
           <div class="careers-form-panel__divider" role="separator" aria-hidden="true"></div>

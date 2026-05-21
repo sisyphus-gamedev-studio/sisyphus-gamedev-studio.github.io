@@ -1,12 +1,11 @@
+@import "./tokens.css";
 @import "tailwindcss";
 @source "../**/*.{astro,ts,tsx,js,jsx}";
 
 @theme {
-  --font-display: "Exo 2", sans-serif;
-  --font-sans: "Exo 2", sans-serif;
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-sans);
 }
-
-@import "./tokens.css";
 @import "./base.css";
 @import "./typography.css";
 @import "./buttons.css";
