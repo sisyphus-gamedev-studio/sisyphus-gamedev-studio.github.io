@@ -33,24 +33,6 @@
   border-radius: var(--r-md);
 }
 
-.card--quote {
-  padding: 20px 22px;
-  border-radius: var(--r-lg);
-  background: var(--s-5);
-  border: 1px solid var(--b-subtle);
-  border-left: 2px solid var(--c-orange);
-}
-
-.card--status {
-  padding: var(--card-padding-compact);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--s-5);
-  border: 1px solid var(--b-subtle);
-  border-radius: var(--r-md);
-}
-
 .card--media {
   padding: 0;
   border-radius: var(--card-radius);

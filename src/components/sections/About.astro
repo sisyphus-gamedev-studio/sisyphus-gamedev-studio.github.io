@@ -21,11 +21,7 @@ const stats = [
 const aboutImg = IMAGES.about;
 ---
 
-<section
-  id="about"
-  class="site-section site-section--filled about-section"
-  aria-labelledby="about-heading"
->
+<section id="about" class="site-section site-section--filled" aria-labelledby="about-heading">
   <div class="site-section__container">
     <div class="site-section__head reveal">
       <div class="section-eyebrow">
@@ -38,7 +34,7 @@ const aboutImg = IMAGES.about;
     </div>
 
     <div class="about-grid">
-      <div class="about-column about-column--main reveal-left">
+      <div class="about-column--main reveal-left">
         <figure class="about-media about-img-wrap">
           <img
             src={aboutImg}
@@ -68,11 +64,11 @@ const aboutImg = IMAGES.about;
         </div>
       </div>
 
-      <aside class="about-column about-column--aside reveal-right">
+      <aside class="about-column--aside reveal-right">
         <dl class="about-stats">
           {
             stats.map((s) => (
-              <div class="about-stat card card--compact card--elevated state">
+              <div class="about-stat card card--compact">
                 <dd class="t-stat-num about-stat__value" aria-label={`${s.value} — ${s.label}`}>
                   {s.value}
                 </dd>
@@ -82,7 +78,7 @@ const aboutImg = IMAGES.about;
           }
         </dl>
 
-        <div class="card card--compact card--elevated about-pillars">
+        <div class="card card--compact about-pillars">
           <p class="t-label-sm about-pillars__label">{t.pillarsLabel}</p>
           <ul class="about-pillars__list">
             {
@@ -99,14 +95,14 @@ const aboutImg = IMAGES.about;
           </ul>
         </div>
 
-        <div class="card card--quote about-mission">
+        <div class="card card--compact about-mission">
           <p class="t-label-sm about-mission__label">{t.missionLabel}</p>
           <blockquote lang={lang} class="t-body-lg about-mission__quote">
             {t.missionQuote}
           </blockquote>
         </div>
 
-        <div class="card card--status about-status">
+        <div class="card card--compact about-status">
           <div class="pulse" aria-hidden="true"></div>
           <div>
             <p class="t-title-sm about-status__title">{t.statusLabel}</p>

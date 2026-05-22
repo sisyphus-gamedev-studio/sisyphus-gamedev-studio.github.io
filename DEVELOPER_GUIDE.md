@@ -150,11 +150,9 @@ Use one of three families; avoid inline `background` / `border` / `border-radius
 | Class | Use |
 |---|---|
 | `.card` | Default panel (`--s-4`, `--card-radius`, `--card-padding`) |
-| `.card--elevated` | Raised surface (`--s-5`) — donate tiers, stats |
+| `.card--elevated` | Raised surface (`--s-5`) — donate tiers |
 | `.card--accent` | Orange border — featured partners/donate highlight |
-| `.card--compact` | List tiles — careers stack/vacancies |
-| `.card--quote` | Mission quote with orange left edge |
-| `.card--status` | Compact status row |
+| `.card--compact` | Compact tiles — About sidebar, careers stack/vacancies |
 | `.card--media` | Hero featured game card (shadow) |
 | `.card--secondary` | Smaller radius/padding — Hero concept link |
 | `.card--interactive` | Unified hover lift + `--card-hover-shadow` |
