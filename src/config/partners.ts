@@ -24,27 +24,6 @@ export interface Partner {
 
 export const PARTNERS: Partner[] = [
   {
-    id: "darkmoonight",
-    logoInitials: "DM",
-    logoImage: "/images/partners/darknight.png",
-    logoStyle: "green",
-    category: "partner",
-    featured: false,
-    links: {
-      github: "https://github.com/darkmoonight",
-    },
-    en: {
-      name: "DARK NIGHT",
-      description:
-        "Open-source developer and contributor. A partner who supports our studio and shares our passion for building great things.",
-    },
-    ru: {
-      name: "DARK NIGHT",
-      description:
-        "Разработчик открытого программного обеспечения и контрибьютор. Партнёр, который поддерживает нашу студию и разделяет страсть к созданию крутых вещей.",
-    },
-  },
-  {
     id: "placeholder",
     logoInitials: "SP",
     logoStyle: "orange",

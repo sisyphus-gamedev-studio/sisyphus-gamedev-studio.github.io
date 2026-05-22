@@ -185,13 +185,6 @@
   gap: 6px 8px;
 }
 
-.team-card-side__title-row {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-}
-
 .team-card-side__name {
   margin: 0;
   font-size: 13px;
@@ -199,27 +192,6 @@
   color: var(--c-on-surface);
   letter-spacing: -0.1px;
   line-height: 1.2;
-}
-
-.team-card-side .md-badge {
-  padding: 2px 7px;
-  font-size: 9px;
-  letter-spacing: 0.5px;
-}
-
-.team-card-side--placeholder .team-card-side__row {
-  opacity: 0.9;
-}
-
-.team-card-side--placeholder .card-entity__media {
-  border-style: dashed;
-  opacity: 0.75;
-}
-
-.team-card-side--placeholder .md-badge {
-  background: var(--s-5);
-  color: var(--c-tertiary);
-  border-color: var(--b-default);
 }
 
 .team-card-side .team-flip-links {

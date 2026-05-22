@@ -100,11 +100,6 @@ export interface TranslationStructure {
     expandSideProject: string;
     collapseSideProject: string;
     sideProjectsLabel: string;
-    placeholderProject: {
-      name: string;
-      description: string;
-      badge: string;
-    };
   };
   careers: {
     sectionLabel: string;

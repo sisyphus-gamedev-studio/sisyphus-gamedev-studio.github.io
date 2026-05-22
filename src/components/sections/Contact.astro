@@ -1,7 +1,8 @@
 ---
 import type { TranslationStructure } from "../../types";
 import ContactForm from "../features/ContactForm";
-import { CONTACT, CONTACT_PAGE_SOCIAL, SOCIAL_ICONS } from "../../config";
+import { CONTACT, SOCIAL_ICONS } from "../../config";
+// import { CONTACT_PAGE_SOCIAL } from "../../config";
 
 interface Props {
   t: TranslationStructure["contact"];
@@ -42,6 +43,7 @@ const contactInfo = [{ icon: SOCIAL_ICONS.email, text: CONTACT.contactEmail }];
           }
         </div>
 
+        <!-- Uncomment together with CONTACT_PAGE_SOCIAL in src/config/links.ts
         <div class="contact-social-row">
           {
             CONTACT_PAGE_SOCIAL.map((social) => (
@@ -58,6 +60,7 @@ const contactInfo = [{ icon: SOCIAL_ICONS.email, text: CONTACT.contactEmail }];
             ))
           }
         </div>
+        -->
       </div>
 
       <div

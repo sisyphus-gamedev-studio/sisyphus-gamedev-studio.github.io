@@ -15,4 +15,9 @@ export const CAREER_STACK: CareerStackItem[] = [
     en: { label: "Task tracker", value: "Trello" },
     ru: { label: "Таск-трекер", value: "Trello" },
   },
+  {
+    id: "communication",
+    en: { label: "Communication", value: "Telegram, Discord" },
+    ru: { label: "Связь", value: "Telegram, Discord" },
+  },
 ];

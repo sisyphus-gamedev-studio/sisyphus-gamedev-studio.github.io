@@ -1,11 +1,11 @@
-import { useCallback, useId, useMemo, useState, type FC } from "react";
+import { useCallback, useId, useState, type FC } from "react";
 import { ChevronDown } from "lucide-react";
 import type { Language, TranslationStructure } from "../../types";
 import TeamProjectLinks from "./TeamProjectLinks";
 import { TEAM_MEMBERS } from "../../config/team";
-import type { TeamMember, TeamMemberAccent } from "../../config/team";
-import { resolveTeamSideProjects } from "../../utils/teamSideProject";
+import type { TeamMember, TeamMemberAccent, TeamSideProject } from "../../config/team";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
+
 interface TeamGridProps {
   lang: Language;
   t: TranslationStructure["team"];
@@ -15,8 +15,8 @@ interface TeamGridProps {
 interface TeamCardProps {
   member: TeamMember;
   lang: Language;
-  t: TeamGridProps["t"];
-  partnerLinkLabels: TeamGridProps["partnerLinkLabels"];
+  t: TranslationStructure["team"];
+  partnerLinkLabels: TranslationStructure["partners"]["linkLabels"];
 }
 
 const avatarClass = (accent: TeamMemberAccent, hasImage: boolean, size: "lg" | "sm" = "lg") => {
@@ -34,6 +34,16 @@ const parseRoleParts = (role: string) =>
     .map((part) => part.trim())
     .filter(Boolean);
 
+const resolveSideProjects = (projects: TeamSideProject[], lang: Language) =>
+  projects.map((project) => ({
+    id: project.id,
+    name: project[lang].name,
+    logoImage: project.logoImage,
+    logoInitials: project.logoInitials,
+    logoAccent: project.accent ?? "green",
+    links: project.links ?? {},
+  }));
+
 const TeamCard: FC<TeamCardProps> = ({ member, lang, t, partnerLinkLabels }) => {
   const [expanded, setExpanded] = useState(false);
   const reducedMotion = useReducedMotion();
@@ -43,17 +53,9 @@ const TeamCard: FC<TeamCardProps> = ({ member, lang, t, partnerLinkLabels }) => 
   const leadRole = roleParts[0];
   const otherRoles = roleParts.slice(1);
   const hasQuote = Boolean(local.quote?.trim());
-
-  const sideProjects = useMemo(
-    () =>
-      member.sideProjects?.length
-        ? resolveTeamSideProjects(member.sideProjects, lang, {
-            placeholder: t.placeholderProject,
-          })
-        : [],
-    [member.sideProjects, lang, t.placeholderProject],
-  );
-
+  const sideProjects = member.sideProjects?.length
+    ? resolveSideProjects(member.sideProjects, lang)
+    : [];
   const hasSideProjects = sideProjects.length > 0;
 
   const toggleExpanded = useCallback(() => {
@@ -136,11 +138,7 @@ const TeamCard: FC<TeamCardProps> = ({ member, lang, t, partnerLinkLabels }) => 
             <div className="team-card-expand-inner">
               <ul className="team-card-projects" role="list">
                 {sideProjects.map((project) => (
-                  <li
-                    key={project.id}
-                    className={`team-card-side${project.isPlaceholder ? " team-card-side--placeholder" : ""}`}
-                    role="listitem"
-                  >
+                  <li key={project.id} className="team-card-side" role="listitem">
                     <div className="team-card-side__row">
                       <div
                         className={avatarClass(
@@ -163,23 +161,12 @@ const TeamCard: FC<TeamCardProps> = ({ member, lang, t, partnerLinkLabels }) => 
                         )}
                       </div>
                       <div className="team-card-side__body">
-                        <div className="team-card-side__title-row">
-                          <p className="team-card-side__name">{project.name}</p>
-                          {project.categoryLabel && (
-                            <span
-                              className={`md-badge${project.isPlaceholder ? "" : " md-badge-primary"}`}
-                            >
-                              {project.categoryLabel}
-                            </span>
-                          )}
-                        </div>
-                        {!project.isPlaceholder && (
-                          <TeamProjectLinks
-                            links={project.links}
-                            projectName={project.name}
-                            labels={partnerLinkLabels}
-                          />
-                        )}
+                        <p className="team-card-side__name">{project.name}</p>
+                        <TeamProjectLinks
+                          links={project.links}
+                          projectName={project.name}
+                          labels={partnerLinkLabels}
+                        />
                       </div>
                     </div>
                   </li>

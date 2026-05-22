@@ -97,11 +97,6 @@ export const TRANSLATIONS = {
       expandSideProject: "Show activities",
       collapseSideProject: "Hide activities",
       sideProjectsLabel: "Other activities",
-      placeholderProject: {
-        name: "Personal project",
-        description: "Not tied to the studio lineup — we'll share details when it's ready.",
-        badge: "Coming soon",
-      },
     },
     careers: {
       sectionLabel: "Careers",
@@ -188,7 +183,7 @@ export const TRANSLATIONS = {
       headingSuffix: "Sponsors",
       description:
         "Our work is hard, but unlike the myth, our mountain has a peak — the release of a cool game. The main idea of sponsorship is mutual benefit and support. Do you want to become a part of this story and accelerate our rise? Support us, and we will make our entire community aware of your help!",
-      activeCount: "1 Active Sponsor",
+      activeCount: "0 Active Sponsors",
       categoryLabels: {
         gold: "Gold Sponsor",
         silver: "Silver Sponsor",
@@ -372,11 +367,6 @@ export const TRANSLATIONS = {
       expandSideProject: "Показать активности",
       collapseSideProject: "Свернуть",
       sideProjectsLabel: "Другие активности",
-      placeholderProject: {
-        name: "Личный проект",
-        description: "Не связан с играми студии — расскажем подробнее, когда будет готов.",
-        badge: "Скоро",
-      },
     },
     careers: {
       sectionLabel: "Карьера",
@@ -463,7 +453,7 @@ export const TRANSLATIONS = {
       headingSuffix: "Спонсоры",
       description:
         "Наш труд тяжел, но, в отличие от мифа, у нашей горы есть вершина — релиз крутой игры. Главная идея спонсорства — это взаимная польза и поддержка. Хотите стать частью этой истории и ускорить наш подъем? Поддержите нас, а мы сделаем так, чтобы о вашей помощи узнало всё наше комьюнити!",
-      activeCount: "1 активный спонсор",
+      activeCount: "0 активных спонсоров",
       categoryLabels: {
         gold: "Золотой спонсор",
         silver: "Серебряный спонсор",
