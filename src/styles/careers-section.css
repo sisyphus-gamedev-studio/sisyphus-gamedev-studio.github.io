@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.careers-layout > * {
+  min-width: 0;
+}
+
 .careers-intro {
   margin-bottom: 32px;
 }
@@ -21,6 +25,9 @@
 .careers-form-panel {
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .careers-form-panel__header {
@@ -92,11 +99,12 @@
 
 .careers-check-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 9px;
   font-size: 13px;
   color: var(--c-secondary);
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .careers-check-icon {
@@ -198,11 +206,38 @@
   font-weight: 700;
   color: var(--c-on-surface);
   line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.careers-faq-trigger {
+  white-space: normal;
+  text-align: center;
+  height: auto;
+  min-height: 42px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 1.35;
 }
 
 @media (max-width: 860px) {
   .careers-layout {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  .careers-layout .reveal-left,
+  .careers-layout .reveal-right {
+    transform: translateY(50px);
+  }
+
+  .careers-layout .reveal-left.in,
+  .careers-layout .reveal-right.in {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 560px) {
+  .careers-vacancies {
+    grid-template-columns: 1fr;
   }
 }
