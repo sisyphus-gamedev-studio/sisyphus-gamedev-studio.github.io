@@ -1,6 +1,7 @@
 ---
 import type { Language, TranslationStructure } from "../../types";
 import { CAREER_STACK } from "../../config/careers";
+import { URLS } from "../../config";
 import CareersFAQ from "../features/CareersFAQ";
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 
 const { t, lang } = Astro.props;
 
-const formUrl = import.meta.env.PUBLIC_CAREERS_FORM_URL || "#";
+const formUrl = URLS.careersForm;
 ---
 
 <section id="careers" class="site-section site-section--filled" aria-labelledby="careers-heading">

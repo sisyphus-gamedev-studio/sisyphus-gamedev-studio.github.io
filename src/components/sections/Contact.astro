@@ -2,15 +2,12 @@
 import type { TranslationStructure } from "../../types";
 import ContactForm from "../features/ContactForm";
 import { CONTACT, SOCIAL_ICONS } from "../../config";
-// import { CONTACT_PAGE_SOCIAL } from "../../config";
 
 interface Props {
   t: TranslationStructure["contact"];
 }
 
 const { t } = Astro.props;
-
-const contactInfo = [{ icon: SOCIAL_ICONS.email, text: CONTACT.contactEmail }];
 ---
 
 <section id="contact" class="site-section site-section--grid" aria-labelledby="contact-heading">
@@ -33,34 +30,11 @@ const contactInfo = [{ icon: SOCIAL_ICONS.email, text: CONTACT.contactEmail }];
         </p>
 
         <div class="contact-info-list">
-          {
-            contactInfo.map((item) => (
-              <div class="contact-info-row">
-                <div class="contact-info-icon" set:html={item.icon} />
-                <span class="t-body-sm contact-info-row__text">{item.text}</span>
-              </div>
-            ))
-          }
+          <a href={`mailto:${CONTACT.email}`} class="contact-info-row state">
+            <div class="contact-info-icon" set:html={SOCIAL_ICONS.email} />
+            <span class="t-body-sm contact-info-row__text">{CONTACT.email}</span>
+          </a>
         </div>
-
-        <!-- Uncomment together with CONTACT_PAGE_SOCIAL in src/config/links.ts
-        <div class="contact-social-row">
-          {
-            CONTACT_PAGE_SOCIAL.map((social) => (
-              <a
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                class="footer-social-link state contact-social-link"
-              >
-                <Fragment set:html={social.iconSvg} />
-                <span class="contact-social-link__label">{social.label}</span>
-              </a>
-            ))
-          }
-        </div>
-        -->
       </div>
 
       <div

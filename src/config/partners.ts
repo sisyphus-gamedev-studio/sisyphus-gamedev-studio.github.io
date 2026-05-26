@@ -8,6 +8,9 @@ export interface PartnerLink {
   steam?: string;
   twitter?: string;
   github?: string;
+  youtube?: string;
+  vk?: string;
+  artstation?: string;
 }
 
 export interface Partner {

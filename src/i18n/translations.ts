@@ -27,7 +27,7 @@ export const TRANSLATIONS = {
       title: "CREATING A NEW REALITY",
       cta: "See Our Games",
       ctaSecondary: "Learn More",
-      badge: "Indie Company · Est. 2025",
+      badge: "Indie Company · Est. 2026",
       stats: {
         titles: "Titles in Development",
         founded: "Founded",
@@ -55,7 +55,7 @@ export const TRANSLATIONS = {
       headingSuffix: "studio",
       sectionLabel: "About Us",
       descriptionParagraphs: [
-        "Sisyphus Studio is an indie company founded in 2025. We understand that game development tolerates no illusions. Here, ambition is weighed strictly against capability, and projects are built on sober calculation—holding up to market realities through mutual trust among specialists who know their craft.",
+        "Sisyphus Studio is an indie company founded in 2026. We understand that game development tolerates no illusions. Here, ambition is weighed strictly against capability, and projects are built on sober calculation—holding up to market realities through mutual trust among specialists who know their craft.",
         "The indie sphere is a heavy boulder that tries to grind its maker into the ground. That is why our mascot is Sisyphus. His myth is not about futile labor, but about extraordinary cunning, daring, and unbreakable determination that challenged the gods.",
         "And when Sisyphus acts alongside a team of equally resourceful like-minded people, their combined strength is enough to defy fate itself.",
       ],
@@ -195,6 +195,9 @@ export const TRANSLATIONS = {
         steam: "Steam",
         twitter: "X / Twitter",
         github: "GitHub",
+        youtube: "YouTube",
+        vk: "VK",
+        artstation: "ArtStation",
       },
     },
     news: {
@@ -247,7 +250,7 @@ export const TRANSLATIONS = {
         name: "Your brand",
         namePlaceholder: "BrandCorp",
         email: "Email",
-        emailPlaceholder: "hello@example.com",
+        emailPlaceholder: "sisyphus.gamedev.studio@gmail.com",
         message: "Message",
         messagePlaceholder: "Hi, I have a proposal you can't refuse!",
         submit: "Send Message",
@@ -296,7 +299,7 @@ export const TRANSLATIONS = {
       title: "СОЗДАЕМ НОВУЮ РЕАЛЬНОСТЬ",
       cta: "Наши игры",
       ctaSecondary: "Узнать больше",
-      badge: "Инди-компания · Осн. в 2025",
+      badge: "Инди-компания · Осн. в 2026",
       stats: {
         titles: "Игры в разработке",
         founded: "Основана",
@@ -324,7 +327,7 @@ export const TRANSLATIONS = {
       headingSuffix: "studio",
       sectionLabel: "О нас",
       descriptionParagraphs: [
-        "Sisyphus Studio — инди-компания, основанная в 2025 году. Мы понимаем, что разработка игр не терпит иллюзий. Здесь амбиции жестко соизмеряются с возможностями, а проекты строятся на трезвом расчете, выдерживая реалии рынка благодаря взаимному доверию профильных специалистов.",
+        "Sisyphus Studio — инди-компания, основанная в 2026 году. Мы понимаем, что разработка игр не терпит иллюзий. Здесь амбиции жестко соизмеряются с возможностями, а проекты строятся на трезвом расчете, выдерживая реалии рынка благодаря взаимному доверию профильных специалистов.",
         "Инди-сфера — тяжелый валун, норовящий сровнять создателя с землей. Поэтому нашим маскотом стал Сизиф. Его миф — не о бесполезном труде, а о невероятной хитрости, дерзости и несгибаемой целеустремленности, бросившей вызов богам.",
         "И когда Сизиф действует вместе с командой таких же находчивых единомышленников, их общих сил достаточно, чтобы пойти против самого предопределения.",
       ],
@@ -465,6 +468,9 @@ export const TRANSLATIONS = {
         steam: "Steam",
         twitter: "X / Twitter",
         github: "GitHub",
+        youtube: "YouTube",
+        vk: "VK",
+        artstation: "ArtStation",
       },
     },
     news: {
@@ -518,7 +524,7 @@ export const TRANSLATIONS = {
         name: "Ваш бренд",
         namePlaceholder: "АртГрупп",
         email: "Email",
-        emailPlaceholder: "hello@example.com",
+        emailPlaceholder: "sisyphus.gamedev.studio@gmail.com",
         message: "Сообщение",
         messagePlaceholder: "Привет, у меня есть предложение от которого сложно отказаться!",
         submit: "Отправить",

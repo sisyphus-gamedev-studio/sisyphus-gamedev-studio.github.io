@@ -141,6 +141,9 @@ export interface TranslationStructure {
       steam: string;
       twitter: string;
       github: string;
+      youtube: string;
+      vk: string;
+      artstation: string;
     };
   };
   news: {

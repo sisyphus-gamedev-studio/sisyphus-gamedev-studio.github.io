@@ -1,16 +1,16 @@
 {
-  "isoDate": "2026-02-01",
+  "isoDate": "2026-01-25",
   "image": "/images/news/news-2.jpg",
   "type": "announcement",
   "en": {
     "title": "Frag Frog — Official Announcement",
-    "date": "Feb 1, 2026",
+    "date": "Jan 25, 2026",
     "summary": "Our first project is officially announced. Frag Frog is a chaotic deathmatch shooter with procedurally generated maps and weapon crossbreeding.",
     "body": "Our first project is officially announced. Frag Frog is a chaotic deathmatch shooter with procedurally generated maps and weapon crossbreeding.\n\nFrag Frog is a fast‑paced deathmatch shooter where every round is unique. Maps are procedurally generated, weapons can be crossbred, and the only rule is to be the last one standing.\n\nRight now we are laying the foundation for our new shooter. We chose a first‑person perspective because we believe it’s the best way to ensure maximum dynamics and absolute fairness in combat. And to make every new run feel unique, we are adding roguelike elements — a system of passive buffs that will take replayability to the next level.\n\nOf course, this is just a small part of the mechanics that await you. All in good time!\n\nA small insider peek from the development kitchen: initially we planned to make the game on the Godot engine. But when Unreal Engine 5 received a major optimization update, we realized — that was exactly the power and flexibility our project needed. The switch was worth it!\n\nSubscribe to our development diary to be the first to know technical details and not miss upcoming playtest announcements."
   },
   "ru": {
     "title": "Frag Frog — официальный анонс",
-    "date": "1 Фев, 2026",
+    "date": "25 Янв, 2026",
     "summary": "Наш первый проект официально анонсирован. Frag Frog — хаотичный шутер-дезматч со случайно генерируемыми картами и скрещиванием оружия.",
     "body": "Наш первый проект официально анонсирован. Frag Frog — хаотичный шутер-дезматч со случайно генерируемыми картами и скрещиванием оружия.\n\nFrag Frog — динамичный шутер-дезматч, в котором каждый раунд уникален. Карты генерируются процедурно, оружие можно скрещивать друг с другом, а единственное правило — остаться последним.\n\nПрямо сейчас мы закладываем фундамент нашего нового шутера. Мы выбрали вид от первого лица, так как убеждены: это лучший способ обеспечить максимальную динамику и абсолютную честность в сражениях. А чтобы каждый новый забег ощущался уникальным, мы внедряем элементы roguelike — систему пассивных баффов, которая выведет реиграбельность на новый уровень.\n\nРазумеется, это лишь малая часть механик, которые вас ждут. Всему свое время!\n\nНебольшой инсайд с кухни разработки: изначально мы планировали делать игру на движке Godot. Но когда в Unreal Engine 5 вышло масштабное обновление по оптимизации, мы поняли — это именно та мощь и гибкость, которые нужны нашему проекту. Переезд того стоил!\n\nПодписывайтесь на наш дневник разработки, чтобы первыми узнавать технические подробности и не пропустить грядущие анонсы плейтестов."
   }

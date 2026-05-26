@@ -1,16 +1,16 @@
 {
-  "isoDate": "2026-02-02",
-  "image": "/images/news/news-2.jpg",
+  "isoDate": "2026-02-15",
+  "image": "/images/news/news-3.jpg",
   "type": "dev-diary",
   "en": {
     "title": "Development Diary 1",
-    "date": "Feb 2, 2026",
+    "date": "Feb 15, 2026",
     "summary": "Frog Frag Dev Diary #1: Basic weapons and the crossbreeding mechanic.",
     "body": "In the first stage, we decided to focus on creating custom mechanics and a basic arsenal. The logic of crossbreeding and choosing the ideal weapon “bases” is a serious challenge. Here’s how we approached it!\n\nThe weapon crossbreeding mechanic is the heart of our game. How well it’s implemented will directly determine how fun the game is to play. To simplify the 3D design pipeline and avoid spreading ourselves too thin, we decided to start small: we approved 3 basic weapon types. Work is now in full swing around them — we are doing both theoretical calculations and practical tests in the engine.\n\nOur goal is to make the basic guns radically different in terms of characteristics and functionality. We want their hybrids to feel unique, behave unpredictably, and even be absurd at times.\n\nThe work is progressing in parallel: while the creative director and the code team are assembling the mechanical innards of this trio, our 3D designer is preparing blockouts of the “pure” versions and visualizing the results of their crossbreeding.\n\nAs soon as the concepts get the green light, the pipeline shifts: the 3D department moves on to texturing and detailing the models, while programmers and game designers immediately start prototyping the next weapon and calculating its combinations with the already finished arsenal.\n\nStay tuned for development news — more to come!"
   },
   "ru": {
     "title": "Дневник разработки 1",
-    "date": "2 Фев, 2026",
+    "date": "15 Фев, 2026",
     "summary": "Дневник разработки Frog Frag #1: Базовое оружие и механика скрещивания.",
     "body": "На первом этапе мы решили сфокусироваться на создании кастомных механик и базового арсенала. Вопрос логики скрещивания и выбора идеальных «баз» для оружия — это серьезный вызов. Рассказываем, как мы к нему подступились!\n\nМеханика скрещивания оружия — это сердце нашей игры. Качество её проработки напрямую определит, насколько весело будет в это играть. Чтобы упростить пайплайн 3D-дизайна и не распыляться, мы решили начать с малого: утвердили 3 базовых вида оружия. Сейчас вокруг них кипит работа — мы проводим как теоретические расчеты, так и практические тесты в движке.\n\nНаша цель — сделать базовые пушки кардинально разными по характеристикам и функционалу. Мы хотим, чтобы их гибриды ощущались уникально, вели себя непредсказуемо, а местами даже абсурдно.\n\nРабота идет параллельно: пока креативный директор и отдел кода собирают механическую начинку этой тройки, наш 3D-дизайнер готовит блокинг «чистых» версий и визуализирует результаты их скрещивания.\n\nКак только концепты получают зеленый свет, пайплайн сдвигается: 3D-отдел переходит к текстурированию и детализации моделей, а программисты и геймдизайнеры сразу приступают к прототипированию следующего оружия и расчету его сочетаний с уже готовым арсеналом.\n\nСледите за новостями разработки, дальше — больше!"
   }

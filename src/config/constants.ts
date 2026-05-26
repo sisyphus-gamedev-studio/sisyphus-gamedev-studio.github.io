@@ -10,7 +10,7 @@ export const BRAND = {
   prefix: "Sisyphus",
   suffix: "Studio",
   short: "SS",
-  foundedYear: 2025,
+  foundedYear: 2026,
   teamSize: 4,
 } satisfies BrandConfig;
 
