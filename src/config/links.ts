@@ -5,8 +5,7 @@ export const URLS = {
   steam: import.meta.env.PUBLIC_STEAM_URL || "https://store.steampowered.com",
   youtube: import.meta.env.PUBLIC_YOUTUBE_URL || "https://www.youtube.com/@SisyphusStudioDev",
   donate: import.meta.env.PUBLIC_DONATE_URL || "https://boosty.to/sisyphus.studio",
-  careersForm:
-    import.meta.env.PUBLIC_CAREERS_FORM_URL || "https://forms.gle/iHn919TyKMPFhaYL8",
+  careersForm: import.meta.env.PUBLIC_CAREERS_FORM_URL || "https://forms.gle/iHn919TyKMPFhaYL8",
   youtubeOrigin: "https://www.youtube.com",
 } as const;
 

@@ -493,11 +493,9 @@ const progressPct = `${featured.progress ?? 0}%`;
 
     apply();
     mq.addEventListener("change", apply);
-    document.addEventListener(
-      "astro:before-swap",
-      () => mq.removeEventListener("change", apply),
-      { once: true },
-    );
+    document.addEventListener("astro:before-swap", () => mq.removeEventListener("change", apply), {
+      once: true,
+    });
   }
 
   document.addEventListener("astro:page-load", initHeroVideo);
