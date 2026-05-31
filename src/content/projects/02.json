@@ -1,6 +1,10 @@
 {
   "id": 2,
   "image": "/images/projects/project-2.jpg",
+  "video": {
+    "ru": "/images/video/KRINV1_720.mp4",
+    "en": "/images/video/KRIV2_720.mp4"
+  },
   "wishlistUrl": "https://store.steampowered.com/app/krivda",
   "en": {
     "title": "Krivda",

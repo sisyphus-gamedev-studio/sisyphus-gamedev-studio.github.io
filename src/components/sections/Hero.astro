@@ -1,6 +1,6 @@
 ---
 import type { TranslationStructure, Project } from "../../types";
-import { BRAND, UI, SIZES, IMAGE_FILTERS, LAYOUT } from "../../config";
+import { BRAND, UI, SIZES, LAYOUT } from "../../config";
 import { getHeroImage, nativeImageFallback } from "../../utils/images";
 
 interface Props {
@@ -141,34 +141,49 @@ const progressPct = `${featured.progress ?? 0}%`;
           aria-label={featured.title}
           style="display:block;text-decoration:none"
         >
-          <img
-            src={heroMainImg}
-            alt={featured.title}
-            width="720"
-            height={String(SIZES.hero.cardHeight)}
-            loading="eager"
-            decoding="async"
-            style={`width:100%;height:${SIZES.hero.cardHeight}px;object-fit:cover;display:block;filter:${IMAGE_FILTERS.heroMain}`}
-            onerror={nativeImageFallback(720, 480)}
-          />
-          <div class="hero-featured__overlay" aria-hidden="true"></div>
-          <div class="hero-featured__badge-wrap">
-            <div class="md-badge-primary md-badge hero-featured__badge">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="9"
-                height="9"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                ><path
-                  d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"
-                ></path></svg
-              >
-              {t.inDevLabel}
+          <div class="project-media-frame">
+            {
+              featured.video ? (
+                <video
+                  src={featured.video}
+                  poster={heroMainImg}
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  aria-label={featured.title}
+                  class="hero-featured__video project-media-fit"
+                />
+              ) : (
+                <img
+                  src={heroMainImg}
+                  alt={featured.title}
+                  loading="eager"
+                  decoding="async"
+                  class="hero-featured__image project-media-fit"
+                  onerror={nativeImageFallback(720, 480)}
+                />
+              )
+            }
+            <div class="hero-featured__overlay" aria-hidden="true"></div>
+            <div class="hero-featured__badge-wrap">
+              <div class="md-badge-primary md-badge hero-featured__badge">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="9"
+                  height="9"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"
+                  ></path></svg
+                >
+                {t.inDevLabel}
+              </div>
             </div>
           </div>
           <div class="hero-featured__body">
@@ -460,4 +475,30 @@ const progressPct = `${featured.progress ?? 0}%`;
   }
 
   document.addEventListener("astro:page-load", initGlitch);
+
+  function initHeroVideo() {
+    const video = document.querySelector(".hero-featured__video") as HTMLVideoElement | null;
+    if (!video) return;
+
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const apply = () => {
+      if (mq.matches) {
+        video.pause();
+        video.style.display = "none";
+      } else {
+        video.style.display = "block";
+        void video.play().catch(() => {});
+      }
+    };
+
+    apply();
+    mq.addEventListener("change", apply);
+    document.addEventListener(
+      "astro:before-swap",
+      () => mq.removeEventListener("change", apply),
+      { once: true },
+    );
+  }
+
+  document.addEventListener("astro:page-load", initHeroVideo);
 </script>

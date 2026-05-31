@@ -20,6 +20,16 @@ const newsCollection = defineCollection({
   }),
 });
 
+const projectVideoSchema = z
+  .union([
+    z.string().startsWith("/images/"),
+    z.object({
+      en: z.string().startsWith("/images/"),
+      ru: z.string().startsWith("/images/"),
+    }),
+  ])
+  .optional();
+
 const projectLocalizedFields = z.object({
   title: z.string().min(1),
   description: z.string().min(1),
@@ -32,6 +42,7 @@ const projectsCollection = defineCollection({
   schema: z.object({
     id: z.number().int().positive(),
     image: z.string().startsWith("/images/"),
+    video: projectVideoSchema,
     progress: z.number().min(0).max(100).optional(),
     wishlistUrl: z.url().optional(),
     en: projectLocalizedFields,

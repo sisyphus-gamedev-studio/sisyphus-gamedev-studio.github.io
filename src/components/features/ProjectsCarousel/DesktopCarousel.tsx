@@ -4,6 +4,7 @@ import type { Project, TranslationStructure } from "../../../types";
 import { handleImageError } from "../../../utils/images";
 import { IMAGE_FALLBACK, PROJECTS_EXPAND_MS } from "../../../config";
 import { getTagIcon } from "./tagIcons";
+import ProjectMedia from "../../common/ProjectMedia";
 
 interface DesktopCarouselProps {
   projects: Project[];
@@ -146,15 +147,13 @@ const DesktopCarousel: FC<DesktopCarouselProps> = ({
                 onClick={() => !isActive && onSelect(i)}
                 style={isActive || isDisplayed ? { willChange: "flex-grow" } : undefined}
               >
-                <img
-                  src={project.image}
+                <ProjectMedia
+                  video={project.video}
+                  poster={project.image}
                   alt={project.title}
-                  width={900}
-                  height={520}
+                  isActive={isActive}
                   loading={i === 0 ? "eager" : "lazy"}
-                  decoding="async"
-                  className="projects-carousel__img"
-                  onError={(e) =>
+                  onImageError={(e) =>
                     handleImageError(
                       e,
                       IMAGE_FALLBACK.projectCard.width,

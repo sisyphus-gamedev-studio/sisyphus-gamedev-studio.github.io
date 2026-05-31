@@ -1,6 +1,7 @@
 {
   "id": 1,
   "image": "/images/projects/project-1.jpg",
+  "video": "/images/video/FROG_720.mp4",
   "progress": 5,
   "wishlistUrl": "https://store.steampowered.com/app/frogfrag",
   "en": {

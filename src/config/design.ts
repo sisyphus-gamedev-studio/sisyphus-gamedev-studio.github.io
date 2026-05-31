@@ -21,10 +21,6 @@ export const DESIGN_TOKENS = {
   panelBg: "rgba(13, 13, 13, 0.97)",
 } as const;
 
-export const IMAGE_FILTERS = {
-  heroMain: "brightness(.75) saturate(.85)",
-} as const;
-
 export const LAYOUT = {
   maxWidth: 1280,
   padding: 20,
@@ -34,7 +30,6 @@ export const LAYOUT = {
 
 export const SIZES = {
   hero: {
-    cardHeight: 264,
     cardImageSize: 48,
     statNumSize: 42,
     paddingTop: 120,

@@ -34,6 +34,11 @@ const projects: Project[] = sortedProjects.map((e) => ({
   title: e.data[lang].title,
   description: e.data[lang].description,
   image: e.data.image,
+  video: e.data.video
+    ? typeof e.data.video === "string"
+      ? e.data.video
+      : e.data.video[lang]
+    : undefined,
   price: e.data[lang].price,
   tags: e.data[lang].tags,
   progress: e.data.progress,

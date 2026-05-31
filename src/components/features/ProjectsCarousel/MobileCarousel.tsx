@@ -4,6 +4,7 @@ import type { Project, TranslationStructure } from "../../../types";
 import { handleImageError } from "../../../utils/images";
 import { IMAGE_FALLBACK, SWIPE_THRESHOLD } from "../../../config";
 import { getTagIcon } from "./tagIcons";
+import ProjectMedia from "../../common/ProjectMedia";
 
 interface MobileCarouselProps {
   projects: Project[];
@@ -75,15 +76,13 @@ const MobileCarousel: FC<MobileCarouselProps> = ({ projects, activeIndex, onSele
         onTouchEnd={onTouchEnd}
         onTouchCancel={onTouchCancel}
       >
-        <div className="projects-mobile__media">
-          <img
-            src={p.image}
+        <div className="projects-mobile__media project-media-frame">
+          <ProjectMedia
+            video={p.video}
+            poster={p.image}
             alt={p.title}
-            width={900}
-            height={220}
-            loading="lazy"
-            decoding="async"
-            onError={(e) =>
+            isActive
+            onImageError={(e) =>
               handleImageError(
                 e,
                 IMAGE_FALLBACK.projectCard.width,

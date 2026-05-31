@@ -11,6 +11,31 @@
       "type": "string",
       "pattern": "^\\/images\\/.*"
     },
+    "video": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^\\/images\\/.*"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "en": {
+              "type": "string",
+              "pattern": "^\\/images\\/.*"
+            },
+            "ru": {
+              "type": "string",
+              "pattern": "^\\/images\\/.*"
+            }
+          },
+          "required": [
+            "en",
+            "ru"
+          ]
+        }
+      ]
+    },
     "progress": {
       "type": "number",
       "minimum": 0,

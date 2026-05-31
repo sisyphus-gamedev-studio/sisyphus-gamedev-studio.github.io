@@ -5,10 +5,16 @@
   pointer-events: none;
 }
 
+.hero-featured__video,
+.hero-featured__image {
+  filter: brightness(0.75) saturate(0.85);
+}
+
 .hero-featured__badge-wrap {
   position: absolute;
   top: 14px;
   right: 14px;
+  z-index: 1;
 }
 
 .hero-featured__badge.md-badge {

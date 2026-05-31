@@ -37,6 +37,7 @@ export default [
         HTMLTextAreaElement: "readonly",
         HTMLFormElement: "readonly",
         HTMLImageElement: "readonly",
+        HTMLVideoElement: "readonly",
         Element: "readonly",
         KeyboardEvent: "readonly",
         MediaQueryListEvent: "readonly",
