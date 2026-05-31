@@ -44,6 +44,28 @@
   color: var(--c-orange);
 }
 
+.contact-social-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.contact-social-link {
+  flex-direction: row;
+  width: auto;
+  padding: 10px 16px;
+  border-radius: var(--r-sm);
+  gap: 10px;
+}
+
+.contact-social-link__label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--c-tertiary);
+}
+
 .contact-info-row__text {
   color: var(--c-tertiary);
 }

@@ -8,4 +8,6 @@ export const HERO_PRELOAD_IMAGE_SRC = "/images/hero/hero-main.jpg";
 
 export const IMAGES = {
   about: "/images/about/about.png",
+  logoNav: "/images/brand/logo-nav.png",
+  favicon: "/favicon.png",
 } as const;

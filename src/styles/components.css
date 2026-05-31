@@ -373,7 +373,7 @@
 
 .brand-link__logo {
   border-radius: 8px;
-  object-fit: cover;
+  object-fit: contain;
   flex-shrink: 0;
 }
 

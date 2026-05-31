@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { BRAND } from "../../config";
+import { BRAND, IMAGES } from "../../config";
 
 interface BrandLinkProps {
   href: string;
@@ -15,7 +15,7 @@ export const BrandLink: FC<BrandLinkProps> = ({ href, variant, onClick, classNam
     className={`brand-link brand-link--${variant} state ${variant === "nav" ? "nav-brand-link" : ""} ${className}`.trim()}
   >
     <img
-      src="/favicon.png"
+      src={IMAGES.logoNav}
       alt={`${BRAND.prefix} ${BRAND.suffix}`}
       width={variant === "nav" ? 56 : 28}
       height={variant === "nav" ? 56 : 28}

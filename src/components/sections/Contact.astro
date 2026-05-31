@@ -2,6 +2,7 @@
 import type { TranslationStructure } from "../../types";
 import ContactForm from "../features/ContactForm";
 import { CONTACT, SOCIAL_ICONS } from "../../config";
+// import { CONTACT_PAGE_SOCIAL } from "../../config";
 
 interface Props {
   t: TranslationStructure["contact"];
@@ -35,6 +36,25 @@ const { t } = Astro.props;
             <span class="t-body-sm contact-info-row__text">{CONTACT.email}</span>
           </a>
         </div>
+
+        <!-- Uncomment together with CONTACT_PAGE_SOCIAL in src/config/links.ts
+        <div class="contact-social-row">
+          {
+            CONTACT_PAGE_SOCIAL.map((social) => (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                class="footer-social-link state contact-social-link"
+              >
+                <Fragment set:html={social.iconSvg} />
+                <span class="contact-social-link__label">{social.label}</span>
+              </a>
+            ))
+          }
+        </div>
+        -->
       </div>
 
       <div

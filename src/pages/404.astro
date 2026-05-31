@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import { TRANSLATIONS } from "../i18n/translations";
-import { BRAND, FONTS } from "../config";
+import { BRAND, FONTS, IMAGES } from "../config";
 import type { Language } from "../types";
 
 const urlPath = Astro.url.pathname;
@@ -18,7 +18,7 @@ const ctaHref = `/${lang}/`;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{t.badge} — {BRAND.prefix} {BRAND.suffix}</title>
     <meta name="robots" content="noindex" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href={IMAGES.favicon} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href={FONTS.googleCssHref} rel="stylesheet" />
@@ -56,7 +56,7 @@ const ctaHref = `/${lang}/`;
       </a>
       <div class="not-found-brand">
         <img
-          src="/favicon.png"
+          src={IMAGES.logoNav}
           alt={`${BRAND.prefix} ${BRAND.suffix}`}
           class="not-found-brand__logo"
         />

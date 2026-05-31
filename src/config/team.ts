@@ -93,12 +93,12 @@ export const TEAM_MEMBERS: TeamMember[] = [
     ],
     ru: {
       name: "Yakudzava",
-      role: "Сосоздатель студии. Креативный директор. Игровой продюсер. Менеджер HR.",
+      role: "Сосоздатель студии. Креативный директор. Игровой продюсер.",
       quote: "Зачем менять мир, если можно создавать игры.",
     },
     en: {
       name: "Yakudzava",
-      role: "Studio co-founder. Creative director. Game producer. HR manager.",
+      role: "Studio co-founder. Creative director. Game producer.",
       quote: "Why change the world when you can make games.",
     },
   },
@@ -133,6 +133,19 @@ export const TEAM_MEMBERS: TeamMember[] = [
     initials: "JO",
     accent: "purple",
     image: "/images/team/joneky.jpg",
+    sideProjects: [
+      sideProject({
+        id: "joneky-darkmoonight",
+        name: "DARK NIGHT",
+        logoInitials: "DM",
+        logoImage: "/images/team/project/darknight.png",
+        accent: "green",
+        links: {
+          website: "https://darkmoonight.github.io/",
+          github: "https://github.com/darkmoonight",
+        },
+      }),
+    ],
     ru: {
       name: "Joneky",
       role: "Младший UE5 разработчик.",
