@@ -11,10 +11,11 @@ export const URLS = {
 
 export const isMailtoLink = (href: string): boolean => href.startsWith("mailto:");
 
+export const WEB3FORMS_SUBMIT_URL = "https://api.web3forms.com/submit";
+
 export const CONTACT = {
   email: import.meta.env.PUBLIC_CONTACT_EMAIL || DEFAULT_EMAIL,
-  formspreeEndpoint:
-    import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || "https://formspree.io/f/YOUR_FORM_ID",
+  web3formsAccessKey: import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY || "",
 } as const;
 
 const YT_SVG_PATHS =

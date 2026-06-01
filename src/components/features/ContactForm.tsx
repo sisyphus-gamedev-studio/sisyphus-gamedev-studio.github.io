@@ -1,6 +1,6 @@
-import { useState, useCallback, type ChangeEvent } from "react";
+import { useState, useCallback, useRef, type ChangeEvent } from "react";
 import type { TranslationStructure } from "../../types";
-import { CONTACT, EMAIL_REGEX, SIZES } from "../../config";
+import { BRAND, CONTACT, EMAIL_REGEX, SIZES, WEB3FORMS_SUBMIT_URL } from "../../config";
 
 interface Props {
   t: TranslationStructure["contact"];
@@ -14,6 +14,7 @@ export default function ContactForm({ t }: Props) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [fields, setFields] = useState({ name: "", email: "", message: "" });
   const [focused, setFocused] = useState<string | null>(null);
+  const botcheckRef = useRef<HTMLInputElement>(null);
 
   function validate() {
     const e: Record<string, string> = {};
@@ -37,15 +38,32 @@ export default function ContactForm({ t }: Props) {
       setErrors(errs);
       return;
     }
+    if (botcheckRef.current?.checked) return;
+
+    if (!CONTACT.web3formsAccessKey) {
+      setStatus("error");
+      return;
+    }
+
     setStatus("submitting");
     try {
-      const res = await fetch(CONTACT.formspreeEndpoint, {
+      const res = await fetch(WEB3FORMS_SUBMIT_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(fields),
+        body: JSON.stringify({
+          access_key: CONTACT.web3formsAccessKey,
+          name: fields.name,
+          email: fields.email,
+          message: fields.message,
+          subject: `${BRAND.prefix} ${BRAND.suffix} — contact`,
+          from_name: `${BRAND.prefix} ${BRAND.suffix}`,
+          botcheck: false,
+        }),
       });
-      setStatus(res.ok ? "success" : "error");
-      if (res.ok) setFields({ name: "", email: "", message: "" });
+      const data = (await res.json()) as { success?: boolean };
+      const ok = res.ok && data.success === true;
+      setStatus(ok ? "success" : "error");
+      if (ok) setFields({ name: "", email: "", message: "" });
     } catch {
       setStatus("error");
     }
@@ -75,6 +93,15 @@ export default function ContactForm({ t }: Props) {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex-col gap-10">
+      <input
+        ref={botcheckRef}
+        type="checkbox"
+        name="botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        className="sr-only"
+        aria-hidden="true"
+      />
       <div className="grid grid-cols-1 sm:grid-cols-2 card-grid-gap">
         <Field
           id="cf-name"

@@ -22,7 +22,7 @@ jobs:
         run: npm run build
         env:
           PUBLIC_SITE_URL: ${{ secrets.PUBLIC_SITE_URL }}
-          PUBLIC_FORMSPREE_ENDPOINT: ${{ secrets.PUBLIC_FORMSPREE_ENDPOINT }}
+          PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ secrets.PUBLIC_WEB3FORMS_ACCESS_KEY }}
           PUBLIC_STEAM_URL: ${{ secrets.PUBLIC_STEAM_URL }}
           PUBLIC_DONATE_URL: ${{ secrets.PUBLIC_DONATE_URL }}
           PUBLIC_CAREERS_FORM_URL: ${{ secrets.PUBLIC_CAREERS_FORM_URL }}

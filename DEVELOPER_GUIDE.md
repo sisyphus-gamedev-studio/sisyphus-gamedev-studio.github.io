@@ -54,7 +54,7 @@ Sections are rendered in this order in `pages/[lang]/index.astro`:
 5. **Careers** — open application info and form link
 6. **Donate** — support tiers (sponsor, one-time, wishlist)
 7. **Partners** — partner cards with links
-8. **Contact** — contact form (Formspree) and social links
+8. **Contact** — contact form (Web3Forms) and social links
 
 ---
 
@@ -72,7 +72,7 @@ Sections are rendered in this order in `pages/[lang]/index.astro`:
 
 | Component | Description |
 |---|---|
-| `ContactForm` | Controlled form with client-side validation and Formspree submission. Strings from `t.contact.form`. |
+| `ContactForm` | Controlled form with client-side validation and Web3Forms submission. Strings from `t.contact.form`. |
 | `NewsCarousel` | Auto-advancing carousel with category filters, touch swipe, keyboard navigation, and article modal. |
 | `NewsModal` | Full-screen modal with focus trap, Escape to close, click-outside to close, scroll lock. |
 | `ProjectsCarousel` | Renders `DesktopCarousel` or `MobileCarousel` based on viewport width. |
@@ -190,7 +190,7 @@ SIZES          // hero and contact form dimensions still used inline in Hero.ast
 
 ```ts
 URLS           // site, steam, youtube, youtubeOrigin, donate (all env-backed)
-CONTACT        // email, contactEmail, formspreeEndpoint (env-backed)
+CONTACT        // email, web3formsAccessKey (env-backed)
 SOCIAL_ICONS   // inline SVG strings for YouTube, Steam, email
 SOCIAL_LINKS   // array used by Navbar and Footer
 CONTACT_PAGE_SOCIAL  // array used by Contact section
@@ -354,7 +354,7 @@ It passes build-time environment variables (`import.meta.env.PUBLIC_*`) via GitH
 Required secrets:
 
 - `PUBLIC_SITE_URL`
-- `PUBLIC_FORMSPREE_ENDPOINT`
+- `PUBLIC_WEB3FORMS_ACCESS_KEY`
 - `PUBLIC_YOUTUBE_URL`
 - `PUBLIC_STEAM_URL`
 - `PUBLIC_DONATE_URL`
@@ -370,4 +370,4 @@ Required secrets:
 - [React Docs](https://react.dev)
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [Lucide Icons](https://lucide.dev)
-- [Formspree](https://formspree.io/docs)
+- [Web3Forms](https://docs.web3forms.com/)

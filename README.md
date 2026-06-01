@@ -33,7 +33,7 @@ Copy `.env.example` to `.env`. All variables are prefixed `PUBLIC_` and availabl
 | Variable | Description |
 |---|---|
 | `PUBLIC_SITE_URL` | Canonical site URL (e.g. `https://example.com`) |
-| `PUBLIC_FORMSPREE_ENDPOINT` | Form URL for the contact form (Formspree endpoint) |
+| `PUBLIC_WEB3FORMS_ACCESS_KEY` | Access key for the contact form ([Web3Forms](https://web3forms.com)) |
 | `PUBLIC_YOUTUBE_URL` | Video channel URL (e.g. YouTube channel) |
 | `PUBLIC_STEAM_URL` | Store page URL |
 | `PUBLIC_DONATE_URL` | Donation link |
@@ -48,7 +48,7 @@ This project is deployed via GitHub Actions to GitHub Pages on pushes to `main` 
 Set repository secrets with the following names (they are passed to the build as `PUBLIC_*` env vars):
 
 - `PUBLIC_SITE_URL`
-- `PUBLIC_FORMSPREE_ENDPOINT`
+- `PUBLIC_WEB3FORMS_ACCESS_KEY`
 - `PUBLIC_YOUTUBE_URL`
 - `PUBLIC_STEAM_URL`
 - `PUBLIC_DONATE_URL`
@@ -134,7 +134,7 @@ All config is exported from `src/config/index.ts`.
 | `fonts.ts` | Google Fonts stylesheet URL (Exo 2) |
 | `i18n.ts` | `LANGUAGE_STORAGE_KEY`, `SUPPORTED_LANGUAGES` |
 | `images.ts` | Fallback image dimensions, hero preload path, static image paths |
-| `links.ts` | Env-backed URLs, Formspree endpoint, social links (SVG-based), `isMailtoLink` |
+| `links.ts` | Env-backed URLs, Web3Forms access key, social links (SVG-based), `isMailtoLink` |
 | `news.ts` | Category order, labels per language, category colors |
 | `partners.ts` | Partner data and types |
 | `seo.ts` | Default meta title/description, OG image path (`HERO_PRELOAD_IMAGE_SRC`), JSON-LD game list |
